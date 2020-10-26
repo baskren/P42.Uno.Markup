@@ -84,6 +84,9 @@ namespace P42.Uno.Markup
 
         public static TElement BorderBrush<TElement>(this TElement element, Color value) where TElement : ElementType
         { element.BorderBrush = new SolidColorBrush(value); return element; }
+
+        public static TElement BorderBrush<TElement>(this TElement element, string hex) where TElement : ElementType
+        { element.BorderBrush = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromHex(hex)); return element; }
         #endregion
 
 

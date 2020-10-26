@@ -21,4 +21,10 @@
   <ItemGroup>
     <UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
   </ItemGroup>
+
+    <!-- REFERENCES -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils.Uno\P42.Utils.Uno.csproj" />
+  </ItemGroup>
+
 </Project>

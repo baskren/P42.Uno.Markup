@@ -92,6 +92,9 @@ namespace P42.Uno.Markup
 
         public static ElementType Foreground(this ElementType element, Color color)
         { element.Foreground = new SolidColorBrush(color); return element; }
+
+        public static ElementType Foreground(this ElementType element, string hex)
+        { element.Foreground = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromHex(hex)); return element; }
         #endregion
 
 

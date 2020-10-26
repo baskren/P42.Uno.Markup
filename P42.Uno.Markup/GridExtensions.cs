@@ -27,6 +27,7 @@ namespace P42.Uno.Markup
         { element.Padding = padding; return element; }
         #endregion
 
+
         #region CornerRadius
         public static TElement CornerRadius<TElement>(this TElement element, double value) where TElement : ElementType
         { element.CornerRadius = new CornerRadius(value); return element; }
@@ -37,6 +38,7 @@ namespace P42.Uno.Markup
         public static TElement CornerRadius<TElement>(this TElement element, CornerRadius padding) where TElement : ElementType
         { element.CornerRadius = padding; return element; }
         #endregion
+
 
         #region Border Thickness
         public static TElement BorderThickness<TElement>(this TElement element, double value) where TElement : ElementType
@@ -59,9 +61,12 @@ namespace P42.Uno.Markup
 
         public static TElement BorderBrush<TElement>(this TElement element, Color value) where TElement : ElementType
         { element.BorderBrush = new SolidColorBrush(value); return element; }
-        #endregion
 
-        public static TElement RowSpacing<TElement>(this TElement element, double value) where TElement : ElementType
+		public static TElement BorderBrush<TElement>(this TElement element, string hex) where TElement : ElementType
+		{ element.BorderBrush = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromHex(hex)); return element; }
+		#endregion
+
+		public static TElement RowSpacing<TElement>(this TElement element, double value) where TElement : ElementType
         { element.RowSpacing = value; return element; }
 
         public static TElement ColumnSpacing<TElement>(this TElement element, double value) where TElement : ElementType

@@ -47,8 +47,60 @@ namespace P42.Uno.Markup
         { element.IsEnabled = true; return element; }
         #endregion
 
+
+        #region Content Alignment
+
+        public static TElement ContentCenter<TElement>(this TElement element) where TElement : ElementType
+        { 
+            element.HorizontalContentAlignment = HorizontalAlignment.Center;
+            element.VerticalContentAlignment = VerticalAlignment.Center;
+            return element; 
+        }
+
+        public static TElement ContentStretch<TElement>(this TElement element) where TElement : ElementType
+        { 
+            element.HorizontalContentAlignment = HorizontalAlignment.Stretch;
+            element.VerticalContentAlignment = VerticalAlignment.Stretch;
+            return element; 
+        }
+
+        #region Horizontal
         public static TElement HorizontalContentAlignment<TElement>(this TElement element, HorizontalAlignment value) where TElement : ElementType
         { element.HorizontalContentAlignment = value; return element; }
+
+        public static TElement ContentLeft<TElement>(this TElement element) where TElement : ElementType
+        { element.HorizontalContentAlignment = HorizontalAlignment.Left; return element; }
+
+        public static TElement ContentRight<TElement>(this TElement element) where TElement : ElementType
+        { element.HorizontalContentAlignment = HorizontalAlignment.Right; return element; }
+
+        public static TElement ContentHorizontalCenter<TElement>(this TElement element) where TElement : ElementType
+        { element.HorizontalContentAlignment = HorizontalAlignment.Center; return element; }
+
+        public static TElement ContentHorizontalStretch<TElement>(this TElement element) where TElement : ElementType
+        { element.HorizontalContentAlignment = HorizontalAlignment.Stretch; return element; }
+        #endregion
+
+        #region Vertical
+        public static TElement VerticalContentAlignment<TElement>(this TElement element, VerticalAlignment value) where TElement : ElementType
+        { element.VerticalContentAlignment = value; return element; }
+
+        public static TElement ContentTop<TElement>(this TElement element) where TElement : ElementType
+        { element.VerticalContentAlignment = VerticalAlignment.Top; return element; }
+
+        public static TElement ContentBottom<TElement>(this TElement element) where TElement : ElementType
+        { element.VerticalContentAlignment = VerticalAlignment.Bottom; return element; }
+
+        public static TElement ContentVerticalCenter<TElement>(this TElement element) where TElement : ElementType
+        { element.VerticalContentAlignment = VerticalAlignment.Center; return element; }
+
+        public static TElement ContentVerticalStretch<TElement>(this TElement element) where TElement : ElementType
+        { element.VerticalContentAlignment = VerticalAlignment.Stretch; return element; }
+
+        #endregion
+
+        #endregion
+
 
         #region Foreground
         public static TElement Foreground<TElement>(this TElement element, Brush brush) where TElement : ElementType
@@ -56,6 +108,9 @@ namespace P42.Uno.Markup
 
         public static TElement Foreground<TElement>(this TElement element, Color color) where TElement : ElementType
         { element.Foreground = new SolidColorBrush(color); return element; }
+
+        public static TElement Foreground<TElement>(this TElement element, string hex) where TElement : ElementType
+        { element.Foreground = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromHex(hex)); return element; }
         #endregion
 
 
@@ -188,21 +243,25 @@ namespace P42.Uno.Markup
 
         public static TElement BorderBrush<TElement>(this TElement element, Color value) where TElement : ElementType
         { element.BorderBrush = new SolidColorBrush(value); return element; }
+
+        public static TElement BorderBrush<TElement>(this TElement element, string hex) where TElement : ElementType
+        { element.BorderBrush = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromHex(hex)); return element; }
         #endregion
 
 
         public static TElement TabNavigation<TElement>(this TElement element, KeyboardNavigationMode value) where TElement : ElementType
         { element.TabNavigation = value; return element; }
 
+        #region Background
         public static TElement Background<TElement>(this TElement element, Brush brush) where TElement : ElementType
         { element.Background = brush; return element; }
 
         public static TElement Background<TElement>(this TElement element, Color color) where TElement : ElementType
         { element.Background = new SolidColorBrush(color); return element; }
 
-
-        public static TElement VerticalContentAlignment<TElement>(this TElement element, VerticalAlignment value) where TElement : ElementType
-        { element.VerticalContentAlignment = value; return element; }
+        public static TElement Background<TElement>(this TElement element, string hex) where TElement : ElementType
+        { element.Background = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromHex(hex)); return element; }
+        #endregion
 
         public static TElement Template<TElement>(this TElement element, ControlTemplate value) where TElement : ElementType
         { element.Template = value; return element; }

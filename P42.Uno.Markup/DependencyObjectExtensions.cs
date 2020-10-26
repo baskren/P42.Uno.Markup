@@ -10,6 +10,13 @@ namespace P42.Uno.Markup
 {
     public static class DependencyObjectExtensions
     {
+		public static TBindable AssignTo<TBindable>(this TBindable element, ref TBindable variable) where TBindable : DependencyObject
+        {
+			variable = element;
+			return element;
+        }
+
+
 		//const string bindingContextPath = Binding.SelfPath;
 
 		/// <summary>Bind to a specified property</summary>
@@ -17,6 +24,7 @@ namespace P42.Uno.Markup
 			this TBindable target,
 			DependencyProperty targetProperty,
 			object source,
+			string path = null,
 			BindingMode mode = BindingMode.OneWay,
 			IValueConverter converter = null,
 			object converterParameter = null,
@@ -38,6 +46,8 @@ namespace P42.Uno.Markup
 			};
 			if (!string.IsNullOrWhiteSpace(converterLanguage))
 				binding.ConverterLanguage = converterLanguage;
+			if (!string.IsNullOrWhiteSpace(path))
+				binding.Path = new PropertyPath(path);
 			BindingOperations.SetBinding(target, targetProperty, binding);
 			return target;
 		}
@@ -47,6 +57,7 @@ namespace P42.Uno.Markup
 			this TBindable target,
 			DependencyProperty targetProperty,
 			object source = null,
+			string path = null,
 			BindingMode mode = BindingMode.OneWay,
 			Func<TSource, TDest> convert = null,
 			Func<TDest, TSource> convertBack = null,
@@ -70,6 +81,8 @@ namespace P42.Uno.Markup
 			};
 			if (!string.IsNullOrWhiteSpace(converterLanguage))
 				binding.ConverterLanguage = converterLanguage;
+			if (!string.IsNullOrWhiteSpace(path))
+				binding.Path = new PropertyPath(path);
 			BindingOperations.SetBinding(target, targetProperty, binding);
 			return target;
 		}
@@ -79,6 +92,7 @@ namespace P42.Uno.Markup
 			this TBindable target,
 			DependencyProperty targetProperty,
 			object source = null,
+			string path = null,
 			BindingMode mode = BindingMode.OneWay,
 			Func<TSource, TParam, TDest> convert = null,
 			Func<TDest, TParam, TSource> convertBack = null,
@@ -102,6 +116,8 @@ namespace P42.Uno.Markup
 			};
 			if (!string.IsNullOrWhiteSpace(converterLanguage))
 				binding.ConverterLanguage = converterLanguage;
+			if (!string.IsNullOrWhiteSpace(path))
+				binding.Path = new PropertyPath(path);
 			BindingOperations.SetBinding(target, targetProperty, binding);
 			return target;
 		}
