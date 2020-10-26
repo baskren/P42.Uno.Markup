@@ -194,6 +194,7 @@ namespace P42.Uno.Markup
         { element.CornerRadius = padding; return element; }
         #endregion
 
+
         #region Border Thickness
         public static TElement BorderThickness<TElement>(this TElement element, double value) where TElement : ElementType
         { element.BorderThickness = new Thickness(value); return element; }

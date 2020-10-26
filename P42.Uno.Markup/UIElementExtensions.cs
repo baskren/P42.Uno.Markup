@@ -18,16 +18,16 @@ namespace P42.Uno.Markup
     public static class UIElementExtensions
     {
         #region Visibility
-        public static TElement IsVisible<TElement>(this TElement element, bool isVisible) where TElement :ElementType
+        public static TElement IsVisible<TElement>(this TElement element, bool isVisible = true) where TElement :ElementType
         { element.Visibility = isVisible ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed; return element; }
 
         public static TElement Visibility<TElement>(this TElement element, Visibility visibility) where TElement :ElementType
         { element.Visibility = visibility; return element; }
 
-        public static TElement Visible<TElement>(this TElement element, bool isVisible) where TElement :ElementType
+        public static TElement Visible<TElement>(this TElement element) where TElement :ElementType
         { element.Visibility = Windows.UI.Xaml.Visibility.Visible; return element; }
 
-        public static TElement Collapsed<TElement>(this TElement element, bool isVisible) where TElement :ElementType
+        public static TElement Collapsed<TElement>(this TElement element) where TElement :ElementType
         { element.Visibility = Windows.UI.Xaml.Visibility.Collapsed; return element; }
         #endregion
 
@@ -195,8 +195,8 @@ namespace P42.Uno.Markup
         public static TElement Transform3D<TElement>(this TElement element, Transform3D transform3D) where TElement :ElementType
         { element.Transform3D = transform3D; return element; }
 
-        public static TElement Transitions<TElement>(this TElement element, TransitionCollection collection) where TElement :ElementType
-        { element.Transitions = collection; return element; }
+        //public static TElement Transitions<TElement>(this TElement element, TransitionCollection collection) where TElement :ElementType
+        //{ element.Transitions = collection; return element; }
 
         public static TElement TranslationTransition<TElement>(this TElement element, Vector3Transition transition) where TElement :ElementType
         { element.TranslationTransition = transition; return element; }

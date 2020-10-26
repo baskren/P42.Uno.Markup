@@ -24,5 +24,16 @@ namespace P42.Uno.Markup
 
         public static TElement BackgroundTransition<TElement>(this TElement element, BrushTransition brushTransition) where TElement : ElementType
         { element.BackgroundTransition = brushTransition; return element; }
+
+        public static TElement Children<TElement>(this TElement panel, params UIElement[] children) where TElement : ElementType
+        {
+            panel.Children.Clear();
+            foreach (var child in children)
+            {
+                panel.Children.Add(child);
+            }
+            return panel;
+        }
+
     }
 }

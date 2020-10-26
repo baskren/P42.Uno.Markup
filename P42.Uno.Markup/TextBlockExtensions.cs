@@ -61,13 +61,7 @@ namespace P42.Uno.Markup
         { element.TextAlignment = Windows.UI.Xaml.TextAlignment.Right; return element; }
 
         public static ElementType JustifyTextAlignment(this ElementType element)
-        { element.TextAlignment = Windows.UI.Xaml.TextAlignment.; return element; }
-
-        public static ElementType StartTextAlignment(this ElementType element)
-        { element.TextAlignment = Windows.UI.Xaml.TextAlignment.Start; return element; }
-
-        public static ElementType EndTextAlignment(this ElementType element)
-        { element.TextAlignment = Windows.UI.Xaml.TextAlignment.End; return element; }
+        { element.TextAlignment = Windows.UI.Xaml.TextAlignment.Justify; return element; }
 
         public static ElementType DetectTextAlignment(this ElementType element)
         { element.TextAlignment = Windows.UI.Xaml.TextAlignment.DetectFromContent; return element; }

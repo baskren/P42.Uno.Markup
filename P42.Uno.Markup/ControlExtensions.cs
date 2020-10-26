@@ -29,6 +29,7 @@ namespace P42.Uno.Markup
         { element.Padding = padding; return element; }
         #endregion
 
+
         #region IsTabStop
         public static TElement IsTabStop<TElement>(this TElement element, bool value) where TElement : ElementType
         { element.IsTabStop = value; return element; }
@@ -36,6 +37,7 @@ namespace P42.Uno.Markup
         public static TElement TabStop<TElement>(this TElement element) where TElement : ElementType
         { element.IsTabStop = true; return element; }
         #endregion
+
 
         #region IsEnabled
         public static TElement IsEnabled<TElement>(this TElement element, bool value) where TElement : ElementType
