@@ -1,4 +1,5 @@
-﻿using System;
+﻿using P42.Utils.Uno;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 using Windows.UI;
 using Windows.UI.Text;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
 using ElementType = Windows.UI.Xaml.Controls.TextBlock;
@@ -268,6 +270,10 @@ namespace P42.Uno.Markup
         public static ElementType SelectionFlyout(this ElementType element, FlyoutBase flyout)
         { element.SelectionFlyout = flyout; return element; }
 
-
+        public static ElementType NullOrEmptyCollapse(this ElementType element)
+        {
+            return element.Bind(TextBlock.VisibilityProperty, element, nameof(TextBlock.Text),
+                       convert: (string text) => (!string.IsNullOrEmpty(text)).ToVisibility());
+        }
     }
 }

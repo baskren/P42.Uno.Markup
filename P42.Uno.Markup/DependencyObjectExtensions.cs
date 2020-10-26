@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
@@ -10,12 +11,6 @@ namespace P42.Uno.Markup
 {
     public static class DependencyObjectExtensions
     {
-		public static TBindable AssignTo<TBindable>(this TBindable element, ref TBindable variable) where TBindable : DependencyObject
-        {
-			variable = element;
-			return element;
-        }
-
 
 		//const string bindingContextPath = Binding.SelfPath;
 
@@ -31,24 +26,32 @@ namespace P42.Uno.Markup
 			string converterLanguage = null,
 			UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
 			object targetNullValue = null,
-			object fallbackValue = null
+			object fallbackValue = null, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = -1
 		) where TBindable : DependencyObject
 		{
-			var binding = new Binding
+			//if (targetProperty.GetMetadata(target.GetType()) is PropertyMetadata metaData 
+			//	&& metaData.DefaultValue.GetType() is Type type
+			//	&& type.FullName != "System.__ComObject")
 			{
-				Source = source,
-				Mode = mode,
-				Converter = converter,
-				ConverterParameter = converterParameter,
-				UpdateSourceTrigger = updateSourceTrigger,
-				TargetNullValue = targetNullValue,
-				FallbackValue = fallbackValue
-			};
-			if (!string.IsNullOrWhiteSpace(converterLanguage))
-				binding.ConverterLanguage = converterLanguage;
-			if (!string.IsNullOrWhiteSpace(path))
-				binding.Path = new PropertyPath(path);
-			BindingOperations.SetBinding(target, targetProperty, binding);
+
+				var binding = new Binding
+				{
+					Source = source,
+					Mode = mode,
+					Converter = converter,
+					ConverterParameter = converterParameter,
+					UpdateSourceTrigger = updateSourceTrigger,
+					TargetNullValue = targetNullValue,
+					FallbackValue = fallbackValue
+				};
+				if (!string.IsNullOrWhiteSpace(converterLanguage))
+					binding.ConverterLanguage = converterLanguage;
+				if (!string.IsNullOrWhiteSpace(path))
+					binding.Path = new PropertyPath(path);
+				BindingOperations.SetBinding(target, targetProperty, binding);
+			}
+			//else
+				//Console.WriteLine("Ignoreing Bind because cannot find PropertyMetaData for binding target["+target+"] targetProperty["+targetProperty+"] source["+source+"] and path["+path+"] at line["+lineNumber+"] in file["+filePath+"].");
 			return target;
 		}
 

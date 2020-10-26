@@ -106,7 +106,7 @@ namespace P42.Uno.Markup
 
 		public static TElement Rows<TElement>(this TElement grid, params GridLength[] lengths) where TElement : ElementType
 		{
-			grid.ColumnDefinitions.Clear();
+			grid.RowDefinitions.Clear();
 			foreach (var length in lengths)
 			{
 				var rowDefinition = new RowDefinition { Height = length };
@@ -117,7 +117,7 @@ namespace P42.Uno.Markup
 
 		public static TElement Rows<TElement, TEnum>(this TElement grid, params (TEnum name, GridLength length)[] rows) where TElement : ElementType where TEnum : Enum
 		{
-			grid.ColumnDefinitions.Clear();
+			grid.RowDefinitions.Clear();
 			for (int i = 0; i < rows.Length; i++)
 			{
 				if (i != rows[i].name.ToInt())

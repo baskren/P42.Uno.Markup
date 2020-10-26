@@ -1,4 +1,5 @@
-﻿using System;
+﻿using P42.Utils.Uno;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -92,5 +93,10 @@ namespace P42.Uno.Markup
         public static ElementType BackgroundSizing(this ElementType element, BackgroundSizing sizing)
         { element.BackgroundSizing = sizing; return element; }
 
+        public static ElementType NullOrEmptyCollapse(this ElementType element)
+        {
+            return element.Bind(TextBlock.VisibilityProperty, element, nameof(TextBlock.Text),
+                           convert: (string text) => (!string.IsNullOrEmpty(text)).ToVisibility());
+        }
     }
 }
