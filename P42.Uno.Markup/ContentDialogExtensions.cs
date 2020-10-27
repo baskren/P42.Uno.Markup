@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using ElementType = Windows.UI.Xaml.Controls.ContentDialog;
@@ -67,5 +68,25 @@ namespace P42.Uno.Markup
         { element.CloseButtonCommand = value; return element; }
 
 
+        #region Events
+        public static TElement AddClosed<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogClosedEventArgs> handler) where TElement : ElementType
+        { element.Closed += handler; return element; }
+
+        public static TElement AddClosing<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogClosingEventArgs> handler) where TElement : ElementType
+        { element.Closing += handler; return element; }
+
+        public static TElement AddOpened<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogOpenedEventArgs> handler) where TElement : ElementType
+        { element.Opened += handler; return element; }
+
+        public static TElement AddPrimaryButtonClick<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs> handler) where TElement : ElementType
+        { element.PrimaryButtonClick += handler; return element; }
+
+        public static TElement AddSecondaryButtonClick<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs> handler) where TElement : ElementType
+        { element.SecondaryButtonClick += handler; return element; }
+
+        public static TElement AddCloseButtonClick<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs> handler) where TElement : ElementType
+        { element.CloseButtonClick += handler; return element; }
+
+        #endregion
     }
 }

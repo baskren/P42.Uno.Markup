@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -36,5 +37,29 @@ namespace P42.Uno.Markup
         public static TElement AreOpenCloseAnimationsEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.AreOpenCloseAnimationsEnabled = value; return element; }
 
+        #region Events
+#if NETFX_CORE
+        public static TElement AddClosed<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        { element.Closed += handler; return element; }
+
+        public static TElement AddOpened<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        { element.Opened += handler; return element; }
+
+        public static TElement AddOpening<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        { element.Opening += handler; return element; }
+#else
+        public static TElement AddClosed<TElement>(this TElement element, EventHandler handler) where TElement : ElementType
+        { element.Closed += handler; return element; }
+
+        public static TElement AddOpened<TElement>(this TElement element, EventHandler handler) where TElement : ElementType
+        { element.Opened += handler; return element; }
+
+        public static TElement AddOpening<TElement>(this TElement element, EventHandler handler) where TElement : ElementType
+        { element.Opening += handler; return element; }
+#endif
+
+        public static TElement AddClosing<TElement>(this TElement element, TypedEventHandler<FlyoutBase, FlyoutBaseClosingEventArgs> handler) where TElement : ElementType
+        { element.Closing += handler; return element; }
+#endregion
     }
 }

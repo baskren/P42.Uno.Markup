@@ -97,5 +97,12 @@ namespace P42.Uno.Markup
         { element.BackgroundSizing = value; return element; }
 
 
+        #region Events
+        public static TElement AddHorizontalSnapPointsChanged<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        { element.HorizontalSnapPointsChanged += handler; return element; }
+
+        public static TElement AddVerticalSnapPointsChanged<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        { element.VerticalSnapPointsChanged += handler; return element; }
+        #endregion
     }
 }

@@ -27,5 +27,10 @@ namespace P42.Uno.Markup
 
         public static TElement IsSynchronizedWithCurrentItem<TElement>(this TElement element, bool? value) where TElement : ElementType
         { element.IsSynchronizedWithCurrentItem = value; return element; }
+
+        #region Events
+        public static TElement AddSelectionChanged<TElement>(this TElement element, SelectionChangedEventHandler handler) where TElement : ElementType
+        { element.SelectionChanged += handler; return element; }
+        #endregion
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
+using P42.Utils;
 
 namespace P42.Uno.Markup
 {
@@ -224,5 +225,6 @@ namespace P42.Uno.Markup
 			action?.Invoke(bindable);
 			return bindable;
 		}
+
 	}
 }

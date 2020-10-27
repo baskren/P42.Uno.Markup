@@ -23,5 +23,20 @@ namespace P42.Uno.Markup
         public static TElement LightDismissOverlayMode<TElement>(this TElement element, LightDismissOverlayMode value) where TElement : ElementType
         { element.LightDismissOverlayMode = value; return element; }
 
+
+        #region Events
+        public static TElement AddClosed<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        { element.Closed += handler; return element; }
+
+        public static TElement AddOpened<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        { element.Opened += handler; return element; }
+
+        public static TElement AddClosing<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        { element.Closing += handler; return element; }
+
+        public static TElement AddOpening<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        { element.Opening += handler; return element; }
+
+        #endregion
     }
 }

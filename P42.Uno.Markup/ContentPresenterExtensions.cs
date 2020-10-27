@@ -8,6 +8,7 @@ using Windows.UI;
 using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using ElementType = Windows.UI.Xaml.Controls.ContentPresenter;
@@ -16,6 +17,71 @@ namespace P42.Uno.Markup
 {
     public static class ContentPresenterExtensions
     {
+        #region Binding
+        public static TElement BindNullCollapse<TElement>(this TElement element) where TElement : ElementType
+        {
+            return element.Bind(ContentPresenter.VisibilityProperty, element, nameof(Content),
+                           convert: (object content) => (content != null).ToVisibility());
+        }
+
+        public static TElement BindFont<TElement>(this TElement target, Control source, BindingMode bindingMode = BindingMode.OneWay, object except = null) where TElement : ElementType
+        {
+            var excepts = InternalHelpers.GetExcepts<Control>(except);
+            if (excepts is null || !excepts.Contains(nameof(Control.FontFamily)))
+                target.Bind(ElementType.FontFamilyProperty, source, nameof(Control.FontFamily), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(Control.FontSize)))
+                target.Bind(ElementType.FontSizeProperty, source, nameof(Control.FontSize), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(Control.FontStretch)))
+                target.Bind(ElementType.FontStretchProperty, source, nameof(Control.FontStretch), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(Control.FontStyle)))
+                target.Bind(ElementType.FontStyleProperty, source, nameof(Control.FontStyle), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(Control.FontWeight)))
+                target.Bind(ElementType.FontWeightProperty, source, nameof(Control.FontWeight), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(Control.Foreground)))
+                target.Bind(ElementType.ForegroundProperty, source, nameof(Control.Foreground), bindingMode);
+            return target;
+        }
+
+        public static TElement BindFont<TElement>(this TElement target, TextBlock source, BindingMode bindingMode = BindingMode.OneWay, object except = null) where TElement : ElementType
+        {
+            var excepts = InternalHelpers.GetExcepts<TextBlock>(except);
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.FontFamily)))
+                target.Bind(ElementType.FontFamilyProperty, source, nameof(TextBlock.FontFamily), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.FontSize)))
+                target.Bind(ElementType.FontSizeProperty, source, nameof(TextBlock.FontSize), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.FontStretch)))
+                target.Bind(ElementType.FontStretchProperty, source, nameof(TextBlock.FontStretch), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.FontStyle)))
+                target.Bind(ElementType.FontStyleProperty, source, nameof(TextBlock.FontStyle), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.FontWeight)))
+                target.Bind(ElementType.FontWeightProperty, source, nameof(TextBlock.FontWeight), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.Foreground)))
+                target.Bind(ElementType.ForegroundProperty, source, nameof(TextBlock.Foreground), bindingMode);
+            return target;
+        }
+
+        public static TElement BindFont<TElement>(this TElement target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay, object except = null) where TElement : ElementType
+        {
+            var excepts = InternalHelpers.GetExcepts<ContentPresenter>(except);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontFamily)))
+                target.Bind(ElementType.FontFamilyProperty, source, nameof(ContentPresenter.FontFamily), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontSize)))
+                target.Bind(ElementType.FontSizeProperty, source, nameof(ContentPresenter.FontSize), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontStretch)))
+                target.Bind(ElementType.FontStretchProperty, source, nameof(ContentPresenter.FontStretch), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontStyle)))
+                target.Bind(ElementType.FontStyleProperty, source, nameof(ContentPresenter.FontStyle), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontWeight)))
+                target.Bind(ElementType.FontWeightProperty, source, nameof(ContentPresenter.FontWeight), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.Foreground)))
+                target.Bind(ElementType.ForegroundProperty, source, nameof(ContentPresenter.Foreground), bindingMode);
+            return target;
+        }
+        #endregion
+
+
+        #region Font Properties
+
         #region Foreground
         public static TElement Foreground<TElement>(this TElement element, Brush brush) where TElement : ElementType
         { element.Foreground = brush; return element; }
@@ -130,6 +196,7 @@ namespace P42.Uno.Markup
         { element.FontFamily = new Windows.UI.Xaml.Media.FontFamily(family); return element; }
         #endregion
 
+        #endregion
 
         public static TElement ContentTransitions<TElement>(this TElement element, TransitionCollection transitions) where TElement : ElementType
         { element.ContentTransitions = transitions; return element; }
@@ -293,10 +360,5 @@ namespace P42.Uno.Markup
         { element.BackgroundSizing = sizing; return element; }
 
 
-        public static TElement NullOrEmptyCollapse<TElement>(this TElement element) where TElement : ElementType
-        {
-            return element.Bind(ContentPresenter.VisibilityProperty, element, nameof(Content),
-                           convert: (object content) => (content != null).ToVisibility());
-        }
     }
 }

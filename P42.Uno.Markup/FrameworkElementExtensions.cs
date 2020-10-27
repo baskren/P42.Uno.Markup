@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Windows.Foundation;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Media;
 using ElementType = Windows.UI.Xaml.FrameworkElement;
@@ -175,6 +178,48 @@ namespace P42.Uno.Markup
 		public static TElement AllowFocusOnInteraction<TElement>(this TElement element, bool allow) where TElement :ElementType
 		{ element.AllowFocusOnInteraction = allow; return element; }
 
-        #endregion
-    }
+		#endregion
+
+
+		#region Events
+		public static TElement AddLayoutUpdated<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+		{ element.LayoutUpdated += handler; return element; }
+
+		public static TElement AddLoaded<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
+		{ element.Loaded += handler; return element; }
+
+		public static TElement AddSizeChanged<TElement>(this TElement element, SizeChangedEventHandler handler) where TElement : ElementType
+		{ element.SizeChanged += handler; return element; }
+
+		public static TElement AddUnloaded<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
+		{ element.Unloaded += handler; return element; }
+
+
+#if NETFX_CORE
+		public static TElement AddDataContextChanged<TElement>(this TElement element, TypedEventHandler<FrameworkElement, DataContextChangedEventArgs> handler) where TElement : ElementType
+		{ element.DataContextChanged += handler; return element; }
+#else
+		public static TElement AddDataContextChanged<TElement>(this TElement element, TypedEventHandler<DependencyObject, DataContextChangedEventArgs> handler) where TElement : ElementType
+		{ element.DataContextChanged += handler; return element; }
+#endif
+
+#if NETFX_CORE
+		public static TElement AddLoading<TElement>(this TElement element, TypedEventHandler<FrameworkElement, object> handler) where TElement : ElementType
+		{ element.Loading += handler; return element; }
+#elif NETSTANDARD
+		public static TElement AddLoading<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
+		{ element.Loading += handler; return element; }
+#else
+		public static TElement AddLoading<TElement>(this TElement element, TypedEventHandler<DependencyObject, object> handler) where TElement : ElementType
+		{ element.Loading += handler; return element; }
+#endif
+
+		public static TElement AddActualThemeChanged<TElement>(this TElement element, TypedEventHandler<FrameworkElement, object> handler) where TElement : ElementType
+		{ element.ActualThemeChanged += handler; return element; }
+
+		public static TElement AddEffectiveViewportChanged<TElement>(this TElement element, TypedEventHandler<FrameworkElement, EffectiveViewportChangedEventArgs> handler) where TElement : ElementType
+		{ element.EffectiveViewportChanged += handler; return element; }
+
+#endregion
+	}
 }

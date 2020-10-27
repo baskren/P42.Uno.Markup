@@ -25,7 +25,7 @@ namespace P42.Uno.Markup
         public static TElement Content<TElement>(this TElement element, object content) where TElement : ElementType
         { element.Content = content; return element; }
 
-        public static TElement NullOrEmptyCollapse<TElement>(this TElement element) where TElement : ElementType
+        public static TElement BindNullCollapse<TElement>(this TElement element) where TElement : ElementType
         {
             return element.Bind(ContentPresenter.VisibilityProperty, element, nameof(Content),
                            convert: (object content) => (content != null).ToVisibility());

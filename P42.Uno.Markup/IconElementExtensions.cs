@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
-using ElementType = Windows.UI.Xaml.Controls.ContentPresenter;
+using ElementType = Windows.UI.Xaml.Controls.IconElement;
 
 namespace P42.Uno.Markup
 {

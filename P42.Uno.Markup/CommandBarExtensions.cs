@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -39,6 +40,9 @@ namespace P42.Uno.Markup
         public static TElement DefaultLabelPosition<TElement>(this TElement element, CommandBarDefaultLabelPosition value) where TElement : ElementType
         { element.DefaultLabelPosition = value; return element; }
 
-
+        #region Events
+        public static TElement AddDynamicOverflowItemsChanging<TElement>(this TElement element, TypedEventHandler<CommandBar, DynamicOverflowItemsChangingEventArgs> handler) where TElement : ElementType
+        { element.DynamicOverflowItemsChanging += handler; return element; }
+        #endregion
     }
 }

@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 using ElementType = Windows.UI.Xaml.Controls.TextBlock;
 
@@ -85,6 +87,63 @@ namespace P42.Uno.Markup
 
         public static ElementType Padding(this ElementType element, Thickness padding)
         { element.Padding = padding; return element; }
+        #endregion
+
+        #region Font Properties
+
+        #region Binding
+        public static ElementType BindFont(this ElementType target, Control source, BindingMode bindingMode = BindingMode.OneWay, object except = null) 
+        {
+            var excepts = InternalHelpers.GetExcepts<Control>(except);
+            if (excepts is null || !excepts.Contains(nameof(Control.FontFamily)))
+                target.Bind(ElementType.FontFamilyProperty, source, nameof(Control.FontFamily), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(Control.FontSize)))
+                target.Bind(ElementType.FontSizeProperty, source, nameof(Control.FontSize), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(Control.FontStretch)))
+                target.Bind(ElementType.FontStretchProperty, source, nameof(Control.FontStretch), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(Control.FontStyle)))
+                target.Bind(ElementType.FontStyleProperty, source, nameof(Control.FontStyle), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(Control.FontWeight)))
+                target.Bind(ElementType.FontWeightProperty, source, nameof(Control.FontWeight), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(Control.Foreground)))
+                target.Bind(ElementType.ForegroundProperty, source, nameof(Control.Foreground), bindingMode);
+            return target;
+        }
+        public static ElementType BindFont(this ElementType target, TextBlock source, BindingMode bindingMode = BindingMode.OneWay, object except = null)
+        {
+            var excepts = InternalHelpers.GetExcepts<TextBlock>(except);
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.FontFamily)))
+                target.Bind(ElementType.FontFamilyProperty, source, nameof(TextBlock.FontFamily), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.FontSize)))
+                target.Bind(ElementType.FontSizeProperty, source, nameof(TextBlock.FontSize), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.FontStretch)))
+                target.Bind(ElementType.FontStretchProperty, source, nameof(TextBlock.FontStretch), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.FontStyle)))
+                target.Bind(ElementType.FontStyleProperty, source, nameof(TextBlock.FontStyle), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.FontWeight)))
+                target.Bind(ElementType.FontWeightProperty, source, nameof(TextBlock.FontWeight), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.Foreground)))
+                target.Bind(ElementType.ForegroundProperty, source, nameof(TextBlock.Foreground), bindingMode);
+            return target;
+        }
+        public static ElementType BindFont(this ElementType target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay, object except = null)
+        {
+            var excepts = InternalHelpers.GetExcepts<ContentPresenter>(except);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontFamily)))
+                target.Bind(ElementType.FontFamilyProperty, source, nameof(ContentPresenter.FontFamily), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontSize)))
+                target.Bind(ElementType.FontSizeProperty, source, nameof(ContentPresenter.FontSize), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontStretch)))
+                target.Bind(ElementType.FontStretchProperty, source, nameof(ContentPresenter.FontStretch), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontStyle)))
+                target.Bind(ElementType.FontStyleProperty, source, nameof(ContentPresenter.FontStyle), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontWeight)))
+                target.Bind(ElementType.FontWeightProperty, source, nameof(ContentPresenter.FontWeight), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.Foreground)))
+                target.Bind(ElementType.ForegroundProperty, source, nameof(ContentPresenter.Foreground), bindingMode);
+            return target;
+        }
+
         #endregion
 
 
@@ -202,6 +261,7 @@ namespace P42.Uno.Markup
         { element.FontFamily = new Windows.UI.Xaml.Media.FontFamily(family); return element; }
         #endregion
 
+        #endregion
 
         public static ElementType LineStackingStrategy(this ElementType element, LineStackingStrategy strategy)
         { element.LineStackingStrategy = strategy; return element; }
@@ -270,10 +330,34 @@ namespace P42.Uno.Markup
         public static ElementType SelectionFlyout(this ElementType element, FlyoutBase flyout)
         { element.SelectionFlyout = flyout; return element; }
 
-        public static ElementType NullOrEmptyCollapse(this ElementType element)
+        public static ElementType BindNullOrEmptyCollapse(this ElementType element)
         {
             return element.Bind(TextBlock.VisibilityProperty, element, nameof(TextBlock.Text),
                        convert: (string text) => (!string.IsNullOrEmpty(text)).ToVisibility());
         }
+
+
+        #region Events
+        public static ElementType AddContextMenuOpening(this ElementType element, ContextMenuOpeningEventHandler handler) 
+        { element.ContextMenuOpening += handler; return element; }
+
+        public static ElementType AddSelectionChanged(this ElementType element, RoutedEventHandler handler) 
+        { element.SelectionChanged += handler; return element; }
+
+        public static ElementType AddIsTextTrimmedChanged(this ElementType element, TypedEventHandler<TextBlock, IsTextTrimmedChangedEventArgs> handler)
+        { element.IsTextTrimmedChanged += handler; return element; }
+        #endregion
+
+
+        #region HTML
+        public static ElementType Html(this ElementType element, string value)
+        { element.SetHtml(value); return element; }
+
+        public static ElementType BindHtml(this ElementType element, object source, string path)
+        {
+            element.Bind(P42.Utils.Uno.TextBlockExtensions.HtmlProperty, source, path);
+            return element;
+        }
+        #endregion
     }
 }

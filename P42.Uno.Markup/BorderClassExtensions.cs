@@ -93,7 +93,7 @@ namespace P42.Uno.Markup
         public static ElementType BackgroundSizing(this ElementType element, BackgroundSizing sizing)
         { element.BackgroundSizing = sizing; return element; }
 
-        public static ElementType NullOrEmptyCollapse(this ElementType element)
+        public static ElementType BindNullCollapse(this ElementType element)
         {
             return element.Bind(TextBlock.VisibilityProperty, element, nameof(TextBlock.Text),
                            convert: (string text) => (!string.IsNullOrEmpty(text)).ToVisibility());

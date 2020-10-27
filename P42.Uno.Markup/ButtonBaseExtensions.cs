@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using ElementType = Windows.UI.Xaml.Controls.Primitives.ButtonBase;
 
@@ -21,5 +22,9 @@ namespace P42.Uno.Markup
         { element.ClickMode = mode; return element; }
 
 
+        #region Events
+        public static TElement AddClick<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
+        { element.Click += handler; return element; }
+        #endregion
     }
 }

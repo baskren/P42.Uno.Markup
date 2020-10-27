@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -55,6 +56,18 @@ namespace P42.Uno.Markup
 
         public static TElement Description<TElement>(this TElement element, object value) where TElement : ElementType
         { element.Description = value; return element; }
+
+
+        #region Events
+        public static TElement AddDropDownClosed<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        { element.DropDownClosed += handler; return element; }
+
+        public static TElement AddDropDownOpened<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        { element.DropDownOpened += handler; return element; }
+
+        public static TElement AddTextSubmitted<TElement>(this TElement element, TypedEventHandler<ComboBox, ComboBoxTextSubmittedEventArgs> handler) where TElement : ElementType
+        { element.TextSubmitted += handler; return element; }
+        #endregion
 
     }
 }
