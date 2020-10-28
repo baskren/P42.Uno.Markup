@@ -177,6 +177,7 @@ namespace P42.Uno.Markup
 				return new GridLength(d);
 			if (obj is int i)
 				return new GridLength(i);
+			/*
 			if (obj is char c)
 			{
 				if (c is '*')
@@ -190,6 +191,7 @@ namespace P42.Uno.Markup
 				}
 				throw new Exception("Cannot parse char [" + c + "] into a GridLength");
 			}
+			*/
 			if (obj is string str)
 			{
 				str = str.Trim();
@@ -202,7 +204,7 @@ namespace P42.Uno.Markup
 						return new GridLength(value, GridUnitType.Star);
 					throw new Exception("Cannot parse string [" + str + "] into a GridLength");
 				}
-				if (str.EndsWith("~") || str.ToLower() == "auto")
+				if (str.ToLower() == "auto")
 					return GridLength.Auto;
 				if (str.ToLower() == "star")
 					return new GridLength(1, GridUnitType.Star);
