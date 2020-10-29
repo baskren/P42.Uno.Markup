@@ -198,7 +198,7 @@ namespace P42.Uno.Markup
 				if (str.EndsWith("*"))
 				{
 					str.TrimEnd('*');
-					if (string.IsNullOrWhiteSpace(str))
+					if (string.IsNullOrWhiteSpace(str) || str == "*")
 						return new GridLength(1, GridUnitType.Star);
 					if (double.TryParse(str, out double value))
 						return new GridLength(value, GridUnitType.Star);
