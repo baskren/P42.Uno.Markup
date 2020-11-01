@@ -155,7 +155,7 @@ namespace P42.Uno.Markup
         { element.Foreground = new SolidColorBrush(color); return element; }
 
         public static ElementType Foreground(this ElementType element, string hex)
-        { element.Foreground = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromHex(hex)); return element; }
+        { element.Foreground = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromString(hex)); return element; }
         #endregion
 
 

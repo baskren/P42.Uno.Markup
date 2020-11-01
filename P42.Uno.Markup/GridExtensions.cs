@@ -64,7 +64,7 @@ namespace P42.Uno.Markup
         { element.BorderBrush = new SolidColorBrush(value); return element; }
 
 		public static TElement BorderBrush<TElement>(this TElement element, string hex) where TElement : ElementType
-		{ element.BorderBrush = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromHex(hex)); return element; }
+		{ element.BorderBrush = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromString(hex)); return element; }
 		#endregion
 
 		public static TElement RowSpacing<TElement>(this TElement element, double value) where TElement : ElementType

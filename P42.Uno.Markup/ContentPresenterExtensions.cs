@@ -90,7 +90,7 @@ namespace P42.Uno.Markup
         { element.Foreground = new SolidColorBrush(color); return element; }
 
         public static TElement Foreground<TElement>(this TElement element, string hex) where TElement : ElementType
-        { element.Foreground = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromHex(hex)); return element; }
+        { element.Foreground = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromString(hex)); return element; }
         #endregion
 
 
@@ -338,7 +338,7 @@ namespace P42.Uno.Markup
         { element.BorderBrush = new SolidColorBrush(value); return element; }
 
         public static TElement BorderBrush<TElement>(this TElement element, string hex) where TElement : ElementType
-        { element.BorderBrush = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromHex(hex)); return element; }
+        { element.BorderBrush = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromString(hex)); return element; }
         #endregion
 
 
@@ -350,7 +350,7 @@ namespace P42.Uno.Markup
         { element.Background = new SolidColorBrush(color); return element; }
 
         public static TElement Background<TElement>(this TElement element, string hex) where TElement : ElementType
-        { element.Background = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromHex(hex)); return element; }
+        { element.Background = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromString(hex)); return element; }
         #endregion
 
         public static TElement BackgroundTransition<TElement>(this TElement element, BrushTransition brushTransition) where TElement : ElementType

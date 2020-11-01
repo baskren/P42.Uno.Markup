@@ -45,7 +45,7 @@ namespace P42.Uno.Markup
         { element.PlaceholderForeground = new SolidColorBrush(value); return element; }
 
         public static TElement PlaceholderForeground<TElement>(this TElement element, string hex) where TElement : ElementType
-        { element.PlaceholderForeground = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromHex(hex)); return element; }
+        { element.PlaceholderForeground = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromString(hex)); return element; }
         #endregion
 
         public static TElement TextBoxStyle<TElement>(this TElement element, Style value) where TElement : ElementType

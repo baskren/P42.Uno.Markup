@@ -72,7 +72,7 @@ namespace P42.Uno.Markup
         { element.BorderBrush = new SolidColorBrush(value); return element; }
 
         public static ElementType BorderBrush(this ElementType element, string hex)
-        { element.BorderBrush = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromHex(hex)); return element; }
+        { element.BorderBrush = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromString(hex)); return element; }
         #endregion
 
 
@@ -84,7 +84,7 @@ namespace P42.Uno.Markup
         { element.Background = new SolidColorBrush(color); return element; }
 
         public static ElementType Background(this ElementType element, string hex)
-        { element.Background = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromHex(hex)); return element; }
+        { element.Background = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromString(hex)); return element; }
         #endregion
 
         public static ElementType BackgroundTransition(this ElementType element, BrushTransition brushTransition)
