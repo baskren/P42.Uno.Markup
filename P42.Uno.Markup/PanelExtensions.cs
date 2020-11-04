@@ -40,5 +40,10 @@ namespace P42.Uno.Markup
             return panel;
         }
 
+        public static TElement Children<TElement>(this TElement panel, IEnumerable<UIElement> children) where TElement : ElementType
+            => Children(panel, children.ToArray());
+
+        public static TElement Children<TElement>(this TElement panel, IEnumerable<FrameworkElement> children) where TElement : ElementType
+            => Children(panel, children.Cast<UIElement>().ToArray());
     }
 }
