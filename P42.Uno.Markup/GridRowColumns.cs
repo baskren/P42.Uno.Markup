@@ -16,6 +16,7 @@ namespace P42.Uno.Markup
 
 		public static GridLength Star => new GridLength(1.0, GridUnitType.Star);
 
+		public static GridLength Zero => new GridLength(0.0);
 
 		/*
 		public static class Columns
