@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using ElementType = Windows.UI.Xaml.Controls.Border;
@@ -37,8 +38,8 @@ namespace P42.Uno.Markup
         public static ElementType CornerRadius(this ElementType element, double topLeft, double topRight, double bottomRight, double bottomLeft)
         { element.CornerRadius = new CornerRadius(topLeft, topRight, bottomRight, bottomLeft); return element; }
 
-        public static ElementType CornerRadius(this ElementType element, CornerRadius padding)
-        { element.CornerRadius = padding; return element; }
+        public static ElementType CornerRadius(this ElementType element, CornerRadius radii)
+        { element.CornerRadius = radii; return element; }
         #endregion
 
 
@@ -98,5 +99,32 @@ namespace P42.Uno.Markup
             return element.Bind(TextBlock.VisibilityProperty, element, nameof(TextBlock.Text),
                            convert: (string text) => (!string.IsNullOrEmpty(text)).ToVisibility());
         }
+
+        #region BindBorder
+
+        public static Border BindBorder(this Border target, Control source, BindingMode bindingMode = BindingMode.OneWay) 
+        {
+            target.Bind(ElementType.BorderBrushProperty, source, nameof(Control.BorderBrush), bindingMode);
+            target.Bind(ElementType.BorderThicknessProperty, source, nameof(Control.BorderThickness), bindingMode);
+            target.Bind(ElementType.CornerRadiusProperty, source, nameof(Control.CornerRadius), bindingMode);
+            return target;
+        }
+        public static Border BindBorder(this Border target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay)
+        {
+            target.Bind(ElementType.BorderBrushProperty, source, nameof(ContentPresenter.BorderBrush), bindingMode);
+            target.Bind(ElementType.BorderThicknessProperty, source, nameof(ContentPresenter.BorderThickness), bindingMode);
+            target.Bind(ElementType.CornerRadiusProperty, source, nameof(ContentPresenter.CornerRadius), bindingMode);
+            return target;
+        }
+        public static Border BindBorder(this Border target, Border source, BindingMode bindingMode = BindingMode.OneWay) 
+        {
+            target.Bind(ElementType.BorderBrushProperty, source, nameof(Border.BorderBrush), bindingMode);
+            target.Bind(ElementType.BorderThicknessProperty, source, nameof(Border.BorderThickness), bindingMode);
+            target.Bind(ElementType.CornerRadiusProperty, source, nameof(Border.CornerRadius), bindingMode);
+            return target;
+        }
+
+        #endregion
+
     }
 }

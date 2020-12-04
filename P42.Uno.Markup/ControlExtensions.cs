@@ -103,6 +103,7 @@ namespace P42.Uno.Markup
 
         #endregion
 
+
         #region Font Properties
 
         #region Binding
@@ -276,11 +277,15 @@ namespace P42.Uno.Markup
 
         #endregion
 
+
         public static TElement TabIndex<TElement>(this TElement element, int index) where TElement : ElementType
         { element.TabIndex = index; return element; }
 
         public static TElement CharacterSpacing<TElement>(this TElement element, int ems) where TElement : ElementType
         { element.CharacterSpacing = ems; return element; }
+
+
+        #region Border Properties
 
         #region Border Thickness
         public static TElement BorderThickness<TElement>(this TElement element, double value) where TElement : ElementType
@@ -308,6 +313,47 @@ namespace P42.Uno.Markup
         { element.BorderBrush = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromString(hex)); return element; }
         #endregion
 
+
+        #region CornerRadius
+        public static TElement CornerRadius<TElement>(this TElement element, double value) where TElement : ElementType
+        { element.CornerRadius = new CornerRadius(value); return element; }
+
+        public static TElement CornerRadius<TElement>(this TElement element, double topLeft, double topRight, double bottomRight, double bottomLeft) where TElement : ElementType
+        { element.CornerRadius = new CornerRadius(topLeft, topRight, bottomRight, bottomLeft); return element; }
+
+        public static TElement CornerRadius<TElement>(this TElement element, CornerRadius padding) where TElement : ElementType
+        { element.CornerRadius = padding; return element; }
+        #endregion
+
+
+        #region BindBorder
+
+        public static TElement BindBorder<TElement>(this TElement target, Control source, BindingMode bindingMode = BindingMode.OneWay) where TElement : ElementType
+        {
+            target.Bind(ElementType.BorderBrushProperty, source, nameof(Control.BorderBrush), bindingMode);
+            target.Bind(ElementType.BorderThicknessProperty, source, nameof(Control.BorderThickness), bindingMode);
+            target.Bind(ElementType.CornerRadiusProperty, source, nameof(Control.CornerRadius), bindingMode);
+            return target;
+        }
+        public static TElement BindBorder<TElement>(this TElement target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay) where TElement : ElementType
+        {
+            target.Bind(ElementType.BorderBrushProperty, source, nameof(ContentPresenter.BorderBrush), bindingMode);
+            target.Bind(ElementType.BorderThicknessProperty, source, nameof(ContentPresenter.BorderThickness), bindingMode);
+            target.Bind(ElementType.CornerRadiusProperty, source, nameof(ContentPresenter.CornerRadius), bindingMode);
+            return target;
+        }
+        public static TElement BindBorder<TElement>(this TElement target, Border source, BindingMode bindingMode = BindingMode.OneWay) where TElement : ElementType
+        {
+            target.Bind(ElementType.BorderBrushProperty, source, nameof(Border.BorderBrush), bindingMode);
+            target.Bind(ElementType.BorderThicknessProperty, source, nameof(Border.BorderThickness), bindingMode);
+            target.Bind(ElementType.CornerRadiusProperty, source, nameof(Border.CornerRadius), bindingMode);
+            return target;
+        }
+
+        #endregion
+
+
+        #endregion
 
         public static TElement TabNavigation<TElement>(this TElement element, KeyboardNavigationMode value) where TElement : ElementType
         { element.TabNavigation = value; return element; }
@@ -366,17 +412,6 @@ namespace P42.Uno.Markup
         public static TElement DefaultStyleResourceUri<TElement>(this TElement element, global::System.Uri value) where TElement : ElementType
         { element.DefaultStyleResourceUri = value; return element; }
 
-
-        #region CornerRadius
-        public static TElement CornerRadius<TElement>(this TElement element, double value) where TElement : ElementType
-        { element.CornerRadius = new CornerRadius(value); return element; }
-
-        public static TElement CornerRadius<TElement>(this TElement element, double topLeft, double topRight, double bottomRight, double bottomLeft) where TElement : ElementType
-        { element.CornerRadius = new CornerRadius(topLeft, topRight, bottomRight, bottomLeft); return element; }
-
-        public static TElement CornerRadius<TElement>(this TElement element, CornerRadius padding) where TElement : ElementType
-        { element.CornerRadius = padding; return element; }
-        #endregion
 
         public static TElement BackgroundSizing<TElement>(this TElement element, BackgroundSizing sizing) where TElement : ElementType
         { element.BackgroundSizing = sizing; return element; }

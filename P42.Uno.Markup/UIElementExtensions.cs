@@ -19,17 +19,15 @@ namespace P42.Uno.Markup
     public static class UIElementExtensions
     {
         #region Visibility
-        public static TElement IsVisible<TElement>(this TElement element, bool isVisible = true) where TElement :ElementType
-        { element.Visibility = isVisible ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed; return element; }
-
         public static TElement Visibility<TElement>(this TElement element, Visibility visibility) where TElement :ElementType
         { element.Visibility = visibility; return element; }
 
-        public static TElement Visible<TElement>(this TElement element) where TElement :ElementType
-        { element.Visibility = Windows.UI.Xaml.Visibility.Visible; return element; }
+        public static TElement Visible<TElement>(this TElement element, bool isVisible = true) where TElement :ElementType
+        { element.Visibility = isVisible ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed; return element; }
 
-        public static TElement Collapsed<TElement>(this TElement element) where TElement :ElementType
-        { element.Visibility = Windows.UI.Xaml.Visibility.Collapsed; return element; }
+        public static TElement Collapsed<TElement>(this TElement element, bool isCollapsed = true) where TElement :ElementType
+        { element.Visibility = isCollapsed ? Windows.UI.Xaml.Visibility.Collapsed : Windows.UI.Xaml.Visibility.Visible; return element; }
+
 
         public static TElement BindVisibleFromBool<TElement>(this TElement element, object source, string path) where TElement : ElementType
         { element.Bind(UIElement.VisibilityProperty, source, path, convert: (bool visible) => visible.ToVisibility()); return element; }
