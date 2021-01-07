@@ -12,7 +12,6 @@ namespace P42.Uno.Markup
 {
     public static class ButtonExtensions
     {
-
         public static TElement Flyout<TElement>(this TElement element, FlyoutBase flyout) where TElement : ElementType
         { element.Flyout = flyout; return element; }
 

@@ -89,7 +89,12 @@ namespace P42.Uno.Markup
 		{
 			grid.ColumnDefinitions.Clear();
 			foreach (var length in lengths)
-				grid.ColumnDefinitions.Add(new ColumnDefinition { Width = ObjectToGridLength(length) });
+			{
+				if (length is ColumnDefinition columnDefinition)
+					grid.ColumnDefinitions.Add(columnDefinition);
+				else
+					grid.ColumnDefinitions.Add(new ColumnDefinition { Width = ObjectToGridLength(length) });
+			}
 			return grid;
 		}
 
@@ -103,7 +108,7 @@ namespace P42.Uno.Markup
 						$"Value of column name { columns[i].name } is not { i }. " +
 						"Columns must be defined with enum names whose values form the sequence 0,1,2,..."
 					);
-				var columnDefinition = new ColumnDefinition { Width = columns[i].length };
+			    var columnDefinition = new ColumnDefinition { Width = columns[i].length };
 				grid.ColumnDefinitions.Add(columnDefinition);
 			}
 			return grid;
@@ -119,7 +124,8 @@ namespace P42.Uno.Markup
 						$"Value of column name { columns[i].name } is not { i }. " +
 						"Columns must be defined with enum names whose values form the sequence 0,1,2,..."
 					);
-				var columnDefinition = new ColumnDefinition { Width = ObjectToGridLength(columns[i].length) };
+				if (!(columns[i].length is ColumnDefinition columnDefinition))
+					columnDefinition = new ColumnDefinition { Width = ObjectToGridLength(columns[i].length) };
 				grid.ColumnDefinitions.Add(columnDefinition);
 			}
 			return grid;
@@ -132,11 +138,17 @@ namespace P42.Uno.Markup
 				grid.RowDefinitions.Add(new RowDefinition { Height = length });
 			return grid;
 		}
+
 		public static TElement Rows<TElement>(this TElement grid, params object[] lengths) where TElement : ElementType
 		{
 			grid.RowDefinitions.Clear();
 			foreach (var length in lengths)
-				grid.RowDefinitions.Add(new RowDefinition { Height = ObjectToGridLength(length) });
+            {
+				if (length is RowDefinition rowDefinition)
+					grid.RowDefinitions.Add(rowDefinition);
+				else
+					grid.RowDefinitions.Add(new RowDefinition { Height = ObjectToGridLength(length) });
+			}
 			return grid;
 		}
 
@@ -165,7 +177,8 @@ namespace P42.Uno.Markup
 						$"Value of row name { rows[i].name } is not { i }. " +
 						"Rows must be defined with enum names whose values form the sequence 0,1,2,..."
 					);
-				var rowDefinition = new RowDefinition { Height = ObjectToGridLength(rows[i].length) };
+				if (!(rows[i].length is RowDefinition rowDefinition))
+					rowDefinition = new RowDefinition { Height = ObjectToGridLength(rows[i].length) };
 				grid.RowDefinitions.Add(rowDefinition);
 			}
 			return grid;
@@ -177,21 +190,6 @@ namespace P42.Uno.Markup
 				return new GridLength(d);
 			if (obj is int i)
 				return new GridLength(i);
-			/*
-			if (obj is char c)
-			{
-				if (c is '*')
-					return new GridLength(1, GridUnitType.Star);
-				if (c is '~')
-					return GridLength.Auto;
-				if (char.IsNumber(c))
-				{
-					var value = (int)(c - '0');
-					return new GridLength(value);
-				}
-				throw new Exception("Cannot parse char [" + c + "] into a GridLength");
-			}
-			*/
 			if (obj is string str)
 			{
 				str = str.Trim();
@@ -214,6 +212,10 @@ namespace P42.Uno.Markup
 			}
 			if (obj is GridLength)
 				return (GridLength)obj;
+			if (obj is RowDefinition rowDef)
+				return rowDef.Height;
+			if (obj is ColumnDefinition colDef)
+				return colDef.Width;
 			return new GridLength(Convert.ToDouble(obj));
 		}
 

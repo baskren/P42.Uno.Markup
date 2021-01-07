@@ -52,5 +52,17 @@ namespace P42.Uno.Markup.Shapes
 
         public static TElement Fill<TElement>(this TElement element, Color value) where TElement : ElementType
         { element.Fill = new SolidColorBrush(value); return element; }
+
+        public static TElement Fill<TElement>(this TElement element, object resourceDictionaryItem) where TElement : ElementType
+        {
+            if (resourceDictionaryItem is Color color)
+                element.Fill(color);
+            else if (resourceDictionaryItem is Brush brush)
+                element.Fill(brush);
+            else
+                throw new InvalidCastException("Object of type [" + resourceDictionaryItem?.GetType() + "] cannot be used a Shape.Fill");
+            return element;
+        }
+
     }
 }

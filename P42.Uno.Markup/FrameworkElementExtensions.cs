@@ -39,6 +39,17 @@ namespace P42.Uno.Markup
 
 		public static T Style<T>(this T element, Style<T> style) where T :ElementType
 		{ element.Style = style.FormsStyle; return element; }
+
+		public static T Style<T>(this T element, object resourceDictionaryEntry) where T: ElementType
+        {
+			if (resourceDictionaryEntry is Style style)
+				element.Style(style);
+			else if (resourceDictionaryEntry is Style<T> styleT)
+				element.Style(styleT);
+			else
+				throw new InvalidCastException("Dictionary entry is of type [" + resourceDictionaryEntry?.GetType() + "], not Style");
+			return element;
+        }
 		#endregion
 
 
