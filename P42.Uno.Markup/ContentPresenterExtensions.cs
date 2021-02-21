@@ -77,6 +77,25 @@ namespace P42.Uno.Markup
                 target.Bind(ElementType.ForegroundProperty, source, nameof(ContentPresenter.Foreground), bindingMode);
             return target;
         }
+
+        public static TElement BindFont<TElement>(this TElement target, ContentControl source, BindingMode bindingMode = BindingMode.OneWay, object except = null) where TElement : ElementType
+        {
+            var excepts = InternalHelpers.GetExcepts<ContentPresenter>(except);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontFamily)))
+                target.Bind(ElementType.FontFamilyProperty, source, nameof(ContentPresenter.FontFamily), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontSize)))
+                target.Bind(ElementType.FontSizeProperty, source, nameof(ContentPresenter.FontSize), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontStretch)))
+                target.Bind(ElementType.FontStretchProperty, source, nameof(ContentPresenter.FontStretch), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontStyle)))
+                target.Bind(ElementType.FontStyleProperty, source, nameof(ContentPresenter.FontStyle), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontWeight)))
+                target.Bind(ElementType.FontWeightProperty, source, nameof(ContentPresenter.FontWeight), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.Foreground)))
+                target.Bind(ElementType.ForegroundProperty, source, nameof(ContentPresenter.Foreground), bindingMode);
+            return target;
+        }
+
         #endregion
 
 
