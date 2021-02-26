@@ -17,7 +17,7 @@
     <NoWarn>1701,1702,Uno0001</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Uno.UI" Version="3.4.0" />
+    <PackageReference Include="Uno.UI" Version="3.5.1" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
