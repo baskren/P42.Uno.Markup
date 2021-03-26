@@ -2,7 +2,7 @@
 <Project Sdk="MSBuild.Sdk.Extras/3.0.22">
 
   <PropertyGroup>
-    <TargetFrameworks>uap10.0.17763;</TargetFrameworks>
+    <TargetFrameworks>uap10.0.18362;</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <NoWarn>1701,1702,Uno0001</NoWarn>
