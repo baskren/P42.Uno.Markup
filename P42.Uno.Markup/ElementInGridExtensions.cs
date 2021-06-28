@@ -84,6 +84,11 @@ namespace P42.Uno.Markup
 			return view;
 		}
 
-		
+		public static TView RowCol<TView>(this TView view, int row, int column) where TView : ElementType
+        {
+			view.SetValue(Grid.RowProperty, row);
+			view.SetValue(Grid.ColumnProperty, column);
+			return view;
+        }
 	}
 }
