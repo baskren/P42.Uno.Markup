@@ -23,7 +23,7 @@ namespace P42.Uno.Markup
         { element.TextAlignment = value; return element; }
 
         public static TElement Text<TElement>(this TElement element, string value) where TElement : ElementType
-        { element.Text = value; return element; }
+        { element.Text = value ?? string.Empty; return element; }
 
         public static TElement SelectionStart<TElement>(this TElement element, int value) where TElement : ElementType
         { element.SelectionStart = value; return element; }

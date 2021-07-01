@@ -52,7 +52,7 @@ namespace P42.Uno.Markup
         { element.TextBoxStyle = value; return element; }
 
         public static TElement Text<TElement>(this TElement element, string value) where TElement : ElementType
-        { element.Text = value; return element; }
+        { element.Text = value ?? string.Empty; return element; }
 
         public static TElement Description<TElement>(this TElement element, object value) where TElement : ElementType
         { element.Description = value; return element; }

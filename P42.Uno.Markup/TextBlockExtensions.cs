@@ -72,7 +72,7 @@ namespace P42.Uno.Markup
         #endregion
 
         public static ElementType Text(this ElementType element, string text)
-        { element.Text = text; return element; }
+        { element.Text = text ?? string.Empty; return element; }
 
 
         #region Padding
