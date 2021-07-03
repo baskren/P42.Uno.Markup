@@ -163,37 +163,37 @@ namespace P42.Uno.Markup
         public static ElementType FontWeight(this ElementType element, FontWeight weight)
         { element.FontWeight = weight; return element; }
 
-        public static ElementType Thin(this ElementType element)
+        public static ElementType ThinFontWeight(this ElementType element)
         { element.FontWeight = Windows.UI.Text.FontWeights.Thin; return element; }
 
-        public static ElementType ExtraLight(this ElementType element)
+        public static ElementType ExtraLightFontWeight(this ElementType element)
         { element.FontWeight = Windows.UI.Text.FontWeights.ExtraLight; return element; }
 
-        public static ElementType Light(this ElementType element)
+        public static ElementType LightFontWeight(this ElementType element)
         { element.FontWeight = Windows.UI.Text.FontWeights.Light; return element; }
 
-        public static ElementType SemiLight(this ElementType element)
+        public static ElementType SemiLightFontWeight(this ElementType element)
         { element.FontWeight = Windows.UI.Text.FontWeights.SemiLight; return element; }
 
-        public static ElementType NormalFontWieght(this ElementType element)
+        public static ElementType NormalFontWeight(this ElementType element)
         { element.FontWeight = Windows.UI.Text.FontWeights.Normal; return element; }
 
-        public static ElementType Medium(this ElementType element)
+        public static ElementType MediumFontWeight(this ElementType element)
         { element.FontWeight = Windows.UI.Text.FontWeights.Medium; return element; }
 
-        public static ElementType SemiBold(this ElementType element)
+        public static ElementType SemiBoldFontWeight(this ElementType element)
         { element.FontWeight = Windows.UI.Text.FontWeights.SemiBold; return element; }
 
-        public static ElementType Bold(this ElementType element)
+        public static ElementType BoldlFontWeight(this ElementType element)
         { element.FontWeight = Windows.UI.Text.FontWeights.Bold; return element; }
 
-        public static ElementType ExtraBold(this ElementType element)
+        public static ElementType ExtraBoldFontWeight(this ElementType element)
         { element.FontWeight = Windows.UI.Text.FontWeights.ExtraBold; return element; }
 
         public static ElementType BlackFontWeight(this ElementType element)
         { element.FontWeight = Windows.UI.Text.FontWeights.Black; return element; }
 
-        public static ElementType ExtraBlack(this ElementType element)
+        public static ElementType ExtraBlackFontWeight(this ElementType element)
         { element.FontWeight = Windows.UI.Text.FontWeights.ExtraBlack; return element; }
         #endregion
 

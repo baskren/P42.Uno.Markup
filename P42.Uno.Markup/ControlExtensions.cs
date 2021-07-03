@@ -190,7 +190,7 @@ namespace P42.Uno.Markup
         public static TElement SemiLight<TElement>(this TElement element) where TElement : ElementType
         { element.FontWeight = Windows.UI.Text.FontWeights.SemiLight; return element; }
 
-        public static TElement NormalFontWieght<TElement>(this TElement element) where TElement : ElementType
+        public static TElement NormalFontWeight<TElement>(this TElement element) where TElement : ElementType
         { element.FontWeight = Windows.UI.Text.FontWeights.Normal; return element; }
 
         public static TElement Medium<TElement>(this TElement element) where TElement : ElementType
