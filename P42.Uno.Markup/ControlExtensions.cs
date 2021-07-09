@@ -46,8 +46,8 @@ namespace P42.Uno.Markup
         public static TElement IsEnabled<TElement>(this TElement element, bool value) where TElement : ElementType
         { element.IsEnabled = value; return element; }
 
-        public static TElement Enabled<TElement>(this TElement element) where TElement : ElementType
-        { element.IsEnabled = true; return element; }
+        public static TElement Enabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
+        { element.IsEnabled = value; return element; }
         #endregion
 
 
