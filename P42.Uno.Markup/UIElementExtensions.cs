@@ -58,36 +58,60 @@ namespace P42.Uno.Markup
         public static TElement ManipulationMode<TElement>(this TElement element, ManipulationModes manipulationMode) where TElement :ElementType
         { element.ManipulationMode = manipulationMode; return element; }
 
+        #region Tap
         public static TElement IsTapEnabled<TElement>(this TElement element, bool isTapEnabled) where TElement :ElementType
         { element.IsTapEnabled = isTapEnabled; return element; }
 
         public static TElement TapEnabled<TElement>(this TElement element) where TElement :ElementType
         { element.IsTapEnabled = true; return element; }
 
+        public static TElement AddOnTap<TElement>(this TElement element, TappedEventHandler handler) where TElement : ElementType
+        { element.Tapped += handler; return element; }
+        #endregion
+
+        #region Right Tap
         public static TElement IsRightTapEnabled<TElement>(this TElement element, bool isTapEnabled) where TElement :ElementType
         { element.IsRightTapEnabled = isTapEnabled; return element; }
 
         public static TElement RightTapEnabled<TElement>(this TElement element) where TElement :ElementType
         { element.IsRightTapEnabled = true; return element; }
 
+        public static TElement AddOnRightTap<TElement>(this TElement element, RightTappedEventHandler handler) where TElement : ElementType
+        { element.RightTapped += handler; return element; }
+        #endregion
+
+        #region Holding
         public static TElement IsHoldingEnabled<TElement>(this TElement element, bool isTapEnabled) where TElement :ElementType
         { element.IsHoldingEnabled = isTapEnabled; return element; }
 
         public static TElement HoldingEnabled<TElement>(this TElement element) where TElement :ElementType
         { element.IsHoldingEnabled = true; return element; }
 
+        public static TElement AddOnHolding<TElement>(this TElement element, HoldingEventHandler handler) where TElement : ElementType
+        { element.Holding += handler; return element; }
+        #endregion
+
+        #region HitTest
         public static TElement IsHitTestVisible<TElement>(this TElement element, bool isTapEnabled) where TElement :ElementType
         { element.IsHitTestVisible = isTapEnabled; return element; }
 
         public static TElement HitTestVisible<TElement>(this TElement element) where TElement :ElementType
         { element.IsHitTestVisible = true; return element; }
+        #endregion
 
+        #region Double Tapped
         public static TElement IsDoubleTapEnabled<TElement>(this TElement element, bool isTapEnabled) where TElement :ElementType
         { element.IsDoubleTapEnabled = isTapEnabled; return element; }
 
         public static TElement DoubleTapEnabled<TElement>(this TElement element) where TElement :ElementType
         { element.IsDoubleTapEnabled = true; return element; }
+
+        public static TElement AddOnDoubleTap<TElement>(this TElement element, DoubleTappedEventHandler handler) where TElement : ElementType
+        { element.DoubleTapped += handler; return element; }
         #endregion
+
+        #endregion
+
 
 
         public static TElement Clip<TElement>(this TElement element, RectangleGeometry clipRectangle) where TElement :ElementType
