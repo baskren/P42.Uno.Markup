@@ -7,7 +7,7 @@
   <PropertyGroup>
     <NoWarn>Uno0001</NoWarn>
     <TargetFrameworks>netstandard2.0;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid11.0;MonoAndroid10.0;</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">uap10.0.18362;$(TargetFrameworks);</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' AND '$(USERNAME)' == 'ben' ">uap10.0.18362;$(TargetFrameworks);</TargetFrameworks>
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
   </PropertyGroup>
 
