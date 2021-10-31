@@ -7,8 +7,5 @@
   </PropertyGroup>
 
     <!-- REFERENCES -->
-  <ItemGroup>
-    <ProjectReference Include="..\..\P42.Utils\P42.Utils.Uno\P42.Utils.Uno.Android.csproj" />
-  </ItemGroup>
 
 </Project>
