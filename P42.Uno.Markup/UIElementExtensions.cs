@@ -67,6 +67,7 @@ namespace P42.Uno.Markup
 
         public static TElement AddOnTap<TElement>(this TElement element, TappedEventHandler handler) where TElement : ElementType
         { element.Tapped += handler; return element; }
+
         #endregion
 
         #region Right Tap

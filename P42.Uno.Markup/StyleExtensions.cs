@@ -7,6 +7,23 @@ using Windows.UI.Xaml;
 
 namespace P42.Uno.Markup
 {
+
+	public static class StyleExtensions
+	{
+		public static Windows.UI.Xaml.Style Add(this Windows.UI.Xaml.Style element, DependencyProperty property, object value) 
+		{
+			element?.Setters.Add(new Setter(property, value));
+			return element;
+		}
+
+		public static Windows.UI.Xaml.Style BasedOn(this Windows.UI.Xaml.Style element, Windows.UI.Xaml.Style source)
+        {
+			element.BasedOn = source;
+			return element;
+        }
+	}
+
+	
 	public class Style<T> where T : DependencyObject
 	{
 		public static implicit operator Style(Style<T> style) => style?.FormsStyle;
@@ -33,5 +50,16 @@ namespace P42.Uno.Markup
 			}
 			return this;
 		}
+
+		public Style<T> Add(DependencyProperty Property, object Value)
+		{
+			FormsStyle.Setters.Add(new Setter(Property, Value));
+			return this;
+		}
 	}
+	
+
+
 }
+
+

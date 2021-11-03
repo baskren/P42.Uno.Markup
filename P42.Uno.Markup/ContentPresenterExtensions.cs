@@ -229,6 +229,9 @@ namespace P42.Uno.Markup
         public static TElement Content<TElement>(this TElement element, UIElement value) where TElement : ElementType
         { element.Content = value; return element; }
 
+        public static TElement Content<TElement>(this TElement element, string value) where TElement : ElementType
+        { element.Content = value; return element; }
+
         public static TElement CharacterSpacing<TElement>(this TElement element, int ems) where TElement : ElementType
         { element.CharacterSpacing = ems; return element; }
 

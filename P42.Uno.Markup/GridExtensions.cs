@@ -77,14 +77,24 @@ namespace P42.Uno.Markup
         { element.BackgroundSizing = sizing; return element; }
 
 
-        #region Rows / Columns
-        public static TElement Columns<TElement>(this TElement grid, params GridLength[] lengths) where TElement : ElementType
+		#region Rows / Columns
+		/*
+		public static TElement Columns<TElement>(this TElement grid, params ColumnDefinition[] columnDefinitions) where TElement : ElementType
+		{
+			grid.ColumnDefinitions.Clear();
+			foreach (var column in columnDefinitions)
+				grid.ColumnDefinitions.Add(column);
+			return grid;
+		}
+
+		public static TElement Columns<TElement>(this TElement grid, params GridLength[] lengths) where TElement : ElementType
 		{
 			grid.ColumnDefinitions.Clear();
 			foreach (var length in lengths)
 				grid.ColumnDefinitions.Add(new ColumnDefinition { Width = length });
 			return grid;
 		}
+		*/
 		public static TElement Columns<TElement>(this TElement grid, params object[] lengths) where TElement : ElementType
 		{
 			grid.ColumnDefinitions.Clear();
@@ -131,6 +141,14 @@ namespace P42.Uno.Markup
 			return grid;
 		}
 
+		/*
+		public static TElement Rows<TElement>(this TElement grid, params RowDefinition[] rows) where TElement : ElementType
+        {
+			grid.RowDefinitions.Clear();
+			foreach (var row in rows)
+				grid.RowDefinitions.Add(row);
+			return grid;
+        }
 		public static TElement Rows<TElement>(this TElement grid, params GridLength[] lengths) where TElement : ElementType
 		{
 			grid.RowDefinitions.Clear();
@@ -138,6 +156,7 @@ namespace P42.Uno.Markup
 				grid.RowDefinitions.Add(new RowDefinition { Height = length });
 			return grid;
 		}
+		*/
 
 		public static TElement Rows<TElement>(this TElement grid, params object[] lengths) where TElement : ElementType
 		{
