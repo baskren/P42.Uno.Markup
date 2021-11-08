@@ -36,6 +36,8 @@ namespace P42.Uno.Markup
 
         public static Image Source(this Image element, string sourceUri)
         {
+            if (sourceUri.StartsWith("/"))
+                sourceUri = "ms-appx://" + sourceUri;
             try
             {
                 var uri = new Uri(sourceUri);

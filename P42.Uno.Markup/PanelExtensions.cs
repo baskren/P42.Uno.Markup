@@ -30,14 +30,22 @@ namespace P42.Uno.Markup
         public static TElement BackgroundTransition<TElement>(this TElement element, BrushTransition brushTransition) where TElement : ElementType
         { element.BackgroundTransition = brushTransition; return element; }
 
+        public static TElement AddChildren<TElement>(this TElement panel, params UIElement[] children) where TElement : ElementType
+        {
+            if (children != null)
+            {
+                foreach (var child in children)
+                {
+                    panel.Children.Add(child);
+                }
+            }
+            return panel;
+        }
+
         public static TElement Children<TElement>(this TElement panel, params UIElement[] children) where TElement : ElementType
         {
             panel.Children.Clear();
-            foreach (var child in children)
-            {
-                panel.Children.Add(child);
-            }
-            return panel;
+            return panel.AddChildren(children);
         }
 
         public static TElement Children<TElement>(this TElement panel, IEnumerable<UIElement> children) where TElement : ElementType
@@ -45,5 +53,11 @@ namespace P42.Uno.Markup
 
         public static TElement Children<TElement>(this TElement panel, IEnumerable<FrameworkElement> children) where TElement : ElementType
             => Children(panel, children.Cast<UIElement>().ToArray());
+
+        public static TElement AddChildren<TElement>(this TElement panel, IEnumerable<UIElement> children) where TElement : ElementType
+            => AddChildren(panel, children.ToArray());
+
+        public static TElement AddChildren<TElement>(this TElement panel, IEnumerable<FrameworkElement> children) where TElement : ElementType
+            => AddChildren(panel, children.Cast<UIElement>().ToArray());
     }
 }

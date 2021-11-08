@@ -80,7 +80,7 @@ namespace P42.Uno.Markup
         { element.FontFamily = new Windows.UI.Xaml.Media.FontFamily(family); return element; }
         #endregion
 
-        public static TElement IsTextScaleFactorEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
+        public static TElement TextScaleFactorEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsTextScaleFactorEnabled = value; return element; }
 
         public static TElement MirroredWhenRightToLeft<TElement>(this TElement element, bool value = true) where TElement : ElementType

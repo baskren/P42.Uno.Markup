@@ -22,7 +22,7 @@ namespace P42.Uno.Markup
         public static TElement ContentTemplate<TElement>(this TElement element, DataTemplate selector) where TElement : ElementType
         { element.ContentTemplate = selector; return element; }
 
-        public static TElement Content<TElement>(this TElement element, object content) where TElement : ElementType
+        public static TElement Content<TElement>(this TElement element, object content = null) where TElement : ElementType
         { element.Content = content; return element; }
 
         public static TElement BindNullCollapse<TElement>(this TElement element) where TElement : ElementType

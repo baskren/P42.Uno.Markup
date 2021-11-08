@@ -221,16 +221,16 @@ namespace P42.Uno.Markup
 						return new GridLength(value, GridUnitType.Star);
 					throw new Exception("Cannot parse string [" + str + "] into a GridLength");
 				}
-				if (str.ToLower() == "auto")
+				if (str.ToLower().StartsWith("a"))
 					return GridLength.Auto;
-				if (str.ToLower() == "star")
+				if (str.ToLower().StartsWith("s"))
 					return new GridLength(1, GridUnitType.Star);
 				if (double.TryParse(str, out double d1))
 					return new GridLength(d1);
 				throw new Exception("Cannot parse string [" + str + "] into a GridLength");
 			}
-			if (obj is GridLength)
-				return (GridLength)obj;
+			if (obj is GridLength length)
+				return length;
 			if (obj is RowDefinition rowDef)
 				return rowDef.Height;
 			if (obj is ColumnDefinition colDef)

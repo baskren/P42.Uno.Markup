@@ -61,7 +61,7 @@ namespace P42.Uno.Markup
         public static TElement ReorderMode<TElement>(this TElement element, ListViewReorderMode value) where TElement : ElementType
         { element.ReorderMode = value; return element; }
 
-        public static TElement IsMultiSelectCheckBoxEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
+        public static TElement MultiSelectCheckBoxEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsMultiSelectCheckBoxEnabled = value; return element; }
 
         public static TElement SingleSelectionFollowsFocus<TElement>(this TElement element, bool value = true) where TElement : ElementType
@@ -70,10 +70,10 @@ namespace P42.Uno.Markup
         public static TElement SemanticZoomOwner<TElement>(this TElement element, SemanticZoom value) where TElement : ElementType
         { element.SemanticZoomOwner = value; return element; }
 
-        public static TElement IsZoomedInView<TElement>(this TElement element, bool value = true) where TElement : ElementType
+        public static TElement ZoomedInView<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsZoomedInView = value; return element; }
 
-        public static TElement IsActiveView<TElement>(this TElement element, bool value = true) where TElement : ElementType
+        public static TElement ActiveView<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsActiveView = value; return element; }
 
 

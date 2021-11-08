@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Markup;
 using Windows.UI.Xaml.Media.Animation;
 using ElementType = Windows.UI.Xaml.Controls.ItemsControl;
 
@@ -13,14 +14,27 @@ namespace P42.Uno.Markup
 {
     public static class ItemsControlExtensions
     {
-        public static TElement ItemsPanel<TElement>(this TElement element, ItemsPanelTemplate brush) where TElement : ElementType
-        { element.ItemsPanel = brush; return element; }
+        public static TElement ItemsSource<TElement>(this TElement element, object source) where TElement : ElementType
+        { element.ItemsSource = source; return element; }
 
-        public static TElement ItemTemplateSelector<TElement>(this TElement element, DataTemplateSelector brush) where TElement : ElementType
-        { element.ItemTemplateSelector = brush; return element; }
+        public static TElement ItemsPanel<TElement>(this TElement element, ItemsPanelTemplate panelTemplate) where TElement : ElementType
+        { element.ItemsPanel = panelTemplate; return element; }
 
-        public static TElement ItemTemplate<TElement>(this TElement element, DataTemplate brush) where TElement : ElementType
-        { element.ItemTemplate = brush; return element; }
+        public static TElement ItemTemplateSelector<TElement>(this TElement element, DataTemplateSelector templateSelector) where TElement : ElementType
+        { element.ItemTemplateSelector = templateSelector; return element; }
+
+        public static TElement ItemTemplate<TElement>(this TElement element, DataTemplate template) where TElement : ElementType
+        { element.ItemTemplate = template; return element; }
+
+        public static TElement ItemTemplate<TElement>(this TElement element, Type templateType, Type dataType = null) where TElement : ElementType
+        {
+            var template = P42.Utils.Uno.UIElementExtensions.AsDataTemplate(templateType);
+                element.ItemTemplate = template; 
+            return element; 
+        }
+
+        public static TElement ItemTemplate<TElement>(this TElement element, string xaml) where TElement : ElementType
+        { element.ItemTemplate = (DataTemplate)XamlReader.Load(xaml); ; return element; }
 
         public static TElement ItemContainerTransitions<TElement>(this TElement element, TransitionCollection value) where TElement : ElementType
         { element.ItemContainerTransitions = value; return element; }

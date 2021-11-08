@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ElementType = Windows.UI.Xaml.Shapes.Line;
 
-namespace P42.Uno.Markup.Shapes
+namespace P42.Uno.Markup
 {
     public static class LineExtensions
     {

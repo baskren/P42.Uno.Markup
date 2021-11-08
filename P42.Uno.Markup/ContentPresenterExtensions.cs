@@ -241,7 +241,7 @@ namespace P42.Uno.Markup
         public static TElement OpticalMarginAlignment<TElement>(this TElement element, OpticalMarginAlignment value) where TElement : ElementType
         { element.OpticalMarginAlignment = value; return element; }
 
-        public static TElement IsTextScaleFactorEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
+        public static TElement TextScaleFactorEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsTextScaleFactorEnabled = value; return element; }
 
         public static TElement TextWrapping<TElement>(this TElement element, TextWrapping value) where TElement : ElementType

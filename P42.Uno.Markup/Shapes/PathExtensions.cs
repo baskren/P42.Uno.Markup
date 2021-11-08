@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Media;
 using ElementType = Windows.UI.Xaml.Shapes.Path;
 
-namespace P42.Uno.Markup.Shapes
+namespace P42.Uno.Markup
 {
     public static class PathExtensions
     {

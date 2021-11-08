@@ -39,26 +39,26 @@ namespace P42.Uno.Markup
 
         #region Events
 #if NETFX_CORE
-        public static TElement AddClosed<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        public static TElement AddOnClosed<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
         { element.Closed += handler; return element; }
 
-        public static TElement AddOpened<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        public static TElement AddOnOpened<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
         { element.Opened += handler; return element; }
 
-        public static TElement AddOpening<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        public static TElement AddOnOpening<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
         { element.Opening += handler; return element; }
 #else
-        public static TElement AddClosed<TElement>(this TElement element, EventHandler handler) where TElement : ElementType
+        public static TElement AddOnClosed<TElement>(this TElement element, EventHandler handler) where TElement : ElementType
         { element.Closed += handler; return element; }
 
-        public static TElement AddOpened<TElement>(this TElement element, EventHandler handler) where TElement : ElementType
+        public static TElement AddOnOpened<TElement>(this TElement element, EventHandler handler) where TElement : ElementType
         { element.Opened += handler; return element; }
 
-        public static TElement AddOpening<TElement>(this TElement element, EventHandler handler) where TElement : ElementType
+        public static TElement AddOnOpening<TElement>(this TElement element, EventHandler handler) where TElement : ElementType
         { element.Opening += handler; return element; }
 #endif
 
-        public static TElement AddClosing<TElement>(this TElement element, TypedEventHandler<FlyoutBase, FlyoutBaseClosingEventArgs> handler) where TElement : ElementType
+        public static TElement AddOnClosing<TElement>(this TElement element, TypedEventHandler<FlyoutBase, FlyoutBaseClosingEventArgs> handler) where TElement : ElementType
         { element.Closing += handler; return element; }
 #endregion
     }

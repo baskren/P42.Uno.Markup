@@ -272,15 +272,8 @@ namespace P42.Uno.Markup
         public static ElementType CharacterSpacing(this ElementType element, int ems)
         { element.CharacterSpacing = ems; return element; }
 
-
-        #region Text Selection
-        public static ElementType IsTextSelectionEnabled(this ElementType element, bool enabled)
+        public static ElementType TextSelectionEnabled(this ElementType element, bool enabled = true)
         { element.IsTextSelectionEnabled = enabled; return element; }
-
-        public static ElementType TextSelectionEnabled(this ElementType element)
-        { element.IsTextSelectionEnabled = true; return element; }
-        #endregion
-
 
         public static ElementType TextReadingOrder(this ElementType element, TextReadingOrder value)
         { element.TextReadingOrder = value; return element; }
@@ -300,21 +293,11 @@ namespace P42.Uno.Markup
         public static ElementType MaxLines(this ElementType element, int value)
         { element.MaxLines = value; return element; }
 
-        #region Color Font Enabled
-        public static ElementType IsColorFontEnabled(this ElementType element, bool enabled)
+        public static ElementType ColorFontEnabled(this ElementType element, bool enabled = true)
         { element.IsColorFontEnabled = enabled; return element; }
 
-        public static ElementType ColorFontEnabled(this ElementType element)
-        { element.IsColorFontEnabled = true; return element; }
-        #endregion
-
-        #region Text Scale Factor Enabled
-        public static ElementType IsTextScaleFactorEnabled(this ElementType element, bool enabled)
+        public static ElementType TextScaleFactorEnabled(this ElementType element, bool enabled = true)
         { element.IsTextScaleFactorEnabled = enabled; return element; }
-
-        public static ElementType TextScaleFactorEnabled(this ElementType element)
-        { element.IsTextScaleFactorEnabled = true; return element; }
-        #endregion
 
         #region Text Decorations
         public static ElementType TextDecorations(this ElementType element, TextDecorations enabled)
@@ -338,13 +321,13 @@ namespace P42.Uno.Markup
 
 
         #region Events
-        public static ElementType AddContextMenuOpening(this ElementType element, ContextMenuOpeningEventHandler handler) 
+        public static ElementType AddOnContextMenuOpening(this ElementType element, ContextMenuOpeningEventHandler handler) 
         { element.ContextMenuOpening += handler; return element; }
 
-        public static ElementType AddSelectionChanged(this ElementType element, RoutedEventHandler handler) 
+        public static ElementType AddOnSelectionChanged(this ElementType element, RoutedEventHandler handler) 
         { element.SelectionChanged += handler; return element; }
 
-        public static ElementType AddIsTextTrimmedChanged(this ElementType element, TypedEventHandler<TextBlock, IsTextTrimmedChangedEventArgs> handler)
+        public static ElementType AddOnIsTextTrimmedChanged(this ElementType element, TypedEventHandler<TextBlock, IsTextTrimmedChangedEventArgs> handler)
         { element.IsTextTrimmedChanged += handler; return element; }
         #endregion
 

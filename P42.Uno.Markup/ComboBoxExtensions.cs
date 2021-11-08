@@ -31,7 +31,7 @@ namespace P42.Uno.Markup
         public static TElement LightDismissOverlayMode<TElement>(this TElement element, LightDismissOverlayMode value) where TElement : ElementType
         { element.LightDismissOverlayMode = value; return element; }
 
-        public static TElement IsTextSearchEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
+        public static TElement TextSearchEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsTextSearchEnabled = value; return element; }
 
         public static TElement SelectionChangedTrigger<TElement>(this TElement element, ComboBoxSelectionChangedTrigger value) where TElement : ElementType
@@ -59,13 +59,13 @@ namespace P42.Uno.Markup
 
 
         #region Events
-        public static TElement AddDropDownClosed<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        public static TElement AddOnDropDownClosed<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
         { element.DropDownClosed += handler; return element; }
 
-        public static TElement AddDropDownOpened<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        public static TElement AddOnDropDownOpened<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
         { element.DropDownOpened += handler; return element; }
 
-        public static TElement AddTextSubmitted<TElement>(this TElement element, TypedEventHandler<ComboBox, ComboBoxTextSubmittedEventArgs> handler) where TElement : ElementType
+        public static TElement AddOnTextSubmitted<TElement>(this TElement element, TypedEventHandler<ComboBox, ComboBoxTextSubmittedEventArgs> handler) where TElement : ElementType
         { element.TextSubmitted += handler; return element; }
         #endregion
 

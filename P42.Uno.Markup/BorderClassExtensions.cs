@@ -46,7 +46,7 @@ namespace P42.Uno.Markup
         public static ElementType ChildTransitions(this ElementType element, TransitionCollection transitions)
         { element.ChildTransitions = transitions; return element; }
 
-        public static ElementType Child(this ElementType element, UIElement child)
+        public static ElementType Child(this ElementType element, UIElement child = null)
         { element.Child = child; return element; }
 
 

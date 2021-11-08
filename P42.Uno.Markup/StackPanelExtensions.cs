@@ -25,15 +25,8 @@ namespace P42.Uno.Markup
         #endregion
 
 
-        #region Regular Scroll Snap Points
-        public static TElement AreScrollSnapPointsRegular<TElement>(this TElement element, bool regular) where TElement : ElementType
+        public static TElement RegularScrollSnapPoints<TElement>(this TElement element, bool regular = true) where TElement : ElementType
         { element.AreScrollSnapPointsRegular = regular; return element; }
-
-        public static TElement RegularScrollSnapPoints<TElement>(this TElement element) where TElement : ElementType
-        { element.AreScrollSnapPointsRegular = true; return element; }
-
-
-        #endregion
 
 
         #region Padding
@@ -98,10 +91,10 @@ namespace P42.Uno.Markup
 
 
         #region Events
-        public static TElement AddHorizontalSnapPointsChanged<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        public static TElement AddOnHorizontalSnapPointsChanged<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
         { element.HorizontalSnapPointsChanged += handler; return element; }
 
-        public static TElement AddVerticalSnapPointsChanged<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        public static TElement AddOnVerticalSnapPointsChanged<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
         { element.VerticalSnapPointsChanged += handler; return element; }
         #endregion
     }

@@ -25,11 +25,11 @@ namespace P42.Uno.Markup
         public static TElement SelectedIndex<TElement>(this TElement element, int value) where TElement : ElementType
         { element.SelectedIndex = value; return element; }
 
-        public static TElement IsSynchronizedWithCurrentItem<TElement>(this TElement element, bool? value) where TElement : ElementType
+        public static TElement SynchronizedWithCurrentItem<TElement>(this TElement element, bool? value) where TElement : ElementType
         { element.IsSynchronizedWithCurrentItem = value; return element; }
 
         #region Events
-        public static TElement AddSelectionChanged<TElement>(this TElement element, SelectionChangedEventHandler handler) where TElement : ElementType
+        public static TElement AddOnSelectionChanged<TElement>(this TElement element, SelectionChangedEventHandler handler) where TElement : ElementType
         { element.SelectionChanged += handler; return element; }
         #endregion
     }

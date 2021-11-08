@@ -37,10 +37,10 @@ namespace P42.Uno.Markup
         public static TElement PrimaryButtonCommand<TElement>(this TElement element, ICommand value) where TElement : ElementType
         { element.PrimaryButtonCommand = value; return element; }
 
-        public static TElement IsSecondaryButtonEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
+        public static TElement SecondaryButtonEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsSecondaryButtonEnabled = value; return element; }
 
-        public static TElement IsPrimaryButtonEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
+        public static TElement PrimaryButtonEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsPrimaryButtonEnabled = value; return element; }
 
         public static TElement FullSizeDesired<TElement>(this TElement element, bool value = true) where TElement : ElementType
@@ -69,22 +69,22 @@ namespace P42.Uno.Markup
 
 
         #region Events
-        public static TElement AddClosed<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogClosedEventArgs> handler) where TElement : ElementType
+        public static TElement AddOnClosed<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogClosedEventArgs> handler) where TElement : ElementType
         { element.Closed += handler; return element; }
 
-        public static TElement AddClosing<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogClosingEventArgs> handler) where TElement : ElementType
+        public static TElement AddOnClosing<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogClosingEventArgs> handler) where TElement : ElementType
         { element.Closing += handler; return element; }
 
-        public static TElement AddOpened<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogOpenedEventArgs> handler) where TElement : ElementType
+        public static TElement AddOnOpened<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogOpenedEventArgs> handler) where TElement : ElementType
         { element.Opened += handler; return element; }
 
-        public static TElement AddPrimaryButtonClick<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs> handler) where TElement : ElementType
+        public static TElement AddOnPrimaryButtonClick<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs> handler) where TElement : ElementType
         { element.PrimaryButtonClick += handler; return element; }
 
-        public static TElement AddSecondaryButtonClick<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs> handler) where TElement : ElementType
+        public static TElement AddOnSecondaryButtonClick<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs> handler) where TElement : ElementType
         { element.SecondaryButtonClick += handler; return element; }
 
-        public static TElement AddCloseButtonClick<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs> handler) where TElement : ElementType
+        public static TElement AddOnCloseButtonClick<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs> handler) where TElement : ElementType
         { element.CloseButtonClick += handler; return element; }
 
         #endregion

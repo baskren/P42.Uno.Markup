@@ -37,13 +37,13 @@ namespace P42.Uno.Markup
         public static TElement MaxLength<TElement>(this TElement element, int value) where TElement : ElementType
         { element.MaxLength = value; return element; }
 
-        public static TElement IsTextPredictionEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
+        public static TElement TextPredictionEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsTextPredictionEnabled = value; return element; }
 
-        public static TElement IsSpellCheckEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
+        public static TElement SpellCheckEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsSpellCheckEnabled = value; return element; }
 
-        public static TElement IsReadOnly<TElement>(this TElement element, bool value = true) where TElement : ElementType
+        public static TElement ReadOnly<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsReadOnly = value; return element; }
 
         public static TElement InputScope<TElement>(this TElement element, InputScope value) where TElement : ElementType
@@ -52,7 +52,7 @@ namespace P42.Uno.Markup
         public static TElement AcceptsReturn<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.AcceptsReturn = value; return element; }
 
-        public static TElement IsColorFontEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
+        public static TElement ColorFontEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsColorFontEnabled = value; return element; }
 
         public static TElement PlaceholderText<TElement>(this TElement element, string value) where TElement : ElementType
@@ -97,7 +97,7 @@ namespace P42.Uno.Markup
         public static TElement CharacterCasing<TElement>(this TElement element, CharacterCasing value) where TElement : ElementType
         { element.CharacterCasing = value; return element; }
 
-        public static TElement IsHandwritingViewEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
+        public static TElement HandwritingViewEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsHandwritingViewEnabled = value; return element; }
 
         public static TElement HandwritingView<TElement>(this TElement element, HandwritingView value) where TElement : ElementType

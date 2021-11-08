@@ -16,16 +16,34 @@ namespace P42.Uno.Markup
     {
         public static TElement AddPrimaryCommands<TElement>(this TElement element, IObservableVector<ICommandBarElement> value) where TElement : ElementType
         {
-            foreach (var command in value)
-                element.PrimaryCommands.Add(command);
+            if (value != null)
+            {
+                foreach (var command in value)
+                    element.PrimaryCommands.Add(command);
+            }
             return element; 
+        }
+
+        public static TElement PrimaryCommands<TElement>(this TElement element, IObservableVector<ICommandBarElement> value) where TElement : ElementType
+        {
+            element.PrimaryCommands.Clear();
+            return element.AddPrimaryCommands(value);
         }
 
         public static TElement AddSecondaryCommands<TElement>(this TElement element, IObservableVector<ICommandBarElement> value) where TElement : ElementType
         {
-            foreach (var command in value)
-                element.SecondaryCommands.Add(command);
+            if (value != null)
+            {
+                foreach (var command in value)
+                    element.SecondaryCommands.Add(command);
+            }
             return element;
+        }
+
+        public static TElement SecondaryCommands<TElement>(this TElement element, IObservableVector<ICommandBarElement> value) where TElement : ElementType
+        {
+            element.SecondaryCommands.Clear();
+            return element.AddSecondaryCommands(value);
         }
 
         public static TElement CommandBarOverflowPresenterStyle<TElement>(this TElement element, Style value) where TElement : ElementType
@@ -34,7 +52,7 @@ namespace P42.Uno.Markup
         public static TElement OverflowButtonVisibility<TElement>(this TElement element, CommandBarOverflowButtonVisibility value) where TElement : ElementType
         { element.OverflowButtonVisibility = value; return element; }
 
-        public static TElement IsDynamicOverflowEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
+        public static TElement DynamicOverflowEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsDynamicOverflowEnabled = value; return element; }
 
         public static TElement DefaultLabelPosition<TElement>(this TElement element, CommandBarDefaultLabelPosition value) where TElement : ElementType

@@ -20,8 +20,86 @@ namespace P42.Uno.Markup
 		public static TElement Tag<TElement>(this TElement element, object tag) where TElement :ElementType
 		{ element.Tag = tag; return element; }
 
-		public static TElement Resources<TElement>(this TElement element, ResourceDictionary resourceDictionary) where TElement :ElementType
-		{ element.Resources = resourceDictionary; return element; }
+		public static TElement Resources<TElement>(this TElement element, params object[] objects) where TElement :ElementType
+		{
+			ResourceDictionary dict = element.Resources ?? new ResourceDictionary();
+			object key = null;
+			foreach (var obj in objects)
+            {
+				if (obj is string text)
+					key = text;
+				else if (obj is Type type)
+					key = type;
+				else if (obj is IDictionary<object, object> mDict)
+				{
+					dict.MergedDictionaries.Add((ResourceDictionary)mDict);
+					key = null;
+				}
+				else if (obj is Style style)
+				{
+					element.AddStyle(key, style);
+				}
+			}
+			return element; 
+		}
+
+		public static TElement AddStyle<TElement>(this TElement element, Style style) where TElement : ElementType
+			=> element.AddStyle(null, style);
+
+		public static TElement AddStyle<TElement>(this TElement element, object key, Style style) where TElement : ElementType
+		{
+			ResourceDictionary dict = element.Resources ?? new ResourceDictionary();
+			key = key ?? style.TargetType;
+			if (style.BasedOn is null && dict.TryGetValue(key, out object xvalue))
+			{
+				if (xvalue is Style xstyle)
+					style.BasedOn(xstyle);
+				else
+					dict.Add(key, style);
+			}
+			else
+				dict.Add(key, style);
+			return element;
+		}
+
+		public static TElement AddStyle<TElement>(this TElement element, string key, Type targetType, Setter first, params Setter[] setters) where TElement : ElementType
+			=> element.AddStyle(key, targetType, null, first, setters);
+
+		public static TElement AddStyle<TElement>(this TElement element, Type targetType, Setter first, params Setter[] setters) where TElement : ElementType
+			=> element.AddStyle(null, targetType, null, first, setters);
+
+		public static TElement AddStyle<TElement>(this TElement element, Type targetType, Style basedUpon, Setter first, params Setter[] setters) where TElement : ElementType
+			=> element.AddStyle(null, targetType, basedUpon, first, setters);
+
+		public static TElement AddStyle<TElement>(this TElement element, string key, Type targetType, Style basedUpon, Setter first, params Setter[] setters) where TElement : ElementType
+        {
+			var style = new Style(targetType);
+			if (basedUpon != null)
+				style.BasedOn = basedUpon;
+			style.Setters.Add(first);
+			if (setters?.Any() ?? false)
+			{
+				foreach (var setter in setters)
+					style.Setters.Add(setter);
+			}
+			element.AddStyle((object)key ?? targetType, style);
+			return element;
+        }
+
+		public static TElement AddStyle<TElement>(this TElement element, string key, Type targetType, Style basedUpon, (DependencyProperty, object) first, params (DependencyProperty, object)[] setters) where TElement : ElementType
+		{
+			element.AddStyle(key, targetType, basedUpon, new Setter(first.Item1, first.Item2), setters?.Select(s => new Setter(s.Item1, s.Item2)).ToArray());
+			return element;
+		}
+
+		public static TElement AddStyle<TElement>(this TElement element, Type targetType, Style basedUpon, (DependencyProperty, object) first, params (DependencyProperty, object)[] setters) where TElement : ElementType
+			=> element.AddStyle(null, targetType, basedUpon, first, setters);
+
+		public static TElement AddStyle<TElement>(this TElement element, string key, Type targetType, (DependencyProperty, object) first, params (DependencyProperty, object)[] setters) where TElement : ElementType
+			=> element.AddStyle(key, targetType, null, first, setters);
+
+		public static TElement AddStyle<TElement>(this TElement element, Type targetType, (DependencyProperty, object) first, params (DependencyProperty, object)[] setters) where TElement : ElementType
+			=> element.AddStyle(null, targetType, null, first, setters);
 
 		public static TElement FlowDirection<TElement>(this TElement element, FlowDirection flowDirection) where TElement :ElementType
 		{ element.FlowDirection = flowDirection; return element; }
@@ -183,52 +261,52 @@ namespace P42.Uno.Markup
 		public static TElement FocusVisualMargin<TElement>(this TElement element, Thickness thickness) where TElement :ElementType
 		{ element.FocusVisualMargin = thickness; return element; }
 
-		public static TElement AllowFocusWhenDisabled<TElement>(this TElement element, bool allow) where TElement :ElementType
+		public static TElement AllowFocusWhenDisabled<TElement>(this TElement element, bool allow = true) where TElement :ElementType
 		{ element.AllowFocusWhenDisabled = allow; return element; }
 
-		public static TElement AllowFocusOnInteraction<TElement>(this TElement element, bool allow) where TElement :ElementType
+		public static TElement AllowFocusOnInteraction<TElement>(this TElement element, bool allow = true) where TElement :ElementType
 		{ element.AllowFocusOnInteraction = allow; return element; }
 
 		#endregion
 
 
 		#region Events
-		public static TElement AddLayoutUpdated<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+		public static TElement AddOnLayoutUpdated<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
 		{ element.LayoutUpdated += handler; return element; }
 
-		public static TElement AddLoaded<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
+		public static TElement AddOnLoaded<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
 		{ element.Loaded += handler; return element; }
 
-		public static TElement AddSizeChanged<TElement>(this TElement element, SizeChangedEventHandler handler) where TElement : ElementType
+		public static TElement AddOnSizeChanged<TElement>(this TElement element, SizeChangedEventHandler handler) where TElement : ElementType
 		{ element.SizeChanged += handler; return element; }
 
-		public static TElement AddUnloaded<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
+		public static TElement AddOnUnloaded<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
 		{ element.Unloaded += handler; return element; }
 
 
 #if NETFX_CORE
-		public static TElement AddDataContextChanged<TElement>(this TElement element, TypedEventHandler<FrameworkElement, DataContextChangedEventArgs> handler) where TElement : ElementType
+		public static TElement AddOnDataContextChanged<TElement>(this TElement element, TypedEventHandler<FrameworkElement, DataContextChangedEventArgs> handler) where TElement : ElementType
 		{ element.DataContextChanged += handler; return element; }
 #else
-		public static TElement AddDataContextChanged<TElement>(this TElement element, TypedEventHandler<DependencyObject, DataContextChangedEventArgs> handler) where TElement : ElementType
+		public static TElement AddOnDataContextChanged<TElement>(this TElement element, TypedEventHandler<DependencyObject, DataContextChangedEventArgs> handler) where TElement : ElementType
 		{ element.DataContextChanged += handler; return element; }
 #endif
 
 #if NETFX_CORE
-		public static TElement AddLoading<TElement>(this TElement element, TypedEventHandler<FrameworkElement, object> handler) where TElement : ElementType
+		public static TElement AddOnLoading<TElement>(this TElement element, TypedEventHandler<FrameworkElement, object> handler) where TElement : ElementType
 		{ element.Loading += handler; return element; }
 #elif NETSTANDARD
-		public static TElement AddLoading<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
+		public static TElement AddOnLoading<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
 		{ element.Loading += handler; return element; }
 #else
-		public static TElement AddLoading<TElement>(this TElement element, TypedEventHandler<DependencyObject, object> handler) where TElement : ElementType
+		public static TElement AddOnLoading<TElement>(this TElement element, TypedEventHandler<DependencyObject, object> handler) where TElement : ElementType
 		{ element.Loading += handler; return element; }
 #endif
 
-		public static TElement AddActualThemeChanged<TElement>(this TElement element, TypedEventHandler<FrameworkElement, object> handler) where TElement : ElementType
+		public static TElement AddOnActualThemeChanged<TElement>(this TElement element, TypedEventHandler<FrameworkElement, object> handler) where TElement : ElementType
 		{ element.ActualThemeChanged += handler; return element; }
 
-		public static TElement AddEffectiveViewportChanged<TElement>(this TElement element, TypedEventHandler<FrameworkElement, EffectiveViewportChangedEventArgs> handler) where TElement : ElementType
+		public static TElement AddOnEffectiveViewportChanged<TElement>(this TElement element, TypedEventHandler<FrameworkElement, EffectiveViewportChangedEventArgs> handler) where TElement : ElementType
 		{ element.EffectiveViewportChanged += handler; return element; }
 
 #endregion

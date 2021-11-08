@@ -33,22 +33,11 @@ namespace P42.Uno.Markup
         #endregion
 
 
-        #region IsTabStop
-        public static TElement IsTabStop<TElement>(this TElement element, bool value) where TElement : ElementType
+        public static TElement TabStop<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsTabStop = value; return element; }
-
-        public static TElement TabStop<TElement>(this TElement element) where TElement : ElementType
-        { element.IsTabStop = true; return element; }
-        #endregion
-
-
-        #region IsEnabled
-        public static TElement IsEnabled<TElement>(this TElement element, bool value) where TElement : ElementType
-        { element.IsEnabled = value; return element; }
 
         public static TElement Enabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsEnabled = value; return element; }
-        #endregion
 
 
         #region Content Alignment
@@ -373,11 +362,8 @@ namespace P42.Uno.Markup
         public static TElement Template<TElement>(this TElement element, ControlTemplate value) where TElement : ElementType
         { element.Template = value; return element; }
 
-        public static TElement IsTextScaleFactorEnabled<TElement>(this TElement element, bool value) where TElement : ElementType
+        public static TElement TextScaleFactorEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsTextScaleFactorEnabled = value; return element; }
-
-        public static TElement TextScaleFactorEnabled<TElement>(this TElement element) where TElement : ElementType
-        { element.IsTextScaleFactorEnabled = true; return element; }
 
         #region Focus
         public static TElement UseSystemFocusVisuals<TElement>(this TElement element, bool value = true) where TElement : ElementType
@@ -395,10 +381,10 @@ namespace P42.Uno.Markup
         public static TElement XYFocusDown<TElement>(this TElement element, DependencyObject value) where TElement : ElementType
         { element.XYFocusDown = value; return element; }
 
-        public static TElement IsFocusEngagementEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
+        public static TElement FocusEngagementEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsFocusEngagementEnabled = value; return element; }
 
-        public static TElement IsFocusEngaged<TElement>(this TElement element, bool value = true) where TElement : ElementType
+        public static TElement FocusEngaged<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsFocusEngaged = value; return element; }
 
 
@@ -418,13 +404,13 @@ namespace P42.Uno.Markup
         { element.BackgroundSizing = sizing; return element; }
 
         #region Events
-        public static TElement AddIsEnabledChanged<TElement>(this TElement element, DependencyPropertyChangedEventHandler handler) where TElement : ElementType
+        public static TElement AddOnIsEnabledChanged<TElement>(this TElement element, DependencyPropertyChangedEventHandler handler) where TElement : ElementType
         { element.IsEnabledChanged += handler; return element; }
 
-        public static TElement AddFocusDisengaged<TElement>(this TElement element, TypedEventHandler<Control, FocusDisengagedEventArgs> handler) where TElement : ElementType
+        public static TElement AddOnFocusDisengaged<TElement>(this TElement element, TypedEventHandler<Control, FocusDisengagedEventArgs> handler) where TElement : ElementType
         { element.FocusDisengaged += handler; return element; }
 
-        public static TElement AddFocusEngaged<TElement>(this TElement element, TypedEventHandler<Control, FocusEngagedEventArgs> handler) where TElement : ElementType
+        public static TElement AddOnFocusEngaged<TElement>(this TElement element, TypedEventHandler<Control, FocusEngagedEventArgs> handler) where TElement : ElementType
         { element.FocusEngaged += handler; return element; }
         #endregion
     }

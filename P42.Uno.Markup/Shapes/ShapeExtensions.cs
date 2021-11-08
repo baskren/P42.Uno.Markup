@@ -7,7 +7,7 @@ using Windows.UI;
 using Windows.UI.Xaml.Media;
 using ElementType = Windows.UI.Xaml.Shapes.Shape;
 
-namespace P42.Uno.Markup.Shapes
+namespace P42.Uno.Markup
 {
     public static class ShapeExtensions
     {
