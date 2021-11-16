@@ -8,4 +8,10 @@
     <NoWarn>1701,1702,Uno0001</NoWarn>
   </PropertyGroup>
 
+  <!-- REFERENCES -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj" />
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils.Uno\P42.Utils.Uno.UWP.csproj" />
+  </ItemGroup>
+
 </Project>
