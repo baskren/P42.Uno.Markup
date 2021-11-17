@@ -5,8 +5,9 @@
     <TargetFrameworks>netstandard2.0;</TargetFrameworks>
   </PropertyGroup>
 
+  <!-- PLATFORM SPECIFIC REFERENCES -->
   <ItemGroup>
-    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj" />
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils.Uno\P42.Utils.Uno.WASM.csproj" />
   </ItemGroup>
 
 </Project>
