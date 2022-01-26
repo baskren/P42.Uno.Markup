@@ -1,5 +1,4 @@
-﻿using P42.Utils.Uno;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -73,7 +72,7 @@ namespace P42.Uno.Markup
         { element.BorderBrush = new SolidColorBrush(value); return element; }
 
         public static ElementType BorderBrush(this ElementType element, string hex)
-        { element.BorderBrush = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromString(hex)); return element; }
+        { element.BorderBrush = new SolidColorBrush(ColorExtensions.ColorFromString(hex)); return element; }
         #endregion
 
 
@@ -85,7 +84,7 @@ namespace P42.Uno.Markup
         { element.Background = new SolidColorBrush(color); return element; }
 
         public static ElementType Background(this ElementType element, string hex)
-        { element.Background = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromString(hex)); return element; }
+        { element.Background = new SolidColorBrush(ColorExtensions.ColorFromString(hex)); return element; }
         #endregion
 
         public static ElementType BackgroundTransition(this ElementType element, BrushTransition brushTransition)
@@ -97,7 +96,7 @@ namespace P42.Uno.Markup
         public static ElementType BindNullCollapse(this ElementType element)
         {
             return element.Bind(TextBlock.VisibilityProperty, element, nameof(TextBlock.Text),
-                           convert: (string text) => (!string.IsNullOrEmpty(text)).ToVisibility());
+                           convert: (string text) => (!string.IsNullOrEmpty(text)?Visibility.Visible:Visibility.Collapsed));
         }
 
         #region BindBorder

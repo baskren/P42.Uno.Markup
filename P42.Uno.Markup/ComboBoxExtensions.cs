@@ -34,7 +34,7 @@ namespace P42.Uno.Markup
         public static TElement TextSearchEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsTextSearchEnabled = value; return element; }
 
-        public static TElement SelectionChangedTrigger<TElement>(this TElement element, ComboBoxSelectionChangedTrigger value) where TElement : ElementType
+        public static TElement AddOnSelectionChangedTrigger<TElement>(this TElement element, ComboBoxSelectionChangedTrigger value) where TElement : ElementType
         { element.SelectionChangedTrigger = value; return element; }
 
         #region PlaceholderForeground
@@ -45,7 +45,7 @@ namespace P42.Uno.Markup
         { element.PlaceholderForeground = new SolidColorBrush(value); return element; }
 
         public static TElement PlaceholderForeground<TElement>(this TElement element, string hex) where TElement : ElementType
-        { element.PlaceholderForeground = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromString(hex)); return element; }
+        { element.PlaceholderForeground = new SolidColorBrush(ColorExtensions.ColorFromString(hex)); return element; }
         #endregion
 
         public static TElement TextBoxStyle<TElement>(this TElement element, Style value) where TElement : ElementType

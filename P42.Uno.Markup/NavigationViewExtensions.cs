@@ -16,7 +16,7 @@ namespace P42.Uno.Markup
         { element.MenuItemTemplate = value; return element; }
 
         public static TElement MenuItemTemplate<TElement>(this TElement element, Type value) where TElement : ElementType
-        { element.MenuItemTemplate = P42.Utils.Uno.UIElementExtensions.AsDataTemplate(value); return element; }
+        { element.MenuItemTemplate = UIElementExtensions.AsDataTemplate(value); return element; }
 
         public static TElement MenuItemContainerStyle<TElement>(this TElement element, Style value) where TElement : ElementType
         { element.MenuItemContainerStyle = value; return element; }
@@ -34,7 +34,7 @@ namespace P42.Uno.Markup
         { element.HeaderTemplate = value; return element; }
 
         public static TElement HeaderTemplate<TElement>(this TElement element, Type value) where TElement : ElementType
-        { element.HeaderTemplate = P42.Utils.Uno.UIElementExtensions.AsDataTemplate(value); return element; }
+        { element.HeaderTemplate = UIElementExtensions.AsDataTemplate(value); return element; }
 
         public static TElement Header<TElement>(this TElement element, object value) where TElement : ElementType
         { element.Header = value; return element; }

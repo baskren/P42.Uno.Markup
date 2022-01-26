@@ -22,7 +22,7 @@ namespace P42.Uno.Markup
 
 		public static TElement Resources<TElement>(this TElement element, params object[] objects) where TElement :ElementType
 		{
-			ResourceDictionary dict = element.Resources ?? new ResourceDictionary();
+			var dict = element.Resources ?? new ResourceDictionary();
 			object key = null;
 			foreach (var obj in objects)
             {
@@ -48,9 +48,9 @@ namespace P42.Uno.Markup
 
 		public static TElement AddStyle<TElement>(this TElement element, object key, Style style) where TElement : ElementType
 		{
-			ResourceDictionary dict = element.Resources ?? new ResourceDictionary();
+			var dict = element.Resources ?? new ResourceDictionary();
 			key = key ?? style.TargetType;
-			if (style.BasedOn is null && dict.TryGetValue(key, out object xvalue))
+			if (style.BasedOn is null && dict.TryGetValue(key, out var xvalue))
 			{
 				if (xvalue is Style xstyle)
 					style.BasedOn(xstyle);
@@ -284,24 +284,11 @@ namespace P42.Uno.Markup
 		{ element.Unloaded += handler; return element; }
 
 
-#if NETFX_CORE
 		public static TElement AddOnDataContextChanged<TElement>(this TElement element, TypedEventHandler<FrameworkElement, DataContextChangedEventArgs> handler) where TElement : ElementType
 		{ element.DataContextChanged += handler; return element; }
-#else
-		public static TElement AddOnDataContextChanged<TElement>(this TElement element, TypedEventHandler<DependencyObject, DataContextChangedEventArgs> handler) where TElement : ElementType
-		{ element.DataContextChanged += handler; return element; }
-#endif
 
-#if NETFX_CORE
 		public static TElement AddOnLoading<TElement>(this TElement element, TypedEventHandler<FrameworkElement, object> handler) where TElement : ElementType
 		{ element.Loading += handler; return element; }
-#elif NETSTANDARD
-		public static TElement AddOnLoading<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
-		{ element.Loading += handler; return element; }
-#else
-		public static TElement AddOnLoading<TElement>(this TElement element, TypedEventHandler<DependencyObject, object> handler) where TElement : ElementType
-		{ element.Loading += handler; return element; }
-#endif
 
 		public static TElement AddOnActualThemeChanged<TElement>(this TElement element, TypedEventHandler<FrameworkElement, object> handler) where TElement : ElementType
 		{ element.ActualThemeChanged += handler; return element; }

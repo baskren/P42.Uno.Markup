@@ -28,7 +28,7 @@ namespace P42.Uno.Markup
 
         public static TElement ItemTemplate<TElement>(this TElement element, Type templateType, Type dataType = null) where TElement : ElementType
         {
-            var template = P42.Utils.Uno.UIElementExtensions.AsDataTemplate(templateType);
+            var template = UIElementExtensions.AsDataTemplate(templateType);
                 element.ItemTemplate = template; 
             return element; 
         }

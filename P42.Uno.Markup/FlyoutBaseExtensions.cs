@@ -38,7 +38,6 @@ namespace P42.Uno.Markup
         { element.AreOpenCloseAnimationsEnabled = value; return element; }
 
         #region Events
-#if NETFX_CORE
         public static TElement AddOnClosed<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
         { element.Closed += handler; return element; }
 
@@ -47,19 +46,9 @@ namespace P42.Uno.Markup
 
         public static TElement AddOnOpening<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
         { element.Opening += handler; return element; }
-#else
-        public static TElement AddOnClosed<TElement>(this TElement element, EventHandler handler) where TElement : ElementType
-        { element.Closed += handler; return element; }
-
-        public static TElement AddOnOpened<TElement>(this TElement element, EventHandler handler) where TElement : ElementType
-        { element.Opened += handler; return element; }
-
-        public static TElement AddOnOpening<TElement>(this TElement element, EventHandler handler) where TElement : ElementType
-        { element.Opening += handler; return element; }
-#endif
 
         public static TElement AddOnClosing<TElement>(this TElement element, TypedEventHandler<FlyoutBase, FlyoutBaseClosingEventArgs> handler) where TElement : ElementType
         { element.Closing += handler; return element; }
-#endregion
+        #endregion
     }
 }

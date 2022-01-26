@@ -64,7 +64,7 @@ namespace P42.Uno.Markup
         { element.BorderBrush = new SolidColorBrush(value); return element; }
 
 		public static TElement BorderBrush<TElement>(this TElement element, string hex) where TElement : ElementType
-		{ element.BorderBrush = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromString(hex)); return element; }
+		{ element.BorderBrush = new SolidColorBrush(ColorExtensions.ColorFromString(hex)); return element; }
 		#endregion
 
 		public static TElement RowSpacing<TElement>(this TElement element, double value) where TElement : ElementType
@@ -111,7 +111,7 @@ namespace P42.Uno.Markup
 		public static TElement Columns<TElement, TEnum>(this TElement grid, params (TEnum name, GridLength length)[] columns) where TElement : ElementType where TEnum : Enum
 		{
 			grid.ColumnDefinitions.Clear();
-			for (int i = 0; i < columns.Length; i++)
+			for (var i = 0; i < columns.Length; i++)
 			{
 				if (i != columns[i].name.ToInt())
 					throw new ArgumentException(
@@ -127,7 +127,7 @@ namespace P42.Uno.Markup
 		public static TElement Columns<TElement, TEnum>(this TElement grid, params (TEnum name, object length)[] columns) where TElement : ElementType where TEnum : Enum
 		{
 			grid.ColumnDefinitions.Clear();
-			for (int i = 0; i < columns.Length; i++)
+			for (var i = 0; i < columns.Length; i++)
 			{
 				if (i != columns[i].name.ToInt())
 					throw new ArgumentException(
@@ -174,7 +174,7 @@ namespace P42.Uno.Markup
 		public static TElement Rows<TElement, TEnum>(this TElement grid, params (TEnum name, GridLength length)[] rows) where TElement : ElementType where TEnum : Enum
 		{
 			grid.RowDefinitions.Clear();
-			for (int i = 0; i < rows.Length; i++)
+			for (var i = 0; i < rows.Length; i++)
 			{
 				if (i != rows[i].name.ToInt())
 					throw new ArgumentException(
@@ -189,7 +189,7 @@ namespace P42.Uno.Markup
 		public static TElement Rows<TElement, TEnum>(this TElement grid, params (TEnum name, object length)[] rows) where TElement : ElementType where TEnum : Enum
 		{
 			grid.RowDefinitions.Clear();
-			for (int i = 0; i < rows.Length; i++)
+			for (var i = 0; i < rows.Length; i++)
 			{
 				if (i != rows[i].name.ToInt())
 					throw new ArgumentException(
@@ -214,10 +214,10 @@ namespace P42.Uno.Markup
 				str = str.Trim();
 				if (str.EndsWith("*"))
 				{
-					str.TrimEnd('*');
+					str = str.Substring(0, str.Length - 1);	
 					if (string.IsNullOrWhiteSpace(str) || str == "*")
 						return new GridLength(1, GridUnitType.Star);
-					if (double.TryParse(str, out double value))
+					if (double.TryParse(str, out var value))
 						return new GridLength(value, GridUnitType.Star);
 					throw new Exception("Cannot parse string [" + str + "] into a GridLength");
 				}
@@ -225,7 +225,7 @@ namespace P42.Uno.Markup
 					return GridLength.Auto;
 				if (str.ToLower().StartsWith("s"))
 					return new GridLength(1, GridUnitType.Star);
-				if (double.TryParse(str, out double d1))
+				if (double.TryParse(str, out var d1))
 					return new GridLength(d1);
 				throw new Exception("Cannot parse string [" + str + "] into a GridLength");
 			}

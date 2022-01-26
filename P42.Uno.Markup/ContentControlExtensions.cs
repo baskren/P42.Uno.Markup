@@ -1,5 +1,4 @@
-﻿using P42.Utils.Uno;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,7 +27,7 @@ namespace P42.Uno.Markup
         public static TElement BindNullCollapse<TElement>(this TElement element) where TElement : ElementType
         {
             return element.Bind(ContentPresenter.VisibilityProperty, element, nameof(Content),
-                           convert: (object content) => (content != null).ToVisibility());
+                           convert: (object content) => content != null ? Visibility.Visible : Visibility.Collapsed);
         }
     }
 }

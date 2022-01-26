@@ -24,7 +24,7 @@ namespace P42.Uno.Markup
         { element.Background = new SolidColorBrush(color); return element; }
 
         public static TElement Background<TElement>(this TElement element, string hex) where TElement : ElementType
-        { element.Background = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromString(hex)); return element; }
+        { element.Background = new SolidColorBrush(ColorExtensions.ColorFromString(hex)); return element; }
         #endregion
 
         public static TElement BackgroundTransition<TElement>(this TElement element, BrushTransition brushTransition) where TElement : ElementType

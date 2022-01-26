@@ -1,5 +1,4 @@
-﻿using P42.Utils.Uno;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -9,6 +8,7 @@ using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Markup;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Media3D;
@@ -30,10 +30,10 @@ namespace P42.Uno.Markup
 
 
         public static TElement BindVisibleFromBool<TElement>(this TElement element, object source, string path) where TElement : ElementType
-        { element.Bind(UIElement.VisibilityProperty, source, path, convert: (bool visible) => visible.ToVisibility()); return element; }
+        { element.Bind(UIElement.VisibilityProperty, source, path, convert: (bool visible) => visible ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed); return element; }
 
         public static TElement BindCollapsedFromBool<TElement>(this TElement element, object source, string path) where TElement : ElementType
-        { element.Bind(UIElement.VisibilityProperty, source, path, convert: (bool visible) => (!visible).ToVisibility()); return element; }
+        { element.Bind(UIElement.VisibilityProperty, source, path, convert: (bool visible) => !visible ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed); return element; }
         #endregion
 
 
@@ -350,5 +350,42 @@ namespace P42.Uno.Markup
         public static TElement AddOnBringIntoViewRequested<TElement>(this TElement element, TypedEventHandler<UIElement, BringIntoViewRequestedEventArgs> handler) where TElement : ElementType
         { element.BringIntoViewRequested += handler; return element; }
         #endregion
+
+        internal static string AsDataTemplateXaml(this Type templateType)
+        {
+            if (templateType == null || !typeof(FrameworkElement).IsAssignableFrom(templateType))
+                throw new Exception("Cannot convert type [" + templateType + "] into DataTemplate");
+            var markup = string.Empty;
+            //if (dataType is null)
+            markup = $"<DataTemplate \n\t xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\" \n\t xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\" \n\t xmlns:local=\"using:{templateType.Namespace}\"> \n\t\t<local:{templateType.Name} /> \n</DataTemplate>";
+            //if (dataType.Namespace == typeof(Type).Namespace)
+            //    markup = $"<DataTemplate xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\" xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\" xmlns:tlocal=\"using:{templateType.Namespace}\" xmlns:system=\"using:System\" x:DataType=\"system:{dataType.Name}\"><tlocal:{templateType.Name} /></DataTemplate>";
+            //else
+            //    markup = $"<DataTemplate xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\" \n\t xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\" \n\t xmlns:tlocal=\"using:{templateType.Namespace}\" \n\t xmlns:dlocal=\"using:{dataType.Namespace}\" \n\t x:DataType=\"dlocal:{dataType.Name}\"> \n\t\t<tlocal:{templateType.Name} /> \n</DataTemplate>";
+            System.Diagnostics.Debug.WriteLine("BcGroupView.GenerateDatatemplate: markup: " + markup);
+            //template.
+            return markup;
+        }
+
+        internal static DataTemplate AsDataTemplate(this Type templateType)
+        {
+            try
+            {
+                if (templateType == null || !typeof(FrameworkElement).IsAssignableFrom(templateType))
+                    throw new Exception("Cannot convert type [" + templateType + "] into DataTemplate");
+                var markup = $"<DataTemplate \n\t xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\" \n\t xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\" \n\t xmlns:local=\"using:{templateType.Namespace}\"> \n\t\t<local:{templateType.Name} /> \n</DataTemplate>";
+                //System.Diagnostics.Trace.WriteLine($"AsDataTemplate : [{markup}]");
+                var template = (DataTemplate)XamlReader.Load(markup);
+                //template.
+                return template;
+            }
+            catch (Exception e)
+            {
+                //System.Console.WriteLine($"EXCEPTION [{e.Message}] [{e.StackTrace}]");
+                System.Diagnostics.Trace.WriteLine($"EXCEPTION [{e.Message}] [{e.StackTrace}]");
+            }
+            return null;
+        }
+
     }
 }

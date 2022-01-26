@@ -1,5 +1,4 @@
-﻿using P42.Utils.Uno;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +20,7 @@ namespace P42.Uno.Markup
         public static TElement BindNullCollapse<TElement>(this TElement element) where TElement : ElementType
         {
             return element.Bind(ContentPresenter.VisibilityProperty, element, nameof(Content),
-                           convert: (object content) => (content != null).ToVisibility());
+                           convert: (object content) => content != null? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed);
         }
 
         public static TElement BindFont<TElement>(this TElement target, Control source, BindingMode bindingMode = BindingMode.OneWay, object except = null) where TElement : ElementType
@@ -109,7 +108,7 @@ namespace P42.Uno.Markup
         { element.Foreground = new SolidColorBrush(color); return element; }
 
         public static TElement Foreground<TElement>(this TElement element, string hex) where TElement : ElementType
-        { element.Foreground = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromString(hex)); return element; }
+        { element.Foreground = new SolidColorBrush(ColorExtensions.ColorFromString(hex)); return element; }
         #endregion
 
 
@@ -361,7 +360,7 @@ namespace P42.Uno.Markup
         { element.BorderBrush = new SolidColorBrush(value); return element; }
 
         public static TElement BorderBrush<TElement>(this TElement element, string hex) where TElement : ElementType
-        { element.BorderBrush = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromString(hex)); return element; }
+        { element.BorderBrush = new SolidColorBrush(ColorExtensions.ColorFromString(hex)); return element; }
         #endregion
 
         #region BindBorder
@@ -400,7 +399,7 @@ namespace P42.Uno.Markup
         { element.Background = new SolidColorBrush(color); return element; }
 
         public static TElement Background<TElement>(this TElement element, string hex) where TElement : ElementType
-        { element.Background = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromString(hex)); return element; }
+        { element.Background = new SolidColorBrush(ColorExtensions.ColorFromString(hex)); return element; }
         #endregion
 
         public static TElement BackgroundTransition<TElement>(this TElement element, BrushTransition brushTransition) where TElement : ElementType

@@ -36,8 +36,5 @@
   </ItemGroup>
 
   <!-- COMMON REFERENCES -->
-  <ItemGroup>
-    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj" />
-  </ItemGroup>
 
 </Project>

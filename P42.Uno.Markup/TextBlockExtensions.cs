@@ -1,5 +1,4 @@
-﻿using P42.Utils.Uno;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -155,7 +154,7 @@ namespace P42.Uno.Markup
         { element.Foreground = new SolidColorBrush(color); return element; }
 
         public static ElementType Foreground(this ElementType element, string hex)
-        { element.Foreground = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromString(hex)); return element; }
+        { element.Foreground = new SolidColorBrush(ColorExtensions.ColorFromString(hex)); return element; }
         #endregion
 
 
@@ -316,7 +315,7 @@ namespace P42.Uno.Markup
         public static ElementType BindNullOrEmptyCollapse(this ElementType element)
         {
             return element.Bind(TextBlock.VisibilityProperty, element, nameof(TextBlock.Text),
-                       convert: (string text) => (!string.IsNullOrEmpty(text)).ToVisibility());
+                       convert: (string text) => !string.IsNullOrEmpty(text) ? Visibility.Visible : Visibility.Collapsed);
         }
 
 
@@ -332,15 +331,5 @@ namespace P42.Uno.Markup
         #endregion
 
 
-        #region HTML
-        public static ElementType Html(this ElementType element, string value)
-        { element.SetHtml(value); return element; }
-
-        public static ElementType BindHtml(this ElementType element, object source, string path)
-        {
-            element.Bind(P42.Utils.Uno.TextBlockExtensions.HtmlProperty, source, path);
-            return element;
-        }
-        #endregion
     }
 }

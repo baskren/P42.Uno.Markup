@@ -19,7 +19,7 @@ namespace P42.Uno.Markup
         { element.Foreground = new SolidColorBrush(color); return element; }
 
         public static TElement Foreground<TElement>(this TElement element, string hex) where TElement : ElementType
-        { element.Foreground = new SolidColorBrush(P42.Utils.Uno.ColorExtensions.ColorFromString(hex)); return element; }
+        { element.Foreground = new SolidColorBrush(ColorExtensions.ColorFromString(hex)); return element; }
         #endregion
 
     }
