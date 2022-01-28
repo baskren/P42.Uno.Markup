@@ -29,6 +29,9 @@ namespace P42.Uno
                         .Style(backButtonStyle)
                         .AddOnClick(OnBackButtonClicked)
                 );
+
+            var platformOffset = global::Uno.UI.Toolkit.VisibleBoundsPadding.WindowPadding;
+            this.Padding = platformOffset;
         }
 
         void OnBackButtonClicked(object sender, RoutedEventArgs e)
