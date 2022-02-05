@@ -296,6 +296,6 @@ namespace P42.Uno.Markup
 		public static TElement AddOnEffectiveViewportChanged<TElement>(this TElement element, TypedEventHandler<FrameworkElement, EffectiveViewportChangedEventArgs> handler) where TElement : ElementType
 		{ element.EffectiveViewportChanged += handler; return element; }
 
-#endregion
+		#endregion
 	}
 }
