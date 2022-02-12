@@ -2,13 +2,8 @@
 <Project Sdk="MSBuild.Sdk.Extras/3.0.23">
 
   <PropertyGroup>
-    <TargetFrameworks>MonoAndroid10.0;</TargetFrameworks>
+    <TargetFrameworks>MonoAndroid11.0;</TargetFrameworks>
     
   </PropertyGroup>
-
-  <!-- PLATFORM SPECIFIC REFERENCES -->
-  <ItemGroup>
-    <ProjectReference Include="..\..\P42.Utils\P42.Utils.Uno\P42.Utils.Uno.Android.csproj" />
-  </ItemGroup>
 
 </Project>

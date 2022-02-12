@@ -5,9 +5,4 @@
     <TargetFrameworks>Xamarin.Mac20;</TargetFrameworks>
   </PropertyGroup>
 
-  <!-- PLATFORM SPECIFIC REFERENCES -->
-  <ItemGroup>
-    <ProjectReference Include="..\..\P42.Utils\P42.Utils.Uno\P42.Utils.Uno.MacOS.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Media;
 
 namespace P42.Uno.Markup
 {
-    public static class ColorExtensions
+    static class ColorExtensions
     {
         public static Color GetForegroundColor(this Color background)
         {
