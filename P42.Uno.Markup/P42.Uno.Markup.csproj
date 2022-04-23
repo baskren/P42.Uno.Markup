@@ -22,8 +22,20 @@
     <TargetFrameworks Condition=" $(SolutionName.Contains('.UWP')) ">uap10.0.18362</TargetFrameworks>
     <TargetFrameworks Condition=" $(SolutionName.Contains('.Wasm')) ">netstandard2.0</TargetFrameworks>
 
-	  <DefaultItemExcludes>$(DefaultItemExcludes);obj/**;bin/**</DefaultItemExcludes>
+	<DefaultItemExcludes>$(DefaultItemExcludes);obj/**;bin/**</DefaultItemExcludes>
     <DebugType>portable</DebugType>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>0.1.0</Version>
+    <Authors>Ben Askren</Authors>
+    <Company>42nd Parallel, LLC</Company>
+    <Description>C# Markup Extensions for the Uno Platform</Description>
+    <Copyright>2022, 4nd Parallel</Copyright>
+    <PackageProjectUrl>https://github.com/baskren/P42.Uno.Markup</PackageProjectUrl>
+    <PackageReadmeFile>ReadMe.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/baskren/P42.Uno.Markup</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>Initial Public Release</PackageReleaseNotes>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
 
   </PropertyGroup>
 
@@ -79,6 +91,18 @@
 	<ItemGroup Condition=" $(TargetFramework.ToLower().StartsWith('net'))">
 		<Compile Include="**\*.net.cs" Exclude="$(DefaultItemExcludes)" />
 		<Compile Include="**\*.net.*.cs" Exclude="$(DefaultItemExcludes)" />
+	</ItemGroup>
+	
+	
+	<ItemGroup>
+	  <None Include="..\ReadMe.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+		<None Include="..\LICENSE">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
 	</ItemGroup>
 
 
