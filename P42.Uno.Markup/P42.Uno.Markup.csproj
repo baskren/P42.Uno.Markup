@@ -5,15 +5,10 @@
 	-->
   <PropertyGroup>
 
-    <GenerateLibraryLayout>true</GenerateLibraryLayout>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyName>P42.Uno.Markup</AssemblyName>
-    <RootNamespace>P42.Uno.Markup</RootNamespace>
-    <NoWarn>1701;1702;Uno0001;VSX1000</NoWarn>
 
-    <TargetFrameworks>netstandard2.0;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid11.0;</TargetFrameworks>
-	  <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">uap10.0.18362;netstandard2.0;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid11.0;</TargetFrameworks>
-    <TargetFrameworks Condition=" $(SolutionName.Contains('.vsmac')) ">netstandard2.0;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid11.0;</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net6.0;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid11.0;net6.0-android;net6.0-ios;net6.0-maccatalyst;net6.0-macos;</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">uap10.0.18362;net6.0;netstandard2.0;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid11.0;net6.0-android;net6.0-ios;net6.0-maccatalyst;net6.0-macos;</TargetFrameworks>
     <TargetFrameworks Condition=" $(SolutionName.Contains('.Droid')) ">MonoAndroid11.0</TargetFrameworks>
     <TargetFrameworks Condition=" $(SolutionName.Contains('.iOS')) ">Xamarin.iOS10</TargetFrameworks>
     <TargetFrameworks Condition=" $(SolutionName.Contains('.macOS')) ">Xamarin.Mac20</TargetFrameworks>
@@ -23,88 +18,9 @@
     <TargetFrameworks Condition=" $(SolutionName.Contains('.UWP')) ">uap10.0.18362</TargetFrameworks>
     <TargetFrameworks Condition=" $(SolutionName.Contains('.Wasm')) ">netstandard2.0</TargetFrameworks>
 
-	<DefaultItemExcludes>$(DefaultItemExcludes);obj/**;bin/**</DefaultItemExcludes>
-    <DebugType>portable</DebugType>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>0.1.0</Version>
-    <Authors>Ben Askren</Authors>
-    <Company>42nd Parallel, LLC</Company>
-    <Description>C# Markup Extensions for the Uno Platform</Description>
-    <Copyright>2022, 4nd Parallel</Copyright>
-    <PackageProjectUrl>https://github.com/baskren/P42.Uno.Markup</PackageProjectUrl>
-    <PackageReadmeFile>ReadMe.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/baskren/P42.Uno.Markup</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>Initial Public Release</PackageReleaseNotes>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
 
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
-    <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>
-
-
-  <ItemGroup>
-    <PackageReference Include="Uno.UI" Version="4.3.6" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
-    <Compile Update="**\*.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
-  </ItemGroup>
-
-	<!-- ANDROID -->
-	<ItemGroup Condition=" $(TargetFramework.ToLower().Contains('android')) ">
-		<Compile Include="**\*.droid.cs" Exclude="$(DefaultItemExcludes)" />
-		<Compile Include="**\*.droid.*.cs" Exclude="$(DefaultItemExcludes)" />
-	</ItemGroup>
-
-	<!-- IOS -->
-	<ItemGroup Condition=" $(TargetFramework.ToLower().Contains('ios')) ">
-		<Compile Include="**\*.ios.cs" Exclude="$(DefaultItemExcludes)" />
-		<Compile Include="**\*.ios.*.cs" Exclude="$(DefaultItemExcludes)" />
-	</ItemGroup>
-
-	<!-- MACOS -->
-	<ItemGroup Condition=" $(TargetFramework.ToLower().Contains('mac')) ">
-		<Compile Include="**\*.mac.cs" Exclude="$(DefaultItemExcludes)" />
-		<Compile Include="**\*.mac.*.cs" Exclude="$(DefaultItemExcludes)" />
-	</ItemGroup>
-
-	<!-- TIZEN -->
-	<ItemGroup Condition=" $(TargetFramework.ToLower().Contains('tizen')) ">
-		<Compile Include="**\*.tizen.cs" Exclude="$(DefaultItemExcludes)" />
-		<Compile Include="**\*.tizen.*.cs" Exclude="$(DefaultItemExcludes)" />
-	</ItemGroup>
-
-	<!-- UWP -->
-	<ItemGroup Condition=" $(TargetFramework.ToLower().StartsWith('uap10.0')) ">
-		<Compile Include="**\*.uwp.cs" Exclude="$(DefaultItemExcludes)" />
-		<Compile Include="**\*.uwp.*.cs" Exclude="$(DefaultItemExcludes)" />
-	</ItemGroup>
-
-	<!-- .NET (GtK, WPF, and WASM) -->
-	<ItemGroup Condition=" $(TargetFramework.ToLower().StartsWith('net'))">
-		<Compile Include="**\*.net.cs" Exclude="$(DefaultItemExcludes)" />
-		<Compile Include="**\*.net.*.cs" Exclude="$(DefaultItemExcludes)" />
-	</ItemGroup>
-	
-	
-	<ItemGroup>
-	  <None Include="..\ReadMe.md">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
-		<None Include="..\LICENSE">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-	</ItemGroup>
 
 
 </Project>

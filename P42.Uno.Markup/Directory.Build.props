@@ -1,0 +1,87 @@
+<Project ToolsVersion="15.0">
+
+  <PropertyGroup>
+
+    <RootNamespace>P42.Uno.Markup</RootNamespace>
+    <Version>0.1.1</Version>
+    <NoWarn>1701;1702;Uno0001;VSX1000;CA1416</NoWarn>
+
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+
+	<!--
+	Force all projects of this folder to use a different output
+	path to avoid intermediate output collisions
+	-->
+  	<BaseOutputPath>bin\$(MSBuildProjectName)</BaseOutputPath>
+  	<BaseIntermediateOutputPath>obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
+  	<DefaultItemExcludes>$(DefaultItemExcludes);obj/**;bin/**</DefaultItemExcludes>
+  
+  	<PublishRepositoryUrl>true</PublishRepositoryUrl>
+  	<EmbedUntrackedSources>true</EmbedUntrackedSources>
+  	<IncludeSymbols>true</IncludeSymbols>
+  	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <DebugType>portable</DebugType>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>Ben Askren</Authors>
+    <Company>42nd Parallel, LLC</Company>
+    <Description>C# Markup Extensions for the Uno Platform</Description>
+    <Copyright>2022, 4nd Parallel</Copyright>
+    <PackageProjectUrl>https://github.com/baskren/P42.Uno.Markup</PackageProjectUrl>
+    <PackageReadmeFile>ReadMe.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/baskren/P42.Uno.Markup</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>Initial Public Release</PackageReleaseNotes>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+	<PackageIcon>P42.icon.png</PackageIcon>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Uno.UI" Version="4.3.6" />
+  	<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+  </ItemGroup>
+	
+	<ItemGroup>
+		<None Include="..\P42.icon.png" Pack="true" PackagePath="\" />
+		<None Include="..\README.md" Pack="true" PackagePath="\" />
+		<None Include="..\LICENSE" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+
+  <!-- https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-targets?view=vs-2022#default-build-targets -->
+  <Target Name="B1" BeforeTargets="BeforeBuild">
+    <Message Text=" " Importance="high"/>
+    <Message Text=" " Importance="high"/>
+    <Message Text=" " Importance="high"/>
+    <Message Text="===============================  [ $(AssemblyName) : $(TargetFramework) ] ===============================" Importance="high"/>
+  </Target>
+  
+  <Target Name="NuGetMove" AfterTargets="Pack" Condition=" $(LocalNuGet) != '' ">
+    <Message Text=" " Importance="high"/>
+    <Message Text=" " Importance="high"/>
+    <Message Text=" " Importance="high"/>
+    <Message Text="=============================== NUGET PACK [$(AssemblyName)] ===============================" Importance="high"/>
+    <Message Importance="high" Text="NuGetPath= $([System.IO.Path]::Combine('.',bin,$(AssemblyName),$(Configuration),$(AssemblyName).$(Version).nupkg)) "/>
+    <Copy SourceFiles="$([System.IO.Path]::Combine('.',bin,$(AssemblyName),$(Configuration),$(AssemblyName).$(Version).nupkg))"  DestinationFolder=" $(LocalNuGet) " />
+    <Copy SourceFiles="$([System.IO.Path]::Combine('.',bin,$(AssemblyName),$(Configuration),$(AssemblyName).$(Version).snupkg))" DestinationFolder=" $(LocalNuGet) " />
+    <Message Importance="high" Text="PACKAGE SAVED TO:  $(LocalNuGet)) " />
+  </Target>
+
+</Project>
