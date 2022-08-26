@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using ElementType = Windows.UI.Xaml.Controls.CommandBar;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using ElementType = Microsoft.UI.Xaml.Controls.CommandBar;
 
 
 namespace P42.Uno.Markup

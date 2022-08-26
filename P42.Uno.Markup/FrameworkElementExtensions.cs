@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Windows.Foundation;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Documents;
-using Windows.UI.Xaml.Media;
-using ElementType = Windows.UI.Xaml.FrameworkElement;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Documents;
+using Microsoft.UI.Xaml.Media;
+using ElementType = Microsoft.UI.Xaml.FrameworkElement;
 
 namespace P42.Uno.Markup
 {
@@ -174,15 +174,15 @@ namespace P42.Uno.Markup
 
 		public static TElement Center<TElement>(this TElement element) where TElement :ElementType
 		{ 
-			element.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center; 
-			element.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center; 
+			element.VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Center; 
+			element.HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center; 
 			return element; 
 		}
 
 		public static TElement Stretch<TElement>(this TElement element) where TElement :ElementType
 		{
-			element.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
-			element.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
+			element.VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Stretch;
+			element.HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Stretch;
 			return element;
 		}
 
@@ -191,16 +191,16 @@ namespace P42.Uno.Markup
 		{ element.VerticalAlignment = verticalAlignment; return element; }
 
 		public static TElement Top<TElement>(this TElement element) where TElement :ElementType
-		{ element.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Top; return element; }
+		{ element.VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Top; return element; }
 
 		public static TElement CenterVertical<TElement>(this TElement element) where TElement :ElementType
-		{ element.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center; return element; }
+		{ element.VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Center; return element; }
 
 		public static TElement Bottom<TElement>(this TElement element) where TElement :ElementType
-		{ element.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Bottom; return element; }
+		{ element.VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Bottom; return element; }
 
 		public static TElement StretchVertical<TElement>(this TElement element) where TElement :ElementType
-		{ element.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch; return element; }
+		{ element.VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Stretch; return element; }
 
 		#endregion
 
@@ -209,16 +209,16 @@ namespace P42.Uno.Markup
 		{ element.HorizontalAlignment = horizontalAlignment; return element; }
 
 		public static TElement Left<TElement>(this TElement element) where TElement :ElementType
-		{ element.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Left; return element; }
+		{ element.HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Left; return element; }
 
 		public static TElement CenterHorizontal<TElement>(this TElement element) where TElement :ElementType
-		{ element.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center; return element; }
+		{ element.HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center; return element; }
 
 		public static TElement Right<TElement>(this TElement element) where TElement :ElementType
-		{ element.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Right; return element; }
+		{ element.HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Right; return element; }
 
 		public static TElement StretchHorizontal<TElement>(this TElement element) where TElement :ElementType
-		{ element.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch; return element; }
+		{ element.HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Stretch; return element; }
 		#endregion
 
 

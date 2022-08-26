@@ -4,9 +4,9 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Windows.Foundation;
 using Windows.Foundation.Metadata;
-using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Navigation;
-using ElementType = Windows.UI.Xaml.Controls.Frame;
+using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.UI.Xaml.Navigation;
+using ElementType = Microsoft.UI.Xaml.Controls.Frame;
 
 namespace P42.Uno.Markup
 {

@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Xaml;
+using Microsoft.UI.Xaml;
 
 namespace P42.Uno.Markup
 {
 
 	public static class StyleExtensions
 	{
-		public static Windows.UI.Xaml.Style Add(this Windows.UI.Xaml.Style element, DependencyProperty property, object value) 
+		public static Microsoft.UI.Xaml.Style Add(this Microsoft.UI.Xaml.Style element, DependencyProperty property, object value) 
 		{
 			element?.Setters.Add(new Setter(property, value));
 			return element;
 		}
 
-		public static Windows.UI.Xaml.Style BasedOn(this Windows.UI.Xaml.Style element, Windows.UI.Xaml.Style source)
+		public static Microsoft.UI.Xaml.Style BasedOn(this Microsoft.UI.Xaml.Style element, Microsoft.UI.Xaml.Style source)
         {
 			element.BasedOn = source;
 			return element;

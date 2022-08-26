@@ -5,14 +5,14 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Markup;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Media.Media3D;
-using ElementType = Windows.UI.Xaml.UIElement;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Markup;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.UI.Xaml.Media.Media3D;
+using ElementType = Microsoft.UI.Xaml.UIElement;
 
 namespace P42.Uno.Markup
 {
@@ -23,17 +23,17 @@ namespace P42.Uno.Markup
         { element.Visibility = visibility; return element; }
 
         public static TElement Visible<TElement>(this TElement element, bool isVisible = true) where TElement :ElementType
-        { element.Visibility = isVisible ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed; return element; }
+        { element.Visibility = isVisible ? Microsoft.UI.Xaml.Visibility.Visible : Microsoft.UI.Xaml.Visibility.Collapsed; return element; }
 
         public static TElement Collapsed<TElement>(this TElement element, bool isCollapsed = true) where TElement :ElementType
-        { element.Visibility = isCollapsed ? Windows.UI.Xaml.Visibility.Collapsed : Windows.UI.Xaml.Visibility.Visible; return element; }
+        { element.Visibility = isCollapsed ? Microsoft.UI.Xaml.Visibility.Collapsed : Microsoft.UI.Xaml.Visibility.Visible; return element; }
 
 
         public static TElement BindVisibleFromBool<TElement>(this TElement element, object source, string path) where TElement : ElementType
-        { element.Bind(UIElement.VisibilityProperty, source, path, convert: (bool visible) => visible ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed); return element; }
+        { element.Bind(UIElement.VisibilityProperty, source, path, convert: (bool visible) => visible ? Microsoft.UI.Xaml.Visibility.Visible : Microsoft.UI.Xaml.Visibility.Collapsed); return element; }
 
         public static TElement BindCollapsedFromBool<TElement>(this TElement element, object source, string path) where TElement : ElementType
-        { element.Bind(UIElement.VisibilityProperty, source, path, convert: (bool visible) => !visible ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed); return element; }
+        { element.Bind(UIElement.VisibilityProperty, source, path, convert: (bool visible) => !visible ? Microsoft.UI.Xaml.Visibility.Visible : Microsoft.UI.Xaml.Visibility.Collapsed); return element; }
         #endregion
 
 

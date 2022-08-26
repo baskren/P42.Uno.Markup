@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
-using ElementType = Windows.UI.Xaml.Controls.ComboBox;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
+using ElementType = Microsoft.UI.Xaml.Controls.ComboBox;
 
 namespace P42.Uno.Markup
 {

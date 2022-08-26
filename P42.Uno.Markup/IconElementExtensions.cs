@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI;
-using Windows.UI.Xaml.Media;
-using ElementType = Windows.UI.Xaml.Controls.IconElement;
+using Microsoft.UI.Xaml.Media;
+using ElementType = Microsoft.UI.Xaml.Controls.IconElement;
 
 namespace P42.Uno.Markup
 {

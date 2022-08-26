@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
-using ElementType = Windows.UI.Xaml.Controls.StackPanel ;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
+using ElementType = Microsoft.UI.Xaml.Controls.StackPanel ;
 
 namespace P42.Uno.Markup
 {
@@ -18,10 +18,10 @@ namespace P42.Uno.Markup
         { element.Orientation = orientation; return element; }
 
         public static TElement Horizontal<TElement>(this TElement element) where TElement : ElementType
-        { element.Orientation = Windows.UI.Xaml.Controls.Orientation.Horizontal; return element; }
+        { element.Orientation = Microsoft.UI.Xaml.Controls.Orientation.Horizontal; return element; }
 
         public static TElement Vertical<TElement>(this TElement element) where TElement : ElementType
-        { element.Orientation = Windows.UI.Xaml.Controls.Orientation.Vertical; return element; }
+        { element.Orientation = Microsoft.UI.Xaml.Controls.Orientation.Vertical; return element; }
         #endregion
 
 

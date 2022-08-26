@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ElementType = Windows.UI.Xaml.Shapes.Line;
+using ElementType = Microsoft.UI.Xaml.Shapes.Line;
 
 namespace P42.Uno.Markup
 {

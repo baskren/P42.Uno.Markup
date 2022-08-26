@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using ElementType = Windows.UI.Xaml.Controls.TextBox;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
+using ElementType = Microsoft.UI.Xaml.Controls.TextBox;
 
 namespace P42.Uno.Markup
 {
@@ -97,11 +97,13 @@ namespace P42.Uno.Markup
         public static TElement CharacterCasing<TElement>(this TElement element, CharacterCasing value) where TElement : ElementType
         { element.CharacterCasing = value; return element; }
 
+        /*
         public static TElement HandwritingViewEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsHandwritingViewEnabled = value; return element; }
 
         public static TElement HandwritingView<TElement>(this TElement element, HandwritingView value) where TElement : ElementType
         { element.HandwritingView = value; return element; }
+        */
 
         public static TElement SelectionFlyout<TElement>(this TElement element, FlyoutBase value) where TElement : ElementType
         { element.SelectionFlyout = value; return element; }

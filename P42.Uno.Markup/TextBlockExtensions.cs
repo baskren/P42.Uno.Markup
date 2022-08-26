@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Text;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Media;
-using ElementType = Windows.UI.Xaml.Controls.TextBlock;
+
+using Microsoft.UI;
+using Microsoft.UI.Text;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Media;
+using ElementType = Microsoft.UI.Xaml.Controls.TextBlock;
 
 namespace P42.Uno.Markup
 {
@@ -22,13 +25,13 @@ namespace P42.Uno.Markup
         { element.TextWrapping = wrapping; return element; }
 
         public static ElementType NoWrap(this ElementType element)
-        { element.TextWrapping = Windows.UI.Xaml.TextWrapping.NoWrap; return element; }
+        { element.TextWrapping = Microsoft.UI.Xaml.TextWrapping.NoWrap; return element; }
 
         public static ElementType Wrap(this ElementType element)
-        { element.TextWrapping = Windows.UI.Xaml.TextWrapping.Wrap; return element; }
+        { element.TextWrapping = Microsoft.UI.Xaml.TextWrapping.Wrap; return element; }
 
         public static ElementType WrapWords(this ElementType element)
-        { element.TextWrapping = Windows.UI.Xaml.TextWrapping.WrapWholeWords; return element; }
+        { element.TextWrapping = Microsoft.UI.Xaml.TextWrapping.WrapWholeWords; return element; }
         #endregion
 
 
@@ -37,16 +40,16 @@ namespace P42.Uno.Markup
         { element.TextTrimming = trimming; return element; }
 
         public static ElementType CharacterEllipsisTextTrimming(this ElementType element)
-        { element.TextTrimming = Windows.UI.Xaml.TextTrimming.CharacterEllipsis; return element; }
+        { element.TextTrimming = Microsoft.UI.Xaml.TextTrimming.CharacterEllipsis; return element; }
 
         public static ElementType ClipTextTrimming(this ElementType element)
-        { element.TextTrimming = Windows.UI.Xaml.TextTrimming.Clip; return element; }
+        { element.TextTrimming = Microsoft.UI.Xaml.TextTrimming.Clip; return element; }
 
         public static ElementType NoTextTrimming(this ElementType element)
-        { element.TextTrimming = Windows.UI.Xaml.TextTrimming.None; return element; }
+        { element.TextTrimming = Microsoft.UI.Xaml.TextTrimming.None; return element; }
 
         public static ElementType WordEllipsisTextTrimming(this ElementType element)
-        { element.TextTrimming = Windows.UI.Xaml.TextTrimming.WordEllipsis; return element; }
+        { element.TextTrimming = Microsoft.UI.Xaml.TextTrimming.WordEllipsis; return element; }
         #endregion
 
 
@@ -55,19 +58,19 @@ namespace P42.Uno.Markup
         { element.TextAlignment = alignment; return element; }
 
         public static ElementType LeftTextAlignment(this ElementType element)
-        { element.TextAlignment = Windows.UI.Xaml.TextAlignment.Left; return element; }
+        { element.TextAlignment = Microsoft.UI.Xaml.TextAlignment.Left; return element; }
 
         public static ElementType CenterTextAlignment(this ElementType element)
-        { element.TextAlignment = Windows.UI.Xaml.TextAlignment.Center; return element; }
+        { element.TextAlignment = Microsoft.UI.Xaml.TextAlignment.Center; return element; }
 
         public static ElementType RightTextAlignment(this ElementType element)
-        { element.TextAlignment = Windows.UI.Xaml.TextAlignment.Right; return element; }
+        { element.TextAlignment = Microsoft.UI.Xaml.TextAlignment.Right; return element; }
 
         public static ElementType JustifyTextAlignment(this ElementType element)
-        { element.TextAlignment = Windows.UI.Xaml.TextAlignment.Justify; return element; }
+        { element.TextAlignment = Microsoft.UI.Xaml.TextAlignment.Justify; return element; }
 
         public static ElementType DetectTextAlignment(this ElementType element)
-        { element.TextAlignment = Windows.UI.Xaml.TextAlignment.DetectFromContent; return element; }
+        { element.TextAlignment = Microsoft.UI.Xaml.TextAlignment.DetectFromContent; return element; }
         #endregion
 
         public static ElementType Text(this ElementType element, string text)
@@ -163,37 +166,37 @@ namespace P42.Uno.Markup
         { element.FontWeight = weight; return element; }
 
         public static ElementType ThinFontWeight(this ElementType element)
-        { element.FontWeight = Windows.UI.Text.FontWeights.Thin; return element; }
+        { element.FontWeight = FontWeights.Thin; return element; }
 
         public static ElementType ExtraLightFontWeight(this ElementType element)
-        { element.FontWeight = Windows.UI.Text.FontWeights.ExtraLight; return element; }
+        { element.FontWeight = FontWeights.ExtraLight; return element; }
 
         public static ElementType LightFontWeight(this ElementType element)
-        { element.FontWeight = Windows.UI.Text.FontWeights.Light; return element; }
+        { element.FontWeight = FontWeights.Light; return element; }
 
         public static ElementType SemiLightFontWeight(this ElementType element)
-        { element.FontWeight = Windows.UI.Text.FontWeights.SemiLight; return element; }
+        { element.FontWeight = FontWeights.SemiLight; return element; }
 
         public static ElementType NormalFontWeight(this ElementType element)
-        { element.FontWeight = Windows.UI.Text.FontWeights.Normal; return element; }
+        { element.FontWeight = FontWeights.Normal; return element; }
 
         public static ElementType MediumFontWeight(this ElementType element)
-        { element.FontWeight = Windows.UI.Text.FontWeights.Medium; return element; }
+        { element.FontWeight = FontWeights.Medium; return element; }
 
         public static ElementType SemiBoldFontWeight(this ElementType element)
-        { element.FontWeight = Windows.UI.Text.FontWeights.SemiBold; return element; }
+        { element.FontWeight = FontWeights.SemiBold; return element; }
 
         public static ElementType BoldlFontWeight(this ElementType element)
-        { element.FontWeight = Windows.UI.Text.FontWeights.Bold; return element; }
+        { element.FontWeight = FontWeights.Bold; return element; }
 
         public static ElementType ExtraBoldFontWeight(this ElementType element)
-        { element.FontWeight = Windows.UI.Text.FontWeights.ExtraBold; return element; }
+        { element.FontWeight = FontWeights.ExtraBold; return element; }
 
         public static ElementType BlackFontWeight(this ElementType element)
-        { element.FontWeight = Windows.UI.Text.FontWeights.Black; return element; }
+        { element.FontWeight = FontWeights.Black; return element; }
 
         public static ElementType ExtraBlackFontWeight(this ElementType element)
-        { element.FontWeight = Windows.UI.Text.FontWeights.ExtraBlack; return element; }
+        { element.FontWeight = FontWeights.ExtraBlack; return element; }
         #endregion
 
 
@@ -257,7 +260,7 @@ namespace P42.Uno.Markup
         { element.FontFamily = family; return element; }
 
         public static ElementType FontFamily(this ElementType element, string family)
-        { element.FontFamily = new Windows.UI.Xaml.Media.FontFamily(family); return element; }
+        { element.FontFamily = new Microsoft.UI.Xaml.Media.FontFamily(family); return element; }
         #endregion
 
         #endregion

@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using ElementType = Windows.UI.Xaml.Controls.Slider;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
+using ElementType = Microsoft.UI.Xaml.Controls.Slider;
 
 namespace P42.Uno.Markup
 {
@@ -21,19 +21,19 @@ namespace P42.Uno.Markup
         { slider.TickPlacement = placement; return slider; }
 
         public static TElement TicksNone<TElement>(this TElement slider) where TElement : ElementType
-        { slider.TickPlacement = Windows.UI.Xaml.Controls.Primitives.TickPlacement.None; return slider; }
+        { slider.TickPlacement = Microsoft.UI.Xaml.Controls.Primitives.TickPlacement.None; return slider; }
 
         public static TElement TicksTopLeft<TElement>(this TElement slider) where TElement : ElementType
-        { slider.TickPlacement = Windows.UI.Xaml.Controls.Primitives.TickPlacement.TopLeft; return slider; }
+        { slider.TickPlacement = Microsoft.UI.Xaml.Controls.Primitives.TickPlacement.TopLeft; return slider; }
 
         public static TElement TicksBottomRight<TElement>(this TElement slider) where TElement : ElementType
-        { slider.TickPlacement = Windows.UI.Xaml.Controls.Primitives.TickPlacement.BottomRight; return slider; }
+        { slider.TickPlacement = Microsoft.UI.Xaml.Controls.Primitives.TickPlacement.BottomRight; return slider; }
 
         public static TElement TicksOutside<TElement>(this TElement slider) where TElement : ElementType
-        { slider.TickPlacement = Windows.UI.Xaml.Controls.Primitives.TickPlacement.Outside; return slider; }
+        { slider.TickPlacement = Microsoft.UI.Xaml.Controls.Primitives.TickPlacement.Outside; return slider; }
 
         public static TElement TicksInline<TElement>(this TElement slider) where TElement : ElementType
-        { slider.TickPlacement = Windows.UI.Xaml.Controls.Primitives.TickPlacement.Inline; return slider; }
+        { slider.TickPlacement = Microsoft.UI.Xaml.Controls.Primitives.TickPlacement.Inline; return slider; }
         #endregion
 
         public static TElement TickFrequency<TElement>(this TElement slider, double freq) where TElement : ElementType

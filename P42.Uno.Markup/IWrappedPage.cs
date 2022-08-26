@@ -1,5 +1,5 @@
 using System;
-using Windows.UI.Xaml.Navigation;
+using Microsoft.UI.Xaml.Navigation;
 
 namespace P42.Uno
 {

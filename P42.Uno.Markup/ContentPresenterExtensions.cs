@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI;
 using Windows.UI.Text;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
-using ElementType = Windows.UI.Xaml.Controls.ContentPresenter;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.UI.Text;
+using ElementType = Microsoft.UI.Xaml.Controls.ContentPresenter;
 
 namespace P42.Uno.Markup
 {
@@ -20,7 +21,7 @@ namespace P42.Uno.Markup
         public static TElement BindNullCollapse<TElement>(this TElement element) where TElement : ElementType
         {
             return element.Bind(ContentPresenter.VisibilityProperty, element, nameof(Content),
-                           convert: (object content) => content != null? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed);
+                           convert: (object content) => content != null? Microsoft.UI.Xaml.Visibility.Visible : Microsoft.UI.Xaml.Visibility.Collapsed);
         }
 
         public static TElement BindFont<TElement>(this TElement target, Control source, BindingMode bindingMode = BindingMode.OneWay, object except = null) where TElement : ElementType
@@ -117,37 +118,37 @@ namespace P42.Uno.Markup
         { element.FontWeight = weight; return element; }
 
         public static TElement Thin<TElement>(this TElement element) where TElement : ElementType
-        { element.FontWeight = Windows.UI.Text.FontWeights.Thin; return element; }
+        { element.FontWeight = FontWeights.Thin; return element; }
 
         public static TElement ExtraLight<TElement>(this TElement element) where TElement : ElementType
-        { element.FontWeight = Windows.UI.Text.FontWeights.ExtraLight; return element; }
+        { element.FontWeight = FontWeights.ExtraLight; return element; }
 
         public static TElement Light<TElement>(this TElement element) where TElement : ElementType
-        { element.FontWeight = Windows.UI.Text.FontWeights.Light; return element; }
+        { element.FontWeight = FontWeights.Light; return element; }
 
         public static TElement SemiLight<TElement>(this TElement element) where TElement : ElementType
-        { element.FontWeight = Windows.UI.Text.FontWeights.SemiLight; return element; }
+        { element.FontWeight = FontWeights.SemiLight; return element; }
 
         public static TElement NormalFontWeight<TElement>(this TElement element) where TElement : ElementType
-        { element.FontWeight = Windows.UI.Text.FontWeights.Normal; return element; }
+        { element.FontWeight = FontWeights.Normal; return element; }
 
         public static TElement Medium<TElement>(this TElement element) where TElement : ElementType
-        { element.FontWeight = Windows.UI.Text.FontWeights.Medium; return element; }
+        { element.FontWeight = FontWeights.Medium; return element; }
 
         public static TElement SemiBold<TElement>(this TElement element) where TElement : ElementType
-        { element.FontWeight = Windows.UI.Text.FontWeights.SemiBold; return element; }
+        { element.FontWeight = FontWeights.SemiBold; return element; }
 
         public static TElement Bold<TElement>(this TElement element) where TElement : ElementType
-        { element.FontWeight = Windows.UI.Text.FontWeights.Bold; return element; }
+        { element.FontWeight = FontWeights.Bold; return element; }
 
         public static TElement ExtraBold<TElement>(this TElement element) where TElement : ElementType
-        { element.FontWeight = Windows.UI.Text.FontWeights.ExtraBold; return element; }
+        { element.FontWeight = FontWeights.ExtraBold; return element; }
 
         public static TElement BlackFontWeight<TElement>(this TElement element) where TElement : ElementType
-        { element.FontWeight = Windows.UI.Text.FontWeights.Black; return element; }
+        { element.FontWeight = FontWeights.Black; return element; }
 
         public static TElement ExtraBlack<TElement>(this TElement element) where TElement : ElementType
-        { element.FontWeight = Windows.UI.Text.FontWeights.ExtraBlack; return element; }
+        { element.FontWeight = FontWeights.ExtraBlack; return element; }
         #endregion
 
 
@@ -211,7 +212,7 @@ namespace P42.Uno.Markup
         { element.FontFamily = family; return element; }
 
         public static TElement FontFamily<TElement>(this TElement element, string family) where TElement : ElementType
-        { element.FontFamily = new Windows.UI.Xaml.Media.FontFamily(family); return element; }
+        { element.FontFamily = new Microsoft.UI.Xaml.Media.FontFamily(family); return element; }
         #endregion
 
         #endregion

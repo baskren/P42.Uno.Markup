@@ -2,10 +2,10 @@ using System;
 using System.Diagnostics;
 using P42.Uno.Markup;
 using Windows.UI;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using Windows.UI.Xaml.Shapes;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
+using Microsoft.UI.Xaml.Shapes;
 
 namespace P42.Uno
 {
@@ -17,7 +17,7 @@ namespace P42.Uno
 
         public PageWrapper()
         {
-            var backButtonStyle = (Windows.UI.Xaml.Style)Resources["NavigationBackButtonNormalStyle"];
+            var backButtonStyle = (Microsoft.UI.Xaml.Style)Resources["NavigationBackButtonNormalStyle"];
 
             Content = _grid = new Grid()
                 .Stretch()
