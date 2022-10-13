@@ -186,7 +186,7 @@ namespace P42.Uno.Markup
         public static ElementType SemiBoldFontWeight(this ElementType element)
         { element.FontWeight = FontWeights.SemiBold; return element; }
 
-        public static ElementType BoldlFontWeight(this ElementType element)
+        public static ElementType BoldFontWeight(this ElementType element)
         { element.FontWeight = FontWeights.Bold; return element; }
 
         public static ElementType ExtraBoldFontWeight(this ElementType element)
