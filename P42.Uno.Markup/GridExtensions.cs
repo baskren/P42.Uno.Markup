@@ -235,7 +235,15 @@ namespace P42.Uno.Markup
 				return rowDef.Height;
 			if (obj is ColumnDefinition colDef)
 				return colDef.Width;
-			return new GridLength(Convert.ToDouble(obj));
+			if (obj is char c)
+			{
+				if (c == '*')
+                    return new GridLength(1.0, GridUnitType.Star);
+				if (c == 'a')
+                    return GridLength.Auto;
+                throw new Exception("Cannot parse character [" + c + "] into a GridLength");
+            }
+            return new GridLength(Convert.ToDouble(obj));
 		}
 
 
