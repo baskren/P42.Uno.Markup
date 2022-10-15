@@ -3,7 +3,7 @@
   <PropertyGroup>
 
     <RootNamespace>P42.Uno.Markup</RootNamespace>
-    <Version>4.5.9-winui.0.4</Version>
+    <Version>4.5.14-winui.0.4</Version>
     <NoWarn>1701;1702;Uno0001;VSX1000;CA1416</NoWarn>
 
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
@@ -44,7 +44,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Uno.WinUI" Version="4.5.9" />
+    <PackageReference Include="Uno.WinUI" Version="4.5.14" />
   	<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
   </ItemGroup>
 
