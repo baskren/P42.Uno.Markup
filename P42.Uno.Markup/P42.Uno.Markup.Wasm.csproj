@@ -1,0 +1,16 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.23">
+  <!--
+	Adding project references to this project requires some manual adjustments.
+	Please see https://github.com/unoplatform/uno/issues/3909 for more details.
+	-->
+  <PropertyGroup>
+
+    <AssemblyName>P42.Uno.Markup.Wasm</AssemblyName>
+	  <TargetFrameworks>net6.0;</TargetFrameworks>
+
+
+    <DefineConstants>__WASM__;$(DefineConstants);</DefineConstants>
+
+  </PropertyGroup>
+
+</Project>
