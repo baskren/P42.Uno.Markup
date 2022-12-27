@@ -11,7 +11,7 @@ namespace P42.Uno.Markup
 {
     public static class MenuFlyoutItemExtensions
     {
-        public static TElement OnClick<TElement>(this TElement element, RoutedEventHandler click) where TElement : ElementType
+        public static TElement OnClickHandler<TElement>(this TElement element, RoutedEventHandler click) where TElement : ElementType
         {
             element.Click += click;
             return element;

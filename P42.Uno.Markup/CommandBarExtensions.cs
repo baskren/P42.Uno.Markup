@@ -59,7 +59,7 @@ namespace P42.Uno.Markup
         { element.DefaultLabelPosition = value; return element; }
 
         #region Events
-        public static TElement AddOnDynamicOverflowItemsChanging<TElement>(this TElement element, TypedEventHandler<CommandBar, DynamicOverflowItemsChangingEventArgs> handler) where TElement : ElementType
+        public static TElement AddDynamicOverflowItemsChangingHandler<TElement>(this TElement element, TypedEventHandler<CommandBar, DynamicOverflowItemsChangingEventArgs> handler) where TElement : ElementType
         { element.DynamicOverflowItemsChanging += handler; return element; }
         #endregion
     }

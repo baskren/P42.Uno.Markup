@@ -25,16 +25,16 @@ namespace P42.Uno.Markup
 
 
         #region Events
-        public static TElement AddOnClosed<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        public static TElement AddClosedHandler<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
         { element.Closed += handler; return element; }
 
-        public static TElement AddOnOpened<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        public static TElement AddOpenedHandler<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
         { element.Opened += handler; return element; }
 
-        public static TElement AddOnClosing<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        public static TElement AddClosingHandler<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
         { element.Closing += handler; return element; }
 
-        public static TElement AddOnOpening<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        public static TElement AddOpeningHandler<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
         { element.Opening += handler; return element; }
 
         #endregion

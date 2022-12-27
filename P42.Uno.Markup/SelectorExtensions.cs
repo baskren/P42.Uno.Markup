@@ -29,7 +29,7 @@ namespace P42.Uno.Markup
         { element.IsSynchronizedWithCurrentItem = value; return element; }
 
         #region Events
-        public static TElement AddOnSelectionChanged<TElement>(this TElement element, SelectionChangedEventHandler handler) where TElement : ElementType
+        public static TElement AddSelectionChangedHandler<TElement>(this TElement element, SelectionChangedEventHandler handler) where TElement : ElementType
         { element.SelectionChanged += handler; return element; }
         #endregion
     }

@@ -405,13 +405,13 @@ namespace P42.Uno.Markup
         { element.BackgroundSizing = sizing; return element; }
 
         #region Events
-        public static TElement AddOnIsEnabledChanged<TElement>(this TElement element, DependencyPropertyChangedEventHandler handler) where TElement : ElementType
+        public static TElement AddIsEnabledChangedHandler<TElement>(this TElement element, DependencyPropertyChangedEventHandler handler) where TElement : ElementType
         { element.IsEnabledChanged += handler; return element; }
 
-        public static TElement AddOnFocusDisengaged<TElement>(this TElement element, TypedEventHandler<Control, FocusDisengagedEventArgs> handler) where TElement : ElementType
+        public static TElement AddFocusDisengagedHandler<TElement>(this TElement element, TypedEventHandler<Control, FocusDisengagedEventArgs> handler) where TElement : ElementType
         { element.FocusDisengaged += handler; return element; }
 
-        public static TElement AddOnFocusEngaged<TElement>(this TElement element, TypedEventHandler<Control, FocusEngagedEventArgs> handler) where TElement : ElementType
+        public static TElement AddFocusEngagedHandler<TElement>(this TElement element, TypedEventHandler<Control, FocusEngagedEventArgs> handler) where TElement : ElementType
         { element.FocusEngaged += handler; return element; }
         #endregion
     }

@@ -21,16 +21,16 @@ namespace P42.Uno.Markup
         public static TElement NavigationStackEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsNavigationStackEnabled = value; return element; }
 
-        public static TElement AddOnNavigated<TElement>(this TElement element, NavigatedEventHandler value) where TElement : ElementType
+        public static TElement AddNavigatedHandler<TElement>(this TElement element, NavigatedEventHandler value) where TElement : ElementType
         { element.Navigated += value; return element; }
 
-        public static TElement AddOnNavigating<TElement>(this TElement element, NavigatingCancelEventHandler value) where TElement : ElementType
+        public static TElement AddNavigatingHandler<TElement>(this TElement element, NavigatingCancelEventHandler value) where TElement : ElementType
         { element.Navigating += value; return element; }
 
-        public static TElement AddOnNavigationFailed<TElement>(this TElement element, NavigationFailedEventHandler value) where TElement : ElementType
+        public static TElement AddNavigationFailedHandler<TElement>(this TElement element, NavigationFailedEventHandler value) where TElement : ElementType
         { element.NavigationFailed += value; return element; }
 
-        public static TElement AddOnNavigationStopped<TElement>(this TElement element, NavigationStoppedEventHandler value) where TElement : ElementType
+        public static TElement AddNavigationStoppedHandler<TElement>(this TElement element, NavigationStoppedEventHandler value) where TElement : ElementType
         { element.NavigationStopped += value; return element; }
 
     }

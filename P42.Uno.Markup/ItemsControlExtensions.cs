@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +14,9 @@ namespace P42.Uno.Markup
 {
     public static class ItemsControlExtensions
     {
+        public static TElement ItemContainerStyle<TElement>(this TElement element, Style style) where TElement : ElementType
+        { element.ItemContainerStyle = style; return element; }
+
         public static TElement ItemsSource<TElement>(this TElement element, object source) where TElement : ElementType
         { element.ItemsSource = source; return element; }
 

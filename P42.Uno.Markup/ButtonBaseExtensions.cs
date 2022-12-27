@@ -21,7 +21,7 @@ namespace P42.Uno.Markup
         public static TElement ClickMode<TElement>(this TElement element, ClickMode mode) where TElement : ElementType
         { element.ClickMode = mode; return element; }
 
-        public static TElement AddOnClick<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
+        public static TElement AddClickHandler<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
         { element.Click += handler; return element; }
     }
 }

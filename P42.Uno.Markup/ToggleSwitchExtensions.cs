@@ -30,7 +30,7 @@ namespace P42.Uno.Markup
         public static ToggleSwitch Header(this ToggleSwitch element, object Header = null)
         { element.Header = Header; return element; }
 
-        public static ToggleSwitch AddOnToggled(this ToggleSwitch element, RoutedEventHandler handler)
+        public static ToggleSwitch AddToggledHandler(this ToggleSwitch element, RoutedEventHandler handler)
         { element.Toggled += handler; return element; }
     }
 }

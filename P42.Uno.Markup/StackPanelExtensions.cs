@@ -91,10 +91,10 @@ namespace P42.Uno.Markup
 
 
         #region Events
-        public static TElement AddOnHorizontalSnapPointsChanged<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        public static TElement AddHorizontalSnapPointsChangedHandler<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
         { element.HorizontalSnapPointsChanged += handler; return element; }
 
-        public static TElement AddOnVerticalSnapPointsChanged<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        public static TElement AddVerticalSnapPointsChangedHandler<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
         { element.VerticalSnapPointsChanged += handler; return element; }
         #endregion
     }

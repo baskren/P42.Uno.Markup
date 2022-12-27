@@ -34,7 +34,7 @@ namespace P42.Uno.Markup
         public static TElement TextSearchEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsTextSearchEnabled = value; return element; }
 
-        public static TElement AddOnSelectionChangedTrigger<TElement>(this TElement element, ComboBoxSelectionChangedTrigger value) where TElement : ElementType
+        public static TElement AddSelectionChangedTrigger<TElement>(this TElement element, ComboBoxSelectionChangedTrigger value) where TElement : ElementType
         { element.SelectionChangedTrigger = value; return element; }
 
         #region PlaceholderForeground
@@ -59,13 +59,13 @@ namespace P42.Uno.Markup
 
 
         #region Events
-        public static TElement AddOnDropDownClosed<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        public static TElement AddDropDownClosedHandler<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
         { element.DropDownClosed += handler; return element; }
 
-        public static TElement AddOnDropDownOpened<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+        public static TElement AddDropDownOpenedHandler<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
         { element.DropDownOpened += handler; return element; }
 
-        public static TElement AddOnTextSubmitted<TElement>(this TElement element, TypedEventHandler<ComboBox, ComboBoxTextSubmittedEventArgs> handler) where TElement : ElementType
+        public static TElement AddTextSubmittedHandler<TElement>(this TElement element, TypedEventHandler<ComboBox, ComboBoxTextSubmittedEventArgs> handler) where TElement : ElementType
         { element.TextSubmitted += handler; return element; }
         #endregion
 

@@ -40,7 +40,7 @@ namespace P42.Uno.Markup
         public static TElement MinMaxChange<TElement>(this TElement element, double min, double max, double largeStep, double smallChange) where TElement : ElementType
         { element.Minimum = min; element.Maximum = max; element.LargeChange = largeStep; element.SmallChange = smallChange; return element; }
 
-        public static TElement AddOnValueChanged<TElement>(this TElement element, RangeBaseValueChangedEventHandler handler) where TElement : ElementType
+        public static TElement AddValueChangedHandler<TElement>(this TElement element, RangeBaseValueChangedEventHandler handler) where TElement : ElementType
         { element.ValueChanged += handler; return element; }
 
     }

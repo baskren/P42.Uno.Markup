@@ -27,7 +27,7 @@ namespace P42.Uno
                         .Assign(out _backButton)
                         //.Content("<-- BACK JACK")
                         .Style(backButtonStyle)
-                        .AddOnClick(OnBackButtonClicked)
+                        .AddClick(OnBackButtonClicked)
                 );
 
             var platformOffset = global::Uno.UI.Toolkit.VisibleBoundsPadding.WindowPadding;
