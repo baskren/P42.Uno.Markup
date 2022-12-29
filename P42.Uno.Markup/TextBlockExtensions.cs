@@ -324,13 +324,13 @@ namespace P42.Uno.Markup
 
 
         #region Events
-        public static ElementType AddOnContextMenuOpening(this ElementType element, ContextMenuOpeningEventHandler handler) 
+        public static ElementType AddContextMenuOpeningHandler(this ElementType element, ContextMenuOpeningEventHandler handler) 
         { element.ContextMenuOpening += handler; return element; }
 
-        public static ElementType AddOnSelectionChanged(this ElementType element, RoutedEventHandler handler) 
+        public static ElementType AddSelectionChangedHandler(this ElementType element, RoutedEventHandler handler) 
         { element.SelectionChanged += handler; return element; }
 
-        public static ElementType AddOnIsTextTrimmedChanged(this ElementType element, TypedEventHandler<TextBlock, IsTextTrimmedChangedEventArgs> handler)
+        public static ElementType AddIsTextTrimmedChangedHandler(this ElementType element, TypedEventHandler<TextBlock, IsTextTrimmedChangedEventArgs> handler)
         { element.IsTextTrimmedChanged += handler; return element; }
         #endregion
 

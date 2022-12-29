@@ -69,22 +69,22 @@ namespace P42.Uno.Markup
 
 
         #region Events
-        public static TElement AddOnClosed<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogClosedEventArgs> handler) where TElement : ElementType
+        public static TElement AddClosedHandler<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogClosedEventArgs> handler) where TElement : ElementType
         { element.Closed += handler; return element; }
 
-        public static TElement AddOnClosing<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogClosingEventArgs> handler) where TElement : ElementType
+        public static TElement AddClosingHandler<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogClosingEventArgs> handler) where TElement : ElementType
         { element.Closing += handler; return element; }
 
-        public static TElement AddOnOpened<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogOpenedEventArgs> handler) where TElement : ElementType
+        public static TElement AddOpenedHandler<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogOpenedEventArgs> handler) where TElement : ElementType
         { element.Opened += handler; return element; }
 
-        public static TElement AddOnPrimaryButtonClick<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs> handler) where TElement : ElementType
+        public static TElement AddPrimaryButtonClickHandler<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs> handler) where TElement : ElementType
         { element.PrimaryButtonClick += handler; return element; }
 
-        public static TElement AddOnSecondaryButtonClick<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs> handler) where TElement : ElementType
+        public static TElement AddSecondaryButtonClickHandler<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs> handler) where TElement : ElementType
         { element.SecondaryButtonClick += handler; return element; }
 
-        public static TElement AddOnCloseButtonClick<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs> handler) where TElement : ElementType
+        public static TElement AddCloseButtonClickHandler<TElement>(this TElement element, TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs> handler) where TElement : ElementType
         { element.CloseButtonClick += handler; return element; }
 
         #endregion

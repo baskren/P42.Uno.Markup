@@ -118,28 +118,28 @@ namespace P42.Uno.Markup
             return element.AddMenuItems(items);
         }
 
-        public static TElement AddOnDisplayModeChanged<TElement>(this TElement element, TypedEventHandler<NavigationView, NavigationViewDisplayModeChangedEventArgs> value) where TElement : ElementType
+        public static TElement AddDisplayModeChangedHandler<TElement>(this TElement element, TypedEventHandler<NavigationView, NavigationViewDisplayModeChangedEventArgs> value) where TElement : ElementType
         { element.DisplayModeChanged += value; return element; }
 
-        public static TElement AddOnItemInvoked<TElement>(this TElement element, TypedEventHandler<NavigationView, NavigationViewItemInvokedEventArgs> value) where TElement : ElementType
+        public static TElement AddItemInvokedHandler<TElement>(this TElement element, TypedEventHandler<NavigationView, NavigationViewItemInvokedEventArgs> value) where TElement : ElementType
         { element.ItemInvoked += value; return element; }
 
-        public static TElement AddOnSelectionChanged<TElement>(this TElement element, TypedEventHandler<NavigationView, NavigationViewSelectionChangedEventArgs> value) where TElement : ElementType
+        public static TElement AddSelectionChangedHandler<TElement>(this TElement element, TypedEventHandler<NavigationView, NavigationViewSelectionChangedEventArgs> value) where TElement : ElementType
         { element.SelectionChanged += value; return element; }
 
-        public static TElement AddOnBackRequested<TElement>(this TElement element, TypedEventHandler<NavigationView, NavigationViewBackRequestedEventArgs> value) where TElement : ElementType
+        public static TElement AddBackRequestedHandler<TElement>(this TElement element, TypedEventHandler<NavigationView, NavigationViewBackRequestedEventArgs> value) where TElement : ElementType
         { element.BackRequested += value; return element; }
 
-        public static TElement AddOnPaneClosed<TElement>(this TElement element, TypedEventHandler<NavigationView, object> value) where TElement : ElementType
+        public static TElement AddPaneClosedHandler<TElement>(this TElement element, TypedEventHandler<NavigationView, object> value) where TElement : ElementType
         { element.PaneClosed += value; return element; }
 
-        public static TElement AddOnPaneClosing<TElement>(this TElement element, TypedEventHandler<NavigationView, NavigationViewPaneClosingEventArgs> value) where TElement : ElementType
+        public static TElement AddPaneClosingHandler<TElement>(this TElement element, TypedEventHandler<NavigationView, NavigationViewPaneClosingEventArgs> value) where TElement : ElementType
         { element.PaneClosing += value; return element; }
 
-        public static TElement AddOnPaneOpened<TElement>(this TElement element, TypedEventHandler<NavigationView, object> value) where TElement : ElementType
+        public static TElement AddPaneOpenedHandler<TElement>(this TElement element, TypedEventHandler<NavigationView, object> value) where TElement : ElementType
         { element.PaneOpened += value; return element; }
 
-        public static TElement AddOnPaneOpening<TElement>(this TElement element, TypedEventHandler<NavigationView, object> value) where TElement : ElementType
+        public static TElement AddPaneOpeningHandler<TElement>(this TElement element, TypedEventHandler<NavigationView, object> value) where TElement : ElementType
         { element.PaneOpening += value; return element; }
 
 

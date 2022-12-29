@@ -271,29 +271,29 @@ namespace P42.Uno.Markup
 
 
 		#region Events
-		public static TElement AddOnLayoutUpdated<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
+		public static TElement AddLayoutUpdatedHandler<TElement>(this TElement element, EventHandler<object> handler) where TElement : ElementType
 		{ element.LayoutUpdated += handler; return element; }
 
-		public static TElement AddOnLoaded<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
+		public static TElement AddLoadedHandler<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
 		{ element.Loaded += handler; return element; }
 
-		public static TElement AddOnSizeChanged<TElement>(this TElement element, SizeChangedEventHandler handler) where TElement : ElementType
+		public static TElement AddSizeChangedHandler<TElement>(this TElement element, SizeChangedEventHandler handler) where TElement : ElementType
 		{ element.SizeChanged += handler; return element; }
 
-		public static TElement AddOnUnloaded<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
+		public static TElement AddUnloadedHandler<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
 		{ element.Unloaded += handler; return element; }
 
 
-		public static TElement AddOnDataContextChanged<TElement>(this TElement element, TypedEventHandler<FrameworkElement, DataContextChangedEventArgs> handler) where TElement : ElementType
+		public static TElement AddDataContextChangedHandler<TElement>(this TElement element, TypedEventHandler<FrameworkElement, DataContextChangedEventArgs> handler) where TElement : ElementType
 		{ element.DataContextChanged += handler; return element; }
 
-		public static TElement AddOnLoading<TElement>(this TElement element, TypedEventHandler<FrameworkElement, object> handler) where TElement : ElementType
+		public static TElement AddLoadingHandler<TElement>(this TElement element, TypedEventHandler<FrameworkElement, object> handler) where TElement : ElementType
 		{ element.Loading += handler; return element; }
 
-		public static TElement AddOnActualThemeChanged<TElement>(this TElement element, TypedEventHandler<FrameworkElement, object> handler) where TElement : ElementType
+		public static TElement AddActualThemeChangedHandler<TElement>(this TElement element, TypedEventHandler<FrameworkElement, object> handler) where TElement : ElementType
 		{ element.ActualThemeChanged += handler; return element; }
 
-		public static TElement AddOnEffectiveViewportChanged<TElement>(this TElement element, TypedEventHandler<FrameworkElement, EffectiveViewportChangedEventArgs> handler) where TElement : ElementType
+		public static TElement AddEffectiveViewportChangedHandler<TElement>(this TElement element, TypedEventHandler<FrameworkElement, EffectiveViewportChangedEventArgs> handler) where TElement : ElementType
 		{ element.EffectiveViewportChanged += handler; return element; }
 
 		#endregion

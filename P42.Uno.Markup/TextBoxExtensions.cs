@@ -16,6 +16,7 @@ namespace P42.Uno.Markup
 {
     public static class TextBoxExtensions
     {
+        #region Properties
         public static TElement TextWrapping<TElement>(this TElement element, TextWrapping value) where TElement : ElementType
         { element.TextWrapping = value; return element; }
 
@@ -110,46 +111,47 @@ namespace P42.Uno.Markup
 
         public static TElement Description<TElement>(this TElement element, object value) where TElement : ElementType
         { element.Description = value; return element; }
+        #endregion
 
 
         #region Events
-        public static TElement AddOnContextMenuOpening<TElement>(this TElement element, ContextMenuOpeningEventHandler handler) where TElement : ElementType
+        public static TElement AddContextMenuOpeningHandler<TElement>(this TElement element, ContextMenuOpeningEventHandler handler) where TElement : ElementType
         { element.ContextMenuOpening += handler; return element; }
 
-        public static TElement AddOnSelectionChanged<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
+        public static TElement AddSelectionChangedHandler<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
         { element.SelectionChanged += handler; return element; }
 
-        public static TElement AddOnTextChanged<TElement>(this TElement element, TextChangedEventHandler handler) where TElement : ElementType
+        public static TElement AddTextChangedHandler<TElement>(this TElement element, TextChangedEventHandler handler) where TElement : ElementType
         { element.TextChanged += handler; return element; }
 
-        public static TElement AddOnPaste<TElement>(this TElement element, TextControlPasteEventHandler handler) where TElement : ElementType
+        public static TElement AddPasteHandler<TElement>(this TElement element, TextControlPasteEventHandler handler) where TElement : ElementType
         { element.Paste += handler; return element; }
 
-        public static TElement AddOnCandidateWindowBoundsChanged<TElement>(this TElement element, TypedEventHandler<TextBox, CandidateWindowBoundsChangedEventArgs> handler) where TElement : ElementType
+        public static TElement AddCandidateWindowBoundsChangedHandler<TElement>(this TElement element, TypedEventHandler<TextBox, CandidateWindowBoundsChangedEventArgs> handler) where TElement : ElementType
         { element.CandidateWindowBoundsChanged += handler; return element; }
 
-        public static TElement AddOnCandidateWindowBoundsChanged<TElement>(this TElement element, TypedEventHandler<TextBox, TextBoxTextChangingEventArgs> handler) where TElement : ElementType
+        public static TElement AddTextChangingHandler<TElement>(this TElement element, TypedEventHandler<TextBox, TextBoxTextChangingEventArgs> handler) where TElement : ElementType
         { element.TextChanging += handler; return element; }
 
-        public static TElement AddOnCandidateWindowBoundsChanged<TElement>(this TElement element, TypedEventHandler<TextBox, TextCompositionChangedEventArgs> handler) where TElement : ElementType
+        public static TElement AddTextCompositionChangedHandler<TElement>(this TElement element, TypedEventHandler<TextBox, TextCompositionChangedEventArgs> handler) where TElement : ElementType
         { element.TextCompositionChanged += handler; return element; }
 
-        public static TElement AddOnCandidateWindowBoundsChanged<TElement>(this TElement element, TypedEventHandler<TextBox, TextCompositionEndedEventArgs> handler) where TElement : ElementType
+        public static TElement AddTextCompositionEndedHandler<TElement>(this TElement element, TypedEventHandler<TextBox, TextCompositionEndedEventArgs> handler) where TElement : ElementType
         { element.TextCompositionEnded += handler; return element; }
 
-        public static TElement AddOnCandidateWindowBoundsChanged<TElement>(this TElement element, TypedEventHandler<TextBox, TextCompositionStartedEventArgs> handler) where TElement : ElementType
+        public static TElement AddTextCompositionStartedHandler<TElement>(this TElement element, TypedEventHandler<TextBox, TextCompositionStartedEventArgs> handler) where TElement : ElementType
         { element.TextCompositionStarted += handler; return element; }
 
-        public static TElement AddOnCandidateWindowBoundsChanged<TElement>(this TElement element, TypedEventHandler<TextBox, TextBoxBeforeTextChangingEventArgs> handler) where TElement : ElementType
+        public static TElement AddBeforeTextChangingHandler<TElement>(this TElement element, TypedEventHandler<TextBox, TextBoxBeforeTextChangingEventArgs> handler) where TElement : ElementType
         { element.BeforeTextChanging += handler; return element; }
 
-        public static TElement AddOnCandidateWindowBoundsChanged<TElement>(this TElement element, TypedEventHandler<TextBox, TextControlCopyingToClipboardEventArgs> handler) where TElement : ElementType
+        public static TElement AddCopyingToClipboardHandler<TElement>(this TElement element, TypedEventHandler<TextBox, TextControlCopyingToClipboardEventArgs> handler) where TElement : ElementType
         { element.CopyingToClipboard += handler; return element; }
 
-        public static TElement AddOnCandidateWindowBoundsChanged<TElement>(this TElement element, TypedEventHandler<TextBox, TextControlCuttingToClipboardEventArgs> handler) where TElement : ElementType
+        public static TElement AddCuttingToClipboardHandler<TElement>(this TElement element, TypedEventHandler<TextBox, TextControlCuttingToClipboardEventArgs> handler) where TElement : ElementType
         { element.CuttingToClipboard += handler; return element; }
 
-        public static TElement AddOnCandidateWindowBoundsChanged<TElement>(this TElement element, TypedEventHandler<TextBox, TextBoxSelectionChangingEventArgs> handler) where TElement : ElementType
+        public static TElement AddSelectionChangingHandler<TElement>(this TElement element, TypedEventHandler<TextBox, TextBoxSelectionChangingEventArgs> handler) where TElement : ElementType
         { element.SelectionChanging += handler; return element; }
 
         #endregion

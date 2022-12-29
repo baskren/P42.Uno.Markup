@@ -62,7 +62,7 @@ namespace P42.Uno.Markup
         public static TElement TapEnabled<TElement>(this TElement element, bool isTapEnabled = true) where TElement :ElementType
         { element.IsTapEnabled = isTapEnabled; return element; }
 
-        public static TElement AddOnTap<TElement>(this TElement element, TappedEventHandler handler) where TElement : ElementType
+        public static TElement AddTapHandler<TElement>(this TElement element, TappedEventHandler handler) where TElement : ElementType
         { element.Tapped += handler; return element; }
 
         #endregion
@@ -71,7 +71,7 @@ namespace P42.Uno.Markup
         public static TElement RightTapEnabled<TElement>(this TElement element, bool isTapEnabled = true) where TElement :ElementType
         { element.IsRightTapEnabled = isTapEnabled; return element; }
 
-        public static TElement AddOnRightTap<TElement>(this TElement element, RightTappedEventHandler handler) where TElement : ElementType
+        public static TElement AddRightTapHandler<TElement>(this TElement element, RightTappedEventHandler handler) where TElement : ElementType
         { element.RightTapped += handler; return element; }
         #endregion
 
@@ -79,7 +79,7 @@ namespace P42.Uno.Markup
         public static TElement HoldingEnabled<TElement>(this TElement element, bool isTapEnabled = true) where TElement :ElementType
         { element.IsHoldingEnabled = isTapEnabled; return element; }
 
-        public static TElement AddOnHolding<TElement>(this TElement element, HoldingEventHandler handler) where TElement : ElementType
+        public static TElement AddHoldingHandler<TElement>(this TElement element, HoldingEventHandler handler) where TElement : ElementType
         { element.Holding += handler; return element; }
         #endregion
 
@@ -90,7 +90,7 @@ namespace P42.Uno.Markup
         public static TElement DoubleTapEnabled<TElement>(this TElement element, bool isTapEnabled = true) where TElement :ElementType
         { element.IsDoubleTapEnabled = isTapEnabled; return element; }
 
-        public static TElement AddOnDoubleTap<TElement>(this TElement element, DoubleTappedEventHandler handler) where TElement : ElementType
+        public static TElement AddDoubleTapHandler<TElement>(this TElement element, DoubleTappedEventHandler handler) where TElement : ElementType
         { element.DoubleTapped += handler; return element; }
         #endregion
 
@@ -233,121 +233,121 @@ namespace P42.Uno.Markup
 
 
         #region Events
-        public static TElement AddOnDoubleTapped<TElement>(this TElement element, DoubleTappedEventHandler handler) where TElement : ElementType
+        public static TElement AddDoubleTappedHandler<TElement>(this TElement element, DoubleTappedEventHandler handler) where TElement : ElementType
         { element.DoubleTapped += handler; return element; }
 
-        public static TElement AddOnDragEnter<TElement>(this TElement element, DragEventHandler handler) where TElement : ElementType
+        public static TElement AddDragEnterHandler<TElement>(this TElement element, DragEventHandler handler) where TElement : ElementType
         { element.DragEnter += handler; return element; }
 
-        public static TElement AddOnDragLeave<TElement>(this TElement element, DragEventHandler handler) where TElement : ElementType
+        public static TElement AddDragLeaveHandler<TElement>(this TElement element, DragEventHandler handler) where TElement : ElementType
         { element.DragLeave += handler; return element; }
 
-        public static TElement AddOnDragOver<TElement>(this TElement element, DragEventHandler handler) where TElement : ElementType
+        public static TElement AddDragOverHandler<TElement>(this TElement element, DragEventHandler handler) where TElement : ElementType
         { element.DragOver += handler; return element; }
 
-        public static TElement AddOnDrop<TElement>(this TElement element, DragEventHandler handler) where TElement : ElementType
+        public static TElement AddDropHandler<TElement>(this TElement element, DragEventHandler handler) where TElement : ElementType
         { element.Drop += handler; return element; }
 
-        public static TElement AddOnGotFocus<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
+        public static TElement AddGotFocusHandler<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
         { element.GotFocus += handler; return element; }
 
-        public static TElement AddOnKeyDown<TElement>(this TElement element, KeyEventHandler handler) where TElement : ElementType
+        public static TElement AddKeyDownHandler<TElement>(this TElement element, KeyEventHandler handler) where TElement : ElementType
         { element.KeyDown += handler; return element; }
 
-        public static TElement AddOnKeyUp<TElement>(this TElement element, KeyEventHandler handler) where TElement : ElementType
+        public static TElement AddKeyUpHandler<TElement>(this TElement element, KeyEventHandler handler) where TElement : ElementType
         { element.KeyUp += handler; return element; }
 
-        public static TElement AddOnLostFocus<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
+        public static TElement AddLostFocusHandler<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
         { element.LostFocus += handler; return element; }
 
-        public static TElement AddOnManipulationCompleted<TElement>(this TElement element, ManipulationCompletedEventHandler handler) where TElement : ElementType
+        public static TElement AddManipulationCompletedHandler<TElement>(this TElement element, ManipulationCompletedEventHandler handler) where TElement : ElementType
         { element.ManipulationCompleted += handler; return element; }
 
-        public static TElement AddOnManipulationDelta<TElement>(this TElement element, ManipulationDeltaEventHandler handler) where TElement : ElementType
+        public static TElement AddManipulationDeltaHandler<TElement>(this TElement element, ManipulationDeltaEventHandler handler) where TElement : ElementType
         { element.ManipulationDelta += handler; return element; }
 
-        public static TElement AddOnManipulationInertiaStarting<TElement>(this TElement element, ManipulationInertiaStartingEventHandler handler) where TElement : ElementType
+        public static TElement AddManipulationInertiaStartingHandler<TElement>(this TElement element, ManipulationInertiaStartingEventHandler handler) where TElement : ElementType
         { element.ManipulationInertiaStarting += handler; return element; }
 
-        public static TElement AddOnManipulationStarted<TElement>(this TElement element, ManipulationStartedEventHandler handler) where TElement : ElementType
+        public static TElement AddManipulationStartedHandler<TElement>(this TElement element, ManipulationStartedEventHandler handler) where TElement : ElementType
         { element.ManipulationStarted += handler; return element; }
 
-        public static TElement AddOnManipulationStarting<TElement>(this TElement element, ManipulationStartingEventHandler handler) where TElement : ElementType
+        public static TElement AddManipulationStartingHandler<TElement>(this TElement element, ManipulationStartingEventHandler handler) where TElement : ElementType
         { element.ManipulationStarting += handler; return element; }
 
-        public static TElement AddOnPointerCanceled<TElement>(this TElement element, PointerEventHandler handler) where TElement : ElementType
+        public static TElement AddPointerCanceledHandler<TElement>(this TElement element, PointerEventHandler handler) where TElement : ElementType
         { element.PointerCanceled += handler; return element; }
 
-        public static TElement AddOnPointerCaptureLost<TElement>(this TElement element, PointerEventHandler handler) where TElement : ElementType
+        public static TElement AddPointerCaptureLostHandler<TElement>(this TElement element, PointerEventHandler handler) where TElement : ElementType
         { element.PointerCaptureLost += handler; return element; }
 
-        public static TElement AddOnPointerEntered<TElement>(this TElement element, PointerEventHandler handler) where TElement : ElementType
+        public static TElement AddPointerEnteredHandler<TElement>(this TElement element, PointerEventHandler handler) where TElement : ElementType
         { element.PointerEntered += handler; return element; }
 
-        public static TElement AddOnPointerExited<TElement>(this TElement element, PointerEventHandler handler) where TElement : ElementType
+        public static TElement AddPointerExitedHandler<TElement>(this TElement element, PointerEventHandler handler) where TElement : ElementType
         { element.PointerExited += handler; return element; }
 
-        public static TElement AddOnPointerMoved<TElement>(this TElement element, PointerEventHandler handler) where TElement : ElementType
+        public static TElement AddPointerMovedHandler<TElement>(this TElement element, PointerEventHandler handler) where TElement : ElementType
         { element.PointerMoved += handler; return element; }
 
-        public static TElement AddOnPointerPressed<TElement>(this TElement element, PointerEventHandler handler) where TElement : ElementType
+        public static TElement AddPointerPressedHandler<TElement>(this TElement element, PointerEventHandler handler) where TElement : ElementType
         { element.PointerPressed += handler; return element; }
 
-        public static TElement AddOnPointerReleased<TElement>(this TElement element, PointerEventHandler handler) where TElement : ElementType
+        public static TElement AddPointerReleasedHandler<TElement>(this TElement element, PointerEventHandler handler) where TElement : ElementType
         { element.PointerReleased += handler; return element; }
 
-        public static TElement AddOnPointerWheelChanged<TElement>(this TElement element, PointerEventHandler handler) where TElement : ElementType
+        public static TElement AddPointerWheelChangedHandler<TElement>(this TElement element, PointerEventHandler handler) where TElement : ElementType
         { element.PointerWheelChanged += handler; return element; }
 
-        public static TElement AddOnRightTapped<TElement>(this TElement element, RightTappedEventHandler handler) where TElement : ElementType
+        public static TElement AddRightTappedHandler<TElement>(this TElement element, RightTappedEventHandler handler) where TElement : ElementType
         { element.RightTapped += handler; return element; }
 
-        public static TElement AddOnTapped<TElement>(this TElement element, TappedEventHandler handler) where TElement : ElementType
+        public static TElement AddTappedHandler<TElement>(this TElement element, TappedEventHandler handler) where TElement : ElementType
         { element.Tapped += handler; return element; }
 
-        public static TElement AddOnDragStarting<TElement>(this TElement element, TypedEventHandler<UIElement, DragStartingEventArgs> handler) where TElement : ElementType
+        public static TElement AddDragStartingHandler<TElement>(this TElement element, TypedEventHandler<UIElement, DragStartingEventArgs> handler) where TElement : ElementType
         { element.DragStarting += handler; return element; }
 
-        public static TElement AddOnDropCompleted<TElement>(this TElement element, TypedEventHandler<UIElement, DropCompletedEventArgs> handler) where TElement : ElementType
+        public static TElement AddDropCompletedHandler<TElement>(this TElement element, TypedEventHandler<UIElement, DropCompletedEventArgs> handler) where TElement : ElementType
         { element.DropCompleted += handler; return element; }
 
-        public static TElement AddOnAccessKeyDisplayDismissed<TElement>(this TElement element, TypedEventHandler<UIElement, AccessKeyDisplayDismissedEventArgs> handler) where TElement : ElementType
+        public static TElement AddAccessKeyDisplayDismissedHandler<TElement>(this TElement element, TypedEventHandler<UIElement, AccessKeyDisplayDismissedEventArgs> handler) where TElement : ElementType
         { element.AccessKeyDisplayDismissed += handler; return element; }
 
-        public static TElement AddOnAccessKeyDisplayRequested<TElement>(this TElement element, TypedEventHandler<UIElement, AccessKeyDisplayRequestedEventArgs> handler) where TElement : ElementType
+        public static TElement AddAccessKeyDisplayRequestedHandler<TElement>(this TElement element, TypedEventHandler<UIElement, AccessKeyDisplayRequestedEventArgs> handler) where TElement : ElementType
         { element.AccessKeyDisplayRequested += handler; return element; }
 
-        public static TElement AddOnDropCAccessKeyInvokedompleted<TElement>(this TElement element, TypedEventHandler<UIElement, AccessKeyInvokedEventArgs> handler) where TElement : ElementType
+        public static TElement AddDropCAccessKeyInvokedompleted<TElement>(this TElement element, TypedEventHandler<UIElement, AccessKeyInvokedEventArgs> handler) where TElement : ElementType
         { element.AccessKeyInvoked += handler; return element; }
 
-        public static TElement AddOnContextCanceled<TElement>(this TElement element, TypedEventHandler<UIElement, RoutedEventArgs> handler) where TElement : ElementType
+        public static TElement AddContextCanceledHandler<TElement>(this TElement element, TypedEventHandler<UIElement, RoutedEventArgs> handler) where TElement : ElementType
         { element.ContextCanceled += handler; return element; }
 
-        public static TElement AddOnContextRequested<TElement>(this TElement element, TypedEventHandler<UIElement, ContextRequestedEventArgs> handler) where TElement : ElementType
+        public static TElement AddContextRequestedHandler<TElement>(this TElement element, TypedEventHandler<UIElement, ContextRequestedEventArgs> handler) where TElement : ElementType
         { element.ContextRequested += handler; return element; }
 
-        public static TElement AddOnGettingFocus<TElement>(this TElement element, TypedEventHandler<UIElement, GettingFocusEventArgs> handler) where TElement : ElementType
+        public static TElement AddGettingFocusHandler<TElement>(this TElement element, TypedEventHandler<UIElement, GettingFocusEventArgs> handler) where TElement : ElementType
         { element.GettingFocus += handler; return element; }
 
-        public static TElement AddOnLosingFocus<TElement>(this TElement element, TypedEventHandler<UIElement, LosingFocusEventArgs> handler) where TElement : ElementType
+        public static TElement AddLosingFocusHandler<TElement>(this TElement element, TypedEventHandler<UIElement, LosingFocusEventArgs> handler) where TElement : ElementType
         { element.LosingFocus += handler; return element; }
 
-        public static TElement AddOnNoFocusCandidateFound<TElement>(this TElement element, TypedEventHandler<UIElement, NoFocusCandidateFoundEventArgs> handler) where TElement : ElementType
+        public static TElement AddNoFocusCandidateFoundHandler<TElement>(this TElement element, TypedEventHandler<UIElement, NoFocusCandidateFoundEventArgs> handler) where TElement : ElementType
         { element.NoFocusCandidateFound += handler; return element; }
 
-        public static TElement AddOnCharacterReceived<TElement>(this TElement element, TypedEventHandler<UIElement, CharacterReceivedRoutedEventArgs> handler) where TElement : ElementType
+        public static TElement AddCharacterReceivedHandler<TElement>(this TElement element, TypedEventHandler<UIElement, CharacterReceivedRoutedEventArgs> handler) where TElement : ElementType
         { element.CharacterReceived += handler; return element; }
 
-        public static TElement AddOnPreviewKeyDown<TElement>(this TElement element, KeyEventHandler handler) where TElement : ElementType
+        public static TElement AddPreviewKeyDownHandler<TElement>(this TElement element, KeyEventHandler handler) where TElement : ElementType
         { element.PreviewKeyDown += handler; return element; }
 
-        public static TElement AddOnPreviewKeyUp<TElement>(this TElement element, KeyEventHandler handler) where TElement : ElementType
+        public static TElement AddPreviewKeyUpHandler<TElement>(this TElement element, KeyEventHandler handler) where TElement : ElementType
         { element.PreviewKeyUp += handler; return element; }
 
-        public static TElement AddOnProcessKeyboardAccelerators<TElement>(this TElement element, TypedEventHandler<UIElement, ProcessKeyboardAcceleratorEventArgs> handler) where TElement : ElementType
+        public static TElement AddProcessKeyboardAcceleratorsHandler<TElement>(this TElement element, TypedEventHandler<UIElement, ProcessKeyboardAcceleratorEventArgs> handler) where TElement : ElementType
         { element.ProcessKeyboardAccelerators += handler; return element; }
 
-        public static TElement AddOnBringIntoViewRequested<TElement>(this TElement element, TypedEventHandler<UIElement, BringIntoViewRequestedEventArgs> handler) where TElement : ElementType
+        public static TElement AddBringIntoViewRequestedHandler<TElement>(this TElement element, TypedEventHandler<UIElement, BringIntoViewRequestedEventArgs> handler) where TElement : ElementType
         { element.BringIntoViewRequested += handler; return element; }
         #endregion
 
