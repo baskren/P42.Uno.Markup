@@ -27,11 +27,13 @@ namespace P42.Uno
                         .Assign(out _backButton)
                         //.Content("<-- BACK JACK")
                         .Style(backButtonStyle)
-                        .AddClick(OnBackButtonClicked)
+                        .AddClickHandler(OnBackButtonClicked)
                 );
 
+#if HAS_UNO
             var platformOffset = global::Uno.UI.Toolkit.VisibleBoundsPadding.WindowPadding;
             this.Padding = platformOffset;
+#endif
         }
 
         void OnBackButtonClicked(object sender, RoutedEventArgs e)
