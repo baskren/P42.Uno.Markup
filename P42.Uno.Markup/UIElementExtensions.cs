@@ -34,6 +34,13 @@ namespace P42.Uno.Markup
 
         public static TElement BindCollapsedFromBool<TElement>(this TElement element, object source, string path) where TElement : ElementType
         { element.Bind(UIElement.VisibilityProperty, source, path, convert: (bool visible) => !visible ? Microsoft.UI.Xaml.Visibility.Visible : Microsoft.UI.Xaml.Visibility.Collapsed); return element; }
+
+        public static bool IsVisible(this UIElement element)
+            => element.Visibility == Microsoft.UI.Xaml.Visibility.Visible;
+
+        public static bool IsCollapsed(this UIElement element)
+            => element.Visibility == Microsoft.UI.Xaml.Visibility.Collapsed;
+
         #endregion
 
 

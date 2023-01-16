@@ -18,7 +18,7 @@ using ElementType = Microsoft.UI.Xaml.Controls.TextBlock;
 
 namespace P42.Uno.Markup
 {
-    public static class TextBlockExtensions
+    public static partial class TextBlockExtensions
     {
         #region Wrapping
         public static ElementType TextWrapping(this ElementType element, TextWrapping wrapping) 
@@ -157,8 +157,11 @@ namespace P42.Uno.Markup
         public static ElementType Foreground(this ElementType element, Color color)
         { element.Foreground = new SolidColorBrush(color); return element; }
 
-        public static ElementType Foreground(this ElementType element, string hex)
-        { element.Foreground = new SolidColorBrush(ColorExtensions.ColorFromString(hex)); return element; }
+        public static ElementType Foreground(this ElementType element, string color)
+        { element.Foreground = new SolidColorBrush(ColorExtensions.ColorFromString(color)); return element; }
+
+        public static ElementType Foreground(this ElementType element, uint hex)
+        { element.Foreground = new SolidColorBrush(ColorExtensions.ColorFromUint(hex)); return element; }
         #endregion
 
 
@@ -289,6 +292,12 @@ namespace P42.Uno.Markup
 
         public static ElementType SelectionHighlightColor(this ElementType element, Color value)
         { element.SelectionHighlightColor = new SolidColorBrush( value); return element; }
+
+        public static ElementType SelectionHighlightColor(this ElementType element, string color) 
+        { element.SelectionHighlightColor = new SolidColorBrush(ColorExtensions.ColorFromString(color)); return element; }
+
+        public static ElementType SelectionHighlightColor(this ElementType element, uint hex) 
+        { element.SelectionHighlightColor = new SolidColorBrush(ColorExtensions.ColorFromUint(hex)); return element; }
 
         public static ElementType OpticalMarginAlignment(this ElementType element, OpticalMarginAlignment value)
         { element.OpticalMarginAlignment = value; return element; }

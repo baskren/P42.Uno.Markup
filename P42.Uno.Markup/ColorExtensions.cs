@@ -10,11 +10,11 @@ using Microsoft.UI.Xaml.Media;
 
 namespace P42.Uno.Markup
 {
-    static class ColorExtensions
+    public static class ColorExtensions
     {
-        public static Color GetForegroundColor(this Color background)
+        public static Color HighContrastCompanionColor(this Color color)
         {
-            var yiq = ((background.R * 299) + (background.G * 587) + (background.B * 114)) / 1000;
+            var yiq = ((color.R * 299) + (color.G * 587) + (color.B * 114)) / 1000;
             return yiq < 128 ? Colors.White : Colors.Black;
         }
 
@@ -37,6 +37,9 @@ namespace P42.Uno.Markup
 
         public static SolidColorBrush ToBrush(this Color color)
             => new SolidColorBrush(color);
+
+        public static Brush ToBrush(this Brush brush)
+            => brush;
         #endregion
 
 
@@ -84,6 +87,19 @@ namespace P42.Uno.Markup
         /// <param name="alpha">Alpha.</param>
         public static Color WithAlpha(this Color c, double alpha)
             => new Color { R = c.R, G = c.G, B = c.B, A = (byte)(alpha).Clamp(0, 255) };
+
+        public static Color AssureGesturable(this Color c)
+            => new Color { R = c.R, G = c.G, B = c.B, A = Math.Max((byte)0x1, c.A) };
+
+        public static Brush AssureGesturable(this Brush b)
+        {
+            if (b is SolidColorBrush scb)
+            {
+                var color = scb.Color;
+                return new SolidColorBrush(color.AssureGesturable());
+            }
+            return b;
+        }
         #endregion
 
 
@@ -534,9 +550,8 @@ namespace P42.Uno.Markup
         /// <returns>The int rgb color string.</returns>
         /// <param name="color">Color.</param>
         public static string ToRgbaColorString(this Color color)
-        {
-            return color.ToIntRgbColorString() + "," + color.A;
-        }
+            => color.ToIntRgbColorString() + "," + color.A;
+        
 
         /// <summary>
         /// Returns a 3 character hexadecimal string of a color's RGB value
@@ -580,9 +595,20 @@ namespace P42.Uno.Markup
         /// </summary>
         /// <returns>The hex rgb color string.</returns>
         /// <param name="color">Color.</param>
-        public static string ToHextAarrggbbColorString(this Color color)
+        public static string ToHexAarrggbbColorString(this Color color)
         {
             return color.A.ToString("x2") + color.ToHexRrggbbColorString();
+        }
+
+        public static int ToInt(this Color color)
+        {
+            int value = 0;
+            value += (color.A << 0x18);
+            value += (color.R << 0x10);
+            value += (color.G << 0x08);
+            value += (color.B);
+
+            return value;
         }
         #endregion
 
@@ -612,6 +638,23 @@ namespace P42.Uno.Markup
             if (Application.Current.Resources[key] is Color color)
                 return color;
             throw new Exception("color not found in Application.Current.Resources for key [" + key + "]. ");
+        }
+
+        public static Brush AppBrush(string key)
+        {
+            var obj = Application.Current.Resources[key];
+            if (obj is Brush brush)
+                return brush;
+            if (obj is Color color)
+                return color.ToBrush();
+            throw new Exception("Brush not found in Application.Current.Resources for key [" + key + "]. ");
+        }
+
+        public static Color AsColor(this Brush brush)
+        {
+            if (brush is SolidColorBrush colorBrush)
+                return colorBrush.Color;
+            return default(Color);
         }
 
     }

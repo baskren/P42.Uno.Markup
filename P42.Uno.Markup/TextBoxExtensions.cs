@@ -68,6 +68,12 @@ namespace P42.Uno.Markup
         public static TElement SelectionHighlightColor<TElement>(this TElement element, Color value) where TElement : ElementType
         { element.SelectionHighlightColor = new SolidColorBrush(value); return element; }
 
+        public static TElement SelectionHighlightColor<TElement>(this TElement element, string color) where TElement : ElementType
+        { element.SelectionHighlightColor = new SolidColorBrush(ColorExtensions.ColorFromString(color)); return element; }
+
+        public static TElement SelectionHighlightColor<TElement>(this TElement element, uint hex) where TElement : ElementType
+        { element.SelectionHighlightColor = new SolidColorBrush(ColorExtensions.ColorFromUint(hex)); return element; }
+
         public static TElement HeaderTemplate<TElement>(this TElement element, DataTemplate value) where TElement : ElementType
         { element.HeaderTemplate = value; return element; }
 
@@ -86,11 +92,23 @@ namespace P42.Uno.Markup
         public static TElement SelectionHighlightColorWhenNotFocused<TElement>(this TElement element, Color value) where TElement : ElementType
         { element.SelectionHighlightColorWhenNotFocused = new SolidColorBrush(value); return element; }
 
+        public static TElement SelectionHighlightColorWhenNotFocused<TElement>(this TElement element, string color) where TElement : ElementType
+        { element.SelectionHighlightColorWhenNotFocused = new SolidColorBrush(ColorExtensions.ColorFromString(color)); return element; }
+
+        public static TElement SelectionHighlightColorWhenNotFocused<TElement>(this TElement element, uint hex) where TElement : ElementType
+        { element.SelectionHighlightColorWhenNotFocused = new SolidColorBrush(ColorExtensions.ColorFromUint(hex)); return element; }
+
         public static TElement PlaceholderForeground<TElement>(this TElement element, Brush value) where TElement : ElementType
         { element.PlaceholderForeground = value; return element; }
 
         public static TElement PlaceholderForeground<TElement>(this TElement element, Color value) where TElement : ElementType
         { element.PlaceholderForeground = new SolidColorBrush(value); return element; }
+
+        public static TElement PlaceholderForeground<TElement>(this TElement element, string color) where TElement : ElementType
+        { element.PlaceholderForeground = new SolidColorBrush(ColorExtensions.ColorFromString(color)); return element; }
+
+        public static TElement PlaceholderForeground<TElement>(this TElement element, uint hex) where TElement : ElementType
+        { element.PlaceholderForeground = new SolidColorBrush(ColorExtensions.ColorFromUint(hex)); return element; }
 
         public static TElement HorizontalTextAlignment<TElement>(this TElement element, TextAlignment value) where TElement : ElementType
         { element.HorizontalTextAlignment = value; return element; }

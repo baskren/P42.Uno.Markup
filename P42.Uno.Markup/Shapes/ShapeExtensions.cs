@@ -53,12 +53,22 @@ namespace P42.Uno.Markup
         public static TElement Fill<TElement>(this TElement element, Color value) where TElement : ElementType
         { element.Fill = new SolidColorBrush(value); return element; }
 
+        public static TElement Fill<TElement>(this TElement element, string color) where TElement : ElementType
+        { element.Fill = new SolidColorBrush(ColorExtensions.ColorFromString(color)); return element; }
+
+        public static TElement Fill<TElement>(this TElement element, uint hex) where TElement : ElementType
+        { element.Fill = new SolidColorBrush(ColorExtensions.ColorFromUint(hex)); return element; }
+
         public static TElement Fill<TElement>(this TElement element, object resourceDictionaryItem) where TElement : ElementType
         {
             if (resourceDictionaryItem is Color color)
                 element.Fill(color);
             else if (resourceDictionaryItem is Brush brush)
                 element.Fill(brush);
+            else if (resourceDictionaryItem is string hex)
+                element.Fill(hex);
+            else if (resourceDictionaryItem is uint hexint)
+                element.Fill(hexint);
             else
                 throw new InvalidCastException("Object of type [" + resourceDictionaryItem?.GetType() + "] cannot be used a Shape.Fill");
             return element;

@@ -23,8 +23,11 @@ namespace P42.Uno.Markup
         public static TElement Background<TElement>(this TElement element, Color color) where TElement : ElementType
         { element.Background = new SolidColorBrush(color); return element; }
 
-        public static TElement Background<TElement>(this TElement element, string hex) where TElement : ElementType
-        { element.Background = new SolidColorBrush(ColorExtensions.ColorFromString(hex)); return element; }
+        public static TElement Background<TElement>(this TElement element, string color) where TElement : ElementType
+        { element.Background = new SolidColorBrush(ColorExtensions.ColorFromString(color)); return element; }
+
+        public static TElement Background<TElement>(this TElement element, uint hex) where TElement : ElementType
+        { element.Background = new SolidColorBrush(ColorExtensions.ColorFromUint(hex)); return element; }
         #endregion
 
         public static TElement BackgroundTransition<TElement>(this TElement element, BrushTransition brushTransition) where TElement : ElementType

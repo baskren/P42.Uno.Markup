@@ -159,8 +159,11 @@ namespace P42.Uno.Markup
         public static TElement Foreground<TElement>(this TElement element, Color color) where TElement : ElementType
         { element.Foreground = new SolidColorBrush(color); return element; }
 
-        public static TElement Foreground<TElement>(this TElement element, string hex) where TElement : ElementType
-        { element.Foreground = new SolidColorBrush(ColorExtensions.ColorFromString(hex)); return element; }
+        public static TElement Foreground<TElement>(this TElement element, string color) where TElement : ElementType
+        { element.Foreground = new SolidColorBrush(ColorExtensions.ColorFromString(color)); return element; }
+
+        public static TElement Foreground<TElement>(this TElement element, uint hex) where TElement : ElementType
+        { element.Foreground = new SolidColorBrush(ColorExtensions.ColorFromUint(hex)); return element; }
         #endregion
 
 
@@ -300,8 +303,11 @@ namespace P42.Uno.Markup
         public static TElement BorderBrush<TElement>(this TElement element, Color value) where TElement : ElementType
         { element.BorderBrush = new SolidColorBrush(value); return element; }
 
-        public static TElement BorderBrush<TElement>(this TElement element, string hex) where TElement : ElementType
-        { element.BorderBrush = new SolidColorBrush(ColorExtensions.ColorFromString(hex)); return element; }
+        public static TElement BorderBrush<TElement>(this TElement element, string color) where TElement : ElementType
+        { element.BorderBrush = new SolidColorBrush(ColorExtensions.ColorFromString(color)); return element; }
+
+        public static TElement BorderBrush<TElement>(this TElement element, uint hex) where TElement : ElementType
+        { element.BorderBrush = new SolidColorBrush(ColorExtensions.ColorFromUint(hex)); return element; }
         #endregion
 
 
@@ -356,8 +362,11 @@ namespace P42.Uno.Markup
         public static TElement Background<TElement>(this TElement element, Color color) where TElement : ElementType
         { element.Background = new SolidColorBrush(color); return element; }
 
-        public static TElement Background<TElement>(this TElement element, string hex) where TElement : ElementType
-        { element.Background = new SolidColorBrush(ColorExtensions.ColorFromString(hex)); return element; }
+        public static TElement Background<TElement>(this TElement element, string color) where TElement : ElementType
+        { element.Background = new SolidColorBrush(ColorExtensions.ColorFromString(color)); return element; }
+
+        public static TElement Background<TElement>(this TElement element, uint hex) where TElement : ElementType
+        { element.Background = new SolidColorBrush(ColorExtensions.ColorFromUint(hex)); return element; }
         #endregion
 
         public static TElement Template<TElement>(this TElement element, ControlTemplate value) where TElement : ElementType
