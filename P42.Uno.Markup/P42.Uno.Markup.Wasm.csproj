@@ -19,7 +19,7 @@
 	  <PackageReference Include="Uno.WinUI.WebAssembly" Version="4.7.37" />
 		
 		<EmbeddedResource Include="LinkerConfig.Wasm.xml">
-			<LogicalName>$(AssemblyName).xml</LogicalName>
+			<LogicalName>P42.Uno.Markup.Wasm.xml</LogicalName>
 		</EmbeddedResource>
 
   </ItemGroup>
