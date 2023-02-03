@@ -86,7 +86,11 @@ namespace P42.Uno.Markup
         /// <param name="c">C.</param>
         /// <param name="alpha">Alpha.</param>
         public static Color WithAlpha(this Color c, double alpha)
-            => new Color { R = c.R, G = c.G, B = c.B, A = (byte)(alpha).Clamp(0, 255) };
+            => c.WithAlpha((byte)(alpha * 255));
+
+        public static Color WithAlpha(this Color c, byte alpha)
+            => new Color { R = c.R, G = c.G, B = c.B, A = byte.Clamp(alpha, 0, 255) };
+
 
         public static Color AssureGesturable(this Color c)
             => new Color { R = c.R, G = c.G, B = c.B, A = Math.Max((byte)0x1, c.A) };
