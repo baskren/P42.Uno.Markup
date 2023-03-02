@@ -4,7 +4,7 @@
 
     <RootNamespace>P42.Uno.Markup</RootNamespace>
     <PackageId Condition=" $(SolutionName.ToLower().Contains('.wasm')) OR $(P42TargetPlatform.ToLower.Contains('wasm')) ">$(MSBuildProjectName).Wasm</PackageId>
-    <Version>4.7.37</Version>
+    <Version>4.7.44</Version>
     <NoWarn>1701;1702;Uno0001;VSX1000;CA1416</NoWarn>
 
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
