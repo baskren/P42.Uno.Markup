@@ -339,7 +339,7 @@ namespace P42.Uno.Markup
         public static ElementType AddSelectionChangedHandler(this ElementType element, RoutedEventHandler handler) 
         { element.SelectionChanged += handler; return element; }
 
-        public static ElementType AddIsTextTrimmedChangedHandler(this ElementType element, TypedEventHandler<TextBlock, IsTextTrimmedChangedEventArgs> handler)
+        public static ElementType AddIsTextTrimmedChangedHandler(this ElementType element, TypedEventHandler<ElementType, IsTextTrimmedChangedEventArgs> handler)
         { element.IsTextTrimmedChanged += handler; return element; }
         #endregion
 
