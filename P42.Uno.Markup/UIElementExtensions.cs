@@ -200,6 +200,12 @@ namespace P42.Uno.Markup
         public static TElement RenderTransformOrigin<TElement>(this TElement element, Point point) where TElement :ElementType
         { element.RenderTransformOrigin = point; return element; }
 
+        public static TElement RenderTransformOrigin<TElement>(this TElement element, double x, double y) where TElement : ElementType
+        {
+            element.RenderTransformOrigin = new Point(x, y);
+            return element;
+        }
+
         public static TElement Transform3D<TElement>(this TElement element, Transform3D transform3D) where TElement :ElementType
         { element.Transform3D = transform3D; return element; }
 
@@ -209,8 +215,18 @@ namespace P42.Uno.Markup
         public static TElement TranslationTransition<TElement>(this TElement element, Vector3Transition transition) where TElement :ElementType
         { element.TranslationTransition = transition; return element; }
 
-        public static TElement Translation<TElement>(this TElement element, Vector3 translation) where TElement :ElementType
+        public static TElement Translate<TElement>(this TElement element, Vector3 translation) where TElement :ElementType
         { element.Translation = translation; return element; }
+
+        public static TElement Translate<TElement>(this TElement element, double x, double y) where TElement : ElementType
+        {
+            element.RenderTransform = new TranslateTransform
+            {
+                X = x,
+                Y = y
+            };
+            return element;
+        }
 
         public static TElement ScaleTransition<TElement>(this TElement element, Vector3Transition transition) where TElement :ElementType
         { element.ScaleTransition = transition; return element; }
@@ -358,6 +374,8 @@ namespace P42.Uno.Markup
         { element.BringIntoViewRequested += handler; return element; }
         #endregion
 
+
+        #region DataTemplate
         internal static string AsDataTemplateXaml(this Type templateType)
         {
             if (templateType == null || !typeof(FrameworkElement).IsAssignableFrom(templateType))
@@ -393,6 +411,17 @@ namespace P42.Uno.Markup
             }
             return null;
         }
+        #endregion
+
+
+        #region Transforms
+
+
+
+
+
+
+        #endregion
 
     }
 }
