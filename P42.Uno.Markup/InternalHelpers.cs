@@ -11,7 +11,7 @@ namespace P42.Uno.Markup
     {
         public static int ToInt(this Enum enumValue) => Convert.ToInt32(enumValue, CultureInfo.InvariantCulture);
 
-        public static List<string> GetExcepts<T>(object except)
+        public static List<string> GetExcepts(object except)
         {
             if (except is null)
                 return null;

@@ -100,7 +100,9 @@ namespace P42.Uno.Markup
         #region Binding
         public static TElement BindFont<TElement>(this TElement target, Control source, BindingMode bindingMode = BindingMode.OneWay, object except = null) where TElement : ElementType
         {
-            var excepts = InternalHelpers.GetExcepts<Control>(except);
+            var excepts = InternalHelpers.GetExcepts(except);
+            if (excepts is null || !excepts.Contains(nameof(Control.CharacterSpacingProperty)))
+                target.Bind(ElementType.CharacterSpacingProperty, source, nameof(Control.CharacterSpacingProperty), bindingMode);
             if (excepts is null || !excepts.Contains(nameof(Control.FontFamily)))
                 target.Bind(ElementType.FontFamilyProperty, source, nameof(Control.FontFamily), bindingMode);
             if (excepts is null || !excepts.Contains(nameof(Control.FontSize)))
@@ -115,9 +117,21 @@ namespace P42.Uno.Markup
                 target.Bind(ElementType.ForegroundProperty, source, nameof(Control.Foreground), bindingMode);
             return target;
         }
+
+        public static TElement BindTextProperties<TElement>(this TElement target, Control source, BindingMode bindingMode = BindingMode.OneWay, object except = null) where TElement : ElementType
+        {
+            var excepts = InternalHelpers.GetExcepts(except);
+            target.BindFont(source, bindingMode, excepts);
+            if (excepts is null || !excepts.Contains(nameof(Control.IsTextScaleFactorEnabledProperty)))
+                target.Bind(ElementType.IsTextScaleFactorEnabledProperty, source, nameof(Control.IsTextScaleFactorEnabled), bindingMode);
+
+            return target;
+        }
+
+
         public static TElement BindFont<TElement>(this TElement target, TextBlock source, BindingMode bindingMode = BindingMode.OneWay, object except = null) where TElement : ElementType
         {
-            var excepts = InternalHelpers.GetExcepts<TextBlock>(except);
+            var excepts = InternalHelpers.GetExcepts(except);
             if (excepts is null || !excepts.Contains(nameof(TextBlock.FontFamily)))
                 target.Bind(ElementType.FontFamilyProperty, source, nameof(TextBlock.FontFamily), bindingMode);
             if (excepts is null || !excepts.Contains(nameof(TextBlock.FontSize)))
@@ -132,9 +146,22 @@ namespace P42.Uno.Markup
                 target.Bind(ElementType.ForegroundProperty, source, nameof(TextBlock.Foreground), bindingMode);
             return target;
         }
+
+        public static TElement BindTextProperties<TElement>(this TElement target, TextBlock source, BindingMode bindingMode = BindingMode.OneWay, object except = null) where TElement : ElementType
+        {
+            var excepts = InternalHelpers.GetExcepts(except);
+            target.BindFont(source, bindingMode, excepts);
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.IsTextScaleFactorEnabledProperty)))
+                target.Bind(ElementType.IsTextScaleFactorEnabledProperty, source, nameof(TextBlock.IsTextScaleFactorEnabled), bindingMode);
+
+            return target;
+        }
+
+
+
         public static TElement BindFont<TElement>(this TElement target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay, object except = null) where TElement : ElementType
         {
-            var excepts = InternalHelpers.GetExcepts<ContentPresenter>(except);
+            var excepts = InternalHelpers.GetExcepts(except);
             if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontFamily)))
                 target.Bind(ElementType.FontFamilyProperty, source, nameof(ContentPresenter.FontFamily), bindingMode);
             if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontSize)))
@@ -147,6 +174,17 @@ namespace P42.Uno.Markup
                 target.Bind(ElementType.FontWeightProperty, source, nameof(ContentPresenter.FontWeight), bindingMode);
             if (excepts is null || !excepts.Contains(nameof(ContentPresenter.Foreground)))
                 target.Bind(ElementType.ForegroundProperty, source, nameof(ContentPresenter.Foreground), bindingMode);
+
+            return target;
+        }
+
+        public static TElement BindTextProperties<TElement>(this TElement target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay, object except = null) where TElement : ElementType
+        {
+            var excepts = InternalHelpers.GetExcepts(except);
+            target.BindFont(source, bindingMode, excepts);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.IsTextScaleFactorEnabledProperty)))
+                target.Bind(ElementType.IsTextScaleFactorEnabledProperty, source, nameof(ContentPresenter.IsTextScaleFactorEnabled), bindingMode);
+
             return target;
         }
         #endregion
