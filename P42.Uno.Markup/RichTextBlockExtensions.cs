@@ -259,7 +259,7 @@ namespace P42.Uno.Markup
         #endregion
 
 
-        #region Binding
+        #region Text/Font Binding
         public static ElementType BindFont(this ElementType target, Control source, BindingMode bindingMode = BindingMode.OneWay, object except = null)
         {
             var excepts = InternalHelpers.GetExcepts(except);

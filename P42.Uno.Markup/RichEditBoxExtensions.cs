@@ -7,6 +7,7 @@ using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
@@ -18,6 +19,103 @@ namespace P42.Uno.Markup
 {
     public static class RichEditBoxExtensions
     {
+        #region Text/Font Binding
+        public static ElementType BindFont(this ElementType target, Control source, BindingMode bindingMode = BindingMode.OneWay, object except = null)
+        {
+            var excepts = InternalHelpers.GetExcepts(except);
+            if (excepts is null || !excepts.Contains(nameof(Control.CharacterSpacingProperty)))
+                target.Bind(ElementType.CharacterSpacingProperty, source, nameof(Control.CharacterSpacingProperty), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(Control.FontFamily)))
+                target.Bind(ElementType.FontFamilyProperty, source, nameof(Control.FontFamily), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(Control.FontSize)))
+                target.Bind(ElementType.FontSizeProperty, source, nameof(Control.FontSize), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(Control.FontStretch)))
+                target.Bind(ElementType.FontStretchProperty, source, nameof(Control.FontStretch), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(Control.FontStyle)))
+                target.Bind(ElementType.FontStyleProperty, source, nameof(Control.FontStyle), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(Control.FontWeight)))
+                target.Bind(ElementType.FontWeightProperty, source, nameof(Control.FontWeight), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(Control.Foreground)))
+                target.Bind(ElementType.ForegroundProperty, source, nameof(Control.Foreground), bindingMode);
+            return target;
+        }
+
+        public static ElementType BindTextProperties(this ElementType target, Control source, BindingMode bindingMode = BindingMode.OneWay, object except = null)
+        {
+            var excepts = InternalHelpers.GetExcepts(except);
+            target.BindFont(source, bindingMode, excepts);
+            if (excepts is null || !excepts.Contains(nameof(Control.IsTextScaleFactorEnabledProperty)))
+                target.Bind(ElementType.IsTextScaleFactorEnabledProperty, source, nameof(Control.IsTextScaleFactorEnabled), bindingMode);
+
+            return target;
+        }
+
+        public static ElementType BindFont(this ElementType target, TextBlock source, BindingMode bindingMode = BindingMode.OneWay, object except = null)
+        {
+            var excepts = InternalHelpers.GetExcepts(except);
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.FontFamily)))
+                target.Bind(ElementType.FontFamilyProperty, source, nameof(TextBlock.FontFamily), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.FontSize)))
+                target.Bind(ElementType.FontSizeProperty, source, nameof(TextBlock.FontSize), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.FontStretch)))
+                target.Bind(ElementType.FontStretchProperty, source, nameof(TextBlock.FontStretch), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.FontStyle)))
+                target.Bind(ElementType.FontStyleProperty, source, nameof(TextBlock.FontStyle), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.FontWeight)))
+                target.Bind(ElementType.FontWeightProperty, source, nameof(TextBlock.FontWeight), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.Foreground)))
+                target.Bind(ElementType.ForegroundProperty, source, nameof(TextBlock.Foreground), bindingMode);
+            return target;
+        }
+
+        public static ElementType BindTextProperties(this ElementType target, TextBlock source, BindingMode bindingMode = BindingMode.OneWay, object except = null)
+        {
+            var excepts = InternalHelpers.GetExcepts(except);
+            target.BindFont(source, bindingMode, excepts);
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.IsTextScaleFactorEnabledProperty)))
+                target.Bind(ElementType.IsTextScaleFactorEnabledProperty, source, nameof(TextBlock.IsTextScaleFactorEnabled), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.TextWrappingProperty)))
+                target.Bind(ElementType.TextWrappingProperty, source, nameof(TextBlock.TextWrapping), bindingMode);
+
+            return target;
+        }
+
+
+        public static ElementType BindFont(this ElementType target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay, object except = null)
+        {
+            var excepts = InternalHelpers.GetExcepts(except);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontFamily)))
+                target.Bind(ElementType.FontFamilyProperty, source, nameof(ContentPresenter.FontFamily), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontSize)))
+                target.Bind(ElementType.FontSizeProperty, source, nameof(ContentPresenter.FontSize), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontStretch)))
+                target.Bind(ElementType.FontStretchProperty, source, nameof(ContentPresenter.FontStretch), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontStyle)))
+                target.Bind(ElementType.FontStyleProperty, source, nameof(ContentPresenter.FontStyle), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontWeight)))
+                target.Bind(ElementType.FontWeightProperty, source, nameof(ContentPresenter.FontWeight), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.Foreground)))
+                target.Bind(ElementType.ForegroundProperty, source, nameof(ContentPresenter.Foreground), bindingMode);
+
+            return target;
+        }
+
+        public static ElementType BindTextProperties(this ElementType target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay, object except = null)
+        {
+            var excepts = InternalHelpers.GetExcepts(except);
+            target.BindFont(source, bindingMode, excepts);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.IsTextScaleFactorEnabledProperty)))
+                target.Bind(ElementType.IsTextScaleFactorEnabledProperty, source, nameof(ContentPresenter.IsTextScaleFactorEnabled), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.TextWrappingProperty)))
+                target.Bind(ElementType.TextWrappingProperty, source, nameof(ContentPresenter.TextWrapping), bindingMode);
+
+            return target;
+        }
+
+        #endregion
+
+
+
         #region Properties
         public static TElement AcceptsReturn<TElement>(this TElement element, bool acceptsReturn = true) where TElement : ElementType
         { element.AcceptsReturn = acceptsReturn; return element; }
