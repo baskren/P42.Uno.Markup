@@ -28,8 +28,8 @@ namespace P42.Uno.Markup
         public static TElement BindFont<TElement>(this TElement target, Control source, BindingMode bindingMode = BindingMode.OneWay, object except = null) where TElement : ElementType
         {   
             var excepts = InternalHelpers.GetExcepts(except);
-            if (excepts is null || !excepts.Contains(nameof(Control.CharacterSpacingProperty)))
-                target.Bind(ElementType.CharacterSpacingProperty, source, nameof(Control.CharacterSpacingProperty), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(Control.CharacterSpacing)))
+                target.Bind(ElementType.CharacterSpacingProperty, source, nameof(Control.CharacterSpacing), bindingMode);
             if (excepts is null || !excepts.Contains(nameof(Control.FontFamily)))
                 target.Bind(ElementType.FontFamilyProperty, source, nameof(Control.FontFamily), bindingMode);
             if (excepts is null || !excepts.Contains(nameof(Control.FontSize)))
@@ -119,7 +119,7 @@ namespace P42.Uno.Markup
         {
             var excepts = InternalHelpers.GetExcepts(except);
             target.BindFont(source, bindingMode, excepts);
-            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.IsTextScaleFactorEnabledProperty)))
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.IsTextScaleFactorEnabled)))
                 target.Bind(ElementType.IsTextScaleFactorEnabledProperty, source, nameof(ContentPresenter.IsTextScaleFactorEnabled), bindingMode);
             if (excepts is null || !excepts.Contains(nameof(ContentPresenter.LineHeightProperty)))
                 target.Bind(ElementType.LineHeightProperty, source, nameof(ContentPresenter.LineHeight), bindingMode);

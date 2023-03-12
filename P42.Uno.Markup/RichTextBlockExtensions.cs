@@ -20,7 +20,7 @@ namespace P42.Uno.Markup
     public static class RichTextEditExtensions
     {
         #region Properties
-        public static ElementType CharacterSpacing(this ElementType element, int thousanthsOfAnEm) 
+        public static ElementType CharacterSpacing(this ElementType element, int thousanthsOfAnEm)
         { element.CharacterSpacing = thousanthsOfAnEm; return element; }
 
         #region FontFamily
@@ -193,7 +193,7 @@ namespace P42.Uno.Markup
         { element.Padding = padding; return element; }
         #endregion
 
-        public static ElementType SelectionFlyout(this ElementType element, FlyoutBase flyout) 
+        public static ElementType SelectionFlyout(this ElementType element, FlyoutBase flyout)
         { element.SelectionFlyout = flyout; return element; }
 
         public static ElementType SelectionHighlightColor(this ElementType element, SolidColorBrush brush)
@@ -263,8 +263,8 @@ namespace P42.Uno.Markup
         public static ElementType BindFont(this ElementType target, Control source, BindingMode bindingMode = BindingMode.OneWay, object except = null)
         {
             var excepts = InternalHelpers.GetExcepts(except);
-            if (excepts is null || !excepts.Contains(nameof(Control.CharacterSpacingProperty)))
-                target.Bind(ElementType.CharacterSpacingProperty, source, nameof(Control.CharacterSpacingProperty), bindingMode);
+            if (excepts is null || !excepts.Contains(nameof(Control.CharacterSpacing)))
+                target.Bind(ElementType.CharacterSpacingProperty, source, nameof(Control.CharacterSpacing), bindingMode);
             if (excepts is null || !excepts.Contains(nameof(Control.FontFamily)))
                 target.Bind(ElementType.FontFamilyProperty, source, nameof(Control.FontFamily), bindingMode);
             if (excepts is null || !excepts.Contains(nameof(Control.FontSize)))
@@ -280,7 +280,7 @@ namespace P42.Uno.Markup
             return target;
         }
 
-        public static ElementType BindTextProperties(this ElementType target, Control source, BindingMode bindingMode = BindingMode.OneWay, object except = null) 
+        public static ElementType BindTextProperties(this ElementType target, Control source, BindingMode bindingMode = BindingMode.OneWay, object except = null)
         {
             var excepts = InternalHelpers.GetExcepts(except);
             target.BindFont(source, bindingMode, excepts);
@@ -308,11 +308,11 @@ namespace P42.Uno.Markup
             return target;
         }
 
-        public static ElementType BindTextProperties(this ElementType target, TextBlock source, BindingMode bindingMode = BindingMode.OneWay, object except = null) 
+        public static ElementType BindTextProperties(this ElementType target, TextBlock source, BindingMode bindingMode = BindingMode.OneWay, object except = null)
         {
             var excepts = InternalHelpers.GetExcepts(except);
             target.BindFont(source, bindingMode, excepts);
-            if (excepts is null || !excepts.Contains(nameof(TextBlock.IsTextScaleFactorEnabledProperty)))
+            if (excepts is null || !excepts.Contains(nameof(TextBlock.IsTextScaleFactorEnabled)))
                 target.Bind(ElementType.IsTextScaleFactorEnabledProperty, source, nameof(TextBlock.IsTextScaleFactorEnabled), bindingMode);
             if (excepts is null || !excepts.Contains(nameof(TextBlock.LineHeightProperty)))
                 target.Bind(ElementType.LineHeightProperty, source, nameof(TextBlock.LineHeight), bindingMode);
@@ -348,11 +348,11 @@ namespace P42.Uno.Markup
             return target;
         }
 
-        public static ElementType BindTextProperties(this ElementType target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay, object except = null) 
+        public static ElementType BindTextProperties(this ElementType target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay, object except = null)
         {
             var excepts = InternalHelpers.GetExcepts(except);
             target.BindFont(source, bindingMode, excepts);
-            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.IsTextScaleFactorEnabledProperty)))
+            if (excepts is null || !excepts.Contains(nameof(ContentPresenter.IsTextScaleFactorEnabled)))
                 target.Bind(ElementType.IsTextScaleFactorEnabledProperty, source, nameof(ContentPresenter.IsTextScaleFactorEnabled), bindingMode);
             if (excepts is null || !excepts.Contains(nameof(ContentPresenter.LineHeightProperty)))
                 target.Bind(ElementType.LineHeightProperty, source, nameof(ContentPresenter.LineHeight), bindingMode);

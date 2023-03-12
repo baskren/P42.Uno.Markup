@@ -8,11 +8,11 @@ namespace P42.Uno.Markup
     // https://github.com/microsoft/microsoft-ui-xaml/blob/main/dev/CommonStyles/Button_themeresources.xaml
     public static class SystemTeachingTipBrushes
     {
-        public static Brush Background => ColorExtensions.AppBrush("TeachingTipBackgroundBrush");
+        public static Brush Background => ColorExtensions.AppBrush("SystemControlPageBackgroundChromeLowBrush");
 
-        public static Brush Foreground => ColorExtensions.AppBrush("TeachingTipForegroundBrush");
+        public static Brush Foreground => ColorExtensions.AppBrush("SystemControlForegroundBaseHighBrush");
 
-        public static Brush Border => ColorExtensions.AppBrush("TeachingTipBorderBrush");
+        public static Brush Border => ColorExtensions.AppBrush("SystemControlTransientBorderBrush");
 
     }
 }
