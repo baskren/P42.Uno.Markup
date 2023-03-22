@@ -8,10 +8,10 @@
 
 
   <!-- NUGET PACKAGE GENERATION -->
-  <PropertyGroup Condition=" $(P42LocalNuGet) != '' AND !$(P42TargetPlatform.ToLower().Contains('android')) AND !$(P42TargetPlatform.ToLower().Contains('ios')) AND !$(P42TargetPlatform.ToLower().Contains('mac')) AND !$(P42TargetPlatform.ToLower().Contains('windows')) AND !$(P42TargetPlatform.ToLower().Contains('tizen')) ">
+  <PropertyGroup Condition=" $(P42_LocalNuGetFolderPath) != '' AND !$(P42_TargetOnlyThisPlatform.ToLower().Contains('android')) AND !$(P42_TargetOnlyThisPlatform.ToLower().Contains('ios')) AND !$(P42_TargetOnlyThisPlatform.ToLower().Contains('mac')) AND !$(P42_TargetOnlyThisPlatform.ToLower().Contains('windows')) AND !$(P42_TargetOnlyThisPlatform.ToLower().Contains('tizen')) ">
    
     <Version>4.7.44</Version>
-    <PackageId Condition=" $(P42TargetPlatform.ToLower.Contains('wasm')) ">$(MSBuildProjectName).Wasm</PackageId>
+    <PackageId Condition=" $(P42_TargetOnlyThisPlatform.ToLower.Contains('wasm')) ">$(MSBuildProjectName).Wasm</PackageId>
     <!--
     Force all projects of this folder to use a different output
     path to avoid intermediate output collisions
@@ -57,11 +57,11 @@
   </ItemGroup>
 
 	<!-- .NetStandard Bait -->
-	<ItemGroup Condition=" !$(P42TargetPlatform.ToLower().Contains('wasm')) AND $(TargetFramework.ToLower().Equals('net7.0')) ">
+	<ItemGroup Condition=" !$(P42_TargetOnlyThisPlatform.ToLower().Contains('wasm')) AND $(TargetFramework.ToLower().Equals('net7.0')) ">
 	</ItemGroup>
 
 	<!-- WASM -->
-	<ItemGroup Condition=" $(P42TargetPlatform.ToLower().Contains('wasm')) ">
+	<ItemGroup Condition=" $(P42_TargetOnlyThisPlatform.ToLower().Contains('wasm')) ">
 		<PackageReference Include="Uno.WinUI.WebAssembly" Version="4.7.44" />
 		<EmbeddedResource Include="LinkerConfig.Wasm.xml">
 			<LogicalName>P42.Uno.Markup.Wasm.xml</LogicalName>
