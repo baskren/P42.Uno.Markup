@@ -1,3 +1,4 @@
+using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
 using System;
 using System.ComponentModel;
@@ -7,8 +8,10 @@ using Windows.UI;
 
 namespace P42.Uno.Markup
 {
-    public class FlexAlignContentTypeConverter : TypeConverter
+    public class SolidBrushConverter : TypeConverter, IValueConverter
     {
+        public static SolidBrushConverter Instance = new SolidBrushConverter();
+
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
             if (sourceType == typeof(SolidColorBrush))
@@ -31,6 +34,35 @@ namespace P42.Uno.Markup
 
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
+            try
+            {
+                return Convert(value, typeof(SolidColorBrush), null, null);
+            }
+            catch (Exception)
+            {
+                return base.ConvertFrom(context, culture, value);
+            }
+        }
+
+        public override bool CanConvertTo(ITypeDescriptorContext context, [NotNullWhen(true)] Type destinationType)
+        {
+            return base.CanConvertFrom(context, destinationType);
+        }
+
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        {
+            try
+            {
+                return ConvertBack(value, destinationType, null, null);
+            }
+            catch (Exception)
+            {
+                return base.ConvertTo(context, culture, value, destinationType);
+            }
+        }
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
             if (value is SolidColorBrush)
                 return value;
 
@@ -43,41 +75,34 @@ namespace P42.Uno.Markup
             if (value is uint uintValue)
                 return new SolidColorBrush(ColorExtensions.ColorFromUint(uintValue));
 
-            if (value is int intValue && intValue >= 0) 
+            if (value is int intValue && intValue >= 0)
                 return new SolidColorBrush(ColorExtensions.ColorFromUint((uint)intValue));
-            
-            return base.ConvertFrom(context, culture, value);
 
-            //var msg = string.Format("Cannot convert \"{0}\" into {1}", value, typeof(SolidColorBrush));
-            //throw new InvalidOperationException(msg);
+            var msg = string.Format("Cannot convert \"{0}\" into {1}", value, typeof(SolidColorBrush));
+            throw new InvalidOperationException(msg);
         }
 
-        public override bool CanConvertTo(ITypeDescriptorContext context, [NotNullWhen(true)] Type destinationType)
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            return base.CanConvertFrom(context, destinationType);
-        }
+            SolidColorBrush brush = (SolidColorBrush)value;
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-        {
-            SolidColorBrush brush = (SolidColorBrush)value; 
-
-            if (destinationType == typeof(SolidColorBrush))
+            if (targetType == typeof(SolidColorBrush))
                 return brush;
 
             var color = brush.Color;
-            if (destinationType == typeof(Color))
+            if (targetType == typeof(Color))
                 return color;
 
-            if (destinationType == typeof(string))
+            if (targetType == typeof(string))
                 return color.ToHexAarrggbbColorString();
 
-            if (destinationType == typeof(int))
+            if (targetType == typeof(int))
                 return color.ToInt();
 
-            if (destinationType == typeof(uint))
+            if (targetType == typeof(uint))
                 return (uint)color.ToInt();
 
-            return base.ConvertTo(context, culture, value, destinationType);
+            throw new NotImplementedException($"Cannot convert SolidColorBrush back to a [{targetType}]");
         }
     }
 }
