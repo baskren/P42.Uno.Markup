@@ -21,11 +21,11 @@ namespace P42.Uno.Markup
         public static ToggleSwitch OffContent(this ToggleSwitch element, object value = null)
         { element.OffContent = value; return element; }
 
-        public static ToggleSwitch On(this ToggleSwitch element)
-        { element.IsOn = true; return element; }
+        public static ToggleSwitch On(this ToggleSwitch element, bool value = true)
+        { element.IsOn = value; return element; }
 
-        public static ToggleSwitch Off(this ToggleSwitch element)
-        { element.IsOn = false; return element; }
+        public static ToggleSwitch Off(this ToggleSwitch element, bool value = true)
+        { element.IsOn = !value; return element; }
 
         public static ToggleSwitch Header(this ToggleSwitch element, object Header = null)
         { element.Header = Header; return element; }

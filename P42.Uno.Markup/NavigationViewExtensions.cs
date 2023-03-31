@@ -75,8 +75,17 @@ namespace P42.Uno.Markup
         public static TElement BackEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsBackEnabled = value; return element; }
 
-        public static TElement BackButtonVisible<TElement>(this TElement element, NavigationViewBackButtonVisible value = NavigationViewBackButtonVisible.Visible) where TElement : ElementType
+        public static TElement BackButtonVisibleMode<TElement>(this TElement element, NavigationViewBackButtonVisible value) where TElement : ElementType
         { element.IsBackButtonVisible = value; return element; }
+
+        public static TElement BackButtonVisible<TElement>(this TElement element) where TElement : ElementType
+        { element.IsBackButtonVisible = NavigationViewBackButtonVisible.Visible; return element; }
+
+        public static TElement BackButtonCollapsed<TElement>(this TElement element) where TElement : ElementType
+        { element.IsBackButtonVisible = NavigationViewBackButtonVisible.Collapsed; return element; }
+
+        public static TElement BackButtonAutoVisible<TElement>(this TElement element) where TElement : ElementType
+        { element.IsBackButtonVisible = NavigationViewBackButtonVisible.Auto; return element; }
 
         public static TElement ShoulderNavigationEnabled<TElement>(this TElement element, NavigationViewShoulderNavigationEnabled value = NavigationViewShoulderNavigationEnabled.Always) where TElement : ElementType
         { element.ShoulderNavigationEnabled = value; return element; }
