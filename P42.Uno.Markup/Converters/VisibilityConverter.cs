@@ -72,7 +72,7 @@ namespace P42.Uno.Markup
                         : 0.0;
             }
 
-            throw new InvalidCastException($"Cannot P42.Utils.Uno.VisibilityConverter.ConvertBack({value},{targetType}) ");
+            throw new InvalidCastException($"Cannot P42.Uno.Markup.VisibilityConverter.ConvertBack({value},{targetType}) ");
         }
     }
 
