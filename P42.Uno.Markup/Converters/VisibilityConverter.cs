@@ -4,8 +4,10 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
 using System;
+using System.Collections;
 using Windows.UI;
-using static System.Net.Mime.MediaTypeNames;
+using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace P42.Uno.Markup
 {
@@ -35,6 +37,11 @@ namespace P42.Uno.Markup
                 return doubleValue > 0 ? Visibility.Visible : Visibility.Collapsed;
             if (value is string text)
                 return string.IsNullOrWhiteSpace(text) ? Visibility.Collapsed : Visibility.Visible;
+            if (value is IEnumerable enumerable)
+            {
+                var e = enumerable.GetEnumerator();
+                return e.MoveNext() ? Visibility.Visible : Visibility.Collapsed;                
+            }
             return Visibility.Visible;
         }
 

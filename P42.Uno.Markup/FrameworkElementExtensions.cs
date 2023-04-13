@@ -118,6 +118,12 @@ namespace P42.Uno.Markup
 		public static T Style<T>(this T element, Style<T> style) where T :ElementType
 		{ element.Style = style.FormsStyle; return element; }
 
+		public static T Style<T>(this T element, DependencyProperty property, object value) where T : ElementType
+		{
+			element.Style = new Style<T>((property, value));
+			return element;
+		}
+
 		public static T Style<T>(this T element, object resourceDictionaryEntry) where T: ElementType
         {
 			if (resourceDictionaryEntry is Style style)
