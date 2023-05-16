@@ -22,14 +22,6 @@ namespace P42.Uno.Markup
         public static TElement Unchecked<TElement>(this TElement element, bool isUnchecked = true) where TElement : ElementType
         { element.IsChecked = !isUnchecked; return element; }
 
-        public static TElement AddCheckedHandler<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
-        { element.Checked += handler; return element; }
-
-        public static TElement AddIndeterminateHandler<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
-        { element.Indeterminate += handler; return element; }
-
-        public static TElement AddUncheckedHandler<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
-        { element.Unchecked += handler; return element; }
 
     }
 }
