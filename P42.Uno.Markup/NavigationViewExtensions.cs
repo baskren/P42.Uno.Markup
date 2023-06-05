@@ -12,6 +12,7 @@ namespace P42.Uno.Markup
 {
     public static class NavigationViewExtensions
     {
+        #region Properties
         public static TElement MenuItemTemplate<TElement>(this TElement element, DataTemplate value) where TElement : ElementType
         { element.MenuItemTemplate = value; return element; }
 
@@ -126,7 +127,10 @@ namespace P42.Uno.Markup
             element.MenuItems.Clear();
             return element.AddMenuItems(items);
         }
+        #endregion
 
+
+        #region Events
         public static TElement AddDisplayModeChangedHandler<TElement>(this TElement element, TypedEventHandler<NavigationView, NavigationViewDisplayModeChangedEventArgs> value) where TElement : ElementType
         { element.DisplayModeChanged += value; return element; }
 
@@ -150,7 +154,7 @@ namespace P42.Uno.Markup
 
         public static TElement AddPaneOpeningHandler<TElement>(this TElement element, TypedEventHandler<NavigationView, object> value) where TElement : ElementType
         { element.PaneOpening += value; return element; }
-
+        #endregion
 
     }
 }

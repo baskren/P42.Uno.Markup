@@ -34,5 +34,6 @@ namespace P42.Uno.Markup
         public static TElement AddSelectionChangedHandler<TElement>(this TElement element, SelectionChangedEventHandler handler) where TElement : ElementType
         { element.SelectionChanged += handler; return element; }
         #endregion
+
     }
 }
