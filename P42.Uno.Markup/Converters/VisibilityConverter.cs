@@ -20,6 +20,13 @@ namespace P42.Uno.Markup
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
+            if (BooleanConverter.Instance.Convert(value, targetType, parameter, language) is bool boolResult)
+                return boolResult
+                    ? Visibility.Visible
+                    : Visibility.Collapsed;
+
+            throw new InvalidCastException($"Cannot P42.Uno.Markup.VisibilityConverter.ConvertBack({value},{targetType}) ");
+            /*
             if (value is null)
                 return Visibility.Collapsed;
             if (value is bool tf)
@@ -43,10 +50,16 @@ namespace P42.Uno.Markup
                 return e.MoveNext() ? Visibility.Visible : Visibility.Collapsed;                
             }
             return Visibility.Visible;
+            */
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
+            if (value is Visibility visibility)
+                return BooleanConverter.Instance.ConvertBack(visibility == Visibility.Visible, targetType, parameter, language);
+
+            throw new InvalidCastException($"Cannot P42.Uno.Markup.VisibilityConverter.ConvertBack({value},{targetType}) ");
+            /*
             if (value is Visibility visibility)
             {
                 if (targetType == typeof(bool))
@@ -80,6 +93,7 @@ namespace P42.Uno.Markup
             }
 
             throw new InvalidCastException($"Cannot P42.Uno.Markup.VisibilityConverter.ConvertBack({value},{targetType}) ");
+            */
         }
     }
 
