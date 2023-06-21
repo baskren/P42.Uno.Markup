@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Windows.UI.Text;
+using Microsoft.UI.Text;
+using Microsoft.UI.Xaml.Media;
+using ElementType = Microsoft.UI.Xaml.Controls.ImageIcon;
+using Microsoft.UI.Xaml.Media.Imaging;
+using System.Reflection;
+
+namespace P42.Uno.Markup
+{
+    public static class ImageIconExtensions
+    {
+        #region Source
+        public static TElement Source<TElement>(this TElement element, ImageSource source) where TElement : ElementType
+        { element.Source = source; return element; }
+
+        public static TElement Source<TElement>(this TElement element, Uri uri) where TElement : ElementType
+        {
+            try
+            {
+                var bitmap = new BitmapImage(uri);
+                return element.Source(bitmap);
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine($"ImageExtensions.Source: Cannot create BitmapImage from Uri [{uri}].  Exception: [{e}]");
+            }
+            return element;
+        }
+
+        public static TElement Source<TElement>(this TElement element, string uriOrResourceId, Assembly asm = null) where TElement : ElementType
+        {
+            if (uriOrResourceId.StartsWith("/"))
+                uriOrResourceId = "ms-appx://" + uriOrResourceId;
+
+            if (uriOrResourceId.Contains(":/"))
+            {
+                try
+                {
+                    var uri = new Uri(uriOrResourceId);
+                    return element.Source(uri);
+                }
+                catch (Exception e)
+                {
+                    System.Console.WriteLine($"ImageExtensions.Source: Cannot create Uri from string [{uriOrResourceId}].  Exception: [{e}]");
+                }
+            }
+            else if (P42.Utils.Uno.ImageSourceExtensions.GetImageSourceFromEmbeddedResource(uriOrResourceId, asm) is ImageSource source)
+            {
+                element.Source(source);
+                return element;
+            }
+
+            System.Console.WriteLine($"ImageExtensions.Source: Cannot find ImageSource from uriOrResourceId string [{uriOrResourceId}].");
+            return element;
+        }
+        #endregion
+
+    }
+}
