@@ -9,11 +9,13 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Markup;
 using Microsoft.UI.Xaml.Media.Animation;
 using ElementType = Microsoft.UI.Xaml.Controls.ItemsControl;
+using Microsoft.UI.Xaml.Documents;
 
 namespace P42.Uno.Markup
 {
     public static class ItemsControlExtensions
     {
+
         public static TElement ItemContainerStyle<TElement>(this TElement element, Style style) where TElement : ElementType
         { element.ItemContainerStyle = style; return element; }
 

@@ -67,5 +67,8 @@
 			<LogicalName>P42.Uno.Markup.Wasm.xml</LogicalName>
 		</EmbeddedResource>
 	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\P42.Utils\P42.Utils.Uno\P42.Utils.Uno.csproj" />
+	</ItemGroup>
 
 </Project>

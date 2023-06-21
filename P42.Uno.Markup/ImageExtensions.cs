@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
+using System.Reflection;
 
 namespace P42.Uno.Markup
 {
@@ -34,19 +35,30 @@ namespace P42.Uno.Markup
             return element;
         }
 
-        public static Image Source(this Image element, string sourceUri)
+        public static Image Source(this Image element, string uriOrResourceId, Assembly asm = null)
         {
-            if (sourceUri.StartsWith("/"))
-                sourceUri = "ms-appx://" + sourceUri;
-            try
+            if (uriOrResourceId.StartsWith("/"))
+                uriOrResourceId = "ms-appx://" + uriOrResourceId;
+
+            if (uriOrResourceId.Contains(":/"))
             {
-                var uri = new Uri(sourceUri);
-                return element.Source(uri);
+                try
+                {
+                    var uri = new Uri(uriOrResourceId);
+                    return element.Source(uri);
+                }
+                catch (Exception e)
+                {
+                    System.Console.WriteLine($"ImageExtensions.Source: Cannot create Uri from string [{uriOrResourceId}].  Exception: [{e}]");
+                }
             }
-            catch (Exception e)
+            else if (P42.Utils.Uno.ImageSourceExtensions.GetImageSourceFromEmbeddedResource(uriOrResourceId, asm) is ImageSource source)
             {
-                System.Console.WriteLine($"ImageExtensions.Source: Cannot create Uri from string [{sourceUri}].  Exception: [{e}]");
+                element.Source(source);
+                return element;
             }
+
+            System.Console.WriteLine($"ImageExtensions.Source: Cannot find ImageSource from uriOrResourceId string [{uriOrResourceId}].");
             return element;
         }
         #endregion

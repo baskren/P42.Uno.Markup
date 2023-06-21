@@ -14,6 +14,23 @@ namespace P42.Uno.Markup
 {
     public static class ListViewBaseExtensions
     {
+        public static readonly Style SimpleItemContainerStyle = new Style
+        {
+            TargetType = typeof(ListViewItem),
+            Setters = {
+                    new Setter(ListViewItem.HorizontalContentAlignmentProperty, HorizontalAlignment.Stretch),
+                    new Setter(ListViewItem.VerticalContentAlignmentProperty, VerticalAlignment.Stretch),
+                    new Setter(ListViewItem.MarginProperty, new Thickness(0)),
+                    new Setter(ListViewItem.PaddingProperty, new Thickness(0)),
+                }
+        };
+
+        public static TElement UseSimpleItemContainerStyle<TElement>(this TElement element, bool value = true) where TElement : ElementType
+        {
+            element.ItemContainerStyle = value ? SimpleItemContainerStyle : null;
+            return element;
+        }
+
         #region Properties
         public static TElement CanDragItems<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.CanDragItems = value; return element; }
