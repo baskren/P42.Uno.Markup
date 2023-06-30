@@ -12,33 +12,27 @@
    
     <Version>4.9.26</Version>
     <PackageId Condition=" $(P42_TargetOnlyThisPlatform.ToLower.Contains('wasm')) ">$(MSBuildProjectName).Wasm</PackageId>
-    <!--
-    Force all projects of this folder to use a different output
-    path to avoid intermediate output collisions
-    -->
-  	<BaseOutputPath>bin\$(MSBuildProjectName)</BaseOutputPath>
-  	<BaseIntermediateOutputPath>obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
-  	<DefaultItemExcludes>$(DefaultItemExcludes);obj/**;bin/**</DefaultItemExcludes>
-  
+
   	<PublishRepositoryUrl>true</PublishRepositoryUrl>
   	<EmbedUntrackedSources>true</EmbedUntrackedSources>
   	<IncludeSymbols>true</IncludeSymbols>
   	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
-    <DebugType>portable</DebugType>
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally> 
+
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>Ben Askren</Authors>
     <Company>42nd Parallel, LLC</Company>
-    <Description>C# Markup Extensions for the Uno Platform</Description>
+    <Description>C# Markup Extensions for the Uno Platform and WinUI</Description>
     <Copyright>2022, 4nd Parallel</Copyright>
     <PackageProjectUrl>https://github.com/baskren/P42.Uno.Markup</PackageProjectUrl>
-    <PackageReadmeFile>ReadMe.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/baskren/P42.Uno.Markup</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>Initial Public Release</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+	  <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   	<PackageIcon>P42.icon.png</PackageIcon>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>WinUI Uno.Platform C# Markup</PackageTags>
   </PropertyGroup>
 
   <!-- SHARED RESOURCES -->
