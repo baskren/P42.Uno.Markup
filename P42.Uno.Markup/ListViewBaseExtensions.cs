@@ -114,7 +114,7 @@ namespace P42.Uno.Markup
         { element.DragItemsStarting += handler; return element; }
 
         public static TElement AddItemClickHandler<TElement>(this TElement element, ItemClickEventHandler handler) where TElement : ElementType
-        { element.ItemClick += handler; return element; }
+        { element.ItemClick += handler; element.IsItemClickEnabled=true; return element; }
         #endregion
 
 
