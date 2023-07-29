@@ -102,6 +102,25 @@ namespace P42.Uno.Markup
                 var color = scb.Color;
                 return new SolidColorBrush(color.AssureGesturable());
             }
+            else if (b is null)
+                return new SolidColorBrush(Colors.Gray.WithAlpha(0x1));
+
+            return b;
+        }
+
+        public static Color AsGesterableEnabled(this Color c, bool isEnabled)
+            => new Color { R = c.R, G = c.G, B = c.B, A = Math.Max((byte)0x1, isEnabled ? c.A : (byte)(c.A>>1) ) };
+
+        public static Brush AsGesterableEnabled(this Brush b, bool isEnabled)
+        {
+            if (b is SolidColorBrush scb)
+            {
+                var color = scb.Color;
+                return new SolidColorBrush(color.AsGesterableEnabled(isEnabled));
+            }
+            else if (b is null && isEnabled)
+                return new SolidColorBrush(Colors.Gray.WithAlpha(0x1));
+
             return b;
         }
         #endregion
