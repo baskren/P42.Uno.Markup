@@ -28,12 +28,20 @@ namespace P42.Uno.Markup
         public static TElement Collapsed<TElement>(this TElement element, bool isCollapsed = true) where TElement :ElementType
         { element.Visibility = isCollapsed ? Microsoft.UI.Xaml.Visibility.Collapsed : Microsoft.UI.Xaml.Visibility.Visible; return element; }
 
-
+        [Obsolete("Use .BindVisible")]
         public static TElement BindVisibleFromBool<TElement>(this TElement element, object source, string path) where TElement : ElementType
         { element.Bind(UIElement.VisibilityProperty, source, path, convert: (bool visible) => visible ? Microsoft.UI.Xaml.Visibility.Visible : Microsoft.UI.Xaml.Visibility.Collapsed); return element; }
 
+        public static TElement BindVisible<TElement>(this TElement element, object source, string path) where TElement : ElementType
+        { element.Bind(UIElement.VisibilityProperty, source, path, converter: VisibilityConverter.Instance); return element; }
+
+
+        [Obsolete("Use .BindCollapsed")]
         public static TElement BindCollapsedFromBool<TElement>(this TElement element, object source, string path) where TElement : ElementType
         { element.Bind(UIElement.VisibilityProperty, source, path, convert: (bool visible) => !visible ? Microsoft.UI.Xaml.Visibility.Visible : Microsoft.UI.Xaml.Visibility.Collapsed); return element; }
+
+        public static TElement BindCollapsed<TElement>(this TElement element, object source, string path) where TElement : ElementType
+        { element.Bind(UIElement.VisibilityProperty, source, path, converter: CollapsedConverter.Instance); return element; }
 
         public static bool IsVisible(this UIElement element)
             => element.Visibility == Microsoft.UI.Xaml.Visibility.Visible;
