@@ -665,12 +665,19 @@ namespace P42.Uno.Markup
 
         public static Brush AppBrush(string key)
         {
-            var obj = Application.Current.Resources[key];
-            if (obj is Brush brush)
-                return brush;
-            if (obj is Color color)
-                return color.ToBrush();
-            throw new Exception("Brush not found in Application.Current.Resources for key [" + key + "]. ");
+            try
+            {
+                var obj = Application.Current.Resources[key];
+                if (obj is Brush brush)
+                    return brush;
+                if (obj is Color color)
+                    return color.ToBrush();
+                throw new Exception("Brush not found in Application.Current.Resources for key [" + key + "]. ");
+            }
+            catch 
+            { 
+                return null;
+            }
         }
 
         public static Color AsColor(this Brush brush)
