@@ -1,0 +1,66 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ElementType = Microsoft.UI.Xaml.Controls.TreeViewNode;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml;
+using Windows.Foundation;
+using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.UI.Xaml.Media;
+using Windows.UI;
+using System.Xml.Linq;
+
+
+namespace P42.Uno.Markup
+{
+    public static class TreeViewNodeExtensions
+    {
+        #region Properties
+        public static TElement AddChildren<TElement>(this TElement element, params TreeViewNode[] children) where TElement : ElementType
+        {
+            if (children != null)
+            {
+                foreach (var child in children)
+                {
+                    element.Children.Add(child);
+                }
+            }
+            return element;
+        }
+
+        public static TElement Children<TElement>(this TElement element, params TreeViewNode[] children) where TElement : ElementType
+        {
+            element.Children.Clear();
+            return element.AddChildren(children);
+        }
+
+        public static TElement Children<TElement>(this TElement element, IEnumerable<TreeViewNode> children) where TElement : ElementType
+            => Children(element, children.ToArray());
+
+        public static TElement AddChildren<TElement>(this TElement element, IEnumerable<TreeViewNode> children) where TElement : ElementType
+            => AddChildren(element, children.ToArray());
+
+        public static TElement Content<TElement>(this TElement element, object value) where TElement : ElementType
+        {
+            element.Content = value; return element;
+        }
+
+        public static TElement HasUnrealizedChildren<TElement>(this TElement element, bool value = true) where TElement : ElementType
+        {
+            element.HasUnrealizedChildren = value; return element;
+        }
+
+        public static TElement IsExpanded<TElement>(this TElement element, bool value = true) where TElement : ElementType
+        {
+            element.IsExpanded = value; return element;
+        }
+        #endregion
+
+
+        #region Events
+        #endregion
+    }
+}
