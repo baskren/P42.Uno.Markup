@@ -141,6 +141,9 @@ namespace P42.Uno.Markup
         public static TElement HeaderTemplate<TElement>(this TElement element, DataTemplate headerTemplate) where TElement : ElementType
         { element.HeaderTemplate = headerTemplate; return element; }
 
+        public static TElement HeaderTemplate<TElement>(this TElement element, Type type) where TElement : ElementType
+        { element.HeaderTemplate = type.AsDataTemplate(); return element; }
+
         public static TElement HorizontalTextAlignment<TElement>(this TElement element, TextAlignment textAlignment) where TElement : ElementType
         { element.HorizontalTextAlignment = textAlignment; return element; }
 

@@ -50,6 +50,12 @@ namespace P42.Uno.Markup
             element.ItemTemplate = value; return element;
         }
 
+        public static TElement ItemTemplate<TElement>(this TElement element, Type type) where TElement : ElementType
+        {
+            element.ItemTemplate = type.AsDataTemplate(); return element;
+        }
+
+
         public static TElement ItemTemplateSelector<TElement>(this TElement element, DataTemplateSelector value) where TElement : ElementType
         {
             element.ItemTemplateSelector = value; return element;

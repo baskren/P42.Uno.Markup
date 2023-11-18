@@ -25,6 +25,9 @@ namespace P42.Uno.Markup
         public static TElement HeaderTemplate<TElement>(this TElement element, DataTemplate value) where TElement : ElementType
         { element.HeaderTemplate = value; return element; }
 
+        public static TElement HeaderTemplate<TElement>(this TElement element, Type type) where TElement : ElementType
+        { element.HeaderTemplate = type.AsDataTemplate(); return element; }
+
         public static TElement Header<TElement>(this TElement element, object value) where TElement : ElementType
         { element.Header = value; return element; }
 

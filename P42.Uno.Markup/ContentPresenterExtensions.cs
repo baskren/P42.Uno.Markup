@@ -270,6 +270,9 @@ namespace P42.Uno.Markup
         public static TElement ContentTemplate<TElement>(this TElement element, DataTemplate value) where TElement : ElementType
         { element.ContentTemplate = value; return element; }
 
+        public static TElement ContentTemplate<TElement>(this TElement element, Type type) where TElement : ElementType
+        { element.ContentTemplate = type.AsDataTemplate(); return element; }
+
         public static TElement Content<TElement>(this TElement element, UIElement value) where TElement : ElementType
         { element.Content = value; return element; }
 

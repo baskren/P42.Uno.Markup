@@ -47,6 +47,9 @@ namespace P42.Uno.Markup
         public static TElement FooterTemplate<TElement>(this TElement element, DataTemplate value) where TElement : ElementType
         { element.FooterTemplate = value; return element; }
 
+        public static TElement FooterTemplate<TElement>(this TElement element, Type type) where TElement : ElementType
+        { element.FooterTemplate = type.AsDataTemplate(); return element; }
+
         public static TElement FooterTransitions<TElement>(this TElement element, TransitionCollection value) where TElement : ElementType
         { element.FooterTransitions = value; return element; }
 
@@ -55,6 +58,9 @@ namespace P42.Uno.Markup
 
         public static TElement HeaderTemplate<TElement>(this TElement element, DataTemplate value) where TElement : ElementType
         { element.HeaderTemplate = value; return element; }
+
+        public static TElement HeaderTemplate<TElement>(this TElement element, Type type) where TElement : ElementType
+        { element.HeaderTemplate = type.AsDataTemplate(); return element; }
 
         public static TElement HeaderTransitions<TElement>(this TElement element, TransitionCollection value) where TElement : ElementType
         { element.HeaderTransitions = value; return element; }

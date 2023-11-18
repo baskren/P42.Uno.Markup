@@ -16,6 +16,9 @@ namespace P42.Uno.Markup
         public static TElement TitleTemplate<TElement>(this TElement element, DataTemplate value) where TElement : ElementType
         { element.TitleTemplate = value; return element; }
 
+        public static TElement TitleTemplate<TElement>(this TElement element, Type type) where TElement : ElementType
+        { element.TitleTemplate = type.AsDataTemplate(); return element; }
+
         public static TElement Title<TElement>(this TElement element, object value) where TElement : ElementType
         { element.Title = value; return element; }
 

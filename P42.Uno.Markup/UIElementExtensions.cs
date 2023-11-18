@@ -406,7 +406,7 @@ namespace P42.Uno.Markup
             {
                 if (templateType == null || !typeof(FrameworkElement).IsAssignableFrom(templateType))
                     throw new Exception("Cannot convert type [" + templateType + "] into DataTemplate");
-                var markup = $"<DataTemplate \n\t xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\" \n\t xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\" \n\t xmlns:local=\"using:{templateType.Namespace}\"> \n\t\t<local:{templateType.Name} /> \n</DataTemplate>";
+                var markup = $"<Xml.DataTemplate \n\t xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\" \n\t xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\" \n\t xmlns:local=\"using:{templateType.Namespace}\"> \n\t\t<local:{templateType.Name} /> \n</DataTemplate>";
                 //System.Diagnostics.Trace.WriteLine($"AsDataTemplate : [{markup}]");
                 var template = (DataTemplate)XamlReader.Load(markup);
                 //template.
