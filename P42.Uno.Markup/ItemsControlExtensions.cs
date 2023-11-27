@@ -31,9 +31,13 @@ namespace P42.Uno.Markup
         public static TElement ItemTemplate<TElement>(this TElement element, DataTemplate template) where TElement : ElementType
         { element.ItemTemplate = template; return element; }
 
-        public static TElement ItemTemplate<TElement>(this TElement element, Type templateType, Type dataType = null) where TElement : ElementType
+        public static TElement ItemTemplate<TElement>(this TElement element, Type templateType) where TElement : ElementType
         {
+#if WINDOWS
             var template = UIElementExtensions.AsDataTemplate(templateType);
+#else
+            var template = new DataTemplate(() => (UIElement)Activator.CreateInstance(templateType));
+#endif
             element.ItemTemplate = template; 
             return element; 
         }
