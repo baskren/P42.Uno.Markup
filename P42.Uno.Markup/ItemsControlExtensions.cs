@@ -33,10 +33,10 @@ namespace P42.Uno.Markup
 
         public static TElement ItemTemplate<TElement>(this TElement element, Type templateType) where TElement : ElementType
         {
-#if WINDOWS
-            var template = UIElementExtensions.AsDataTemplate(templateType);
-#else
+#if HAS_UNO
             var template = new DataTemplate(() => (UIElement)Activator.CreateInstance(templateType));
+#else
+            var template = UIElementExtensions.AsDataTemplate(templateType);
 #endif
             element.ItemTemplate = template; 
             return element; 

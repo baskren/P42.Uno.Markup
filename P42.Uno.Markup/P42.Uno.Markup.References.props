@@ -1,0 +1,28 @@
+<Project ToolsVersion="15.0">
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils.Uno\P42.Utils.Uno.csproj" />
+  </ItemGroup>
+  <!-- PLATFORM SPECIFIC REFERENCES -->
+  <ItemGroup Condition=" $(TargetFramework.Contains('windows')) ">
+  </ItemGroup>
+  <ItemGroup Condition=" !$(TargetFramework.Contains('windows')) ">
+  </ItemGroup>
+  <Choose>
+    <When Condition="  $(MSBuildProjectName.ToLower().Contains('wasm'))  OR  $(P42_TargetPlatform.ToLower().Contains('wasm'))  OR  $(SolutionName.ToLower().Contains('wasm')) ">
+      <ItemGroup>
+      </ItemGroup>
+    </When>
+    <When Condition="  $(MSBuildProjectName.ToLower().Contains('skia'))  OR  $(P42_TargetPlatform.ToLower().Contains('skia'))  OR  $(SolutionName.ToLower().Contains('skia')) ">
+      <ItemGroup>
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+
+
+</Project>
