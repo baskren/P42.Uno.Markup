@@ -19,6 +19,7 @@ using Microsoft.UI.Xaml.Media.Imaging;
 using System.IO;
 using P42.Utils.Uno;
 
+
 namespace P42.Uno.Markup
 {
     public static class SvgImageSourceExtensions
