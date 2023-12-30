@@ -52,21 +52,29 @@ namespace P42.Uno.Markup
 
         private static void IsEnabledChanged(ElementType dependencyObject, DependencyPropertyChangedEventArgs args)
         {
-            if (dependencyObject is Control control)
-                control.IsEnabled = (bool)args.NewValue;
-            else
-            {
+			if (args is null || dependencyObject is null)
+				return;
+
+			if (dependencyObject is Control control)
+			{
+                if (args.NewValue is not bool newValue)
+                    newValue = true;
+				control.IsEnabled = newValue;
+			}
+			else
+			{
                 var count = VisualTreeHelper.GetChildrenCount(dependencyObject);
                 for (int i = 0; i < count; i++)
-                {
+				{
                     var current = VisualTreeHelper.GetChild(dependencyObject, i);
                     if (current is Panel panel)
-                    {
-                        foreach (var child in panel.Children)
+					{
+						foreach (var child in panel.Children)
                             IsEnabledChanged(child, args);
-                    }
-                }
-            }
+					}
+				}
+			}
+
         }
         #endregion IsEnabled
 
