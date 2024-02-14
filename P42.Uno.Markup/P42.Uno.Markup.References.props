@@ -16,17 +16,17 @@
   <Choose>
     <When Condition="  $(MSBuildProjectName.ToLower().Contains('wasm'))  OR  $(P42_TargetPlatform.ToLower().Contains('wasm'))  OR  $(SolutionName.ToLower().Contains('wasm')) ">
       <ItemGroup>
-        <PackageReference Condition=" '$(Configuration)' == 'Release' " Include="P42.Utils.Uno.Wasm" Version="5.0.64" />
+        <PackageReference Condition=" '$(Configuration)' == 'Release' " Include="P42.Utils.Uno.Wasm" Version="5.0.118" />
       </ItemGroup>
     </When>
     <When Condition="  $(MSBuildProjectName.ToLower().Contains('skia'))  OR  $(P42_TargetPlatform.ToLower().Contains('skia'))  OR  $(SolutionName.ToLower().Contains('skia')) ">
       <ItemGroup>
-        <PackageReference Condition=" '$(Configuration)' == 'Release' " Include="P42.Utils.Uno.Skia" Version="5.0.64" />
+        <PackageReference Condition=" '$(Configuration)' == 'Release' " Include="P42.Utils.Uno.Skia" Version="5.0.118" />
       </ItemGroup>
     </When>
     <Otherwise>
       <ItemGroup>
-        <PackageReference Condition=" '$(Configuration)' == 'Release' " Include="P42.Utils.Uno" Version="5.0.64" />
+        <PackageReference Condition=" '$(Configuration)' == 'Release' " Include="P42.Utils.Uno" Version="5.0.118" />
       </ItemGroup>
     </Otherwise>
   </Choose>
