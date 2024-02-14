@@ -79,8 +79,6 @@ namespace P42.Uno.Markup
         }
         #endregion IsEnabled
 
-
-
         public static TBindable Assign<TBindable, TVariable>(this TBindable bindable, out TVariable variable)
 			where TBindable : DependencyObject, TVariable
 		{
@@ -94,7 +92,17 @@ namespace P42.Uno.Markup
 			return bindable;
 		}
 
-		static void CheckArguments<TBindable>(this TBindable target, DependencyProperty targetProperty, object source, string path, IValueConverter converter, object converterParameter, string converterLanguage, string filePath, int lineNumber) where TBindable : DependencyObject
+        #region Property Changed Handler
+        public static TElement AddPropertyChangedHandler<TElement>(this TElement element, DependencyProperty property, DependencyPropertyChangedCallback handler) where TElement : ElementType
+        {
+            element.RegisterPropertyChangedCallback(property, handler);
+            return element;
+        }
+        #endregion
+
+
+        #region Bind
+        static void CheckArguments<TBindable>(this TBindable target, DependencyProperty targetProperty, object source, string path, IValueConverter converter, object converterParameter, string converterLanguage, string filePath, int lineNumber) where TBindable : DependencyObject
 		{
 			try
 			{
@@ -372,8 +380,9 @@ namespace P42.Uno.Markup
 			BindingOperations.SetBinding(target, targetProperty, binding);
 			return target;
 		}
+        #endregion
 
-		/*
+        /*
 		/// <summary>Bind to the default property</summary>
 		public static TBindable Bind<TBindable>(
 			this TBindable bindable,
@@ -461,5 +470,5 @@ namespace P42.Uno.Markup
 		*/
 
 
-	}
+    }
 }
