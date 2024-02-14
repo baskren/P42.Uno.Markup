@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -55,12 +55,13 @@ namespace P42.Uno.Markup
 			if (args is null || dependencyObject is null)
 				return;
 
-			if (dependencyObject is Control control)
-			{
-                if (args.NewValue is not bool newValue)
-                    newValue = true;
+            if (args.NewValue is not bool newValue)
+                newValue = true;
+
+            if (dependencyObject is Control control)
 				control.IsEnabled = newValue;
-			}
+            else if (dependencyObject is Button button)
+                button.IsEnabled = newValue;
 			else
 			{
                 var count = VisualTreeHelper.GetChildrenCount(dependencyObject);
