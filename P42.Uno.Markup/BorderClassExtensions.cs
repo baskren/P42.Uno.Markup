@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -114,7 +114,7 @@ namespace P42.Uno.Markup
             target.Bind(ElementType.CornerRadiusProperty, source, nameof(Control.CornerRadius), bindingMode);
             return target;
         }
-        public static Border BindBorder(this Border target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay)
+        public static Border BindBorder(this Border target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay) 
         {
             target.Bind(ElementType.BorderBrushProperty, source, nameof(ContentPresenter.BorderBrush), bindingMode);
             target.Bind(ElementType.BorderThicknessProperty, source, nameof(ContentPresenter.BorderThickness), bindingMode);
@@ -128,8 +128,29 @@ namespace P42.Uno.Markup
             target.Bind(ElementType.CornerRadiusProperty, source, nameof(Border.CornerRadius), bindingMode);
             return target;
         }
-
+        public static Border BindBorder(this Border target, Grid source, BindingMode bindingMode = BindingMode.OneWay) 
+        {
+            target.Bind(ElementType.BorderBrushProperty, source, nameof(Grid.BorderBrush), bindingMode);
+            target.Bind(ElementType.BorderThicknessProperty, source, nameof(Grid.BorderThickness), bindingMode);
+            target.Bind(ElementType.CornerRadiusProperty, source, nameof(Grid.CornerRadius), bindingMode);
+            return target;
+        }
+        public static Border BindBorder(this Border target, RelativePanel source, BindingMode bindingMode = BindingMode.OneWay) 
+        {
+            target.Bind(ElementType.BorderBrushProperty, source, nameof(RelativePanel.BorderBrush), bindingMode);
+            target.Bind(ElementType.BorderThicknessProperty, source, nameof(RelativePanel.BorderThickness), bindingMode);
+            target.Bind(ElementType.CornerRadiusProperty, source, nameof(RelativePanel.CornerRadius), bindingMode);
+            return target;
+        }
+        public static Border BindBorder(this Border target, StackPanel source, BindingMode bindingMode = BindingMode.OneWay) 
+        {
+            target.Bind(ElementType.BorderBrushProperty, source, nameof(StackPanel.BorderBrush), bindingMode);
+            target.Bind(ElementType.BorderThicknessProperty, source, nameof(StackPanel.BorderThickness), bindingMode);
+            target.Bind(ElementType.CornerRadiusProperty, source, nameof(StackPanel.CornerRadius), bindingMode);
+            return target;
+        }
         #endregion
+
 
     }
 }

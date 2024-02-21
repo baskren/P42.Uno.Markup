@@ -15,7 +15,7 @@ namespace P42.Uno.Markup
 {
     public static class CalendarViewDayItemExtensions
     {
-        public static TElement IsBlackout<TElement>(this TElement element, bool value) where TElement : ElementType
+        public static TElement IsBlackout<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsBlackout = value; return element; }
 
 

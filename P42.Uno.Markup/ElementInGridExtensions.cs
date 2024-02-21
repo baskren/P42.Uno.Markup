@@ -1,11 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Newtonsoft.Json.Linq;
 using ElementType = Microsoft.UI.Xaml.UIElement;
 
 namespace P42.Uno.Markup
@@ -28,7 +30,8 @@ namespace P42.Uno.Markup
 		public static TView RowSpan<TView>(this TView view, int span) where TView :ElementType
 		{
 			view.SetValue(Grid.RowSpanProperty, span);
-			return view;
+            VariableSizedWrapGrid.SetRowSpan(view, span); 
+            return view;
 		}
 
 		public static TView Column<TView>(this TView view, int column) where TView :ElementType
@@ -47,7 +50,8 @@ namespace P42.Uno.Markup
 		public static TView ColumnSpan<TView>(this TView view, int span) where TView :ElementType
 		{
 			view.SetValue(Grid.ColumnSpanProperty, span);
-			return view;
+            VariableSizedWrapGrid.SetColumnSpan(view, span);
+            return view;
 		}
 
 		public static TView Row<TView, TRow>(this TView view, TRow row) where TView :ElementType where TRow : Enum

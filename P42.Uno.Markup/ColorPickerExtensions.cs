@@ -23,31 +23,31 @@ namespace P42.Uno.Markup
         public static TElement ColorSpectrumShape<TElement>(this TElement element, ColorSpectrumShape value) where TElement : ElementType
         { element.ColorSpectrumShape = value; return element; }
 
-        public static TElement IsAlphaEnabled<TElement>(this TElement element, bool value) where TElement : ElementType
+        public static TElement IsAlphaEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsAlphaEnabled = value; return element; }
 
-        public static TElement IsAlphaSliderVisible<TElement>(this TElement element, bool value) where TElement : ElementType
+        public static TElement IsAlphaSliderVisible<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsAlphaSliderVisible = value; return element; }
 
-        public static TElement IsAlphaTextInputVisible<TElement>(this TElement element, bool value) where TElement : ElementType
+        public static TElement IsAlphaTextInputVisible<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsAlphaTextInputVisible = value; return element; }
 
-        public static TElement IsColorChannelTextInputVisible<TElement>(this TElement element, bool value) where TElement : ElementType
+        public static TElement IsColorChannelTextInputVisible<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsColorChannelTextInputVisible = value; return element; }
 
-        public static TElement IsColorPreviewVisible<TElement>(this TElement element, bool value) where TElement : ElementType
+        public static TElement IsColorPreviewVisible<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsColorPreviewVisible = value; return element; }
 
-        public static TElement IsColorSliderVisible<TElement>(this TElement element, bool value) where TElement : ElementType
+        public static TElement IsColorSliderVisible<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsColorSliderVisible = value; return element; }
 
-        public static TElement IsColorSpectrumVisible<TElement>(this TElement element, bool value) where TElement : ElementType
+        public static TElement IsColorSpectrumVisible<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsColorSpectrumVisible = value; return element; }
 
-        public static TElement IsHexInputVisible<TElement>(this TElement element, bool value) where TElement : ElementType
+        public static TElement IsHexInputVisible<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsHexInputVisible = value; return element; }
 
-        public static TElement IsMoreButtonVisible<TElement>(this TElement element, bool value) where TElement : ElementType
+        public static TElement IsMoreButtonVisible<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsMoreButtonVisible = value; return element; }
 
         public static TElement MaxHue<TElement>(this TElement element, int value) where TElement : ElementType

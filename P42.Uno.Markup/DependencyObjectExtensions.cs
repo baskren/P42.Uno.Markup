@@ -22,7 +22,7 @@ namespace P42.Uno.Markup
         public static readonly DependencyProperty IsEnabledProperty =
 			DependencyProperty.RegisterAttached("IsEnabled", typeof(string), typeof(DependencyObjectExtensions), new PropertyMetadata(null, IsEnabledChanged));
 
-        public static DependencyObject SetIsEnabled(this DependencyObject dependencyObject, bool value)
+        public static DependencyObject SetIsEnabled(this DependencyObject dependencyObject, bool value = true)
         {
             dependencyObject.SetValue(IsEnabledProperty, value);
             return dependencyObject;
@@ -59,11 +59,9 @@ namespace P42.Uno.Markup
                 newValue = true;
 
             if (dependencyObject is Control control)
-				control.IsEnabled = newValue;
-            else if (dependencyObject is Button button)
-                button.IsEnabled = newValue;
-			else
-			{
+                control.IsEnabled = (bool)BooleanConverter.Instance.Convert(args.NewValue);
+            else
+            {
                 var count = VisualTreeHelper.GetChildrenCount(dependencyObject);
                 for (int i = 0; i < count; i++)
 				{

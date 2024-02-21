@@ -68,46 +68,26 @@ namespace P42.Uno.Markup
         #endregion
 
 
-        public static TElement IconSource<TElement>(this TElement element, IconSource iconSource) where TElement : ElementType
-        {
-            element.IconSource = iconSource;
-            return element;
-        }
+        #region IconSource
+        public static TElement Icon<TElement>(this TElement element, IconSource value = null) where TElement : ElementType
+        { element.IconSource = value; return element; }
 
-        public static TElement IconSource<TElement>(this TElement element, Symbol symbol) where TElement : ElementType
-        {
-            element.IconSource = new SymbolIconSource { Symbol = symbol };
-            return element;
-        }
+        public static TElement Icon<TElement>(this TElement element, Symbol value) where TElement : ElementType
+        { element.IconSource = new SymbolIconSource { Symbol = value }; return element; }
 
-        public static TElement IconSource<TElement>(this TElement element, Geometry path) where TElement : ElementType
-        {
-            element.IconSource = new PathIconSource { Data = path };
-            return element;
-        }
+        public static TElement Icon<TElement>(this TElement element, string glyph, FontFamily fontFamily) where TElement : ElementType
+        { element.IconSource = new FontIconSource { FontFamily = fontFamily, Glyph = glyph }; return element; }
 
-        public static TElement IconSource<TElement>(this TElement element, string glyph, FontFamily fontFamily, double fontSize = default, FontWeight fontWeight = default, FontStyle fontStyle = default, bool isTextScaleFactorEnabled = false, bool mirroredWhenRightToLeft = false) where TElement : ElementType
-        {
-            var source = new FontIconSource
-            {
-                Glyph = glyph,
-                FontFamily = fontFamily,
-                IsTextScaleFactorEnabled = isTextScaleFactorEnabled,
-                MirroredWhenRightToLeft = mirroredWhenRightToLeft
-            };
-            if (fontSize != default) source.FontSize = fontSize;
-            if (fontStyle != default) source.FontStyle = fontStyle;
-            if (fontWeight != default) source.FontWeight = fontWeight;
+        public static TElement Icon<TElement>(this TElement element, string glyph, FontFamily fontFamily, double fontSize) where TElement : ElementType
+        { element.IconSource = new FontIconSource { FontFamily = fontFamily, FontSize = fontSize, Glyph = glyph }; return element; }
 
-            element.IconSource = source;
-            return element;
-        }
+        public static TElement Icon<TElement>(this TElement element, Geometry path) where TElement : ElementType
+        { element.IconSource = new PathIconSource { Data = path }; return element; }
 
-        public static TElement IconSource<TElement>(this TElement element, Uri uriSource, bool showAsMonoChrome = true) where TElement : ElementType
-        {
-            element.IconSource = new BitmapIconSource { UriSource = uriSource, ShowAsMonochrome = showAsMonoChrome };
-            return element;
-        }
+        public static TElement Icon<TElement>(this TElement element, Uri bitMapUriSource, bool showAsMonoChrome = true) where TElement : ElementType
+        { element.IconSource = new BitmapIconSource { UriSource = bitMapUriSource, ShowAsMonochrome = showAsMonoChrome }; return element; }
+        #endregion
+
 
         public static TElement Text<TElement>(this TElement element, string text) where TElement : ElementType
         {

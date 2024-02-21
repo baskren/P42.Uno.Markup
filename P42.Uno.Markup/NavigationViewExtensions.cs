@@ -13,6 +13,35 @@ namespace P42.Uno.Markup
     public static class NavigationViewExtensions
     {
         #region Properties
+
+        #region MenuItems
+        public static ElementType AddMenuItems(this ElementType panel, params object[] children)
+        {
+            if (children != null)
+            {
+                foreach (var child in children)
+                {
+                    panel.MenuItems.Add(child);
+                }
+            }
+            return panel;
+        }
+
+        public static ElementType MenuItems(this ElementType panel, params object[] children)
+        {
+            panel.MenuItems.Clear();
+            return panel.AddMenuItems(children);
+        }
+
+        public static ElementType MenuItems(this ElementType panel, IEnumerable<object> children)
+            => MenuItems(panel, children.ToArray());
+
+        public static ElementType AddMenuItems(this ElementType panel, IEnumerable<object> children)
+            => AddMenuItems(panel, children.ToArray());
+        #endregion
+
+
+
         public static TElement MenuItemTemplate<TElement>(this TElement element, DataTemplate value) where TElement : ElementType
         { element.MenuItemTemplate = value; return element; }
 

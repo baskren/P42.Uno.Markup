@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -305,6 +305,82 @@ namespace P42.Uno.Markup
         #endregion
 
 
+
+        #region Special Bindings
+
+        #region BindBorder
+        public static TElement BindBorder<TElement>(this TElement target, Control source, BindingMode bindingMode = BindingMode.OneWay) where TElement : ElementType
+        {
+            if (typeof(ElementType).GetBorderDependencyProperty(nameof(Control.BorderBrushProperty)) is DependencyProperty borderBrushProperty)
+                target.Bind(borderBrushProperty, source, nameof(Control.BorderBrush), bindingMode);
+            if (typeof(ElementType).GetBorderDependencyProperty(nameof(Control.BorderThicknessProperty)) is DependencyProperty borderThicknessProperty)
+                target.Bind(borderThicknessProperty, source, nameof(Control.BorderThickness), bindingMode);
+            if (typeof(ElementType).GetBorderDependencyProperty(nameof(Control.CornerRadiusProperty)) is DependencyProperty cornerRadiusProperty)
+                target.Bind(cornerRadiusProperty, source, nameof(Control.CornerRadius), bindingMode);
+            return target;
+        }
+
+        static DependencyProperty GetBorderDependencyProperty(this Type type, string propertyName) 
+        { 
+            switch (propertyName)
+            {
+                case nameof(Control.BorderBrushProperty):
+                    switch (type.Name)
+                    {
+                        case nameof(Control):
+                            return Control.BorderBrushProperty;
+                        case nameof(ContentPresenter):
+                            return ContentPresenter.BorderBrushProperty;
+                        case nameof(Border):
+                            return Border.BorderBrushProperty;
+                        case nameof(Grid):
+                            return Grid.BorderBrushProperty;
+                        case nameof(RelativePanel):
+                            return RelativePanel.BorderBrushProperty;
+                        case nameof(StackPanel):
+                            return StackPanel.BorderBrushProperty;
+                    }
+                    break;
+                case nameof(Control.BorderThickness):
+                    switch (type.Name)
+                    {
+                        case nameof(Control):
+                            return Control.BorderThicknessProperty;
+                        case nameof(ContentPresenter):
+                            return ContentPresenter.BorderThicknessProperty;
+                        case nameof(Border):
+                            return Border.BorderThicknessProperty;
+                        case nameof(Grid):
+                            return Grid.BorderThicknessProperty;
+                        case nameof(RelativePanel):
+                            return RelativePanel.BorderThicknessProperty;
+                        case nameof(StackPanel):
+                            return StackPanel.BorderThicknessProperty;
+                    }
+                    break;
+                case nameof(Control.CornerRadius):
+                    switch (type.Name)
+                    {
+                        case nameof(Control):
+                            return Control.CornerRadiusProperty;
+                        case nameof(ContentPresenter):
+                            return ContentPresenter.CornerRadiusProperty;
+                        case nameof(Border):
+                            return Border.CornerRadiusProperty;
+                        case nameof(Grid):
+                            return Grid.CornerRadiusProperty;
+                        case nameof(RelativePanel):
+                            return RelativePanel.CornerRadiusProperty;
+                        case nameof(StackPanel):
+                            return StackPanel.CornerRadiusProperty;
+                    }
+                    break;
+            }
+            return null;
+        }
+        #endregion
+
+        #endregion
 
     }
 }

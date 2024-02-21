@@ -2,6 +2,7 @@ using System;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
+using Windows.Foundation;
 
 namespace P42.Uno.Markup
 {
@@ -93,5 +94,24 @@ namespace P42.Uno.Markup
         public static ScrollViewer CanContentRenderOutsideBounds(this ScrollViewer element, bool value = true)
         { element.CanContentRenderOutsideBounds = value; return element; }
 
+
+        #region Event Handlers
+
+        public static ScrollViewer AddAnchorRequestedHandler(this ScrollViewer element, TypedEventHandler<ScrollViewer, AnchorRequestedEventArgs> handler)
+        { element.AnchorRequested += handler; return element; }
+
+        public static ScrollViewer AddDirectManipulationCompletedHandler(this ScrollViewer element, EventHandler<object> handler)
+        { element.DirectManipulationCompleted += handler; return element; }
+
+        public static ScrollViewer AddDirectManipulationStartedHandler(this ScrollViewer element, EventHandler<object> handler)
+        { element.DirectManipulationStarted += handler; return element; }
+
+        public static ScrollViewer AddViewChangedHandler(this ScrollViewer element, EventHandler<ScrollViewerViewChangedEventArgs> handler)
+        { element.ViewChanged += handler; return element; }
+
+        public static ScrollViewer AddViewChangingHandler(this ScrollViewer element, EventHandler<ScrollViewerViewChangingEventArgs> handler)
+        { element.ViewChanging += handler; return element; }
+
+        #endregion
     }
 }

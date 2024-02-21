@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +20,8 @@ namespace P42.Uno.Markup
 {
     public static partial class TextBlockExtensions
     {
+
+
         #region Wrapping
         public static ElementType TextWrapping(this ElementType element, TextWrapping wrapping) 
         { element.TextWrapping = wrapping; return element; }
@@ -395,7 +397,7 @@ namespace P42.Uno.Markup
         public static ElementType AddSelectionChangedHandler(this ElementType element, RoutedEventHandler handler) 
         { element.SelectionChanged += handler; return element; }
 
-        public static ElementType AddIsTextTrimmedChangedHandler(this ElementType element, TypedEventHandler<ElementType, IsTextTrimmedChangedEventArgs> handler)
+        public static ElementType AddIsTextTrimmedChangedHandler(this ElementType element, TypedEventHandler<TextBlock, IsTextTrimmedChangedEventArgs> handler)
         { element.IsTextTrimmedChanged += handler; return element; }
         #endregion
 

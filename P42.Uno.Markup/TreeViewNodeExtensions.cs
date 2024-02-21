@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +19,8 @@ namespace P42.Uno.Markup
     public static class TreeViewNodeExtensions
     {
         #region Properties
+
+        #region Children
         public static TElement AddChildren<TElement>(this TElement element, params TreeViewNode[] children) where TElement : ElementType
         {
             if (children != null)
@@ -42,6 +44,7 @@ namespace P42.Uno.Markup
 
         public static TElement AddChildren<TElement>(this TElement element, IEnumerable<TreeViewNode> children) where TElement : ElementType
             => AddChildren(element, children.ToArray());
+        #endregion
 
         public static TElement Content<TElement>(this TElement element, object value) where TElement : ElementType
         {

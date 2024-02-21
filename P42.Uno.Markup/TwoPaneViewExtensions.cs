@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +16,7 @@ using System.Xml.Linq;
 
 namespace P42.Uno.Markup
 {
-    public static class TwoPanelViewExtensions
+    public static class TwoPaneViewExtensions
     {
         #region Properties
         public static TElement MinTallModeHeight<TElement>(this TElement element, double value) where TElement : ElementType
@@ -28,6 +28,7 @@ namespace P42.Uno.Markup
         {
             element.MinWideModeWidth = value; return element;
         }
+
 
         public static TElement Pane1<TElement>(this TElement element, UIElement value) where TElement : ElementType
         {

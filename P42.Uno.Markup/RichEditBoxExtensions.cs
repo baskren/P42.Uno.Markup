@@ -115,7 +115,6 @@ namespace P42.Uno.Markup
         #endregion
 
 
-
         #region Properties
         public static TElement AcceptsReturn<TElement>(this TElement element, bool acceptsReturn = true) where TElement : ElementType
         { element.AcceptsReturn = acceptsReturn; return element; }
@@ -237,16 +236,16 @@ namespace P42.Uno.Markup
 
 
         #region Events
-        public static TElement AddCandidateWindowBoundsChangedHandler<TElement>(this TElement element, TypedEventHandler<ElementType, CandidateWindowBoundsChangedEventArgs> handler) where TElement : ElementType
+        public static TElement AddCandidateWindowBoundsChangedHandler<TElement>(this TElement element, TypedEventHandler<RichEditBox, CandidateWindowBoundsChangedEventArgs> handler) where TElement : ElementType
         { element.CandidateWindowBoundsChanged += handler; return element; }
 
         public static TElement AddContextMenuOpeningHandler<TElement>(this TElement element, ContextMenuOpeningEventHandler handler) where TElement : ElementType
         { element.ContextMenuOpening += handler; return element; }
 
-        public static TElement AddCopyingToClipboardHandler<TElement>(this TElement element, TypedEventHandler<ElementType, TextControlCopyingToClipboardEventArgs> handler) where TElement : ElementType
+        public static TElement AddCopyingToClipboardHandler<TElement>(this TElement element, TypedEventHandler<RichEditBox, TextControlCopyingToClipboardEventArgs> handler) where TElement : ElementType
         { element.CopyingToClipboard += handler; return element; }
 
-        public static TElement AddCuttingToClipboardHandler<TElement>(this TElement element, TypedEventHandler<ElementType, TextControlCuttingToClipboardEventArgs> handler) where TElement : ElementType
+        public static TElement AddCuttingToClipboardHandler<TElement>(this TElement element, TypedEventHandler<RichEditBox, TextControlCuttingToClipboardEventArgs> handler) where TElement : ElementType
         { element.CuttingToClipboard += handler; return element; }
 
         public static TElement AddPasteHandler<TElement>(this TElement element, TextControlPasteEventHandler handler) where TElement : ElementType
@@ -255,22 +254,22 @@ namespace P42.Uno.Markup
         public static TElement AddSelectionChangedHandler<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
         { element.SelectionChanged += handler; return element; }
 
-        public static TElement AddSelectionChangingHandler<TElement>(this TElement element, TypedEventHandler<ElementType, RichEditBoxSelectionChangingEventArgs> handler) where TElement : ElementType
+        public static TElement AddSelectionChangingHandler<TElement>(this TElement element, TypedEventHandler<RichEditBox, RichEditBoxSelectionChangingEventArgs> handler) where TElement : ElementType
         { element.SelectionChanging += handler; return element; }
 
-        public static TElement AddTextChangedHandler<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
+        public static TElement AddTextChangedHandler<TElement>(this TElement element, RoutedEventHandler handler) where TElement : RichEditBox
         { element.TextChanged += handler; return element; }
 
-        public static TElement AddTextChangingHandler<TElement>(this TElement element, TypedEventHandler<ElementType, RichEditBoxTextChangingEventArgs> handler) where TElement : ElementType
+        public static TElement AddTextChangingHandler<TElement>(this TElement element, TypedEventHandler<RichEditBox, RichEditBoxTextChangingEventArgs> handler) where TElement : ElementType
         { element.TextChanging += handler; return element; }
 
-        public static TElement AddTextCompositionChangedHandler<TElement>(this TElement element, TypedEventHandler<ElementType, TextCompositionChangedEventArgs> handler) where TElement : ElementType
+        public static TElement AddTextCompositionChangedHandler<TElement>(this TElement element, TypedEventHandler<RichEditBox, TextCompositionChangedEventArgs> handler) where TElement : ElementType
         { element.TextCompositionChanged += handler; return element; }
 
-        public static TElement AddTextCompositionEndedHandler<TElement>(this TElement element, TypedEventHandler<ElementType, TextCompositionEndedEventArgs> handler) where TElement : ElementType
+        public static TElement AddTextCompositionEndedHandler<TElement>(this TElement element, TypedEventHandler<RichEditBox, TextCompositionEndedEventArgs> handler) where TElement : ElementType
         { element.TextCompositionEnded += handler; return element; }
 
-        public static TElement AddTextCompositionStartedHandler<TElement>(this TElement element, TypedEventHandler<ElementType, TextCompositionStartedEventArgs> handler) where TElement : ElementType
+        public static TElement AddTextCompositionStartedHandler<TElement>(this TElement element, TypedEventHandler<RichEditBox, TextCompositionStartedEventArgs> handler) where TElement : ElementType
         { element.TextCompositionStarted += handler; return element; }
 
 

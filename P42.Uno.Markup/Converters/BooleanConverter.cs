@@ -18,6 +18,9 @@ namespace P42.Uno.Markup
 
         private BooleanConverter() { }
 
+        public object Convert(object value)
+            => Convert(value, null, null, null);
+
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             if (parameter is Func<object,bool> func)
@@ -50,7 +53,21 @@ namespace P42.Uno.Markup
             if (value is decimal decimalValue)
                 return decimalValue > 0;
             if (value is string text)
+            {
+                if (text.Equals("true", StringComparison.OrdinalIgnoreCase))
+                    return true;
+                if (text.Equals("false", StringComparison.OrdinalIgnoreCase))
+                    return false;
+                if (text.Equals("yes", StringComparison.OrdinalIgnoreCase))
+                    return true;
+                if (text.Equals("no", StringComparison.OrdinalIgnoreCase))
+                    return false;
+                if (text.Equals("visible", StringComparison.OrdinalIgnoreCase))
+                    return true;
+                if (text.Equals("collapsed", StringComparison.OrdinalIgnoreCase))
+                    return false;
                 return !string.IsNullOrWhiteSpace(text);
+            }
             if (value is IEnumerable enumerable)
             {
                 var e = enumerable.GetEnumerator();

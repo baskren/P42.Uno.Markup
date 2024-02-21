@@ -274,13 +274,13 @@ namespace P42.Uno.Markup
         { element.HoverBorderBrush = new SolidColorBrush(ColorExtensions.ColorFromUint(hex)); return element; }
         #endregion
 
-        public static TElement IsGroupLabelVisible<TElement>(this TElement element, bool value) where TElement : ElementType
+        public static TElement IsGroupLabelVisible<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsGroupLabelVisible = value; return element; }
 
-        public static TElement IsOutOfScopeEnabled<TElement>(this TElement element, bool value) where TElement : ElementType
+        public static TElement IsOutOfScopeEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsOutOfScopeEnabled = value; return element; }
 
-        public static TElement IsTodayHighlighted<TElement>(this TElement element, bool value) where TElement : ElementType
+        public static TElement IsTodayHighlighted<TElement>(this TElement element, bool value = true) where TElement : ElementType
         { element.IsTodayHighlighted = value; return element; }
 
         public static TElement MaxDate<TElement>(this TElement element, DateTimeOffset value) where TElement : ElementType

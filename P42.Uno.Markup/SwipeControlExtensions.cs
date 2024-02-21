@@ -59,5 +59,6 @@ namespace P42.Uno.Markup
         public static TElement TopItems<TElement>(this TElement element, SwipeMode mode, params SwipeItem[] items) where TElement : ElementType
             => TopItems(element, items.AsSwipeItems(mode));
 
+
     }
 }
