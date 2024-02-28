@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -28,7 +29,6 @@ namespace P42.Uno.Markup
             return dependencyObject;
         }
 
-
         public static bool GetIsEnabled(this DependencyObject dependencyObject)
             => (bool)dependencyObject.GetValue(IsEnabledProperty);
 
@@ -36,7 +36,7 @@ namespace P42.Uno.Markup
         public static ElementType IsEnabled(this ElementType element, bool value = true)
         { element.SetIsEnabled(value); return element; }
 
-        public static TElement BindIsEnabled<TElement>(this TElement element, object source, string path,
+        public static TElement BindIsEnabled<TElement>(this TElement element, INotifyPropertyChanged source, string path,
             BindingMode mode = BindingMode.OneWay,
             IValueConverter converter = null,
             object converterParameter = null,
@@ -47,6 +47,20 @@ namespace P42.Uno.Markup
             ) where TElement : ElementType
         {
             element.Bind(IsEnabledProperty, source, path, mode, converter, converterParameter, converterLanguage, updateSourceTrigger, targetNullValue, fallbackValue, filePath, lineNumber);
+            return element;
+        }
+
+        public static TElement BindIsEnabled<TElement>(this TElement element, DependencyObject source, DependencyProperty sourceProperty,
+            BindingMode mode = BindingMode.OneWay,
+            IValueConverter converter = null,
+            object converterParameter = null,
+            string converterLanguage = null,
+            UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
+            object targetNullValue = null,
+            object fallbackValue = null, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = -1
+            ) where TElement : ElementType
+        {
+            element.Bind(IsEnabledProperty, source, sourceProperty, mode, converter, converterParameter, converterLanguage, updateSourceTrigger, targetNullValue, fallbackValue, filePath, lineNumber);
             return element;
         }
 
@@ -100,6 +114,8 @@ namespace P42.Uno.Markup
 
 
         #region Bind
+
+
         static void CheckArguments<TBindable>(this TBindable target, DependencyProperty targetProperty, object source, string path, IValueConverter converter, object converterParameter, string converterLanguage, string filePath, int lineNumber) where TBindable : DependencyObject
 		{
 			try
@@ -269,203 +285,315 @@ namespace P42.Uno.Markup
 
         //const string bindingContextPath = Binding.SelfPath;
 
+        static readonly DependencyProperty P42BindingsProperty = DependencyProperty.RegisterAttached("P42Bindings", typeof(List<WorkaroundBinding>), typeof(DependencyObjectExtensions), new PropertyMetadata(new BindingCollection()));
+
+        static DependencyObject SetWorkaroundBindings(this DependencyObject dependencyObject, BindingCollection value)
+        {
+            dependencyObject.SetValue(P42BindingsProperty, value);
+            return dependencyObject;
+        }
+
+        static BindingCollection GetWorkaroundBindings(this DependencyObject dependencyObject)
+            => (BindingCollection)dependencyObject.GetValue(P42BindingsProperty);
+
+        public static TBindable Bind<TBindable>(
+            this TBindable target,
+            DependencyProperty targetProperty,
+            INotifyPropertyChanged source,
+            string sourcePropertyName,
+            BindingMode mode = BindingMode.OneWay,
+            
+            IValueConverter converter = null,
+            object converterParameter = null,
+            string converterLanguage = null,
+            UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
+            object targetNullValue = null, 
+            object fallbackValue = null, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = -1
+        ) where TBindable : DependencyObject
+        {
+            var binding = new WorkaroundBinding
+                (
+                    target, targetProperty,
+                    source, sourcePropertyName,
+                    mode,
+                    converter, converterParameter, converterLanguage
+                );
+
+            var bindings = target.GetWorkaroundBindings();
+            bindings.Add( binding );
+            return target;
+        }
+
+        public static TBindable Bind<TBindable>(
+            this TBindable target,
+            DependencyProperty targetProperty,
+            DependencyObject source,
+            DependencyProperty sourceProperty,
+            BindingMode mode = BindingMode.OneWay,
+            
+            IValueConverter converter = null,
+            object converterParameter = null,
+            string converterLanguage = null,
+            UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
+            object targetNullValue = null, 
+            
+            object fallbackValue = null, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = -1
+        ) where TBindable : DependencyObject
+        {
+            var binding = new WorkaroundBinding
+                (
+                    target, targetProperty,
+                    source, sourceProperty,
+                    mode,
+                    converter, converterParameter, converterLanguage
+                );
+
+            var bindings = target.GetWorkaroundBindings();
+            bindings.Add(binding);
+            return target;
+        }
+
+        public static TBindable Bind<TBindable, TSource, TDest>(
+            this TBindable target,
+            DependencyProperty targetProperty,
+            DependencyObject source,
+            DependencyProperty sourceProperty,
+            BindingMode mode = BindingMode.OneWay,
+            Func<TSource, TDest> convert = null,
+            Func<TDest, TSource> convertBack = null,
+            object converterParameter = null,
+            string converterLanguage = null,
+            UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
+            object targetNullValue = null,
+            object fallbackValue = null, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = -1
+        ) where TBindable : DependencyObject
+        {
+            IValueConverter converter = null;
+            if (convert is not null || convertBack is not null)
+                converter = new FuncConverter<TSource, TDest, object>(convert, convertBack, filePath, lineNumber);
+            return Bind(target, targetProperty, source, sourceProperty, mode, converter, converterParameter, converterLanguage, updateSourceTrigger, targetNullValue, fallbackValue, filePath, lineNumber);
+        }
+
+        public static TBindable Bind<TBindable, TSource, TDest>(
+            this TBindable target,
+            DependencyProperty targetProperty,
+            INotifyPropertyChanged source,
+            string sourcePropertyName,
+            BindingMode mode = BindingMode.OneWay,
+            Func<TSource, TDest> convert = null,
+            Func<TDest, TSource> convertBack = null,
+            object converterParameter = null,
+            string converterLanguage = null,
+            UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
+            object targetNullValue = null,
+            object fallbackValue = null, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = -1
+        ) where TBindable : DependencyObject
+        {
+            IValueConverter converter = null;
+            if (convert is not null || convertBack is not null)
+                converter = new FuncConverter<TSource, TDest, object>(convert, convertBack, filePath, lineNumber);
+            return Bind(target, targetProperty, source, sourcePropertyName, mode, converter, converterParameter, converterLanguage, updateSourceTrigger, targetNullValue, fallbackValue, filePath, lineNumber);
+        }
+        /*
         /// <summary>Bind to a specified property</summary>
         public static TBindable Bind<TBindable>(
-			this TBindable target,
-			DependencyProperty targetProperty,
-			object source,
-			string path = null,
-			BindingMode mode = BindingMode.OneWay,
-			IValueConverter converter = null,
-			object converterParameter = null,
-			string converterLanguage = null,
-			UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
-			object targetNullValue = null,
-			object fallbackValue = null, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = -1
-		) where TBindable : DependencyObject
-		{
-			CheckArguments(target, targetProperty, source, path, converter, converterParameter, converterLanguage, filePath, lineNumber);
-
-            var binding = new Binding
-			{
-				Source = source,
-				Mode = mode,
-				Converter = converter,
-				ConverterParameter = converterParameter,
-				UpdateSourceTrigger = updateSourceTrigger,
-				TargetNullValue = targetNullValue,
-				FallbackValue = fallbackValue
-			};
-			if (!string.IsNullOrWhiteSpace(converterLanguage))
-				binding.ConverterLanguage = converterLanguage;
-			if (!string.IsNullOrWhiteSpace(path))
-				binding.Path = new PropertyPath(path);
-			BindingOperations.SetBinding(target, targetProperty, binding);
-
-			return target;
-		}
-
-		/// <summary>Bind to a specified property with inline conversion</summary>
-		public static TBindable Bind<TBindable, TSource, TDest>(
-			this TBindable target,
-			DependencyProperty targetProperty,
-			object source = null,
-			string path = null,
-			BindingMode mode = BindingMode.OneWay,
-			Func<TSource, TDest> convert = null,
-			Func<TDest, TSource> convertBack = null,
-			object converterParameter = null,
-			string converterLanguage = null,
-			UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
-			object targetNullValue = null,
-			object fallbackValue = null, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = -1
+            this TBindable target,
+            DependencyProperty targetProperty,
+            object source,
+            string path = null,
+            BindingMode mode = BindingMode.OneWay,
+            IValueConverter converter = null,
+            object converterParameter = null,
+            string converterLanguage = null,
+            UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
+            object targetNullValue = null,
+            object fallbackValue = null, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = -1
         ) where TBindable : DependencyObject
-		{
+        {
+            CheckArguments(target, targetProperty, source, path, converter, converterParameter, converterLanguage, filePath, lineNumber);
+
+            /*
+            var binding = new Binding
+            {
+                Source = source,
+                Mode = mode,
+                Converter = converter,
+                ConverterParameter = converterParameter,
+                UpdateSourceTrigger = updateSourceTrigger,
+                TargetNullValue = targetNullValue,
+                FallbackValue = fallbackValue
+            };
+            if (!string.IsNullOrWhiteSpace(converterLanguage))
+                binding.ConverterLanguage = converterLanguage;
+            if (!string.IsNullOrWhiteSpace(path))
+                binding.Path = new PropertyPath(path);
+            BindingOperations.SetBinding(target, targetProperty, binding);
+]
+            return target;
+        }
+
+        /// <summary>Bind to a specified property with inline conversion</summary>
+        public static TBindable Bind<TBindable, TSource, TDest>(
+            this TBindable target,
+            DependencyProperty targetProperty,
+            object source = null,
+            string path = null,
+            BindingMode mode = BindingMode.OneWay,
+            Func<TSource, TDest> convert = null,
+            Func<TDest, TSource> convertBack = null,
+            object converterParameter = null,
+            string converterLanguage = null,
+            UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
+            object targetNullValue = null,
+            object fallbackValue = null, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = -1
+        ) where TBindable : DependencyObject
+        {
             var converter = new FuncConverter<TSource, TDest, object>(convert, convertBack, filePath, lineNumber);
             CheckArguments(target, targetProperty, source, path, converter, converterParameter, converterLanguage, filePath, lineNumber);
 
-			var binding = new Binding
-			{
-				Source = source,
-				Mode = mode,
-				Converter = converter,
-				ConverterParameter = converterParameter,
-				UpdateSourceTrigger = updateSourceTrigger,
-				TargetNullValue = targetNullValue,
-				FallbackValue = fallbackValue
-			};
-			if (!string.IsNullOrWhiteSpace(converterLanguage))
-				binding.ConverterLanguage = converterLanguage;
-			if (!string.IsNullOrWhiteSpace(path))
-				binding.Path = new PropertyPath(path);
-			BindingOperations.SetBinding(target, targetProperty, binding);
-			return target;
-		}
+            var binding = new Binding
+            {
+                Source = source,
+                Mode = mode,
+                Converter = converter,
+                ConverterParameter = converterParameter,
+                UpdateSourceTrigger = updateSourceTrigger,
+                TargetNullValue = targetNullValue,
+                FallbackValue = fallbackValue
+            };
+            if (!string.IsNullOrWhiteSpace(converterLanguage))
+                binding.ConverterLanguage = converterLanguage;
+            if (!string.IsNullOrWhiteSpace(path))
+                binding.Path = new PropertyPath(path);
+            BindingOperations.SetBinding(target, targetProperty, binding);
+            return target;
+        }
 
-		/// <summary>Bind to a specified property with inline conversion and conversion parameter</summary>
-		public static TBindable Bind<TBindable, TSource, TParam, TDest>(
-			this TBindable target,
-			DependencyProperty targetProperty,
-			object source = null,
-			string path = null,
-			BindingMode mode = BindingMode.OneWay,
-			Func<TSource, TParam, TDest> convert = null,
-			Func<TDest, TParam, TSource> convertBack = null,
-			object converterParameter = null,
-			string converterLanguage = null,
-			UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
-			object targetNullValue = null,
-			object fallbackValue = null, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = -1
+        /// <summary>Bind to a specified property with inline conversion and conversion parameter</summary>
+        public static TBindable Bind<TBindable, TSource, TParam, TDest>(
+            this TBindable target,
+            DependencyProperty targetProperty,
+            object source = null,
+            string path = null,
+            BindingMode mode = BindingMode.OneWay,
+            Func<TSource, TParam, TDest> convert = null,
+            Func<TDest, TParam, TSource> convertBack = null,
+            object converterParameter = null,
+            string converterLanguage = null,
+            UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
+            object targetNullValue = null,
+            object fallbackValue = null, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = -1
         ) where TBindable : DependencyObject
-		{
+        {
             var converter = new FuncConverter<TSource, TDest, TParam>(convert, convertBack, filePath, lineNumber);
             CheckArguments(target, targetProperty, source, path, converter, converterParameter, converterLanguage, filePath, lineNumber);
 
             var binding = new Binding
-			{
-				Source = source,
-				Mode = mode,
-				Converter = converter,
-				ConverterParameter = converterParameter,
-				UpdateSourceTrigger = updateSourceTrigger,
-				TargetNullValue = targetNullValue,
-				FallbackValue = fallbackValue
-			};
-			if (!string.IsNullOrWhiteSpace(converterLanguage))
-				binding.ConverterLanguage = converterLanguage;
-			if (!string.IsNullOrWhiteSpace(path))
-				binding.Path = new PropertyPath(path);
-			BindingOperations.SetBinding(target, targetProperty, binding);
-			return target;
-		}
+            {
+                Source = source,
+                Mode = mode,
+                Converter = converter,
+                ConverterParameter = converterParameter,
+                UpdateSourceTrigger = updateSourceTrigger,
+                TargetNullValue = targetNullValue,
+                FallbackValue = fallbackValue
+            };
+            if (!string.IsNullOrWhiteSpace(converterLanguage))
+                binding.ConverterLanguage = converterLanguage;
+            if (!string.IsNullOrWhiteSpace(path))
+                binding.Path = new PropertyPath(path);
+            BindingOperations.SetBinding(target, targetProperty, binding);
+            return target;
+        }
+        */
         #endregion
 
         /*
-		/// <summary>Bind to the default property</summary>
-		public static TBindable Bind<TBindable>(
-			this TBindable bindable,
-			string path = bindingContextPath,
-			BindingMode mode = BindingMode.OneWay,
-			IValueConverter converter = null,
-			object converterParameter = null,
-			string stringFormat = null,
-			object source = null,
-			object targetNullValue = null,
-			object fallbackValue = null
-		) where TBindable : DependencyObject
-		{
-			bindable.Bind(
-				DefaultBindableProperties.GetFor(bindable),
-				path, mode, converter, converterParameter, stringFormat, source, targetNullValue, fallbackValue
-			);
-			return bindable;
-		}
+        /// <summary>Bind to the default property</summary>
+        public static TBindable Bind<TBindable>(
+            this TBindable bindable,
+            string path = bindingContextPath,
+            BindingMode mode = BindingMode.OneWay,
+            IValueConverter converter = null,
+            object converterParameter = null,
+            string stringFormat = null,
+            object source = null,
+            object targetNullValue = null,
+            object fallbackValue = null
+        ) where TBindable : DependencyObject
+        {
+            bindable.Bind(
+                DefaultBindableProperties.GetFor(bindable),
+                path, mode, converter, converterParameter, stringFormat, source, targetNullValue, fallbackValue
+            );
+            return bindable;
+        }
 
-		/// <summary>Bind to the default property with inline conversion</summary>
-		public static TBindable Bind<TBindable, TSource, TDest>(
-			this TBindable bindable,
-			string path = bindingContextPath,
-			BindingMode mode = BindingMode.OneWay,
-			Func<TSource, TDest> convert = null,
-			Func<TDest, TSource> convertBack = null,
-			object converterParameter = null,
-			string stringFormat = null,
-			object source = null,
-			object targetNullValue = null,
-			object fallbackValue = null
-		) where TBindable : DependencyObject
-		{
-			var converter = new FuncConverter<TSource, TDest, object>(convert, convertBack);
-			bindable.Bind(
-				DefaultBindableProperties.GetFor(bindable),
-				path, mode, converter, converterParameter, stringFormat, source, targetNullValue, fallbackValue
-			);
-			return bindable;
-		}
+        /// <summary>Bind to the default property with inline conversion</summary>
+        public static TBindable Bind<TBindable, TSource, TDest>(
+            this TBindable bindable,
+            string path = bindingContextPath,
+            BindingMode mode = BindingMode.OneWay,
+            Func<TSource, TDest> convert = null,
+            Func<TDest, TSource> convertBack = null,
+            object converterParameter = null,
+            string stringFormat = null,
+            object source = null,
+            object targetNullValue = null,
+            object fallbackValue = null
+        ) where TBindable : DependencyObject
+        {
+            var converter = new FuncConverter<TSource, TDest, object>(convert, convertBack);
+            bindable.Bind(
+                DefaultBindableProperties.GetFor(bindable),
+                path, mode, converter, converterParameter, stringFormat, source, targetNullValue, fallbackValue
+            );
+            return bindable;
+        }
 
-		/// <summary>Bind to the default property with inline conversion and conversion parameter</summary>
-		public static TBindable Bind<TBindable, TSource, TParam, TDest>(
-			this TBindable bindable,
-			string path = bindingContextPath,
-			BindingMode mode = BindingMode.OneWay,
-			Func<TSource, TParam, TDest> convert = null,
-			Func<TDest, TParam, TSource> convertBack = null,
-			object converterParameter = null,
-			string stringFormat = null,
-			object source = null,
-			object targetNullValue = null,
-			object fallbackValue = null
-		) where TBindable : DependencyObject
-		{
-			var converter = new FuncConverter<TSource, TDest, TParam>(convert, convertBack);
-			bindable.Bind(
-				DefaultBindableProperties.GetFor(bindable),
-				path, mode, converter, converterParameter, stringFormat, source, targetNullValue, fallbackValue
-			);
-			return bindable;
-		}
+        /// <summary>Bind to the default property with inline conversion and conversion parameter</summary>
+        public static TBindable Bind<TBindable, TSource, TParam, TDest>(
+            this TBindable bindable,
+            string path = bindingContextPath,
+            BindingMode mode = BindingMode.OneWay,
+            Func<TSource, TParam, TDest> convert = null,
+            Func<TDest, TParam, TSource> convertBack = null,
+            object converterParameter = null,
+            string stringFormat = null,
+            object source = null,
+            object targetNullValue = null,
+            object fallbackValue = null
+        ) where TBindable : DependencyObject
+        {
+            var converter = new FuncConverter<TSource, TDest, TParam>(convert, convertBack);
+            bindable.Bind(
+                DefaultBindableProperties.GetFor(bindable),
+                path, mode, converter, converterParameter, stringFormat, source, targetNullValue, fallbackValue
+            );
+            return bindable;
+        }
 
-		/// <summary>Bind to the <typeparamref name="TBindable"/>'s default Command and CommandParameter properties </summary>
-		/// <param name="parameterPath">If null, no binding is created for the CommandParameter property</param>
-		public static TBindable BindCommand<TBindable>(
-			this TBindable bindable,
+        /// <summary>Bind to the <typeparamref name="TBindable"/>'s default Command and CommandParameter properties </summary>
+        /// <param name="parameterPath">If null, no binding is created for the CommandParameter property</param>
+        public static TBindable BindCommand<TBindable>(
+            this TBindable bindable,
 
-			string path = bindingContextPath,
-			object source = null,
-			string parameterPath = bindingContextPath,
-			object parameterSource = null
-		) where TBindable : DependencyObject
-		{
-			(var commandProperty, var parameterProperty) = DefaultBindableProperties.GetForCommand(bindable);
+            string path = bindingContextPath,
+            object source = null,
+            string parameterPath = bindingContextPath,
+            object parameterSource = null
+        ) where TBindable : DependencyObject
+        {
+            (var commandProperty, var parameterProperty) = DefaultBindableProperties.GetForCommand(bindable);
 
-			bindable.SetBinding(commandProperty, new Binding(path: path, source: source));
+            bindable.SetBinding(commandProperty, new Binding(path: path, source: source));
 
-			if (parameterPath != null)
-				bindable.SetBinding(parameterProperty, new Binding(path: parameterPath, source: parameterSource));
+            if (parameterPath != null)
+                bindable.SetBinding(parameterProperty, new Binding(path: parameterPath, source: parameterSource));
 
-			return bindable;
-		}
-		*/
+            return bindable;
+        }
+        */
 
 
     }
