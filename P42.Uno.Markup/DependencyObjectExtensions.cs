@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -378,6 +379,129 @@ namespace P42.Uno.Markup
 			BindingOperations.SetBinding(target, targetProperty, binding);
 			return target;
 		}
+        #endregion
+
+
+        #region Workaround Binding
+
+        static readonly DependencyProperty P42BindingsProperty = DependencyProperty.RegisterAttached("P42Bindings", typeof(BindingCollection), typeof(DependencyObjectExtensions), new PropertyMetadata(default));
+
+        static DependencyObject SetWorkaroundBindings(this DependencyObject dependencyObject, BindingCollection value)
+        {
+            dependencyObject.SetValue(P42BindingsProperty, value);
+            return dependencyObject;
+        }
+
+        static BindingCollection GetWorkaroundBindings(this DependencyObject dependencyObject)
+        {
+            if ((BindingCollection)dependencyObject.GetValue(P42BindingsProperty) is not BindingCollection bindingCollection)
+            {
+                bindingCollection = new();
+                dependencyObject.SetValue(P42BindingsProperty, bindingCollection);
+            }
+            return bindingCollection;
+        }
+
+        public static TBindable WBind<TBindable>(
+            this TBindable target,
+            DependencyProperty targetProperty,
+            INotifyPropertyChanged source,
+            string sourcePropertyName,
+            BindingMode mode = BindingMode.OneWay,
+
+            IValueConverter converter = null,
+            object converterParameter = null,
+            string converterLanguage = null,
+            UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
+            object targetNullValue = null,
+            object fallbackValue = null, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = -1
+        ) where TBindable : DependencyObject
+        {
+            var binding = new WorkaroundBinding
+                (
+                    target, targetProperty,
+                    source, sourcePropertyName,
+                    mode,
+                    converter, converterParameter, converterLanguage
+                );
+
+            var bindings = target.GetWorkaroundBindings();
+            bindings.Add(binding);
+            return target;
+
+        }
+
+        public static TBindable WBind<TBindable>(
+            this TBindable target,
+            DependencyProperty targetProperty,
+            DependencyObject source,
+            DependencyProperty sourceProperty,
+            BindingMode mode = BindingMode.OneWay,
+
+            IValueConverter converter = null,
+            object converterParameter = null,
+            string converterLanguage = null,
+            UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
+            object targetNullValue = null,
+
+            object fallbackValue = null, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = -1
+        ) where TBindable : DependencyObject
+        {
+            var binding = new WorkaroundBinding
+                (
+                    target, targetProperty,
+                    source, sourceProperty,
+                    mode,
+                    converter, converterParameter, converterLanguage
+                );
+
+            var bindings = target.GetWorkaroundBindings();
+            bindings.Add(binding);
+            return target;
+        }
+
+        public static TBindable WBind<TBindable, TSource, TDest>(
+            this TBindable target,
+            DependencyProperty targetProperty,
+            DependencyObject source,
+            DependencyProperty sourceProperty,
+            BindingMode mode = BindingMode.OneWay,
+            Func<TSource, TDest> convert = null,
+            Func<TDest, TSource> convertBack = null,
+            object converterParameter = null,
+            string converterLanguage = null,
+            UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
+            object targetNullValue = null,
+            object fallbackValue = null, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = -1
+        ) where TBindable : DependencyObject
+        {
+            IValueConverter converter = null;
+            if (convert is not null || convertBack is not null)
+                converter = new FuncConverter<TSource, TDest, object>(convert, convertBack, filePath, lineNumber);
+            return WBind(target, targetProperty, source, sourceProperty, mode, converter, converterParameter, converterLanguage, updateSourceTrigger, targetNullValue, fallbackValue, filePath, lineNumber);
+        }
+
+        public static TBindable WBind<TBindable, TSource, TDest>(
+            this TBindable target,
+            DependencyProperty targetProperty,
+            INotifyPropertyChanged source,
+            string sourcePropertyName,
+            BindingMode mode = BindingMode.OneWay,
+            Func<TSource, TDest> convert = null,
+            Func<TDest, TSource> convertBack = null,
+            object converterParameter = null,
+            string converterLanguage = null,
+            UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
+            object targetNullValue = null,
+            object fallbackValue = null, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = -1
+        ) where TBindable : DependencyObject
+        {
+            IValueConverter converter = null;
+            if (convert is not null || convertBack is not null)
+                converter = new FuncConverter<TSource, TDest, object>(convert, convertBack, filePath, lineNumber);
+            return WBind(target, targetProperty, source, sourcePropertyName, mode, converter, converterParameter, converterLanguage, updateSourceTrigger, targetNullValue, fallbackValue, filePath, lineNumber);
+        }
+
         #endregion
 
         /*
