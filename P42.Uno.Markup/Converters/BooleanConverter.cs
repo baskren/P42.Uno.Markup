@@ -76,7 +76,12 @@ namespace P42.Uno.Markup
             if (value is Visibility visibility)
                 return visibility == Visibility.Visible;
 
-            throw new InvalidCastException($"Cannot P42.Uno.Markup.BoolConverter.ConvertBack({value},{targetType}) ");
+            if (value is null)
+                return false;
+
+            return true;
+
+            //throw new InvalidCastException($"Cannot P42.Uno.Markup.BoolConverter.ConvertBack({value},{targetType}) ");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
