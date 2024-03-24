@@ -260,6 +260,9 @@ namespace P42.Uno.Markup
 			if (targetPropertyType is null)
 				return;
 
+            if (targetPropertyType == typeof(SolidColorBrush) && sourceType == typeof(Brush))
+                return;
+
 			if (!targetPropertyType.IsAssignableFrom(sourceType))
 			{
 				var msg = $"BIND: {targetLabel} type [{targetPropertyType}] is not assignable from the type [{sourceType}] found at {sourceLabel}.  This can be a false detection in Windows platform apps.  {filePath}:{lineNumber}";
