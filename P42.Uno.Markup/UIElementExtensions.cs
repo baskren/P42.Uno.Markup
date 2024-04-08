@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -13,6 +13,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Media.Media3D;
 using ElementType = Microsoft.UI.Xaml.UIElement;
+using System.ComponentModel;
 
 namespace P42.Uno.Markup
 {
@@ -35,6 +36,11 @@ namespace P42.Uno.Markup
         public static TElement BindVisible<TElement>(this TElement element, object source, string path) where TElement : ElementType
         { element.Bind(UIElement.VisibilityProperty, source, path, converter: VisibilityConverter.Instance); return element; }
 
+        public static TElement WBindVisible<TElement>(this TElement element, DependencyObject source, DependencyProperty property) where TElement : ElementType
+        { element.WBind(UIElement.VisibilityProperty, source, property, converter: VisibilityConverter.Instance); return element; }
+
+        public static TElement WBindVisible<TElement>(this TElement element, INotifyPropertyChanged source, string path) where TElement : ElementType
+        { element.WBind(UIElement.VisibilityProperty, source, path, converter: VisibilityConverter.Instance); return element; }
 
         [Obsolete("Use .BindCollapsed")]
         public static TElement BindCollapsedFromBool<TElement>(this TElement element, object source, string path) where TElement : ElementType
@@ -42,6 +48,12 @@ namespace P42.Uno.Markup
 
         public static TElement BindCollapsed<TElement>(this TElement element, object source, string path) where TElement : ElementType
         { element.Bind(UIElement.VisibilityProperty, source, path, converter: CollapsedConverter.Instance); return element; }
+
+        public static TElement WBindCollapsed<TElement>(this TElement element, DependencyObject source, DependencyProperty property) where TElement : ElementType
+        { element.WBind(UIElement.VisibilityProperty, source, property, converter: CollapsedConverter.Instance); return element; }
+
+        public static TElement WBindCollapsed<TElement>(this TElement element, INotifyPropertyChanged source, string path) where TElement : ElementType
+        { element.WBind(UIElement.VisibilityProperty, source, path, converter: CollapsedConverter.Instance); return element; }
 
         public static bool IsVisible(this UIElement element)
             => element.Visibility == Microsoft.UI.Xaml.Visibility.Visible;
