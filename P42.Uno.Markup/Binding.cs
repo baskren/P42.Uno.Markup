@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
+using Newtonsoft.Json.Linq;
 using P42.Utils;
 using Windows.Graphics.Display;
 
@@ -69,6 +70,8 @@ internal class WorkaroundBinding : IDisposable
 
     public DependencyProperty TargetProperty;
     Type TargetPropertyType;
+    object DefaultTargetPropertyValue;
+
     DependencyProperty SourceProperty;
     Type SourcePropertyType;
 
@@ -100,6 +103,7 @@ internal class WorkaroundBinding : IDisposable
 
         TargetDependencyObject = target;
         TargetProperty = targetProperty;
+        DefaultTargetPropertyValue = target.GetValue(targetProperty);
         //if (DependencyPropertyExtensions.DependencyRegistry.TryGetValue(targetProperty, out var targetPropertyEntry))
         //    TargetPropertyType = targetPropertyEntry.PropertyType;
 
@@ -109,12 +113,17 @@ internal class WorkaroundBinding : IDisposable
         //if (DependencyPropertyExtensions.DependencyRegistry.TryGetValue(sourceProperty, out var sourcePropertyEntry))
         //    SourcePropertyType = sourcePropertyEntry.PropertyType;
 
+        ValueConverter = valueConverter;
+        ValueConverterParameter = valueConverterProperty;
+        ValueConverterLanguage = valueConverterLanguage;
+
+        //var value = source.GetValue(sourceProperty);
+        //target.SetValue(targetProperty, source.GetValue(sourceProperty));
+
+        OnSourceDependencyPropertyChanged(source, sourceProperty);
 
         switch (bindingMode)
         {
-            case BindingMode.OneTime:
-                target.SetValue(targetProperty, source.GetValue(sourceProperty));
-                break;
             case BindingMode.OneWay:
                 OnSourceDependencyPropertyChangedIndex = source.RegisterPropertyChangedCallback(sourceProperty, OnSourceDependencyPropertyChanged);
                 break;
@@ -124,9 +133,6 @@ internal class WorkaroundBinding : IDisposable
                 break;
         }
 
-        ValueConverter = valueConverter;
-        ValueConverterParameter = valueConverterProperty;
-        ValueConverterLanguage = valueConverterLanguage;
     }
 
 
@@ -161,10 +167,16 @@ internal class WorkaroundBinding : IDisposable
         SourcePropertyName = sourcePropertyName;
         SourcePropertyType = sourcePropertyInfo.PropertyType;
 
+        ValueConverter = valueConverter;
+        ValueConverterParameter = valueConverterProperty;
+        ValueConverterLanguage = valueConverterLanguage;
+
+        //target.SetValue(targetProperty, source.GetPropertyValue(sourcePropertyName));
+        OnSourceNotifyPropertyChanged(source, new PropertyChangedEventArgs(sourcePropertyName));
+
         switch (bindingMode)
         {
             case BindingMode.OneTime:
-                target.SetValue(targetProperty, source.GetPropertyValue(sourcePropertyName));
                 break;
             case BindingMode.OneWay:
                 source.PropertyChanged += OnSourceNotifyPropertyChanged;
@@ -179,49 +191,81 @@ internal class WorkaroundBinding : IDisposable
                 break;
         }
 
-        ValueConverter = valueConverter;
-        ValueConverterParameter = valueConverterProperty;
-        ValueConverterLanguage = valueConverterLanguage;
     }
 
     private void OnTargetDependencyPropertyChanged(DependencyObject sender, DependencyProperty dp)
     {
         if (TargetDependencyObject is not DependencyObject target)
             return;
+        if (TargetProperty is not DependencyProperty targetProperty)
+            return;
 
-        var value = target.GetValue(TargetProperty);
+        var value = target.GetValue(targetProperty);
 
         if (ValueConverter is IValueConverter converter)
             value = converter.ConvertBack(value, SourcePropertyType, ValueConverterParameter, ValueConverterLanguage);
 
-        SourceDependencyObject?.SetValue(SourceProperty, value);
+        if (SourceProperty is DependencyProperty sourceProperty)
+            SourceDependencyObject?.SetValue(sourceProperty, value);
 
-        if (SourceNotifyPropertyChanged is not INotifyPropertyChanged source)
-            return;
-        SourcePropertyInfo?.SetValue(source, value);
+        if (SourceNotifyPropertyChanged is INotifyPropertyChanged source)
+            SourcePropertyInfo?.SetValue(source, value);
     }
 
     private void OnSourceDependencyPropertyChanged(DependencyObject sender, DependencyProperty dp)
     {
-        if (SourceDependencyObject is not DependencyObject source)
+        if (sender != SourceDependencyObject)
             return;
-        var value = source.GetValue(SourceProperty);
-        if (ValueConverter is IValueConverter converter)
-            value = converter.Convert(value, TargetPropertyType, ValueConverterParameter, ValueConverterLanguage);
+        if (dp != SourceProperty)
+            return;
+        if (TargetDependencyObject is null)
+            return;
+        if (TargetProperty is null)
+            return;
 
+        try
+        {
+            var value = SourceDependencyObject.GetValue(SourceProperty);
+            if (ValueConverter is IValueConverter converter)
+                value = converter.Convert(value, TargetPropertyType, ValueConverterParameter, ValueConverterLanguage);
 
-        TargetDependencyObject?.SetValue(TargetProperty, value);
+            if (value is null)
+                TargetDependencyObject.ClearValue(TargetProperty);
+            else
+                TargetDependencyObject.SetValue(TargetProperty, value);
+        }
+        catch (Exception)
+        {
+            TargetDependencyObject.SetValue(TargetProperty, DefaultTargetPropertyValue);
+        }
     }
 
     private void OnSourceNotifyPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == SourcePropertyName)
         {
+            if (TargetDependencyObject is null)
+                return;
+            if (TargetProperty is null)
+                return;
             if (SourceNotifyPropertyChanged is not INotifyPropertyChanged source)
                 return;
 
-            var value = SourcePropertyInfo.GetValue(source, null);
-            TargetDependencyObject.SetValue(TargetProperty, value);
+            try
+            {
+                var value = SourcePropertyInfo.GetValue(source, null);
+                if (ValueConverter is IValueConverter converter)
+                    value = converter.Convert(value, TargetPropertyType, ValueConverterParameter, ValueConverterLanguage);
+
+                if (value is null)
+                    TargetDependencyObject.ClearValue(TargetProperty);
+                else
+                    TargetDependencyObject.SetValue(TargetProperty, value);
+            }
+            catch (Exception)
+            {
+                TargetDependencyObject.SetValue(TargetProperty, DefaultTargetPropertyValue);
+            }
         }
     }
 
