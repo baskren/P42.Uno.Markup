@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Uno.Sdk">
 
 
   <PropertyGroup>
@@ -14,7 +14,7 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Uno.WinUI" Version="5.1.104" />
+    <PackageReference Include="Uno.WinUI" Version="$(UnoVersion)" />
   </ItemGroup>
 
 
