@@ -142,23 +142,24 @@ namespace P42.Uno.Markup
                            convert: (object content) => content != null ? Microsoft.UI.Xaml.Visibility.Visible : Microsoft.UI.Xaml.Visibility.Collapsed);
         }
 
+        
         public static TElement WBindFont<TElement>(this TElement target, Control source, BindingMode bindingMode = BindingMode.OneWay, object except = null) where TElement : ElementType
         {
             var excepts = InternalHelpers.GetExcepts(except);
             if (excepts is null || !excepts.Contains(nameof(Control.CharacterSpacing)))
-                target.WBind(ElementType.CharacterSpacingProperty, source, ElementType.CharacterSpacingProperty, bindingMode);
+                target.WBind(ElementType.CharacterSpacingProperty, source, Control.CharacterSpacingProperty, bindingMode);
             if (excepts is null || !excepts.Contains(nameof(Control.FontFamily)))
-                target.WBind(ElementType.FontFamilyProperty, source, ElementType.FontFamilyProperty, bindingMode);
+                target.WBind(ElementType.FontFamilyProperty, source, Control.FontFamilyProperty, bindingMode);
             if (excepts is null || !excepts.Contains(nameof(Control.FontSize)))
-                target.WBind(ElementType.FontSizeProperty, source, ElementType.FontSizeProperty, bindingMode);
+                target.WBind(ElementType.FontSizeProperty, source, Control.FontSizeProperty, bindingMode);
             if (excepts is null || !excepts.Contains(nameof(Control.FontStretch)))
-                target.WBind(ElementType.FontStretchProperty, source, ElementType.FontStretchProperty, bindingMode);
+                target.WBind(ElementType.FontStretchProperty, source, Control.FontStretchProperty, bindingMode);
             if (excepts is null || !excepts.Contains(nameof(Control.FontStyle)))
-                target.WBind(ElementType.FontStyleProperty, source, ElementType.FontStyleProperty, bindingMode);
+                target.WBind(ElementType.FontStyleProperty, source, Control.FontStyleProperty, bindingMode);
             if (excepts is null || !excepts.Contains(nameof(Control.FontWeight)))
-                target.WBind(ElementType.FontWeightProperty, source, ElementType.FontWeightProperty, bindingMode);
+                target.WBind(ElementType.FontWeightProperty, source, Control.FontWeightProperty, bindingMode);
             if (excepts is null || !excepts.Contains(nameof(Control.Foreground)))
-                target.WBind(ElementType.ForegroundProperty, source, ElementType.ForegroundProperty, bindingMode);
+                target.WBind(ElementType.ForegroundProperty, source, Control.ForegroundProperty, bindingMode);
             return target;
         }
 
@@ -167,7 +168,7 @@ namespace P42.Uno.Markup
             var excepts = InternalHelpers.GetExcepts(except);
             target.WBindFont(source, bindingMode, excepts);
             if (excepts is null || !excepts.Contains(nameof(Control.IsTextScaleFactorEnabledProperty)))
-                target.WBind(ElementType.IsTextScaleFactorEnabledProperty, source, ElementType.IsTextScaleFactorEnabledProperty, bindingMode);
+                target.WBind(ElementType.IsTextScaleFactorEnabledProperty, source, Control.IsTextScaleFactorEnabledProperty, bindingMode);
 
             return target;
         }

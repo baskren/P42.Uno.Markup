@@ -69,7 +69,7 @@ internal class WorkaroundBinding : IDisposable
     }
 
     public DependencyProperty TargetProperty;
-    Type TargetPropertyType;
+    readonly Type TargetPropertyType = null;
     object DefaultTargetPropertyValue;
 
     DependencyProperty SourceProperty;
@@ -149,15 +149,25 @@ internal class WorkaroundBinding : IDisposable
 
         if (string.IsNullOrWhiteSpace(sourcePropertyName))
             throw new ArgumentException(nameof(sourcePropertyName));
-
+        
         if (source.GetProperty(sourcePropertyName) is not PropertyInfo sourcePropertyInfo)
-            throw new ArgumentException($"Property [{sourcePropertyName}] not found in class [{source}]");
-
+        {
+            var msg = $"Property [{sourcePropertyName}] not found in class [{source}]";
+            Console.WriteLine(msg);
+            System.Diagnostics.Debug.WriteLine(msg);
+            throw new ArgumentException(msg);
+        }
+        
         SourcePropertyInfo = sourcePropertyInfo;
-
+        
         if (!SourcePropertyInfo.CanRead)
-            throw new ArgumentException($"Property [{sourcePropertyName}], in class [{source}], cannot be read.");
-
+        {
+            var msg = $"Property [{sourcePropertyName}], in class [{source}], cannot be read.";
+            Console.WriteLine(msg);
+            System.Diagnostics.Debug.WriteLine(msg);
+            throw new ArgumentException(msg);
+        }
+        
         TargetDependencyObject = target;
         TargetProperty = targetProperty;
         //if (DependencyPropertyExtensions.DependencyRegistry.TryGetValue(targetProperty, out var targetPropertyEntry))
