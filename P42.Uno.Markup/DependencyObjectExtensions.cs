@@ -166,7 +166,10 @@ namespace P42.Uno.Markup
 			}
         }
 
-		static FieldInfo FlagsAttachedField;
+#if !WINDOWS
+		static FieldInfo FlagsAttachedField = null;
+#endif
+
         static void CheckPropertyTarget<TBindable>(this TBindable target, DependencyProperty targetProperty, string filePath, int lineNumber) where TBindable : DependencyObject
 		{
 #if !WINDOWS
