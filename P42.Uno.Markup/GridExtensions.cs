@@ -216,13 +216,9 @@ namespace P42.Uno.Markup
 		{
 			grid.RowDefinitions.Clear();
 			foreach (var length in lengths)
-            {
-				if (length is RowDefinition rowDefinition)
-					grid.RowDefinitions.Add(rowDefinition);
-				else
-					grid.RowDefinitions.Add(new RowDefinition { Height = ObjectToGridLength(length) });
-			}
-			return grid;
+				grid.RowDefinitions.Add(ObjectToRowDefinition(length));
+
+            return grid;
 		}
 
 		public static TElement Rows<TElement, TEnum>(this TElement grid, params (TEnum name, GridLength length)[] rows) where TElement : ElementType where TEnum : Enum
@@ -251,12 +247,68 @@ namespace P42.Uno.Markup
 						"Rows must be defined with enum names whose values form the sequence 0,1,2,..."
 					);
 				if (!(rows[i].length is RowDefinition rowDefinition))
-					rowDefinition = new RowDefinition { Height = ObjectToGridLength(rows[i].length) };
+					rowDefinition = ObjectToRowDefinition(rows[i].length);
 				grid.RowDefinitions.Add(rowDefinition);
 			}
 			return grid;
 		}
+        
+        static bool GetArgumentAndLimitValue(this string str, string conditional, out (string arg, double limit) result)
+        {
+            result.arg = "";
+            result.limit = 0.0;
+            var index = str.IndexOf(conditional);
+            if (index < 0)
+                return false;
 
+            result.arg = index==0 ? "a" : str[..index];
+            var valueText = str[(index + conditional.Length)..];
+            if (!double.TryParse(valueText, out var value))
+                return false;
+            
+            result.limit = value;
+            return true;
+            
+        }
+        
+        static ColumnDefinition ObjectToColumnDefinition(object obj)
+        {
+            if (obj is ColumnDefinition rowDefinition)
+                return rowDefinition;
+            if (obj is not string str)
+                return new ColumnDefinition { Width = ObjectToGridLength(obj) };
+            
+            if (str.GetArgumentAndLimitValue("<=", out var lte))
+                return new ColumnDefinition { Width = ObjectToGridLength(lte.arg), MaxWidth = lte.limit };
+            if (str.GetArgumentAndLimitValue("<", out var lt))
+                return new ColumnDefinition { Width = ObjectToGridLength(lt.arg), MaxWidth = lt.limit-0.01 };
+            if (str.GetArgumentAndLimitValue(">=", out var gte))
+                return new ColumnDefinition { Width = ObjectToGridLength(gte.arg), MinWidth = lte.limit };
+            if (str.GetArgumentAndLimitValue(">=", out var gt))
+                return new ColumnDefinition { Width = ObjectToGridLength(gt.arg), MinWidth = gt.limit+0.01 };
+            
+            return new ColumnDefinition { Width = ObjectToGridLength(obj) };
+        }
+        
+        static RowDefinition ObjectToRowDefinition(object obj)
+        {
+            if (obj is RowDefinition rowDefinition)
+                return rowDefinition; 
+            if (obj is not string str)
+                return new RowDefinition { Height = ObjectToGridLength(obj) };
+            
+            if (str.GetArgumentAndLimitValue("<=", out var lte))
+                return new RowDefinition { Height = ObjectToGridLength(lte.arg), MaxHeight = lte.limit };
+            if (str.GetArgumentAndLimitValue("<", out var lt))
+                return new RowDefinition { Height = ObjectToGridLength(lt.arg), MaxHeight = lt.limit-0.01 };
+            if (str.GetArgumentAndLimitValue(">=", out var gte))
+                return new RowDefinition { Height = ObjectToGridLength(gte.arg), MinHeight = lte.limit };
+            if (str.GetArgumentAndLimitValue(">=", out var gt))
+                return new RowDefinition { Height = ObjectToGridLength(gt.arg), MaxHeight = gt.limit+0.01 };
+
+            return new RowDefinition { Height = ObjectToGridLength(obj) };
+        }
+        
 		static GridLength ObjectToGridLength(object obj)
 		{
 			if (obj is double d)
