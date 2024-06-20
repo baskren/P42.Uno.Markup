@@ -408,6 +408,18 @@ namespace P42.Uno.Markup
             return bindingCollection;
         }
 
+        public static TBindable WUnbind<TBindable>(
+            this TBindable target,
+            DependencyProperty targetProperty
+        ) where TBindable : DependencyObject
+        {
+            var bindings = target.GetWorkaroundBindings();
+            if (bindings.FirstOrDefault(b => b.TargetProperty == targetProperty) is WorkaroundBinding oldBinding)
+                oldBinding.Dispose();
+
+            return target;
+        }
+
         public static TBindable WBind<TBindable>(
             this TBindable target,
             DependencyProperty targetProperty,
@@ -423,6 +435,13 @@ namespace P42.Uno.Markup
             object fallbackValue = null, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = -1
         ) where TBindable : DependencyObject
         {
+            var bindings = target.GetWorkaroundBindings();
+            if (bindings.FirstOrDefault(b => b.TargetProperty == targetProperty) is WorkaroundBinding oldBinding)
+                oldBinding.Dispose();
+
+            if (source is null)
+                return target;
+
             var binding = new WorkaroundBinding
                 (
                     target, targetProperty,
@@ -431,7 +450,6 @@ namespace P42.Uno.Markup
                     converter, converterParameter, converterLanguage
                 );
 
-            var bindings = target.GetWorkaroundBindings();
             bindings.Add(binding);
             return target;
 
@@ -453,6 +471,13 @@ namespace P42.Uno.Markup
             object fallbackValue = null, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = -1
         ) where TBindable : DependencyObject
         {
+            var bindings = target.GetWorkaroundBindings();
+            if (bindings.FirstOrDefault(b => b.TargetProperty == targetProperty) is WorkaroundBinding oldBinding)
+                oldBinding.Dispose();
+
+            if (source is null)
+                return target;
+
             var binding = new WorkaroundBinding
                 (
                     target, targetProperty,
@@ -461,7 +486,6 @@ namespace P42.Uno.Markup
                     converter, converterParameter, converterLanguage
                 );
 
-            var bindings = target.GetWorkaroundBindings();
             bindings.Add(binding);
             return target;
         }
