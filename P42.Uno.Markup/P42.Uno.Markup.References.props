@@ -7,29 +7,14 @@
   
   <ItemGroup>
     <ProjectReference Condition=" '$(Configuration)' != 'Release' " Include="..\..\P42.Utils\P42.Utils.Uno\P42.Utils.Uno.csproj" />
+    <PackageReference Condition=" '$(Configuration)' == 'Release' " Include="P42.Utils.Uno" Version="5.2.132" />
   </ItemGroup>
+
   <!-- PLATFORM SPECIFIC REFERENCES -->
   <ItemGroup Condition=" $(TargetFramework.Contains('windows')) ">
   </ItemGroup>
   <ItemGroup Condition=" !$(TargetFramework.Contains('windows')) ">
   </ItemGroup>
-  <Choose>
-    <When Condition="  $(MSBuildProjectName.ToLower().Contains('wasm'))  OR  $(P42_TargetPlatform.ToLower().Contains('wasm'))  OR  $(SolutionName.ToLower().Contains('wasm')) ">
-      <ItemGroup>
-        <PackageReference Condition=" '$(Configuration)' == 'Release' " Include="P42.Utils.Uno.Wasm" Version="5.1.104" />
-      </ItemGroup>
-    </When>
-    <When Condition="  $(MSBuildProjectName.ToLower().Contains('skia'))  OR  $(P42_TargetPlatform.ToLower().Contains('skia'))  OR  $(SolutionName.ToLower().Contains('skia')) ">
-      <ItemGroup>
-        <PackageReference Condition=" '$(Configuration)' == 'Release' " Include="P42.Utils.Uno.Skia" Version="5.1.104" />
-      </ItemGroup>
-    </When>
-    <Otherwise>
-      <ItemGroup>
-        <PackageReference Condition=" '$(Configuration)' == 'Release' " Include="P42.Utils.Uno" Version="5.1.104" />
-      </ItemGroup>
-    </Otherwise>
-  </Choose>
 
 
 </Project>
