@@ -18,11 +18,17 @@ public static class MenuFlyoutSubItemExtensions
     public static ElementType Icon(this ElementType element, Symbol value) 
     { element.Icon = new SymbolIcon { Symbol = value }; return element; }
 
-    public static ElementType Icon(this ElementType element, string glyph, FontFamily fontFamily) 
+    public static ElementType Icon(this ElementType element, string glyph, Microsoft.UI.Xaml.Media.FontFamily fontFamily) 
     { element.Icon = new FontIcon { FontFamily = fontFamily, Glyph = glyph }; return element; }
 
-    public static ElementType Icon(this ElementType element, string glyph, FontFamily fontFamily, double fontSize) 
+    public static ElementType Icon(this ElementType element, string glyph, string fontFamily)
+    { element.Icon = new FontIcon { FontFamily = new FontFamily(fontFamily), Glyph = glyph }; return element; }
+
+    public static ElementType Icon(this ElementType element, string glyph, Microsoft.UI.Xaml.Media.FontFamily fontFamily, double fontSize) 
     { element.Icon = new FontIcon { FontFamily = fontFamily, FontSize = fontSize, Glyph = glyph }; return element; }
+
+    public static ElementType Icon(this ElementType element, string glyph, string fontFamily, double fontSize)
+    { element.Icon = new FontIcon { FontFamily = new FontFamily(fontFamily), FontSize = fontSize, Glyph = glyph }; return element; }
 
     public static ElementType Icon(this ElementType element, Geometry path) 
     { element.Icon = new PathIcon { Data = path }; return element; }

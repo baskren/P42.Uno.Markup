@@ -158,11 +158,11 @@ namespace P42.Uno.Markup
         { element.CalendarViewDayItemStyle = value; return element; }
 
         #region DayItemFontFamily
-        public static TElement DayItemFontFamily<TElement>(this TElement element, FontFamily family) where TElement : ElementType
+        public static TElement DayItemFontFamily<TElement>(this TElement element, Microsoft.UI.Xaml.Media.FontFamily family) where TElement : ElementType
         { element.DayItemFontFamily = family; return element; }
 
         public static TElement DayItemFontFamily<TElement>(this TElement element, string family) where TElement : ElementType
-        { element.DayItemFontFamily = new Microsoft.UI.Xaml.Media.FontFamily(family); return element; }
+        { element.DayItemFontFamily = new FontFamily(family); return element; }
         #endregion
 
         public static TElement DayItemFontSize<TElement>(this TElement element, double value) where TElement : ElementType
@@ -201,11 +201,11 @@ namespace P42.Uno.Markup
         { element.FirstDayOfWeek = value; return element; }
 
         #region FirstOfMonthLabelFontFamily
-        public static TElement FirstOfMonthLabelFontFamily<TElement>(this TElement element, FontFamily family) where TElement : ElementType
+        public static TElement FirstOfMonthLabelFontFamily<TElement>(this TElement element, Microsoft.UI.Xaml.Media.FontFamily family) where TElement : ElementType
         { element.FirstOfMonthLabelFontFamily = family; return element; }
 
         public static TElement FirstOfMonthLabelFontFamily<TElement>(this TElement element, string family) where TElement : ElementType
-        { element.FirstOfMonthLabelFontFamily = new Microsoft.UI.Xaml.Media.FontFamily(family); return element; }
+        { element.FirstOfMonthLabelFontFamily = new FontFamily(family); return element; }
         #endregion
 
         public static TElement FirstOfMonthLabelFontSize<TElement>(this TElement element, double value) where TElement : ElementType
@@ -221,11 +221,11 @@ namespace P42.Uno.Markup
         { element.FirstOfMonthLabelMargin = value; return element; }
 
         #region FirstOfYearDecadeLabelFontFamily
-        public static TElement FirstOfYearDecadeLabelFontFamily<TElement>(this TElement element, FontFamily family) where TElement : ElementType
+        public static TElement FirstOfYearDecadeLabelFontFamily<TElement>(this TElement element, Microsoft.UI.Xaml.Media.FontFamily family) where TElement : ElementType
         { element.FirstOfYearDecadeLabelFontFamily = family; return element; }
 
         public static TElement FirstOfYearDecadeLabelFontFamily<TElement>(this TElement element, string family) where TElement : ElementType
-        { element.FirstOfYearDecadeLabelFontFamily = new Microsoft.UI.Xaml.Media.FontFamily(family); return element; }
+        { element.FirstOfYearDecadeLabelFontFamily = new FontFamily(family); return element; }
         #endregion
 
         public static TElement FirstOfYearDecadeLabelFontSize<TElement>(this TElement element, double value) where TElement : ElementType
@@ -290,11 +290,11 @@ namespace P42.Uno.Markup
         { element.MinDate = value; return element; }
 
         #region MonthYearItemFontFamily
-        public static TElement MonthYearItemFontFamily<TElement>(this TElement element, FontFamily family) where TElement : ElementType
+        public static TElement MonthYearItemFontFamily<TElement>(this TElement element, Microsoft.UI.Xaml.Media.FontFamily family) where TElement : ElementType
         { element.MonthYearItemFontFamily = family; return element; }
 
         public static TElement MonthYearItemFontFamily<TElement>(this TElement element, string family) where TElement : ElementType
-        { element.MonthYearItemFontFamily = new Microsoft.UI.Xaml.Media.FontFamily(family); return element; }
+        { element.MonthYearItemFontFamily = new FontFamily(family); return element; }
         #endregion
 
         public static TElement MonthYearItemFontSize<TElement>(this TElement element, double value) where TElement : ElementType

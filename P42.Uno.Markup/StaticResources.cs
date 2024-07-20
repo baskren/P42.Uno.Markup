@@ -46,6 +46,6 @@ namespace P42.Uno.Markup
             return default;
         }
 
-        public static FontFamily SymbolThemeFontFamily => TryGetAppResourceAs<FontFamily>("SymbolThemeFontFamily");
+        public static Microsoft.UI.Xaml.Media.FontFamily SymbolThemeFontFamily => TryGetAppResourceAs<Microsoft.UI.Xaml.Media.FontFamily>("SymbolThemeFontFamily");
     }
 }

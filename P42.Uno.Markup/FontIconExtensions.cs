@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -74,11 +74,11 @@ namespace P42.Uno.Markup
 
 
         #region FontFamily
-        public static TElement FontFamily<TElement>(this TElement element, FontFamily family) where TElement : ElementType
+        public static TElement FontFamily<TElement>(this TElement element, Microsoft.UI.Xaml.Media.FontFamily family) where TElement : ElementType
         { element.FontFamily = family; return element; }
 
         public static TElement FontFamily<TElement>(this TElement element, string family) where TElement : ElementType
-        { element.FontFamily = new Microsoft.UI.Xaml.Media.FontFamily(family); return element; }
+        { element.FontFamily = new FontFamily(family); return element; }
         #endregion
 
         public static TElement TextScaleFactorEnabled<TElement>(this TElement element, bool value = true) where TElement : ElementType

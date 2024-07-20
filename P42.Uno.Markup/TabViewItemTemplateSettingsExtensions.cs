@@ -18,11 +18,17 @@ public static class TabViewItemTemplateSettingsExtensions
     public static TElement Icon<TElement>(this TElement element, Symbol value) where TElement : ElementType
     { element.IconElement = new SymbolIcon { Symbol = value }; return element; }
 
-    public static TElement Icon<TElement>(this TElement element, string glyph, FontFamily fontFamily) where TElement : ElementType
+    public static TElement Icon<TElement>(this TElement element, string glyph, Microsoft.UI.Xaml.Media.FontFamily fontFamily) where TElement : ElementType
     { element.IconElement = new FontIcon { FontFamily = fontFamily, Glyph = glyph }; return element; }
 
-    public static TElement Icon<TElement>(this TElement element, string glyph, FontFamily fontFamily, double fontSize) where TElement : ElementType
+    public static TElement Icon<TElement>(this TElement element, string glyph, string fontFamily) where TElement : ElementType
+    { element.IconElement = new FontIcon { FontFamily = new FontFamily(fontFamily), Glyph = glyph }; return element; }
+
+    public static TElement Icon<TElement>(this TElement element, string glyph, Microsoft.UI.Xaml.Media.FontFamily fontFamily, double fontSize) where TElement : ElementType
     { element.IconElement = new FontIcon { FontFamily = fontFamily, FontSize=fontSize, Glyph = glyph }; return element; }
+
+    public static TElement Icon<TElement>(this TElement element, string glyph, string fontFamily, double fontSize) where TElement : ElementType
+    { element.IconElement = new FontIcon { FontFamily = new FontFamily(fontFamily), FontSize = fontSize, Glyph = glyph }; return element; }
 
     public static TElement Icon<TElement>(this TElement element, Geometry path) where TElement : ElementType
     { element.IconElement = new PathIcon { Data = path }; return element; }

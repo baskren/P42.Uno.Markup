@@ -24,11 +24,11 @@ namespace P42.Uno.Markup
         { element.CharacterSpacing = thousanthsOfAnEm; return element; }
 
         #region FontFamily
-        public static ElementType FontFamily(this ElementType element, FontFamily family)
+        public static ElementType FontFamily(this ElementType element, Microsoft.UI.Xaml.Media.FontFamily family)
         { element.FontFamily = family; return element; }
 
         public static ElementType FontFamily(this ElementType element, string family)
-        { element.FontFamily = new Microsoft.UI.Xaml.Media.FontFamily(family); return element; }
+        { element.FontFamily = new FontFamily(family); return element; }
         #endregion
 
         public static ElementType FontSize(this ElementType element, double size)
