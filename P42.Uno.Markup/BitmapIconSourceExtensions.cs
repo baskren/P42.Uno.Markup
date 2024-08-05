@@ -1,14 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Text;
-using Microsoft.UI.Text;
-using Microsoft.UI.Xaml.Media;
 using ElementType = Microsoft.UI.Xaml.Controls.BitmapIconSource;
 using System.Reflection;
-using Microsoft.UI.Xaml.Media.Imaging;
 
 namespace P42.Uno.Markup
 {

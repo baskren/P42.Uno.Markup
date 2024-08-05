@@ -6,8 +6,6 @@ using Microsoft.UI.Xaml.Media;
 using System;
 using System.Collections;
 using Windows.UI;
-using System.Linq;
-using System.Collections.ObjectModel;
 
 namespace P42.Uno.Markup
 {
@@ -117,7 +115,7 @@ namespace P42.Uno.Markup
                         return boolValue ? brush : null;
                     if (parameter is Color color)
                         return boolValue ? new SolidColorBrush(color) : null;
-                    return boolValue ? new SolidColorBrush(Colors.Red) : null;
+                    return boolValue ? new SolidColorBrush(Microsoft.UI.Colors.Red) : null;
                 }
                 if (targetType == typeof(string))
                     return boolValue

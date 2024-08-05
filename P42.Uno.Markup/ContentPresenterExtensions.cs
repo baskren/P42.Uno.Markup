@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI;
 using Windows.UI.Text;
 using Microsoft.UI.Xaml;
@@ -12,7 +8,6 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Text;
 using ElementType = Microsoft.UI.Xaml.Controls.ContentPresenter;
-using System.Runtime.CompilerServices;
 
 namespace P42.Uno.Markup
 {

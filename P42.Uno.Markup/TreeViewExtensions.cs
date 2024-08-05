@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ElementType = Microsoft.UI.Xaml.Controls.TreeView;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
 using Windows.Foundation;
-using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Media.Animation;
 
 namespace P42.Uno.Markup

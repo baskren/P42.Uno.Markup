@@ -1,15 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
-using Newtonsoft.Json.Linq;
 using P42.Utils;
-using Windows.Graphics.Display;
 
 namespace P42.Uno.Markup;
 internal class WorkaroundBinding : IDisposable

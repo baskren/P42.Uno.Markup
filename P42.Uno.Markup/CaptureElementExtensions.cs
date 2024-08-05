@@ -1,14 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Windows.Foundation;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Windows.Media.Capture;
-using Microsoft.UI.Xaml.Media;
+
 /* NOT SUPPORTED IN THIS VERSION
 using ElementType = Microsoft.UI.Xaml.Controls.CaptureElement;
 

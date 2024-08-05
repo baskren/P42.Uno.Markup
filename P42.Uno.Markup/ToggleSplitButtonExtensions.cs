@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ElementType = Microsoft.UI.Xaml.Controls.ToggleSplitButton;
+﻿using ElementType = Microsoft.UI.Xaml.Controls.ToggleSplitButton;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml;
 using Windows.Foundation;
 
 namespace P42.Uno.Markup

@@ -2,10 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using ElementType = Microsoft.UI.Xaml.Controls.NavigationViewItem;
 using Microsoft.UI.Xaml.Media;

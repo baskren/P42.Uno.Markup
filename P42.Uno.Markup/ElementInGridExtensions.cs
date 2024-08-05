@@ -1,13 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Newtonsoft.Json.Linq;
 using ElementType = Microsoft.UI.Xaml.UIElement;
 
 namespace P42.Uno.Markup

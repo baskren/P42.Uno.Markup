@@ -1,10 +1,5 @@
-using Microsoft.UI;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Media;
 using System;
-using Windows.UI;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace P42.Uno.Markup
 {

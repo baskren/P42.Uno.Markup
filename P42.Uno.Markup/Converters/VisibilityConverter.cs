@@ -1,13 +1,6 @@
-
-using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Media;
 using System;
-using System.Collections;
-using Windows.UI;
-using System.Linq;
-using System.Collections.ObjectModel;
 
 namespace P42.Uno.Markup
 {

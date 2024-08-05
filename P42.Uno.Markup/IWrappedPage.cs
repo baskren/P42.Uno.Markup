@@ -1,4 +1,3 @@
-using System;
 using Microsoft.UI.Xaml.Navigation;
 
 namespace P42.Uno

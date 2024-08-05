@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
@@ -103,7 +99,7 @@ namespace P42.Uno.Markup
                 return new SolidColorBrush(color.AssureGesturable());
             }
             else if (b is null)
-                return new SolidColorBrush(Colors.Gray.WithAlpha(0x1));
+                return new SolidColorBrush(Microsoft.UI.Colors.Gray.WithAlpha(0x1));
 
             return b;
         }
@@ -119,7 +115,7 @@ namespace P42.Uno.Markup
                 return new SolidColorBrush(color.AsGesterableEnabled(isEnabled));
             }
             else if (b is null && isEnabled)
-                return new SolidColorBrush(Colors.Gray.WithAlpha(0x1));
+                return new SolidColorBrush(Microsoft.UI.Colors.Gray.WithAlpha(0x1));
 
             return b;
         }

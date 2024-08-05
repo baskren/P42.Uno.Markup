@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI;
 using Microsoft.UI.Xaml.Controls;
 using ElementType = Microsoft.UI.Xaml.Controls.WrapGrid;
 using Microsoft.UI.Xaml;

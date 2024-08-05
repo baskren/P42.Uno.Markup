@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ElementType = Microsoft.UI.Xaml.Shapes.Rectangle;
+﻿using ElementType = Microsoft.UI.Xaml.Shapes.Rectangle;
 
 namespace P42.Uno.Markup
 {
