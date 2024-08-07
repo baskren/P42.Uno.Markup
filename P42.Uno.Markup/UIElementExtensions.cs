@@ -31,6 +31,9 @@ namespace P42.Uno.Markup
         public static TElement BindVisible<TElement>(this TElement element, object source, string path) where TElement : ElementType
         { element.Bind(UIElement.VisibilityProperty, source, path, converter: VisibilityConverter.Instance); return element; }
 
+        public static TElement WBindVisible<TElement>(this TElement element, DependencyProperty property) where TElement : ElementType
+        { element.WBind(UIElement.VisibilityProperty, element, property, converter: VisibilityConverter.Instance); return element; }
+
         public static TElement WBindVisible<TElement>(this TElement element, DependencyObject source, DependencyProperty property) where TElement : ElementType
         { element.WBind(UIElement.VisibilityProperty, source, property, converter: VisibilityConverter.Instance); return element; }
 
@@ -46,6 +49,9 @@ namespace P42.Uno.Markup
 
         public static TElement WBindCollapsed<TElement>(this TElement element, DependencyObject source, DependencyProperty property) where TElement : ElementType
         { element.WBind(UIElement.VisibilityProperty, source, property, converter: CollapsedConverter.Instance); return element; }
+
+        public static TElement WBindCollapsed<TElement>(this TElement element, DependencyProperty property) where TElement : ElementType
+        { element.WBind(UIElement.VisibilityProperty, element, property, converter: CollapsedConverter.Instance); return element; }
 
         public static TElement WBindCollapsed<TElement>(this TElement element, INotifyPropertyChanged source, string path) where TElement : ElementType
         { element.WBind(UIElement.VisibilityProperty, source, path, converter: CollapsedConverter.Instance); return element; }
