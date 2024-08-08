@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Reflection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
@@ -14,17 +15,30 @@ internal class WorkaroundBinding : IDisposable
     {
         get
         {
-            if (TargetWeakReference?.TryGetTarget(out DependencyObject target) ?? false)
+            if (!(TargetWeakReference?.TryGetTarget(out DependencyObject target) ?? false))
+                return null;
+            
+            /* move this to calling sites (to as not to have redundant or multiple GetValue calls)
+            if (TargetProperty == null)
                 return target;
-            return null;
+
+            try
+            {
+                target.GetValue(TargetProperty);
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            */
+            
+            
+            return target;
+
         }
-        set 
-        {
-            if (value is null)
-                TargetWeakReference = null;
-            else
-                TargetWeakReference = new WeakReference<DependencyObject>(value);
-        }
+        set => TargetWeakReference = value is null 
+            ? null 
+            : new WeakReference<DependencyObject>(value); 
     }
 
     WeakReference<object> SourceWeakReference;
@@ -97,7 +111,6 @@ internal class WorkaroundBinding : IDisposable
 
         TargetDependencyObject = target;
         TargetProperty = targetProperty;
-        DefaultTargetPropertyValue = target.GetValue(targetProperty);
         //if (DependencyPropertyExtensions.DependencyRegistry.TryGetValue(targetProperty, out var targetPropertyEntry))
         //    TargetPropertyType = targetPropertyEntry.PropertyType;
 
@@ -204,16 +217,32 @@ internal class WorkaroundBinding : IDisposable
         if (TargetProperty is not DependencyProperty targetProperty)
             return;
 
-        var value = target.GetValue(targetProperty);
+        try
+        {
+            var value = target.GetValue(targetProperty);
 
-        if (ValueConverter is IValueConverter converter)
-            value = converter.ConvertBack(value, SourcePropertyType, ValueConverterParameter, ValueConverterLanguage);
+            if (ValueConverter is IValueConverter converter)
+                value = converter.ConvertBack(value, SourcePropertyType, ValueConverterParameter, ValueConverterLanguage);
 
-        if (SourceProperty is DependencyProperty sourceProperty)
-            SourceDependencyObject?.SetValue(sourceProperty, value);
+            try
+            {
+                if (SourceProperty is DependencyProperty sourceProperty)
+                    SourceDependencyObject?.SetValue(sourceProperty, value);
 
-        if (SourceNotifyPropertyChanged is INotifyPropertyChanged source)
-            SourcePropertyInfo?.SetValue(source, value);
+                if (SourceNotifyPropertyChanged is INotifyPropertyChanged source)
+                    SourcePropertyInfo?.SetValue(source, value);
+            }            
+            catch (Exception e)
+            {
+                _sourceFailed = true;
+                Dispose();
+            }
+        }
+        catch (Exception e)
+        {
+            _targetFailed = true;
+            Dispose();
+        }
     }
 
     private void OnSourceDependencyPropertyChanged(DependencyObject sender, DependencyProperty dp)
@@ -231,16 +260,28 @@ internal class WorkaroundBinding : IDisposable
         {
             var value = SourceDependencyObject.GetValue(SourceProperty);
             if (ValueConverter is IValueConverter converter)
-                value = converter.Convert(value, TargetPropertyType, ValueConverterParameter, ValueConverterLanguage);
+                value = converter.Convert(value, TargetPropertyType, ValueConverterParameter,
+                    ValueConverterLanguage);
 
-            if (value is null)
-                TargetDependencyObject.ClearValue(TargetProperty);
-            else
-                TargetDependencyObject.SetValue(TargetProperty, value);
+            try
+            {
+                if (value is null)
+                    TargetDependencyObject.ClearValue(TargetProperty);
+                else
+                    TargetDependencyObject.SetValue(TargetProperty, value);
+            }            
+            catch (Exception)
+            {
+                // We get here because the SourceDependencyObject is no longer valid
+                _targetFailed = true;
+                Dispose();
+            }
         }
         catch (Exception)
         {
-            TargetDependencyObject.SetValue(TargetProperty, DefaultTargetPropertyValue);
+            // We get here because the SourceDependencyObject is no longer valid
+            _sourceFailed = true;
+            Dispose();
         }
     }
 
@@ -261,40 +302,61 @@ internal class WorkaroundBinding : IDisposable
                 if (ValueConverter is IValueConverter converter)
                     value = converter.Convert(value, TargetPropertyType, ValueConverterParameter, ValueConverterLanguage);
 
-                if (value is null)
-                    TargetDependencyObject.ClearValue(TargetProperty);
-                else
-                    TargetDependencyObject.SetValue(TargetProperty, value);
+                try
+                {
+                    if (value is null)
+                        TargetDependencyObject.ClearValue(TargetProperty);
+                    else
+                        TargetDependencyObject.SetValue(TargetProperty, value);
+                }            
+                catch (Exception)
+                {
+                    // We get here because the SourceDependencyObject is no longer valid
+                    _targetFailed = true;
+                    Dispose();
+                }
             }
             catch (Exception)
             {
-                TargetDependencyObject.SetValue(TargetProperty, DefaultTargetPropertyValue);
+                // We get here because the SourceDependencyObject is no longer valid
+                _sourceFailed = true;
+                Dispose();
             }
         }
     }
 
+    private bool _sourceFailed;
+    private bool _targetFailed;
     protected virtual void Dispose(bool disposing)
     {
-        if (!disposedValue)
+        if (disposedValue)
+            return;
+
+        if (disposing)
         {
-            if (disposing)
+            if (!_sourceFailed)
             {
                 if (OnSourceDependencyPropertyChangedIndex > -1)
                     SourceDependencyObject?.UnregisterPropertyChangedCallback(SourceProperty, OnSourceDependencyPropertyChangedIndex);
-                if (OnTargetDependencyPropertyChangedIndex > -1) 
-                    TargetDependencyObject?.UnregisterPropertyChangedCallback(TargetProperty, OnTargetDependencyPropertyChangedIndex);
-
                 if (SourceNotifyPropertyChanged is INotifyPropertyChanged source)
                     source.PropertyChanged -= OnSourceNotifyPropertyChanged;
-
-                SourceWeakReference = null;
-                TargetWeakReference = null;
             }
 
-            // TODO: free unmanaged resources (unmanaged objects) and override finalizer
-            // TODO: set large fields to null
-            disposedValue = true;
+            if (!_targetFailed)
+            {
+                if (OnTargetDependencyPropertyChangedIndex > -1) 
+                    TargetDependencyObject?.UnregisterPropertyChangedCallback(TargetProperty, OnTargetDependencyPropertyChangedIndex);
+                TargetDependencyObject?.WUnbind(TargetProperty);
+            }
+
+
+            SourceWeakReference = null;
+            TargetWeakReference = null;
         }
+
+        // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+        // TODO: set large fields to null
+        disposedValue = true;
     }
 
     // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
