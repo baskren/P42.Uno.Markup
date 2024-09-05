@@ -14,6 +14,53 @@ namespace P42.Uno.Markup
 {
     public static class UIElementExtensions
     {
+        #region Blinking
+        
+        public static DependencyProperty IsBlinkingProperty = DependencyProperty.RegisterAttached(
+            "IsBlinking",
+            typeof(Boolean),
+            typeof(UIElementExtensions),
+            new PropertyMetadata(false));
+        
+        public static void SetIsBlinking(UIElement element, Boolean value) 
+        {
+            var isBlinking = GetIsBlinking(element);
+            if (isBlinking == value)
+                return;
+
+            element.SetValue(IsBlinkingProperty, value);
+
+            if (value)
+            {
+                P42.Utils.Timer.StartTimer(TimeSpan.FromSeconds(0.5), () =>
+                {
+                    try
+                    {
+                        if (!GetIsBlinking(element))
+                        {
+                            element.Opacity = 1;
+                            return false;
+                        }
+                        element.Opacity = element.Opacity == 1
+                            ? 0.25
+                            : 1;
+                        return true;
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
+                });
+            }
+        }
+        public static Boolean GetIsBlinking(UIElement element)
+            => (Boolean)element.GetValue(IsBlinkingProperty);
+        
+        public static TElement Blinking<TElement>(this TElement element, bool isBlinking = true) where TElement :ElementType
+        { SetIsBlinking(element, isBlinking); return element; }
+        
+        #endregion
+        
         #region Visibility
         public static TElement Visibility<TElement>(this TElement element, Visibility visibility) where TElement :ElementType
         { element.Visibility = visibility; return element; }
