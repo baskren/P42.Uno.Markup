@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Reflection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
+using P42.Serilog.QuickLog;
 using P42.Utils;
 
 namespace P42.Uno.Markup;
@@ -236,12 +237,14 @@ internal class WorkaroundBinding : IDisposable
             {
                 _sourceFailed = true;
                 Dispose();
+                QLog.Error(e);
             }
         }
         catch (Exception e)
         {
             _targetFailed = true;
             Dispose();
+            QLog.Error(e);
         }
     }
 
