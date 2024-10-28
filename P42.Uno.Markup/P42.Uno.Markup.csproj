@@ -28,6 +28,10 @@
     <!--
     <UnoFeatures></UnoFeatures>
     -->
+
+    <Platforms>AnyCPU;ARM64;X86;X64</Platforms>
+
+
   </PropertyGroup>
 
 
