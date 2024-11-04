@@ -419,7 +419,6 @@ namespace P42.Uno.Markup
         {
             var bindings = target.GetWorkaroundBindings();
             if (bindings.FirstOrDefault(b => b.TargetProperty == targetProperty) is WorkaroundBinding oldBinding)
-                oldBinding.Dispose();
                 bindings.Remove(oldBinding);
 
             return target;
@@ -442,7 +441,6 @@ namespace P42.Uno.Markup
         {
             var bindings = target.GetWorkaroundBindings();
             if (bindings.FirstOrDefault(b => b.TargetProperty == targetProperty) is WorkaroundBinding oldBinding)
-                oldBinding.Dispose();
                 bindings.Remove(oldBinding);
 
             if (source is null)
@@ -479,7 +477,6 @@ namespace P42.Uno.Markup
         {
             var bindings = target.GetWorkaroundBindings();
             if (bindings.FirstOrDefault(b => b.TargetProperty == targetProperty) is WorkaroundBinding oldBinding)
-                oldBinding.Dispose();
                 bindings.Remove(oldBinding);
 
             if (source is null)
