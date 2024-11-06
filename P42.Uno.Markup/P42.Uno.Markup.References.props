@@ -6,10 +6,10 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\..\P42.Utils\P42.Utils.Uno\P42.Utils.Uno.csproj" />
-    <!--
     <ProjectReference Condition=" '$(Configuration)' != 'Release' " Include="..\..\P42.Utils\P42.Utils.Uno\P42.Utils.Uno.csproj" />
     <PackageReference Condition=" '$(Configuration)' == 'Release' " Include="P42.Utils.Uno" Version="$(UnoVersion)" />
+    <!--
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils.Uno\P42.Utils.Uno.csproj" />
     -->
   </ItemGroup>
 
