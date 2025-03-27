@@ -19,7 +19,7 @@ public static class TeachingTipExtensions
     public static TElement ActionButtonContent<TElement>(this TElement element, object value) where TElement : ElementType
     { element.ActionButtonContent = value; return element; }
 
-    public static TElement ActionButtonStyle<TElement>(this TElement element, Microsoft.UI.Xaml.Style value) where TElement : ElementType
+    public static TElement ActionButtonStyle<TElement>(this TElement element, Style value) where TElement : ElementType
     { element.ActionButtonStyle = value; return element; }
     #endregion
 
@@ -33,7 +33,7 @@ public static class TeachingTipExtensions
     public static TElement CloseButtonContent<TElement>(this TElement element, object value) where TElement : ElementType
     { element.CloseButtonContent = value; return element; }
 
-    public static TElement CloseButtonStyle<TElement>(this TElement element, Microsoft.UI.Xaml.Style value) where TElement : ElementType
+    public static TElement CloseButtonStyle<TElement>(this TElement element, Style value) where TElement : ElementType
     { element.CloseButtonStyle = value; return element; }
     #endregion
 

@@ -1,13 +1,12 @@
 using Microsoft.UI.Xaml.Navigation;
 
-namespace P42.Uno
+namespace P42.Uno;
+
+public interface IWrappedPage
 {
-    public interface IWrappedPage
-    {
-        void OnNavigatedFrom(NavigationEventArgs e);
+    void OnNavigatedFrom(NavigationEventArgs e);
 
-        void OnNavigatedTo(NavigationEventArgs e);
+    void OnNavigatedTo(NavigationEventArgs e);
 
-        void OnNavigatingFrom(NavigatingCancelEventArgs e);
-    }
+    void OnNavigatingFrom(NavigatingCancelEventArgs e);
 }

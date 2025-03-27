@@ -2,55 +2,54 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
 using System;
 
-namespace P42.Uno.Markup
+namespace P42.Uno.Markup;
+
+public class VisibilityConverter : IValueConverter
 {
-    public class VisibilityConverter : IValueConverter
+    private static VisibilityConverter visibilityConverter;
+    public static VisibilityConverter Instance => visibilityConverter ??= new VisibilityConverter();
+
+    private VisibilityConverter() { }
+
+    public object Convert(object value, Type targetType, object parameter, string language)
     {
-        static VisibilityConverter visibilityConverter;
-        public static VisibilityConverter Instance => visibilityConverter ??= new VisibilityConverter();
+        if (BooleanConverter.Instance.Convert(value, targetType, parameter, language) is bool boolResult)
+            return boolResult
+                ? Visibility.Visible
+                : Visibility.Collapsed;
 
-        private VisibilityConverter() { }
-
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            if (BooleanConverter.Instance.Convert(value, targetType, parameter, language) is bool boolResult)
-                return boolResult
-                    ? Visibility.Visible
-                    : Visibility.Collapsed;
-
-            throw new InvalidCastException($"Cannot P42.Uno.Markup.VisibilityConverter.ConvertBack({value},{targetType}) ");
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            if (value is Visibility visibility)
-                return BooleanConverter.Instance.ConvertBack(visibility == Visibility.Visible, targetType, parameter, language);
-
-            throw new InvalidCastException($"Cannot P42.Uno.Markup.VisibilityConverter.ConvertBack({value},{targetType}) ");
-        }
+        throw new InvalidCastException($"Cannot P42.Uno.Markup.VisibilityConverter.ConvertBack({value},{targetType}) ");
     }
 
-    public class CollapsedConverter : IValueConverter
+    public object ConvertBack(object value, Type targetType, object parameter, string language)
     {
-        static CollapsedConverter collapsedConverter;
-        public static CollapsedConverter Instance => collapsedConverter ??= new CollapsedConverter();
+        if (value is Visibility visibility)
+            return BooleanConverter.Instance.ConvertBack(visibility == Visibility.Visible, targetType, parameter, language);
 
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            if (BooleanConverter.Instance.Convert(value, targetType, parameter, language) is bool boolResult)
-                return boolResult
-                    ? Visibility.Collapsed
-                    : Visibility.Visible;
+        throw new InvalidCastException($"Cannot P42.Uno.Markup.VisibilityConverter.ConvertBack({value},{targetType}) ");
+    }
+}
 
-            throw new InvalidCastException($"Cannot P42.Uno.Markup.CollapsedConverter.ConvertBack({value},{targetType}) ");
-        }
+public class CollapsedConverter : IValueConverter
+{
+    private static CollapsedConverter collapsedConverter;
+    public static CollapsedConverter Instance => collapsedConverter ??= new CollapsedConverter();
 
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            if (value is Visibility visibility)
-                return BooleanConverter.Instance.ConvertBack(visibility == Visibility.Collapsed, targetType, parameter, language);
+    public object Convert(object value, Type targetType, object parameter, string language)
+    {
+        if (BooleanConverter.Instance.Convert(value, targetType, parameter, language) is bool boolResult)
+            return boolResult
+                ? Visibility.Collapsed
+                : Visibility.Visible;
 
-            throw new InvalidCastException($"Cannot P42.Uno.Markup.CollapsedConverter.ConvertBack({value},{targetType}) ");
-        }
+        throw new InvalidCastException($"Cannot P42.Uno.Markup.CollapsedConverter.ConvertBack({value},{targetType}) ");
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, string language)
+    {
+        if (value is Visibility visibility)
+            return BooleanConverter.Instance.ConvertBack(visibility == Visibility.Collapsed, targetType, parameter, language);
+
+        throw new InvalidCastException($"Cannot P42.Uno.Markup.CollapsedConverter.ConvertBack({value},{targetType}) ");
     }
 }
