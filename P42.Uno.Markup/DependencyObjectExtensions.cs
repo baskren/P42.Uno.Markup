@@ -9,6 +9,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
 using P42.Serilog.QuickLog;
+using P42.Utils;
 using ElementType = Microsoft.UI.Xaml.DependencyObject;
 
 namespace P42.Uno.Markup
@@ -155,7 +156,7 @@ namespace P42.Uno.Markup
                         object converterDefaultValue = converter.Convert(sourceDefaultValue, targetPropertyType, converterParameter, converterLanguage);
                         CheckTypeMatch(targetPropertyType, converterDefaultValue.GetType(), "TargetProperty", "Converter result", filePath, lineNumber);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         throw;
                     }

@@ -79,7 +79,7 @@ internal class WorkaroundBinding : IDisposable
 
     public DependencyProperty TargetProperty;
     readonly Type TargetPropertyType = null;
-    object DefaultTargetPropertyValue;
+    //object DefaultTargetPropertyValue;
 
     DependencyProperty SourceProperty;
     Type SourcePropertyType;

@@ -35,22 +35,5 @@
   </ItemGroup>
 
 
-  <!-- NUGET WINDOWS ASSETS WORKAROUND -->
-  <!--
-  <ItemGroup>
-    <None Include="Assets/**/*">
-      <Pack>true</Pack>
-      <PackagePath>contentFiles/any/net8.0-windows10.0.19041/$(PackageId)/Assets</PackagePath>
-      <BuildAction>Content</BuildAction>
-      <IncludeInPackage>true</IncludeInPackage>
-    </None>
-    <None Include="$(NuGetPackageRoot)p42.utils.uno\$(UnoVersion)\contentFiles\any\net8.0\Assets\**\*">
-      <Pack>true</Pack>
-      <PackagePath>contentFiles/any/net8.0-windows10.0.19041/p42.utils.uno/Assets</PackagePath>
-      <BuildAction>Content</BuildAction>
-      <IncludeInPackage>true</IncludeInPackage>
-    </None>
-  </ItemGroup>
-  -->
 
 </Project>
