@@ -3,6 +3,7 @@
 
   <PropertyGroup>
      <TargetFrameworks>
+      net9.0;
       net9.0-ios;
       net9.0-android
     </TargetFrameworks>
@@ -14,7 +15,6 @@
       $(TargetFrameworks);
       net9.0-browserwasm;
       net9.0-desktop;
-      net9.0
     </TargetFrameworks>
     <UnoSingleProject>true</UnoSingleProject>
     <OutputType>Library</OutputType>
