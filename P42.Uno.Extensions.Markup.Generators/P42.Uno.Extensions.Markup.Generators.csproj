@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+
+    <LangVersion>latest</LangVersion>
+
+    <IsTool>true</IsTool>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    <CodeGenHelpersMode>source</CodeGenHelpersMode>
+    <UnoSourceGeneratorOutputPath>P42_GeneratedFiles</UnoSourceGeneratorOutputPath>
+
+    <OutputItemType>Analyzer</OutputItemType>
+    <Pack>true</Pack>
+    <PackageId>P42.Uno.Extensions.Markup.Generators</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>42nd Parallel</Authors>
+    <Description>P42.Uno.Markup Roslyn Source Generator</Description>
+    <IncludeBuildOutput>true</IncludeBuildOutput>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
+    
+  </PropertyGroup>
+
+  <ItemGroup>
+    
+    <PackageReference Include="AvantiPoint.CodeGenHelpers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
+    <PackageReference Include="Microsoft.CodeAnalysis" />
+    
+    
+    <!--
+    <PackageReference Include="Uno.CodeGen" />
+      
+      <PackageReference Include="System.Collections.Immutable"  />
+      <PackageReference Include="System.Memory"  />
+      <PackageReference Include="System.Runtime.CompilerServices.Unsafe" />
+      -->
+  </ItemGroup>
+
+  <Import Project="..\P42.Uno.Extensions.Markup.Shared\P42.Uno.Extensions.Markup.Shared.projitems" Label="Shared" />
+
+
+</Project>

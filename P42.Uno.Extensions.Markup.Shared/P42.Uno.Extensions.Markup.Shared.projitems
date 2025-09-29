@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>2158842e-0179-456e-b7f2-3559b902892d</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>P42.Uno.Extensions.Markup.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)DELETEME.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\SharedSymbolExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\SymbolExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Microsoft\CodeAnalysis\PooledObjects\ObjectPool.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Microsoft\CodeAnalysis\PooledObjects\PooledStringBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)QualifiedTypeName.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Diagnostics\NotNullWhenAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\HashCode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Runtime\CompilerServices\IsExternalInit.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UnoNamedTypeSymbolDisplayVisitor.cs" />
+  </ItemGroup>
+</Project>

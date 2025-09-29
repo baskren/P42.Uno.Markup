@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P42.Uno.Markup", "P42.Uno.Markup\P42.Uno.Markup.csproj", "{1DC6BDEF-562A-4918-B6FE-8FB2C771AAE2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Uno.Extensions.Markup.Generators", "P42.Uno.Extensions.Markup.Generators\P42.Uno.Extensions.Markup.Generators.csproj", "{D4376899-A76F-4018-8CE4-4C114D2120C6}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "P42.Uno.Extensions.Markup.Shared", "P42.Uno.Extensions.Markup.Shared\P42.Uno.Extensions.Markup.Shared.shproj", "{2158842E-0179-456E-B7F2-3559B902892D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Uno.Extensions.Markup.Analyzers", "P42.Uno.Extensions.Markup.Analyzers\P42.Uno.Extensions.Markup.Analyzers.csproj", "{BA3661BD-E73E-7A93-5D4A-5968A5F42C08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Uno.WinUI.Markup", "P42.Uno.WinUI.Markup\P42.Uno.WinUI.Markup.csproj", "{8CBFF3DE-B719-2075-E4F7-E3BD30BD3EE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Uno.Extensions.Markup", "P42.Uno.Extensions.Markup\P42.Uno.Extensions.Markup.csproj", "{A7045FF4-2A44-4C18-BD78-4DEE321BC944}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +21,32 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1DC6BDEF-562A-4918-B6FE-8FB2C771AAE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1DC6BDEF-562A-4918-B6FE-8FB2C771AAE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1DC6BDEF-562A-4918-B6FE-8FB2C771AAE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1DC6BDEF-562A-4918-B6FE-8FB2C771AAE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4376899-A76F-4018-8CE4-4C114D2120C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4376899-A76F-4018-8CE4-4C114D2120C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4376899-A76F-4018-8CE4-4C114D2120C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4376899-A76F-4018-8CE4-4C114D2120C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA3661BD-E73E-7A93-5D4A-5968A5F42C08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA3661BD-E73E-7A93-5D4A-5968A5F42C08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA3661BD-E73E-7A93-5D4A-5968A5F42C08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA3661BD-E73E-7A93-5D4A-5968A5F42C08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CBFF3DE-B719-2075-E4F7-E3BD30BD3EE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CBFF3DE-B719-2075-E4F7-E3BD30BD3EE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CBFF3DE-B719-2075-E4F7-E3BD30BD3EE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CBFF3DE-B719-2075-E4F7-E3BD30BD3EE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7045FF4-2A44-4C18-BD78-4DEE321BC944}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7045FF4-2A44-4C18-BD78-4DEE321BC944}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7045FF4-2A44-4C18-BD78-4DEE321BC944}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7045FF4-2A44-4C18-BD78-4DEE321BC944}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D8022DED-EB03-46B4-A777-B5F39FA94EBC}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		P42.Uno.Extensions.Markup.Shared\P42.Uno.Extensions.Markup.Shared.projitems*{2158842e-0179-456e-b7f2-3559b902892d}*SharedItemsImports = 13
+		P42.Uno.Extensions.Markup.Shared\P42.Uno.Extensions.Markup.Shared.projitems*{ba3661bd-e73e-7a93-5d4a-5968a5f42c08}*SharedItemsImports = 5
+		P42.Uno.Extensions.Markup.Shared\P42.Uno.Extensions.Markup.Shared.projitems*{d4376899-a76f-4018-8ce4-4c114d2120c6}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal
