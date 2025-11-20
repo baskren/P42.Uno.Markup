@@ -1,0 +1,31 @@
+<Project ToolsVersion="15.0">
+  <!--
+    To update the version of Uno, you should instead update the Sdk version in the global.json file.
+
+    See https://aka.platform.uno/using-uno-sdk for more information.
+    See https://aka.platform.uno/using-uno-sdk#implicit-packages for more information regarding the Implicit Packages.
+  -->
+  <ItemGroup>
+  	<PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
+    <PackageVersion Include="AvantiPoint.CodeGenHelpers" Version="2.0.30-pre" />
+
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.4.0" />
+    <PackageVersion Include="Microsoft.CodeAnalysis" Version="4.4.0" />
+    <PackageVersion Include="System.Collections.Immutable" Version="6.0.0" />
+    <!--
+    <PackageVersion Include="Uno.Extensions.Markup.WinUI" Version="6.4.11" />
+    -->
+    <!--
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" />
+    <PackageVersion Include="Microsoft.CodeAnalysis" Version="4.14.0" />
+    <PackageVersion Include="System.Collections.Immutable" Version="10.0.0" />
+    -->
+
+    <PackageVersion Include="P42.Utils" Version="$(P42UtilsVersion)" />
+    <PackageVersion Include="P42.Utils.Uno" Version="$(P42UtilsUnoVersion)" />
+
+    <PackageVersion Include="P42.Uno.Extensions.Markup.Generators" Version="$(P42UnoExtensionsMarkupVersion)" />
+    <PackageVersion Include="P42.Uno.Extensions.Markup" Version="$(P42UnoExtensionsMarkupVersion)" />
+
+  </ItemGroup>
+</Project>

@@ -1,7 +1,7 @@
-using Microsoft.UI.Xaml.Controls;
 using Windows.Foundation;
 
-namespace P42.Uno.Markup;
+namespace P42.Uno.WinUI.Markup;
+// ReSharper disable once UnusedType.Global
 public static class SemanticZoomLocationExtensions
 {
     #region Bounds

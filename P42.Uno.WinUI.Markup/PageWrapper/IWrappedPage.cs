@@ -1,6 +1,4 @@
-using Microsoft.UI.Xaml.Navigation;
-
-namespace P42.Uno;
+namespace P42.Uno.WinUI.Markup;
 
 public interface IWrappedPage
 {

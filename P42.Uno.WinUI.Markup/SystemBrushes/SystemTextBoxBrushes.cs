@@ -1,7 +1,8 @@
-using Microsoft.UI.Xaml.Media;
+using P42.Utils.Uno;
 
-namespace P42.Uno.Markup;
+namespace P42.Uno.WinUI.Markup;
 
+// ReSharper disable once UnusedType.Global
 public static class SystemTextBoxBrushes
 {
     public static Brush ForegroundHeader => ColorExtensions.AppBrush("TextBoxForegroundHeaderThemeBrush");
@@ -11,7 +12,7 @@ public static class SystemTextBoxBrushes
     public static Brush ButtonBackground => ColorExtensions.AppBrush("TextBoxButtonBackgroundThemeBrush");
     public static Brush ButtonBorder => ColorExtensions.AppBrush("TextBoxButtonBorderThemeBrush");
     public static Brush ButtonForeground => ColorExtensions.AppBrush("TextBoxButtonForegroundThemeBrush");
-    public static Brush ectionHighlightColor => ColorExtensions.AppBrush("TextSelectionHighlightColorThemeBrush");
+    public static Brush TextSelectionHighlightColor => ColorExtensions.AppBrush("TextSelectionHighlightColorThemeBrush");
     public static Brush ButtonPointerOverBackground => ColorExtensions.AppBrush("TextBoxButtonPointerOverBackgroundThemeBrush");
     public static Brush ButtonPointerOverBorder => ColorExtensions.AppBrush("TextBoxButtonPointerOverBorderThemeBrush");
     public static Brush ButtonPointerOverForeground => ColorExtensions.AppBrush("TextBoxButtonPointerOverForegroundThemeBrush");

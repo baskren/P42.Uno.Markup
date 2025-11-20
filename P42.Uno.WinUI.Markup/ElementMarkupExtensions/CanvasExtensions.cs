@@ -1,8 +1,8 @@
-using Microsoft.UI.Xaml.Controls;
 using ElementType = Microsoft.UI.Xaml.UIElement;
 
-namespace P42.Uno.Markup;
+namespace P42.Uno.WinUI.Markup;
 
+// ReSharper disable once UnusedType.Global
 public static class CanvasExtensions
 {
     public static TElement CanvasLeft<TElement>(this TElement element, double value) where TElement : ElementType

@@ -1,15 +1,10 @@
-using P42.Uno.Markup;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
-
-namespace P42.Uno;
+namespace P42.Uno.WinUI.Markup;
 
 public partial class PageWrapper : Page, IWrappedPage
 {
-    private Grid _grid;
-    private Button _backButton;
-    private Page _wrappedPage;
+    private readonly Grid _grid;
+    private readonly Button _backButton;
+    private Page? _wrappedPage;
 
     public PageWrapper()
     {
@@ -17,7 +12,7 @@ public partial class PageWrapper : Page, IWrappedPage
 
         Content = _grid = new Grid()
             .Stretch()
-            .Rows(40, "*")
+            .RowsX(40, "*")
             .Children(
                 new Button()
                     .Name(out _backButton)
@@ -27,7 +22,7 @@ public partial class PageWrapper : Page, IWrappedPage
             );
 
 #if HAS_UNO
-        var platformOffset = global::Uno.UI.Toolkit.VisibleBoundsPadding.WindowPadding;
+        var platformOffset = VisibleBoundsPadding.WindowPadding;
         Padding = platformOffset;
 #endif
     }
@@ -43,12 +38,13 @@ public partial class PageWrapper : Page, IWrappedPage
         if (e.NavigationMode == NavigationMode.New)
         {
             _wrappedPage = e.Parameter as Page;
-            _wrappedPage
-                .Stretch()
-                .RowCol(1, 0);
-            if (_wrappedPage != null)   
+            if (_wrappedPage != null)
+            {
+                _wrappedPage
+                    .Stretch()
+                    .RowColX(1, 0);
                 _grid.Children.Add(_wrappedPage);
-
+            }
         }
 
         base.OnNavigatedTo(e);

@@ -1,30 +1,16 @@
-using Microsoft.UI.Xaml.Data;
-using System;
+using System.Runtime.CompilerServices;
 
-namespace P42.Uno.Markup;
+namespace P42.Uno.WinUI.Markup;
 
-public class InverseBooleanConverter : IValueConverter
+// ReSharper disable once UnusedType.Global
+public class InverseBooleanConverter : NotConverter;
+
+// ReSharper disable once UnusedType.Global
+public class NotConverter(
+    [CallerFilePath] string filePath = "",
+    [CallerLineNumber] int lineNumber = -1)
+    : FuncConverter<bool, bool>(t => !t, t => !t, filePath, lineNumber)
 {
-    private static InverseBooleanConverter inverseVisibilityConverter;
-    public static InverseBooleanConverter Instance => inverseVisibilityConverter ??= new InverseBooleanConverter();
-
-    private InverseBooleanConverter() { }
-
-    public object Convert(object value, Type targetType, object parameter, string language)
-
-    {
-        if (BooleanConverter.Instance.Convert(value, targetType, parameter, language) is bool boolResult)
-            return !boolResult;
-
-        throw new Exception("P42.Uno.Markup.InverseBooleanConverter.Convert failed");
-    }
-
-
-    public object ConvertBack(object value, Type targetType, object parameter, string language)
-    {
-        if (value is bool boolValue)
-            return BooleanConverter.Instance.ConvertBack(!boolValue, targetType, parameter, language);
-
-        throw new InvalidCastException($"Cannot P42.Uno.Markup.InverseBooleanConverter.ConvertBack({value},{targetType}) ");
-    }
+    private static NotConverter? _instance;
+    public static NotConverter Instance => _instance ??= new NotConverter();
 }

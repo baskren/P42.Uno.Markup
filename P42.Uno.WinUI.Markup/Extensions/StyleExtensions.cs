@@ -1,11 +1,9 @@
 
-using Microsoft.UI.Xaml;
-
 namespace P42.Uno.WinUI.Markup;
 
 
 
-internal static class StyleExtensions
+public static partial class StyleExtensions
 {
     public static bool TryGetSetterValue<T>(this Style style, DependencyProperty property, out T? value)
     {
@@ -14,12 +12,11 @@ internal static class StyleExtensions
             if (baseSetter is not Setter setter)
                 continue;
 
-            if (setter.Property == property)
-            {
-                value = (T?)setter.Value;
-                return true;
-            }
+            if (setter.Property != property)
+                continue;
 
+            value = (T?)setter.Value;
+            return true;
         }
 
         value = default;
@@ -31,9 +28,8 @@ internal static class StyleExtensions
         if (style is null)
             return fallback;
 
-        if (!TryGetSetterValue(style, property, out T? value))
-            return value;
-
-        return fallback;
+        return !TryGetSetterValue(style, property, out T? value) 
+            ? value 
+                : fallback;
     }
 }

@@ -1,8 +1,6 @@
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
+namespace P42.Uno.WinUI.Markup;
 
-namespace P42.Uno.Markup;
-
+// ReSharper disable once UnusedType.Global
 public static class ElementInCanvasExtensions
 {
     public static TView LeftX<TView>(this TView view, double length) where TView : UIElement

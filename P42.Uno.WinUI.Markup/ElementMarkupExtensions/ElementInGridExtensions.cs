@@ -1,9 +1,8 @@
-using System;
-using Microsoft.UI.Xaml.Controls;
 using ElementType = Microsoft.UI.Xaml.UIElement;
 
-namespace P42.Uno.Markup;
+namespace P42.Uno.WinUI.Markup;
 
+// ReSharper disable once UnusedType.Global
 public static class ElementInGridExtensions
 {
     public static TView RowX<TView>(this TView view, int row) where TView :ElementType

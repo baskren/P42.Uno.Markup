@@ -1,19 +1,15 @@
-using System;
-using Windows.Foundation;
 using ElementType = Microsoft.UI.Xaml.Media.Imaging.SvgImageSource;
 using System.Reflection;
-using Microsoft.UI.Xaml.Media.Imaging;
-using System.IO;
-using P42.Utils.Uno;
 using P42.Utils;
 using AsyncAwaitBestPractices;
 
 
-namespace P42.Uno.Markup;
+namespace P42.Uno.WinUI.Markup;
 
+// ReSharper disable once UnusedType.Global
 public static class SvgImageSourceExtensions
 {
-    public static TElement ResourceSourceT<TElement>(this TElement element, string value, Assembly asm = null) where TElement : ElementType
+    public static TElement ResourceSourceT<TElement>(this TElement element, string value, Assembly? asm = null) where TElement : ElementType
     {
         if (EmbeddedResourceExtensions.FindStream(value, asm) is { } stream)
         {

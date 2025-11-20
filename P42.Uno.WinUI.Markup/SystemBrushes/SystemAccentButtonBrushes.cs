@@ -1,7 +1,8 @@
-using Microsoft.UI.Xaml.Media;
+using P42.Utils.Uno;
 
-namespace P42.Uno.Markup;
+namespace P42.Uno.WinUI.Markup;
 
+// ReSharper disable once UnusedType.Global
 public static class SystemAccentButtonBrushes
 {
     public static Brush Background => ColorExtensions.AppBrush("AccentButtonBackground");

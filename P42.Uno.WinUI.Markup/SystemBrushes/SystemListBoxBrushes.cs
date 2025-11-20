@@ -1,7 +1,9 @@
-using Microsoft.UI.Xaml.Media;
 
-namespace P42.Uno.Markup;
+using P42.Utils.Uno;
 
+namespace P42.Uno.WinUI.Markup;
+
+// ReSharper disable once UnusedType.Global
 public static class SystemListBoxBrushes
 {
     public static Brush Background => ColorExtensions.AppBrush("ListBoxBackgroundThemeBrush");

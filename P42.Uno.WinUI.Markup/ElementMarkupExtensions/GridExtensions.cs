@@ -1,12 +1,8 @@
-using System;
-using Windows.UI;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
 using ElementType = Microsoft.UI.Xaml.Controls.Grid;
 
-namespace P42.Uno.Markup;
+namespace P42.Uno.WinUI.Markup;
 
+// ReSharper disable once UnusedType.Global
 public static class GridExtensions
 {
 
@@ -65,16 +61,8 @@ public static class GridExtensions
     {
         grid.ColumnDefinitions.Clear();
         foreach (var length in lengths)
-        {
-            /*
-            if (length is ColumnDefinition columnDefinition)
-                grid.ColumnDefinitions.Add(columnDefinition);
-            else
-                grid.ColumnDefinitions.Add(new ColumnDefinition { Width = ObjectToGridLength(length) });
-            */
             grid.ColumnDefinitions.Add(ObjectToColumnDefinition(length));
 
-        }
         return grid;
     }
 
@@ -142,7 +130,7 @@ public static class GridExtensions
                 throw new ArgumentException(
                     $"Value of row name {rows[i].name} is not {i}. Rows must be defined with enum names whose values form the sequence 0,1,2,..."
                 );
-            if (!(rows[i].length is RowDefinition rowDefinition))
+            if (rows[i].length is not RowDefinition rowDefinition)
                 //rowDefinition = ObjectToRowDefinition(rows[i].length);
                 rowDefinition = new RowDefinition {  Height = ObjectToGridLength(rows[i].length) };
             grid.RowDefinitions.Add(rowDefinition);
@@ -154,7 +142,7 @@ public static class GridExtensions
     {
         result.arg = "";
         result.limit = 0.0;
-        var index = str.IndexOf(conditional);
+        var index = str.IndexOf(conditional, StringComparison.Ordinal);
         if (index < 0)
             return false;
 
@@ -181,10 +169,9 @@ public static class GridExtensions
             return new ColumnDefinition { Width = ObjectToGridLength(lt.arg), MaxWidth = lt.limit-0.01 };
         if (str.GetArgumentAndLimitValue(">=", out var gte))
             return new ColumnDefinition { Width = ObjectToGridLength(gte.arg), MinWidth = lte.limit };
-        if (str.GetArgumentAndLimitValue(">=", out var gt))
-            return new ColumnDefinition { Width = ObjectToGridLength(gt.arg), MinWidth = gt.limit+0.01 };
-            
-        return new ColumnDefinition { Width = ObjectToGridLength(obj) };
+        return str.GetArgumentAndLimitValue(">=", out var gt) 
+            ? new ColumnDefinition { Width = ObjectToGridLength(gt.arg), MinWidth = gt.limit+0.01 } 
+            : new ColumnDefinition { Width = ObjectToGridLength(obj) };
     }
 
     private static RowDefinition ObjectToRowDefinition(object obj)
@@ -200,53 +187,54 @@ public static class GridExtensions
             return new RowDefinition { Height = ObjectToGridLength(lt.arg), MaxHeight = lt.limit-0.01 };
         if (str.GetArgumentAndLimitValue(">=", out var gte))
             return new RowDefinition { Height = ObjectToGridLength(gte.arg), MinHeight = lte.limit };
-        if (str.GetArgumentAndLimitValue(">=", out var gt))
-            return new RowDefinition { Height = ObjectToGridLength(gt.arg), MaxHeight = gt.limit+0.01 };
-
-        return new RowDefinition { Height = ObjectToGridLength(obj) };
+        return str.GetArgumentAndLimitValue(">=", out var gt) 
+            ? new RowDefinition { Height = ObjectToGridLength(gt.arg), MaxHeight = gt.limit+0.01 } 
+            : new RowDefinition { Height = ObjectToGridLength(obj) };
     }
 
     private static GridLength ObjectToGridLength(object obj)
     {
-        if (obj is double d)
-            return new GridLength(d);
-        if (obj is int i)
-            return new GridLength(i);
-        if (obj is string str)
+        switch (obj)
         {
-            str = str.Trim();
-            if (str.EndsWith("*"))
+            case double d:
+                return new GridLength(d);
+            case int i:
+                return new GridLength(i);
+            case string str:
             {
-                str = str[..^1];	
-                if (string.IsNullOrWhiteSpace(str) || str == "*")
+                str = str.Trim();
+                if (str.EndsWith('*'))
+                {
+                    str = str[..^1];	
+                    if (string.IsNullOrWhiteSpace(str) || str == "*")
+                        return new GridLength(1, GridUnitType.Star);
+                    return double.TryParse(str, out var value) 
+                        ? new GridLength(value, GridUnitType.Star) 
+                        : throw new Exception($"Cannot parse string [{str}] into a GridLength");
+                }
+                if (str.ToLower().StartsWith('a'))
+                    return GridLength.Auto;
+                if (str.ToLower().StartsWith('s'))
                     return new GridLength(1, GridUnitType.Star);
-                if (double.TryParse(str, out var value))
-                    return new GridLength(value, GridUnitType.Star);
-                throw new Exception($"Cannot parse string [{str}] into a GridLength");
+                return double.TryParse(str, out var d1) 
+                    ? new GridLength(d1) 
+                    : throw new Exception($"Cannot parse string [{str}] into a GridLength");
             }
-            if (str.ToLower().StartsWith("a"))
-                return GridLength.Auto;
-            if (str.ToLower().StartsWith("s"))
-                return new GridLength(1, GridUnitType.Star);
-            if (double.TryParse(str, out var d1))
-                return new GridLength(d1);
-            throw new Exception($"Cannot parse string [{str}] into a GridLength");
+            case GridLength length:
+                return length;
+            case RowDefinition rowDef:
+                return rowDef.Height;
+            case ColumnDefinition colDef:
+                return colDef.Width;
+            case char c:
+                if (c == '*')
+                    return new GridLength(1.0, GridUnitType.Star);
+                return c == 'a' 
+                    ? GridLength.Auto 
+                    : throw new Exception($"Cannot parse character [{c}] into a GridLength");
+            default:
+                return new GridLength(Convert.ToDouble(obj));
         }
-        if (obj is GridLength length)
-            return length;
-        if (obj is RowDefinition rowDef)
-            return rowDef.Height;
-        if (obj is ColumnDefinition colDef)
-            return colDef.Width;
-        if (obj is char c)
-        {
-            if (c == '*')
-                return new GridLength(1.0, GridUnitType.Star);
-            if (c == 'a')
-                return GridLength.Auto;
-            throw new Exception($"Cannot parse character [{c}] into a GridLength");
-        }
-        return new GridLength(Convert.ToDouble(obj));
     }
 
 

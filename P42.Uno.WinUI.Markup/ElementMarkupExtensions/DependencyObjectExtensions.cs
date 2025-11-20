@@ -1,17 +1,9 @@
-using System;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Media;
-using P42.Serilog.QuickLog;
+using P42.Utils.Uno;
 using ElementType = Microsoft.UI.Xaml.DependencyObject;
 
-namespace P42.Uno.Markup;
+namespace P42.Uno.WinUI.Markup;
 
 public static class DependencyObjectExtensions
 {
@@ -19,53 +11,70 @@ public static class DependencyObjectExtensions
     public static readonly DependencyProperty IsEnabledXProperty =
         DependencyProperty.RegisterAttached("IsEnabledX", typeof(string), typeof(DependencyObjectExtensions), new PropertyMetadata(null, IsEnabledXChanged));
 
-    public static DependencyObject SetIsEnabled(this DependencyObject dependencyObject, bool value = true)
+    public static ElementType SetIsEnabled(this ElementType dependencyObject, bool value = true)
     {
         dependencyObject.SetValue(IsEnabledXProperty, value);
         return dependencyObject;
     }
 
-    public static bool GetIsEnabled(this DependencyObject dependencyObject)
+    public static bool GetIsEnabled(this ElementType dependencyObject)
         => (bool)dependencyObject.GetValue(IsEnabledXProperty);
 
     public static ElementType IsEnabled(this ElementType element, bool value = true)
     { element.SetIsEnabled(value); return element; }
 
-    public static TElement BindIsEnabledX<TElement>(this TElement element, object source, string path,
+    public static TElement BindIsEnabledX<TElement>(
+        this TElement target,
+        DependencyObject source,
+        DependencyProperty sourceProperty,
         BindingMode mode = BindingMode.OneWay,
-        IValueConverter converter = null,
-        object converterParameter = null,
-        string converterLanguage = null,
+        IValueConverter? converter = null,
+        object? converterParameter = null,
+        string? converterLanguage = null,
         UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
-        object targetNullValue = null,
-        object fallbackValue = null, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = -1
+        object? targetNullValue = null,
+        object? fallbackValue = null,
+        [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = -1
+    ) where TElement : ElementType
+        => target.AltBind(IsEnabledXProperty, source, sourceProperty, mode, converter, converterParameter, converterLanguage, updateSourceTrigger, targetNullValue, fallbackValue, filePath, lineNumber); 
+    
+    public static TElement BindIsEnabledX<TElement, TSource, TDest>(
+        this TElement target,
+        INotifyPropertyChanged source,
+        string sourcePropertyName,
+        BindingMode mode = BindingMode.OneWay,
+        Func<TSource?, TDest?>? convert = null,
+        Func<TDest?, TSource?>? convertBack = null,
+        object? converterParameter = null,
+        string? converterLanguage = null,
+        UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
+        object? targetNullValue = null,
+        object? fallbackValue = null, 
+        [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = -1
     ) where TElement : ElementType
     {
-        element.BindX(IsEnabledXProperty, source, path, mode, converter, converterParameter, converterLanguage, updateSourceTrigger, targetNullValue, fallbackValue, filePath, lineNumber);
-        return element;
+        target.AltBind(IsEnabledXProperty, source, sourcePropertyName, mode, convert, convertBack, converterParameter, converterLanguage, updateSourceTrigger, targetNullValue, fallbackValue, filePath, lineNumber);
+        return target;
     }
 
     private static void IsEnabledXChanged(ElementType dependencyObject, DependencyPropertyChangedEventArgs args)
     {
-        if (args is null || dependencyObject is null)
-            return;
-
         if (args.NewValue is not bool newValue)
             newValue = true;
 
         if (dependencyObject is Control control)
-            control.IsEnabled = (bool)BooleanConverter.Instance.Convert(args.NewValue);
+            control.IsEnabled = (bool)(BooleanConverter.Instance.Convert(newValue) ?? false);
         else
         {
             var count = VisualTreeHelper.GetChildrenCount(dependencyObject);
             for (var i = 0; i < count; i++)
             {
                 var current = VisualTreeHelper.GetChild(dependencyObject, i);
-                if (current is Panel panel)
-                {
-                    foreach (var child in panel.Children)
-                        IsEnabledXChanged(child, args);
-                }
+                if (current is not Panel panel)
+                    continue;
+
+                foreach (var child in panel.Children)
+                    IsEnabledXChanged(child, args);
             }
         }
 
@@ -74,15 +83,15 @@ public static class DependencyObjectExtensions
 
 
     public static TBindable AssignX<TBindable, TVariable>(this TBindable bindable, out TVariable variable)
-        where TBindable : DependencyObject, TVariable
+        where TBindable : ElementType, TVariable
     {
         variable = bindable;
         return bindable;
     }
 
-    public static TBindable InvokeX<TBindable>(this TBindable bindable, Action<TBindable> action) where TBindable : DependencyObject
+    public static TBindable InvokeX<TBindable>(this TBindable bindable, Action<TBindable> action) where TBindable : ElementType
     {
-        action?.Invoke(bindable);
+        action.Invoke(bindable);
         return bindable;
     }
 
@@ -94,7 +103,8 @@ public static class DependencyObjectExtensions
     }
     #endregion
 
-
+    
+    /*
     #region Bind
 
     private static void CheckArguments<TBindable>(this TBindable target, DependencyProperty targetProperty, object source, string path, IValueConverter converter, object converterParameter, string converterLanguage, string filePath, int lineNumber) where TBindable : DependencyObject
@@ -291,7 +301,9 @@ public static class DependencyObjectExtensions
         string converterLanguage = null,
         UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
         object targetNullValue = null,
-        object fallbackValue = null, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = -1
+        object fallbackValue = null, 
+        [CallerFilePath] string filePath = null, 
+        [CallerLineNumber] int lineNumber = -1
     ) where TBindable : DependencyObject
     {
         CheckArguments(target, targetProperty, source, path, converter, converterParameter, converterLanguage, filePath, lineNumber);
@@ -389,4 +401,6 @@ public static class DependencyObjectExtensions
         return target;
     }
     #endregion
+
+    */
 }

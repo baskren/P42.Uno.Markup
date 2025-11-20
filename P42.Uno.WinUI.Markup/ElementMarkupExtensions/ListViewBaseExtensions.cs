@@ -1,13 +1,8 @@
-using System;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Markup;
-using Microsoft.UI.Xaml.Media.Animation;
-using Windows.Foundation;
 using ElementType = Microsoft.UI.Xaml.Controls.ListViewBase;
 
-namespace P42.Uno.Markup;
+namespace P42.Uno.WinUI.Markup;
 
+// ReSharper disable once UnusedType.Global
 public static class ListViewBaseExtensions
 {
     public static readonly Style SimpleItemContainerStyle = new()
@@ -17,7 +12,7 @@ public static class ListViewBaseExtensions
             new Setter(Control.HorizontalContentAlignmentProperty, HorizontalAlignment.Stretch),
             new Setter(Control.VerticalContentAlignmentProperty, VerticalAlignment.Stretch),
             new Setter(FrameworkElement.MarginProperty, new Thickness(0)),
-            new Setter(Control.PaddingProperty, new Thickness(0)),
+            new Setter(Control.PaddingProperty, new Thickness(0))
         }
     };
 

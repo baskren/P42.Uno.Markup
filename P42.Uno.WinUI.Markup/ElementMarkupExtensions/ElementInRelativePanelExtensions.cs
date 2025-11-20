@@ -1,8 +1,8 @@
-using Microsoft.UI.Xaml.Controls;
 using ElementType = Microsoft.UI.Xaml.UIElement;
 
-namespace P42.Uno.Markup;
+namespace P42.Uno.WinUI.Markup;
 
+// ReSharper disable once UnusedType.Global
 public static class ElementInRelativePanelExtensions
 {
     public static TView AboveX<TView>(this TView view, object otherElement) where TView :ElementType

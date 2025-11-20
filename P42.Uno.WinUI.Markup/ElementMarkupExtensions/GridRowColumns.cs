@@ -1,8 +1,6 @@
-using System;
-using Microsoft.UI.Xaml;
+namespace P42.Uno.WinUI.Markup;
 
-namespace P42.Uno.Markup;
-
+// ReSharper disable once UnusedType.Global
 public static class GridRowsColumns
 {
     public static GridLength Auto => new(1.0, GridUnitType.Auto);

@@ -1,44 +1,60 @@
-using System;
 using Windows.UI;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Media;
 
-namespace P42.Uno.Markup;
+namespace P42.Uno.WinUI.Markup;
 
+// ReSharper disable once UnusedType.Global
 public static class StaticResources
 {
-    public static T TryGetAppResourceAs<T>(string key)
-        => Application.Current.Resources.TryGetAs<T>(key);
+    public static bool TryGetAppResourceAs<T>(string key, out T? value)
+        => Application.Current.Resources.TryGetAs(key, out value);
 
-    public static T TryGetResourceAs<T>(this FrameworkElement d, string key)
-        => d.Resources.TryGetAs<T>(key);
+    public static bool TryGetResourceAs<T>(this FrameworkElement d, string key, out T? value)
+        => d.Resources.TryGetAs(key, out value);
 
-    public static T TryGetAs<T>(this ResourceDictionary resourceDictionary, string key)
+    public static bool TryGetAs<T>(this ResourceDictionary resourceDictionary, string key, out T? value)
     {
-        if (resourceDictionary.TryGetValue(key, out var value))
+        value = default;
+        if (!resourceDictionary.TryGetValue(key, out var resourceValue))
+            return false;
+        
+        if (typeof(T) == typeof(Brush) &&
+            SolidBrushConverter.Instance.CanConvertFrom(resourceValue.GetType()) &&
+            SolidBrushConverter.Instance.Convert(resourceValue, resourceValue.GetType(), null, null) is T tBrush
+           )
         {
-            if (typeof(T) == typeof(Brush) &&
-                SolidBrushConverter.Instance.CanConvertFrom(value.GetType()) &&
-                SolidBrushConverter.Instance.Convert(value, value.GetType(), null, null) is T tBrush
-               )
-                return tBrush;
-
-            if (typeof(T) == typeof(Color) &&
-                ColorConverter.Instance.CanConvertFrom(value.GetType()) &&
-                ColorConverter.Instance.Convert(value, value.GetType(), null, null) is T tColor
-               )
-                return tColor;
-
-            if (value is T tValue)
-                return tValue;
-
-            Console.WriteLine($"Could not convert Application.Current.Resource for key [{key}] from type [{value.GetType()}] to [{value.GetType()}]");
+            value = tBrush;
+            return true;
         }
-        else
-            Console.WriteLine($"Could not find Application.Current.Resource for key [{key}]");
 
-        return default;
+        if (typeof(T) == typeof(Color) &&
+            ColorConverter.Instance.CanConvertFrom(resourceValue.GetType()) &&
+            ColorConverter.Instance.Convert(resourceValue, resourceValue.GetType(), null, null) is T tColor
+           )
+        {
+            value = tColor;
+            return true;
+        }
+        
+        if (resourceValue is T tValue)
+        {
+            value = tValue;
+            return true;
+        }
+        
+        return false;
     }
 
-    public static Microsoft.UI.Xaml.Media.FontFamily SymbolThemeFontFamily => TryGetAppResourceAs<Microsoft.UI.Xaml.Media.FontFamily>("SymbolThemeFontFamily");
+    private static FontFamily? _symbolFontFamily;
+
+    public static FontFamily? SymbolThemeFontFamily
+    {
+        get
+        {
+            if (_symbolFontFamily != null)
+                return _symbolFontFamily;
+            if (!TryGetAppResourceAs<FontFamily>("SymbolThemeFontFamily", out var fontFamily))
+                return null;
+            return _symbolFontFamily = fontFamily;
+        }
+    }
 }

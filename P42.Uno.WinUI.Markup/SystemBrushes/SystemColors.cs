@@ -1,11 +1,13 @@
 ﻿using Windows.UI;
+using P42.Utils.Uno;
 
-namespace P42.Uno.Markup;
+namespace P42.Uno.WinUI.Markup;
 
 // XAML theme resources
 // The XAML color ramp and theme-dependent brushes
 // Light and Dark theme colors
 // https://docstaging.z5.web.core.windows.net/aleader/toolkit-7/design/controls-and-patterns/xaml-theme-resources.html#the-xaml-color-ramp-and-theme-dependent-brushes
+// ReSharper disable once UnusedType.Global
 public static class SystemColors
 {
     #region Custom
@@ -29,27 +31,27 @@ public static class SystemColors
 
     #region ALT
     /// <summary>
-    /// Light: FFFFFFFF  Dark: FF000000
+    /// Light: #FFFFFFFF  Dark: #FF000000
     /// </summary>
     public static Color AltHigh
         => ColorExtensions.AppColor("SystemAltHighColor");
     /// <summary>
-    /// Light: 33FFFFFF  Dark: 33000000
+    /// Light: #33FFFFFF  Dark: #33000000
     /// </summary>
     public static Color AltLow
         => ColorExtensions.AppColor("SystemAltLowColor");
     /// <summary>
-    /// Light: 99FFFFFF  Dark: 99000000
+    /// Light: #99FFFFFF  Dark: #99000000
     /// </summary>
     public static Color AltMedium
         => ColorExtensions.AppColor("SystemAltMediumColor");
     /// <summary>
-    /// Light: CCFFFFFF  Dark: CC000000
+    /// Light: #CCFFFFFF  Dark: #CC000000
     /// </summary>
     public static Color AltMediumHigh
         => ColorExtensions.AppColor("SystemAltMediumHighColor");
     /// <summary>
-    /// Light: 66FFFFFF  Dark: 66000000
+    /// Light: 66FFFFFF  Dark: #66000000
     /// </summary>
     public static Color AltMediumLow 
         => ColorExtensions.AppColor("SystemAltMediumLowColor");
@@ -58,27 +60,27 @@ public static class SystemColors
 
     #region BASE
     /// <summary>
-    /// Light: FF000000  Dark FFFFFFFF
+    /// Light: #FF000000  Dark #FFFFFFFF
     /// </summary>
     public static Color BaseHigh 
         => ColorExtensions.AppColor("SystemBaseHighColor");
     /// <summary>
-    /// Light: 33000000  Dark: 33FFFFFF
+    /// Light: #33000000  Dark: #33FFFFFF
     /// </summary>
     public static Color BaseLow 
         => ColorExtensions.AppColor("SystemBaseLowColor");
     /// <summary>
-    /// Light: 99000000  Dark: 99FFFFFF
+    /// Light: #99000000  Dark: #99FFFFFF
     /// </summary>
     public static Color BaseMedium 
         => ColorExtensions.AppColor("SystemBaseMediumColor");
     /// <summary>
-    /// Light: CC000000  Dark: CCFFFFFF
+    /// Light: #CC000000  Dark: #CCFFFFFF
     /// </summary>
     public static Color BaseMediumHigh 
         => ColorExtensions.AppColor("SystemBaseMediumHighColor");
     /// <summary>
-    /// Light: 66000000  Dark: 66FFFFFF
+    /// Light: #66000000  Dark: #66FFFFFF
     /// </summary>
     public static Color BaseMediumLow 
         => ColorExtensions.AppColor("SystemBaseMediumLowColor");
@@ -87,13 +89,13 @@ public static class SystemColors
 
     #region Chrome
     /// <summary>
-    /// Light: FF171717  Dark: FFF2F2F2
+    /// Light: #FF171717  Dark: #FFF2F2F2
     /// </summary>
     public static Color ChromeAltLow 
         => ColorExtensions.AppColor("SystemChromeAltLowColor");
 
     /// <summary>
-    /// Light: FF000000  Dark: FF000000
+    /// Light: #FF000000  Dark: #FF000000
     /// </summary>
     public static Color ChromeBlackHigh
         => ColorExtensions.AppColor("SystemChromeBlackHighColor");
@@ -114,45 +116,45 @@ public static class SystemColors
         => ColorExtensions.AppColor("SystemChromeBlackLowColor");
 
     /// <summary>
-    /// Light: FFCCCCCC  Dark: FF333333
+    /// Light: #FFCCCCCC  Dark: #FF333333
     /// </summary>
     public static Color ChromeDisabledHigh
         => ColorExtensions.AppColor("SystemChromeDisabledHighColor");
     /// <summary>
-    /// Light: FF7A7A7A  Dark: FF858585
+    /// Light: #FF7A7A7A  Dark: #FF858585
     /// </summary>
     public static Color ChromeDisabledLow 
         => ColorExtensions.AppColor("SystemChromeDisabledLowColor");
 
     /// <summary>
-    /// Light: FF767676  Dark: FF767676
+    /// Light: #FF767676  Dark: #FF767676
     /// </summary>
     public static Color ChromeGray
         => ColorExtensions.AppColor("SystemChromeGrayColor");
 
     /// <summary>
-    /// Light: FFCCCCCC  Dark: FF767676
+    /// Light: #FFCCCCCC  Dark: #FF767676
     /// </summary>
     public static Color ChromeHigh
         => ColorExtensions.AppColor("SystemChromeHighColor");
     /// <summary>
-    /// Light: FFE6E6E6  Dark: FF1F1F1F
+    /// Light: #FFE6E6E6  Dark: #FF1F1F1F
     /// </summary>
     public static Color ChromeMedium
         => ColorExtensions.AppColor("SystemChromeMediumColor");
     /// <summary>
-    /// Light: FFF2F2F2  Dark: FF2B2B2B
+    /// Light: #FFF2F2F2  Dark: #FF2B2B2B
     /// </summary>
     public static Color ChromeMediumLow
         => ColorExtensions.AppColor("SystemChromeMediumLowColor");
     /// <summary>
-    /// Light: FFF2F2F2  Dark: FF171717
+    /// Light: #FFF2F2F2  Dark: #FF171717
     /// </summary>
     public static Color ChromeLow 
         => ColorExtensions.AppColor("SystemChromeLowColor");
 
     /// <summary>
-    /// Light: FFFFFFFF  Dark: FFFFFFFF
+    /// Light: #FFFFFFFF  Dark: #FFFFFFFF
     /// </summary>
     public static Color ChromeWhite
         => ColorExtensions.AppColor("SystemChromeWhiteColor");
@@ -162,27 +164,27 @@ public static class SystemColors
 
     #region List
     /// <summary>
-    /// Light: 19000000  Dark: 19FFFFFF
+    /// Light: #19000000  Dark: #19FFFFFF
     /// </summary>
     public static Color ListLow 
         => ColorExtensions.AppColor("SystemListLowColor");
     /// <summary>
-    /// Light: 33000000  Dark: 33FFFFFF
+    /// Light: #33000000  Dark: #33FFFFFF
     /// </summary>
     public static Color ListMedium 
         => ColorExtensions.AppColor("SystemListMediumColor");
     /// <summary>
-    /// Light: 660078D4  Dark: 660078D4
+    /// Light: #660078D4  Dark: #660078D4
     /// </summary>
     public static Color ListAccentLow
         => ColorExtensions.AppColor("SystemListAccentLowColor");
     /// <summary>
-    /// Light: 990078D4  Dark: 990078D4
+    /// Light: #990078D4  Dark: #990078D4
     /// </summary>
     public static Color ListAccentMedium
         => ColorExtensions.AppColor("SystemListAccentMediumColor");
     /// <summary>
-    /// Light: B20078D4  Dark: B20078D4
+    /// Light: #B20078D4  Dark: #B20078D4
     /// </summary>
     public static Color ListAccentHigh
         => ColorExtensions.AppColor("SystemListAccentHighColor");
@@ -191,12 +193,12 @@ public static class SystemColors
 
     #region Button
     /// <summary>
-    /// Light: FFF0F0F0  Dark: FFF0F0F0
+    /// Light: #FFF0F0F0  Dark: #FFF0F0F0
     /// </summary>
     public static Color ButtonFace 
         => ColorExtensions.AppColor("SystemColorButtonFaceColor");
     /// <summary>
-    /// Light: FF000000  Dark: FF000000
+    /// Light: #FF000000  Dark: #FF000000
     /// </summary>
     public static Color ButtonText 
         => ColorExtensions.AppColor("SystemColorButtonTextColor");
@@ -205,7 +207,7 @@ public static class SystemColors
 
     #region Text
     /// <summary>
-    /// Light: FF6D6D6D  Dark: FF6D6D6D
+    /// Light: #FF6D6D6D  Dark: #FF6D6D6D
     /// </summary>
     public static Color GrayText 
         => ColorExtensions.AppColor("SystemColorGrayTextColor");
@@ -217,12 +219,12 @@ public static class SystemColors
 
     #region HighLight
     /// <summary>
-    /// Light: FF0078D7  Dark: FF0078D7
+    /// Light: #FF0078D7  Dark: #FF0078D7
     /// </summary>
     public static Color Highlight 
         => ColorExtensions.AppColor("SystemColorHighlightColor");
     /// <summary>
-    /// Light: FFFFFFFF  Dark: FFFFFFFF
+    /// Light: #FFFFFFFF  Dark: #FFFFFFFF
     /// </summary>
     public static Color HighlightText 
         => ColorExtensions.AppColor("SystemColorHighlightTextColor");
@@ -231,7 +233,7 @@ public static class SystemColors
 
     #region HotLight
     /// <summary>
-    /// Light: FF0066CC  Dark: FF0066CC
+    /// Light: #FF0066CC  Dark: #FF0066CC
     /// </summary>
     public static Color Hotlight 
         => ColorExtensions.AppColor("SystemColorHotlightColor");
@@ -240,12 +242,12 @@ public static class SystemColors
 
     #region Window
     /// <summary>
-    /// Light: FFFFFFFF  Dark: FFFFFFFF
+    /// Light: #FFFFFFFF  Dark: #FFFFFFFF
     /// </summary>
     public static Color WindowColor 
         => ColorExtensions.AppColor("SystemColorWindowColor");
     /// <summary>
-    /// Light: FF000000  Dark: FF000000
+    /// Light: #FF000000  Dark: #FF000000
     /// </summary>
     public static Color WindowTextColor 
         => ColorExtensions.AppColor("SystemColorWindowTextColor");
@@ -254,37 +256,37 @@ public static class SystemColors
 
     #region Accent
     /// <summary>
-    /// Light: FF267244  Dark: FF267244
+    /// Light: #FF267244  Dark: #FF267244
     /// </summary>
     public static Color Accent 
         => ColorExtensions.AppColor("SystemAccentColor");
     /// <summary>
-    /// Light: FF99EBFF  Dark: FF99EBFF
+    /// Light: #FF99EBFF  Dark: #FF99EBFF
     /// </summary>
     public static Color AccentLight3
         => ColorExtensions.AppColor("SystemAccentColorLight3");
     /// <summary>
-    /// Light: FF4CC2FF  Dark: FF4CC2FF
+    /// Light: #FF4CC2FF  Dark: #FF4CC2FF
     /// </summary>
     public static Color AccentLight2
         => ColorExtensions.AppColor("SystemAccentColorLight2");
     /// <summary>
-    /// Light: FF0091F8  Dark: FF0091F8
+    /// Light: #FF0091F8  Dark: #FF0091F8
     /// </summary>
     public static Color AccentLight1
         => ColorExtensions.AppColor("SystemAccentColorLight1");
     /// <summary>
-    /// Light: FF0067C0  Dark: FF0067C0
+    /// Light: #FF0067C0  Dark: #FF0067C0
     /// </summary>
     public static Color AccentDark1
         => ColorExtensions.AppColor("SystemAccentColorDark1");
     /// <summary>
-    /// Light: FF003E92  Dark: FF003E92
+    /// Light: #FF003E92  Dark: #FF003E92
     /// </summary>
     public static Color AccentDark2
         => ColorExtensions.AppColor("SystemAccentColorDark2");
     /// <summary>
-    /// Light: FF001A68  Dark: FF001A68
+    /// Light: #FF001A68  Dark: #FF001A68
     /// </summary>
     public static Color AccentDark3
         => ColorExtensions.AppColor("SystemAccentColorDark3");

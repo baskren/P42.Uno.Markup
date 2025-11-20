@@ -1,12 +1,10 @@
-using Microsoft.UI.Xaml;
+namespace P42.Uno.WinUI.Markup;
 
-namespace P42.Uno.Markup;
-
-public static class StyleExtensions
+public static partial class StyleExtensions
 {
     public static Style Add(this Style element, DependencyProperty property, object value) 
     {
-        element?.Setters.Add(new Setter(property, value));
+        element.Setters.Add(new Setter(property, value));
         return element;
     }
 
@@ -20,13 +18,13 @@ public static class StyleExtensions
 	
 public class Style<T> where T : DependencyObject
 {
-    public static implicit operator Style(Style<T> style) => style?.FormsStyle;
+    public static implicit operator Style(Style<T> style) => style.FormsStyle;
 
     public Style FormsStyle { get; }
 
     public Style(params (DependencyProperty Property, object Value)[] setters)
     {
-        FormsStyle = new Style(typeof(T)) { };
+        FormsStyle = new Style(typeof(T));
         AddX(setters);
     }
 
@@ -36,6 +34,7 @@ public class Style<T> where T : DependencyObject
         return this;
     }
 
+    // ReSharper disable once UnusedMethodReturnValue.Global
     public Style<T> AddX(params (DependencyProperty Property, object Value)[] setters)
     {
         foreach (var setter in setters)
@@ -45,9 +44,9 @@ public class Style<T> where T : DependencyObject
         return this;
     }
 
-    public Style<T> AddX(DependencyProperty Property, object Value)
+    public Style<T> AddX(DependencyProperty property, object value)
     {
-        FormsStyle.Setters.Add(new Setter(Property, Value));
+        FormsStyle.Setters.Add(new Setter(property, value));
         return this;
     }
 }

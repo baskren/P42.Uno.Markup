@@ -1,10 +1,9 @@
-using Microsoft.UI.Xaml;
-
-namespace P42.Uno.Markup.TypeRamps.TextBlock;
+namespace P42.Uno.WinUI.Markup;
 
 // https://learn.microsoft.com/en-us/windows/apps/develop/platform/xaml/xaml-theme-resources#the-xaml-type-ramp
 // 
 
+// ReSharper disable once UnusedType.Global
 public static class TextBlockStyle
 {
     public static Style? Caption => Application.Current.Resources["CaptionTextBlockStyle"] as Style;

@@ -1,8 +1,9 @@
-using Microsoft.UI.Xaml.Media;
+using P42.Utils.Uno;
 
-namespace P42.Uno.Markup;
+namespace P42.Uno.WinUI.Markup;
 
 // Full list of brushes found here: https://github.com/unoplatform/uno/blob/master/src/Uno.UI/UI/Xaml/Style/Generic/SystemResources.xaml
+// ReSharper disable once UnusedType.Global
 public static class SystemSliderBrushes
 {
     public static Brush ContainerBackground => ColorExtensions.AppBrush("SliderContainerBackground");

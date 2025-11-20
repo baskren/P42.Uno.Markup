@@ -1,18 +1,21 @@
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Media;
-using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Windows.UI;
+using P42.Utils.Uno;
 
-namespace P42.Uno.Markup;
+namespace P42.Uno.WinUI.Markup;
 
 public class ColorConverter : TypeConverter, IValueConverter
 {
-    public static ColorConverter Instance = new();
+    private static ColorConverter? _instance;
+    public static ColorConverter Instance => _instance ??= new ColorConverter();
 
-    public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+    private ColorConverter()
+    {
+    }
+
+    public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
     {
         if (sourceType == typeof(SolidColorBrush))
             return true;
@@ -26,17 +29,30 @@ public class ColorConverter : TypeConverter, IValueConverter
         if (sourceType == typeof(int))
             return true;
 
-        if (sourceType == typeof(uint))
-            return true;
-
-        return base.CanConvertFrom(context, sourceType);
+        return sourceType == typeof(uint) || base.CanConvertFrom(context, sourceType);
     }
 
-    public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+    public override bool CanConvertTo(ITypeDescriptorContext? context, [NotNullWhen(true)] Type? destinationType)
+    {
+        if (destinationType == typeof(Color))
+            return true;
+        if (destinationType == typeof(SolidColorBrush))
+            return true;
+        if (destinationType == typeof(string))
+            return true;
+        if (destinationType == typeof(int))
+            return true;
+        if (destinationType == typeof(uint))
+            return true;
+        
+        return base.CanConvertTo(context, destinationType);
+    }
+
+    public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
     {
         try
         {
-            return Convert(value, typeof(SolidColorBrush), null, null);
+            return Convert(value, value.GetType(), null, null);
         }
         catch (Exception)
         {
@@ -44,12 +60,7 @@ public class ColorConverter : TypeConverter, IValueConverter
         }
     }
 
-    public override bool CanConvertTo(ITypeDescriptorContext context, [NotNullWhen(true)] Type destinationType)
-    {
-        return base.CanConvertFrom(context, destinationType);
-    }
-
-    public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+    public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
     {
         try
         {
@@ -61,30 +72,26 @@ public class ColorConverter : TypeConverter, IValueConverter
         }
     }
 
-    public object Convert(object value, Type targetType, object parameter, string language)
+    
+    public object? Convert(object? value, Type? targetType, object? parameter, string? language)
     {
-        if (value is Color)
-            return value;
-
-        if (value is SolidColorBrush brush)
-            return brush.Color;
-
-        if (value is string hexText)
-            return ColorExtensions.ColorFromString(hexText);
-
-        if (value is uint uintValue)
-            return ColorExtensions.ColorFromUint(uintValue);
-
-        if (value is int intValue && intValue >= 0)
-            return ColorExtensions.ColorFromUint((uint)intValue);
-
-        var msg = string.Format("Cannot convert \"{0}\" into {1}", value, typeof(Color));
-        throw new InvalidOperationException(msg);
+        return value switch
+        {
+            Color => value,
+            SolidColorBrush brush => brush.Color,
+            string hexText => ColorExtensions.ColorFromString(hexText),
+            uint uintValue => ColorExtensions.ColorFromUint(uintValue),
+            int intValue and >= 0 => ColorExtensions.ColorFromUint((uint)intValue),
+            _ => default(Color)
+        };
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, string language)
+    public object ConvertBack(object? value, Type targetType, object? parameter, string? language)
     {
-        var color = (Color)value;
+        value ??= default(Color);
+
+        if (value is not Color color)
+            throw new NotImplementedException($"Cannot convert back type [{value.GetType()}] to a [{targetType}]");
 
         if (targetType == typeof(Color))
             return color;
@@ -101,6 +108,6 @@ public class ColorConverter : TypeConverter, IValueConverter
         if (targetType == typeof(uint))
             return (uint)color.ToInt();
 
-        throw new NotImplementedException($"Cannot convert SolidColorBrush back to a [{targetType}]");
+        throw new NotImplementedException($"Cannot convert back type [{value.GetType()}] to a [{targetType}]");
     }
 }

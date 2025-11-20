@@ -1,8 +1,8 @@
-using Microsoft.UI.Xaml;
 using ElementType = Microsoft.UI.Xaml.Controls.Primitives.ToggleButton;
 
-namespace P42.Uno.Markup;
+namespace P42.Uno.WinUI.Markup;
 
+// ReSharper disable once UnusedType.Global
 public static class ToggleButtonExtensions
 {
 
