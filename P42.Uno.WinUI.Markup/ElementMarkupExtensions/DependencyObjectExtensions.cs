@@ -9,7 +9,7 @@ public static class DependencyObjectExtensions
 {
     #region IsEnabledX
     public static readonly DependencyProperty IsEnabledXProperty =
-        DependencyProperty.RegisterAttached("IsEnabledX", typeof(string), typeof(DependencyObjectExtensions), new PropertyMetadata(null, IsEnabledXChanged));
+        DependencyProperty.RegisterAttached("IsEnabledX", typeof(string), typeof(DependencyObjectExtensions), new PropertyMetadata(null, IsEnabledChanged));
 
     public static ElementType SetIsEnabled(this ElementType dependencyObject, bool value = true)
     {
@@ -23,7 +23,7 @@ public static class DependencyObjectExtensions
     public static ElementType IsEnabled(this ElementType element, bool value = true)
     { element.SetIsEnabled(value); return element; }
 
-    public static TElement BindIsEnabledX<TElement>(
+    public static TElement BindIsEnabled<TElement>(
         this TElement target,
         DependencyObject source,
         DependencyProperty sourceProperty,
@@ -38,7 +38,7 @@ public static class DependencyObjectExtensions
     ) where TElement : ElementType
         => target.AltBind(IsEnabledXProperty, source, sourceProperty, mode, converter, converterParameter, converterLanguage, updateSourceTrigger, targetNullValue, fallbackValue, filePath, lineNumber); 
     
-    public static TElement BindIsEnabledX<TElement, TSource, TDest>(
+    public static TElement BindIsEnabled<TElement, TSource, TDest>(
         this TElement target,
         INotifyPropertyChanged source,
         string sourcePropertyName,
@@ -57,7 +57,7 @@ public static class DependencyObjectExtensions
         return target;
     }
 
-    private static void IsEnabledXChanged(ElementType dependencyObject, DependencyPropertyChangedEventArgs args)
+    private static void IsEnabledChanged(ElementType dependencyObject, DependencyPropertyChangedEventArgs args)
     {
         if (args.NewValue is not bool newValue)
             newValue = true;
@@ -74,14 +74,14 @@ public static class DependencyObjectExtensions
                     continue;
 
                 foreach (var child in panel.Children)
-                    IsEnabledXChanged(child, args);
+                    IsEnabledChanged(child, args);
             }
         }
 
     }
     #endregion IsEnabledX
 
-
+    
     public static TBindable AssignX<TBindable, TVariable>(this TBindable bindable, out TVariable variable)
         where TBindable : ElementType, TVariable
     {
@@ -89,14 +89,14 @@ public static class DependencyObjectExtensions
         return bindable;
     }
 
-    public static TBindable InvokeX<TBindable>(this TBindable bindable, Action<TBindable> action) where TBindable : ElementType
+    public static TBindable Invoke<TBindable>(this TBindable bindable, Action<TBindable> action) where TBindable : ElementType
     {
         action.Invoke(bindable);
         return bindable;
     }
 
     #region Property Changed Handler
-    public static TElement AddPropertyChangedHandlerX<TElement>(this TElement element, DependencyProperty property, DependencyPropertyChangedCallback handler) where TElement : ElementType
+    public static TElement AddPropertyChangedHandler<TElement>(this TElement element, DependencyProperty property, DependencyPropertyChangedCallback handler) where TElement : ElementType
     {
         element.RegisterPropertyChangedCallback(property, handler);
         return element;

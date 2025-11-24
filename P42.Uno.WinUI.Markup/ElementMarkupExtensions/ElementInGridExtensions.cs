@@ -1,3 +1,4 @@
+using P42.Utils;
 using ElementType = Microsoft.UI.Xaml.UIElement;
 
 namespace P42.Uno.WinUI.Markup;
@@ -5,40 +6,40 @@ namespace P42.Uno.WinUI.Markup;
 // ReSharper disable once UnusedType.Global
 public static class ElementInGridExtensions
 {
-    public static TView RowX<TView>(this TView view, int row) where TView :ElementType
+    public static TView Row<TView>(this TView view, int row) where TView :ElementType
     {
         view.SetValue(Grid.RowProperty, row);
         return view;
     }
 
-    public static TView RowX<TView>(this TView view, int row, int span) where TView :ElementType
+    public static TView Row<TView>(this TView view, int row, int span) where TView :ElementType
     {
         view.SetValue(Grid.RowProperty, row);
         view.SetValue(Grid.RowSpanProperty, span);
         return view;
     }
 
-    public static TView RowSpanX<TView>(this TView view, int span) where TView :ElementType
+    public static TView RowSpan<TView>(this TView view, int span) where TView :ElementType
     {
         view.SetValue(Grid.RowSpanProperty, span);
         VariableSizedWrapGrid.SetRowSpan(view, span); 
         return view;
     }
 
-    public static TView ColumnX<TView>(this TView view, int column) where TView :ElementType
+    public static TView Column<TView>(this TView view, int column) where TView :ElementType
     {
         view.SetValue(Grid.ColumnProperty, column);
         return view;
     }
 
-    public static TView ColumnX<TView>(this TView view, int column, int span) where TView :ElementType
+    public static TView Column<TView>(this TView view, int column, int span) where TView :ElementType
     {
         view.SetValue(Grid.ColumnProperty, column);
         view.SetValue(Grid.ColumnSpanProperty, span);
         return view;
     }
 
-    public static TView ColumnSpanX<TView>(this TView view, int span) where TView :ElementType
+    public static TView ColumnSpan<TView>(this TView view, int span) where TView :ElementType
     {
         view.SetValue(Grid.ColumnSpanProperty, span);
         VariableSizedWrapGrid.SetColumnSpan(view, span);
@@ -79,7 +80,7 @@ public static class ElementInGridExtensions
         return view;
     }
 
-    public static TView RowColX<TView>(this TView view, int row, int column) where TView : ElementType
+    public static TView RowCol<TView>(this TView view, int row, int column) where TView : ElementType
     {
         view.SetValue(Grid.RowProperty, row);
         view.SetValue(Grid.ColumnProperty, column);

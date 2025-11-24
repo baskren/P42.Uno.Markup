@@ -7,7 +7,7 @@ public static class ToggleButtonExtensions
 {
 
     #region Events
-    public static TElement AddCheckStateChangedHandlerX<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
+    public static TElement AddCheckStateChangedHandler<TElement>(this TElement element, RoutedEventHandler handler) where TElement : ElementType
     { 
         element.Checked += handler;
         element.Indeterminate += handler;

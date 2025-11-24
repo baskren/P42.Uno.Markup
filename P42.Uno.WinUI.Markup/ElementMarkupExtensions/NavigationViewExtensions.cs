@@ -9,7 +9,7 @@ public static class NavigationViewExtensions
 
 
 
-    public static TElement NewMenuItemsX<TElement>(this TElement element, params object[] items) where TElement : ElementType
+    public static TElement NewMenuItems<TElement>(this TElement element, params object[] items) where TElement : ElementType
     {
         element.MenuItems.Clear();
         return element.MenuItems(items);

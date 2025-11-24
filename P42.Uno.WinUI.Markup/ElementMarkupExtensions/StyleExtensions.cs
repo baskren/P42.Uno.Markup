@@ -25,17 +25,17 @@ public class Style<T> where T : DependencyObject
     public Style(params (DependencyProperty Property, object Value)[] setters)
     {
         FormsStyle = new Style(typeof(T));
-        AddX(setters);
+        Add(setters);
     }
 
-    public Style<T> BasedOnX(Style value)
+    public Style<T> BasedOn(Style value)
     {
         FormsStyle.BasedOn = value;
         return this;
     }
 
     // ReSharper disable once UnusedMethodReturnValue.Global
-    public Style<T> AddX(params (DependencyProperty Property, object Value)[] setters)
+    public Style<T> Add(params (DependencyProperty Property, object Value)[] setters)
     {
         foreach (var setter in setters)
         {
@@ -44,7 +44,7 @@ public class Style<T> where T : DependencyObject
         return this;
     }
 
-    public Style<T> AddX(DependencyProperty property, object value)
+    public Style<T> Add(DependencyProperty property, object value)
     {
         FormsStyle.Setters.Add(new Setter(property, value));
         return this;

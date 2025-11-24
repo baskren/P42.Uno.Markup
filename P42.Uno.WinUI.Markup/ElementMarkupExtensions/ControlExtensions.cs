@@ -11,7 +11,7 @@ public static class ControlExtensions
     #region Font Properties
 
     #region Workaround Binding
-    public static TElement BindFontX<TElement>(this TElement target, Control source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
+    public static TElement BindFont<TElement>(this TElement target, Control source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
     {
         var excepts = InternalHelpers.GetExcepts(except);
         if (excepts is null || !excepts.Contains(nameof(Control.CharacterSpacing)))
@@ -31,10 +31,10 @@ public static class ControlExtensions
         return target;
     }
 
-    public static TElement BindTextPropertiesX<TElement>(this TElement target, Control source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
+    public static TElement BindTextProperties<TElement>(this TElement target, Control source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
     {
         var excepts = InternalHelpers.GetExcepts(except);
-        target.BindFontX(source, bindingMode, excepts);
+        target.BindFont(source, bindingMode, excepts);
         if (excepts is null || !excepts.Contains(nameof(Control.IsTextScaleFactorEnabledProperty)))
             target.AltBind(ElementType.IsTextScaleFactorEnabledProperty, source, Control.IsTextScaleFactorEnabledProperty, bindingMode);
 
@@ -42,7 +42,7 @@ public static class ControlExtensions
     }
 
 
-    public static TElement BindFontX<TElement>(this TElement target, TextBlock source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
+    public static TElement BindFont<TElement>(this TElement target, TextBlock source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
     {
         var excepts = InternalHelpers.GetExcepts(except);
         if (excepts is null || !excepts.Contains(nameof(TextBlock.FontFamily)))
@@ -60,10 +60,10 @@ public static class ControlExtensions
         return target;
     }
 
-    public static TElement BindTextPropertiesX<TElement>(this TElement target, TextBlock source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
+    public static TElement BindTextProperties<TElement>(this TElement target, TextBlock source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
     {
         var excepts = InternalHelpers.GetExcepts(except);
-        target.BindFontX(source, bindingMode, excepts);
+        target.BindFont(source, bindingMode, excepts);
         if (excepts is null || !excepts.Contains(nameof(TextBlock.IsTextScaleFactorEnabledProperty)))
             target.AltBind(ElementType.IsTextScaleFactorEnabledProperty, source, TextBlock.IsTextScaleFactorEnabledProperty, bindingMode);
 
@@ -72,7 +72,7 @@ public static class ControlExtensions
 
 
 
-    public static TElement BindFontX<TElement>(this TElement target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
+    public static TElement BindFont<TElement>(this TElement target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
     {
         var excepts = InternalHelpers.GetExcepts(except);
         if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontFamily)))
@@ -91,10 +91,10 @@ public static class ControlExtensions
         return target;
     }
 
-    public static TElement BindTextPropertiesX<TElement>(this TElement target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
+    public static TElement BindTextProperties<TElement>(this TElement target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
     {
         var excepts = InternalHelpers.GetExcepts(except);
-        target.BindFontX(source, bindingMode, excepts);
+        target.BindFont(source, bindingMode, excepts);
         if (excepts is null || !excepts.Contains(nameof(ContentPresenter.IsTextScaleFactorEnabled)))
             target.AltBind(ElementType.IsTextScaleFactorEnabledProperty, source, ContentPresenter.IsTextScaleFactorEnabledProperty, bindingMode);
 
@@ -111,42 +111,42 @@ public static class ControlExtensions
     /*
     #region BindBorder
 
-    public static TElement BindBorderX<TElement>(this TElement target, Control source, BindingMode bindingMode = BindingMode.OneWay) where TElement : ElementType
+    public static TElement BindBorder<TElement>(this TElement target, Control source, BindingMode bindingMode = BindingMode.OneWay) where TElement : ElementType
     {
         target.Bind(ElementType.BorderBrushProperty, source, nameof(Control.BorderBrush), bindingMode);
         target.Bind(ElementType.BorderThicknessProperty, source, nameof(Control.BorderThickness), bindingMode);
         target.Bind(ElementType.CornerRadiusProperty, source, nameof(Control.CornerRadius), bindingMode);
         return target;
     }
-    public static TElement BindBorderX<TElement>(this TElement target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay) where TElement : ElementType
+    public static TElement BindBorder<TElement>(this TElement target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay) where TElement : ElementType
     {
         target.Bind(ElementType.BorderBrushProperty, source, nameof(ContentPresenter.BorderBrush), bindingMode);
         target.Bind(ElementType.BorderThicknessProperty, source, nameof(ContentPresenter.BorderThickness), bindingMode);
         target.Bind(ElementType.CornerRadiusProperty, source, nameof(ContentPresenter.CornerRadius), bindingMode);
         return target;
     }
-    public static TElement BindBorderX<TElement>(this TElement target, Border source, BindingMode bindingMode = BindingMode.OneWay) where TElement : ElementType
+    public static TElement BindBorder<TElement>(this TElement target, Border source, BindingMode bindingMode = BindingMode.OneWay) where TElement : ElementType
     {
         target.Bind(ElementType.BorderBrushProperty, source, nameof(Border.BorderBrush), bindingMode);
         target.Bind(ElementType.BorderThicknessProperty, source, nameof(Border.BorderThickness), bindingMode);
         target.Bind(ElementType.CornerRadiusProperty, source, nameof(Border.CornerRadius), bindingMode);
         return target;
     }
-    public static TElement BindBorderX<TElement>(this TElement target, Grid source, BindingMode bindingMode = BindingMode.OneWay) where TElement : ElementType
+    public static TElement BindBorder<TElement>(this TElement target, Grid source, BindingMode bindingMode = BindingMode.OneWay) where TElement : ElementType
     {
         target.Bind(ElementType.BorderBrushProperty, source, nameof(Grid.BorderBrush), bindingMode);
         target.Bind(ElementType.BorderThicknessProperty, source, nameof(Grid.BorderThickness), bindingMode);
         target.Bind(ElementType.CornerRadiusProperty, source, nameof(Grid.CornerRadius), bindingMode);
         return target;
     }
-    public static TElement BindBorderX<TElement>(this TElement target, RelativePanel source, BindingMode bindingMode = BindingMode.OneWay) where TElement : ElementType
+    public static TElement BindBorder<TElement>(this TElement target, RelativePanel source, BindingMode bindingMode = BindingMode.OneWay) where TElement : ElementType
     {
         target.Bind(ElementType.BorderBrushProperty, source, nameof(RelativePanel.BorderBrush), bindingMode);
         target.Bind(ElementType.BorderThicknessProperty, source, nameof(RelativePanel.BorderThickness), bindingMode);
         target.Bind(ElementType.CornerRadiusProperty, source, nameof(RelativePanel.CornerRadius), bindingMode);
         return target;
     }
-    public static TElement BindBorderX<TElement>(this TElement target, StackPanel source, BindingMode bindingMode = BindingMode.OneWay) where TElement : ElementType
+    public static TElement BindBorder<TElement>(this TElement target, StackPanel source, BindingMode bindingMode = BindingMode.OneWay) where TElement : ElementType
     {
         target.Bind(ElementType.BorderBrushProperty, source, nameof(StackPanel.BorderBrush), bindingMode);
         target.Bind(ElementType.BorderThicknessProperty, source, nameof(StackPanel.BorderThickness), bindingMode);

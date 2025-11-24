@@ -8,7 +8,7 @@ public static class RichTextEditExtensions
 {
 
     #region Text/Font Workaround Binding
-    public static ElementType BindFontX(this ElementType target, Control source, BindingMode bindingMode = BindingMode.OneWay, object? except = null)
+    public static ElementType BindFont(this ElementType target, Control source, BindingMode bindingMode = BindingMode.OneWay, object? except = null)
     {
         var excepts = InternalHelpers.GetExcepts(except);
         if (excepts is null || !excepts.Contains(nameof(Control.CharacterSpacing)))
@@ -31,14 +31,14 @@ public static class RichTextEditExtensions
     public static ElementType BindTextProperties(this ElementType target, Control source, BindingMode bindingMode = BindingMode.OneWay, object? except = null)
     {
         var excepts = InternalHelpers.GetExcepts(except);
-        target.BindFontX(source, bindingMode, excepts);
+        target.BindFont(source, bindingMode, excepts);
         if (excepts is null || !excepts.Contains(nameof(Control.IsTextScaleFactorEnabledProperty)))
             target.AltBind(ElementType.IsTextScaleFactorEnabledProperty, source, Control.IsTextScaleFactorEnabledProperty, bindingMode);
 
         return target;
     }
 
-    public static ElementType BindFontX(this ElementType target, TextBlock source, BindingMode bindingMode = BindingMode.OneWay, object? except = null)
+    public static ElementType BindFont(this ElementType target, TextBlock source, BindingMode bindingMode = BindingMode.OneWay, object? except = null)
     {
         var excepts = InternalHelpers.GetExcepts(except);
         if (excepts is null || !excepts.Contains(nameof(TextBlock.FontFamily)))
@@ -59,7 +59,7 @@ public static class RichTextEditExtensions
     public static ElementType BindTextProperties(this ElementType target, TextBlock source, BindingMode bindingMode = BindingMode.OneWay, object? except = null)
     {
         var excepts = InternalHelpers.GetExcepts(except);
-        target.BindFontX(source, bindingMode, excepts);
+        target.BindFont(source, bindingMode, excepts);
         if (excepts is null || !excepts.Contains(nameof(TextBlock.IsTextScaleFactorEnabled)))
             target.AltBind(ElementType.IsTextScaleFactorEnabledProperty, source, TextBlock.IsTextScaleFactorEnabledProperty, bindingMode);
         if (excepts is null || !excepts.Contains(nameof(TextBlock.LineHeightProperty)))
@@ -77,7 +77,7 @@ public static class RichTextEditExtensions
     }
 
 
-    public static ElementType BindFontX(this ElementType target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay, object? except = null)
+    public static ElementType BindFont(this ElementType target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay, object? except = null)
     {
         var excepts = InternalHelpers.GetExcepts(except);
         if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontFamily)))
@@ -99,7 +99,7 @@ public static class RichTextEditExtensions
     public static ElementType BindTextProperties(this ElementType target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay, object? except = null)
     {
         var excepts = InternalHelpers.GetExcepts(except);
-        target.BindFontX(source, bindingMode, excepts);
+        target.BindFont(source, bindingMode, excepts);
         if (excepts is null || !excepts.Contains(nameof(ContentPresenter.IsTextScaleFactorEnabled)))
             target.AltBind(ElementType.IsTextScaleFactorEnabledProperty, source, ContentPresenter.IsTextScaleFactorEnabledProperty, bindingMode);
         if (excepts is null || !excepts.Contains(nameof(ContentPresenter.LineHeightProperty)))

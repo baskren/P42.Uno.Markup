@@ -6,7 +6,7 @@ namespace P42.Uno.WinUI.Markup;
 // ReSharper disable once UnusedType.Global
 public static class FrameworkElementExtensions
 {
-    public static TElement ResourcesX<TElement>(this TElement element, params object[] objects) where TElement :ElementType
+    public static TElement Resources<TElement>(this TElement element, params object[] objects) where TElement :ElementType
     {
         var dict = element.Resources ?? new ResourceDictionary();
         object? key = null;
@@ -26,17 +26,17 @@ public static class FrameworkElementExtensions
                     break;
                 case Style style:
                     if (key is not null)
-                        element.AddStyleX(key, style);
+                        element.AddStyle(key, style);
                     break;
             }
         }
         return element; 
     }
 
-    public static TElement AddStyleX<TElement>(this TElement element, Style style) where TElement : ElementType
-        => element.AddStyleX(null, style);
+    public static TElement AddStyle<TElement>(this TElement element, Style style) where TElement : ElementType
+        => element.AddStyle(null, style);
 
-    public static TElement AddStyleX<TElement>(this TElement element, object? key, Style style) where TElement : ElementType
+    public static TElement AddStyle<TElement>(this TElement element, object? key, Style style) where TElement : ElementType
     {
         var dict = element.Resources ?? new ResourceDictionary();
         key ??= style.TargetType;
@@ -47,7 +47,7 @@ public static class FrameworkElementExtensions
         if (style.BasedOn is null && dict.TryGetValue(key, out var xvalue))
         {
             if (xvalue is Style xStyle)
-                style.BasedOn(xStyle);
+                StyleExtensions.BasedOn(style, xStyle);
             else
                 dict.Add(key, style);
         }
@@ -57,16 +57,16 @@ public static class FrameworkElementExtensions
         return element;
     }
 
-    public static TElement AddStyleX<TElement>(this TElement element, string? key, Type targetType, Setter first, params Setter[] setters) where TElement : ElementType
-        => element.AddStyleX(key, targetType, null, first, setters);
+    public static TElement AddStyle<TElement>(this TElement element, string? key, Type targetType, Setter first, params Setter[] setters) where TElement : ElementType
+        => element.AddStyle(key, targetType, null, first, setters);
 
-    public static TElement AddStyleX<TElement>(this TElement element, Type targetType, Setter first, params Setter[] setters) where TElement : ElementType
-        => element.AddStyleX(null, targetType, null, first, setters);
+    public static TElement AddStyle<TElement>(this TElement element, Type targetType, Setter first, params Setter[] setters) where TElement : ElementType
+        => element.AddStyle(null, targetType, null, first, setters);
 
-    public static TElement AddStyleX<TElement>(this TElement element, Type targetType, Style? basedUpon, Setter first, params Setter[] setters) where TElement : ElementType
-        => element.AddStyleX(null, targetType, basedUpon, first, setters);
+    public static TElement AddStyle<TElement>(this TElement element, Type targetType, Style? basedUpon, Setter first, params Setter[] setters) where TElement : ElementType
+        => element.AddStyle(null, targetType, basedUpon, first, setters);
 
-    public static TElement AddStyleX<TElement>(this TElement element, string? key, Type targetType, Style? basedUpon, Setter first, params Setter[]? setters) where TElement : ElementType
+    public static TElement AddStyle<TElement>(this TElement element, string? key, Type targetType, Style? basedUpon, Setter first, params Setter[]? setters) where TElement : ElementType
     {
         var style = new Style(targetType);
         if (basedUpon is not null)
@@ -79,24 +79,24 @@ public static class FrameworkElementExtensions
                 style.Setters.Add(setter);
         }
         
-        element.AddStyleX((object?)key ?? targetType, style);
+        element.AddStyle((object?)key ?? targetType, style);
         return element;
     }
 
-    public static TElement AddStyleX<TElement>(this TElement element, string? key, Type targetType, Style? basedUpon, (DependencyProperty, object) first, params (DependencyProperty, object)[]? setters) where TElement : ElementType
+    public static TElement AddStyle<TElement>(this TElement element, string? key, Type targetType, Style? basedUpon, (DependencyProperty, object) first, params (DependencyProperty, object)[]? setters) where TElement : ElementType
     {
-        element.AddStyleX(key, targetType, basedUpon, new Setter(first.Item1, first.Item2), setters?.Select(s => new Setter(s.Item1, s.Item2)).ToArray());
+        element.AddStyle(key, targetType, basedUpon, new Setter(first.Item1, first.Item2), setters?.Select(s => new Setter(s.Item1, s.Item2)).ToArray());
         return element;
     }
 
-    public static TElement AddStyleX<TElement>(this TElement element, Type targetType, Style? basedUpon, (DependencyProperty, object) first, params (DependencyProperty, object)[] setters) where TElement : ElementType
-        => element.AddStyleX(null, targetType, basedUpon, first, setters);
+    public static TElement AddStyle<TElement>(this TElement element, Type targetType, Style? basedUpon, (DependencyProperty, object) first, params (DependencyProperty, object)[] setters) where TElement : ElementType
+        => element.AddStyle(null, targetType, basedUpon, first, setters);
 
-    public static TElement AddStyleX<TElement>(this TElement element, string? key, Type targetType, (DependencyProperty, object) first, params (DependencyProperty, object)[] setters) where TElement : ElementType
-        => element.AddStyleX(key, targetType, null, first, setters);
+    public static TElement AddStyle<TElement>(this TElement element, string? key, Type targetType, (DependencyProperty, object) first, params (DependencyProperty, object)[] setters) where TElement : ElementType
+        => element.AddStyle(key, targetType, null, first, setters);
 
-    public static TElement AddStyleX<TElement>(this TElement element, Type targetType, (DependencyProperty, object) first, params (DependencyProperty, object)[] setters) where TElement : ElementType
-        => element.AddStyleX(null, targetType, null, first, setters);
+    public static TElement AddStyle<TElement>(this TElement element, Type targetType, (DependencyProperty, object) first, params (DependencyProperty, object)[] setters) where TElement : ElementType
+        => element.AddStyle(null, targetType, null, first, setters);
 
 
     #region Style
@@ -130,22 +130,22 @@ public static class FrameworkElementExtensions
 
 
     #region Size
-    public static TElement SizeX<TElement>(this TElement element, double widthRequest, double heightRequest) where TElement :ElementType
+    public static TElement Size<TElement>(this TElement element, double widthRequest, double heightRequest) where TElement :ElementType
         => element.Width(widthRequest).Height(heightRequest);
 
-    public static TElement SizeX<TElement>(this TElement element, double sizeRequest) where TElement :ElementType
+    public static TElement Size<TElement>(this TElement element, double sizeRequest) where TElement :ElementType
         => element.Width(sizeRequest).Height(sizeRequest);
 
-    public static TElement MinSizeX<TElement>(this TElement element, double widthRequest, double heightRequest) where TElement :ElementType
+    public static TElement MinSize<TElement>(this TElement element, double widthRequest, double heightRequest) where TElement :ElementType
         => element.MinWidth(widthRequest).MinHeight(heightRequest);
 
-    public static TElement MinSizeX<TElement>(this TElement element, double sizeRequest) where TElement :ElementType
+    public static TElement MinSize<TElement>(this TElement element, double sizeRequest) where TElement :ElementType
         => element.MinWidth(sizeRequest).MinHeight(sizeRequest);
 
-    public static TElement MaxSizeX<TElement>(this TElement element, double widthRequest, double heightRequest) where TElement :ElementType
+    public static TElement MaxSize<TElement>(this TElement element, double widthRequest, double heightRequest) where TElement :ElementType
         => element.MaxWidth(widthRequest).MaxHeight(heightRequest);
 
-    public static TElement MaxSizeX<TElement>(this TElement element, double sizeRequest) where TElement :ElementType
+    public static TElement MaxSize<TElement>(this TElement element, double sizeRequest) where TElement :ElementType
         => element.MaxWidth(sizeRequest).MaxHeight(sizeRequest);
     #endregion
     
@@ -209,7 +209,7 @@ public static class FrameworkElementExtensions
     #region Special Bindings
 
     #region BindBorder
-    public static TElement BindBorderX<TElement>(this TElement target, Control source, BindingMode bindingMode = BindingMode.OneWay) where TElement : ElementType
+    public static TElement BindBorder<TElement>(this TElement target, Control source, BindingMode bindingMode = BindingMode.OneWay) where TElement : ElementType
     {
         if (typeof(ElementType).GetBorderDependencyProperty(nameof(Control.BorderBrushProperty)) is { } borderBrushProperty)
             target.AltBind(borderBrushProperty, source, Control.BorderBrushProperty, bindingMode);

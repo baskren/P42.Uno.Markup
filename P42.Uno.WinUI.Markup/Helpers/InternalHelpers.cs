@@ -4,7 +4,7 @@ namespace P42.Uno.WinUI.Markup;
 
 internal static class InternalHelpers
 {
-    public static int ToInt(this Enum enumValue) => Convert.ToInt32(enumValue, CultureInfo.InvariantCulture);
+    
 
     public static List<string>? GetExcepts(object? except)
     => except switch

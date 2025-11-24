@@ -7,13 +7,13 @@ namespace P42.Uno.WinUI.Markup;
 public static class ContentPresenterExtensions
 {
     #region Binding
-    public static TElement BindNullCollapseX<TElement>(this TElement element) where TElement : ElementType
+    public static TElement BindNullCollapse<TElement>(this TElement element) where TElement : ElementType
     {
         return element.AltBind(UIElement.VisibilityProperty, element, ContentPresenter.ContentProperty,
             convert: (object? content) => content != null? Visibility.Visible : Visibility.Collapsed);
     }
 
-    public static TElement BindFontX<TElement>(this TElement target, Control source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
+    public static TElement BindFont<TElement>(this TElement target, Control source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
     {   
         var excepts = InternalHelpers.GetExcepts(except);
         if (excepts is null || !excepts.Contains(nameof(Control.CharacterSpacing)))
@@ -33,17 +33,17 @@ public static class ContentPresenterExtensions
         return target;
     }
 
-    public static TElement BindTextPropertiesX<TElement>(this TElement target, Control source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
+    public static TElement BindTextProperties<TElement>(this TElement target, Control source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
     {
         var excepts = InternalHelpers.GetExcepts(except);
-        target.BindFontX(source, bindingMode, excepts);
+        target.BindFont(source, bindingMode, excepts);
         if (excepts is null || !excepts.Contains(nameof(Control.IsTextScaleFactorEnabledProperty)))
             target.AltBind(ElementType.IsTextScaleFactorEnabledProperty, source, Control.IsTextScaleFactorEnabledProperty, bindingMode);
 
         return target;
     }
 
-    public static TElement BindFontX<TElement>(this TElement target, TextBlock source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
+    public static TElement BindFont<TElement>(this TElement target, TextBlock source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
     {
         var excepts = InternalHelpers.GetExcepts(except);
         if (excepts is null || !excepts.Contains(nameof(TextBlock.FontFamily)))
@@ -61,10 +61,10 @@ public static class ContentPresenterExtensions
         return target;
     }
 
-    public static TElement BindTextPropertiesX<TElement>(this TElement target, TextBlock source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
+    public static TElement BindTextProperties<TElement>(this TElement target, TextBlock source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
     {
         var excepts = InternalHelpers.GetExcepts(except);
-        target.BindFontX(source, bindingMode, excepts);
+        target.BindFont(source, bindingMode, excepts);
         if (excepts is null || !excepts.Contains(nameof(TextBlock.IsTextScaleFactorEnabledProperty)))
             target.AltBind(ElementType.IsTextScaleFactorEnabledProperty, source, TextBlock.IsTextScaleFactorEnabledProperty, bindingMode);
         if (excepts is null || !excepts.Contains(nameof(TextBlock.LineHeightProperty)))
@@ -81,7 +81,7 @@ public static class ContentPresenterExtensions
         return target;
     }
 
-    public static TElement BindFontX<TElement>(this TElement target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
+    public static TElement BindFont<TElement>(this TElement target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
     {
         var excepts = InternalHelpers.GetExcepts(except);
         if (excepts is null || !excepts.Contains(nameof(ContentPresenter.FontFamily)))
@@ -100,10 +100,10 @@ public static class ContentPresenterExtensions
         return target;
     }
 
-    public static TElement BindTextPropertiesX<TElement>(this TElement target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
+    public static TElement BindTextProperties<TElement>(this TElement target, ContentPresenter source, BindingMode bindingMode = BindingMode.OneWay, object? except = null) where TElement : ElementType
     {
         var excepts = InternalHelpers.GetExcepts(except);
-        target.BindFontX(source, bindingMode, excepts);
+        target.BindFont(source, bindingMode, excepts);
         if (excepts is null || !excepts.Contains(nameof(ContentPresenter.IsTextScaleFactorEnabled)))
             target.AltBind(ElementType.IsTextScaleFactorEnabledProperty, source, ContentPresenter.IsTextScaleFactorEnabledProperty, bindingMode);
         if (excepts is null || !excepts.Contains(nameof(ContentPresenter.LineHeightProperty)))

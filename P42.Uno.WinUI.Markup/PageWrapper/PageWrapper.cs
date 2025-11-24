@@ -12,7 +12,7 @@ public partial class PageWrapper : Page, IWrappedPage
 
         Content = _grid = new Grid()
             .Stretch()
-            .RowsX(40, "*")
+            .Rows(40, "*")
             .Children(
                 new Button()
                     .Name(out _backButton)
@@ -42,7 +42,7 @@ public partial class PageWrapper : Page, IWrappedPage
             {
                 _wrappedPage
                     .Stretch()
-                    .RowColX(1, 0);
+                    .RowCol(1, 0);
                 _grid.Children.Add(_wrappedPage);
             }
         }
