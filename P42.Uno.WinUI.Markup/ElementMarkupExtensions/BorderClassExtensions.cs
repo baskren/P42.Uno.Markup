@@ -7,12 +7,13 @@ namespace P42.Uno.WinUI.Markup;
 public static class BorderClassExtensions
 {
 
-
+    /* WinUI does not have a ChildProeprty dependency property on Border like UNO.  Not sure how this worked in older versions of this library.
     public static ElementType BindNullCollapse(this ElementType element)
     {
-        return element.AltBind(UIElement.VisibilityProperty, element, ElementType.ChildProperty,
+        return element.AltBind(UIElement.VisibilityProperty, element, Microsoft.UI.Xaml.Controls.Border.ChildProperty,
             convert: (UIElement? child) => child is null ? Visibility.Collapsed:Visibility.Visible);
     }
+    */
 
     #region BindBorder
 
@@ -62,3 +63,5 @@ public static class BorderClassExtensions
 
 
 }
+
+
