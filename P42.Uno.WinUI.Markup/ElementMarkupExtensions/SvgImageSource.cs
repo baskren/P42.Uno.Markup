@@ -1,8 +1,7 @@
-using ElementType = Microsoft.UI.Xaml.Media.Imaging.SvgImageSource;
 using System.Reflection;
-using P42.Utils;
 using AsyncAwaitBestPractices;
-using P42.Utils.Uno;
+using P42.Utils;
+using ElementType = Microsoft.UI.Xaml.Media.Imaging.SvgImageSource;
 
 
 namespace P42.Uno.WinUI.Markup;

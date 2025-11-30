@@ -1,5 +1,5 @@
-using Microsoft.UI.Text;
 using Windows.UI.Text;
+using Microsoft.UI.Text;
 
 namespace P42.Uno.WinUI.Markup;
 

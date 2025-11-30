@@ -1,5 +1,3 @@
-using System.Globalization;
-
 namespace P42.Uno.WinUI.Markup;
 
 internal static class InternalHelpers

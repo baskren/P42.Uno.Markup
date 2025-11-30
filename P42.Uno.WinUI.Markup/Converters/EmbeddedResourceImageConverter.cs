@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
+using P42.Utils;
 using P42.Utils.Uno;
 
 namespace P42.Uno.WinUI.Markup;
@@ -43,7 +44,7 @@ public class EmbeddedResourceImageSourceConverter : TypeConverter, IValueConvert
 
         try
         {
-            var item = Utils.LocalData.ResourceItem.For(resourceId, null, assembly);
+            var item = LocalData.ResourceItem.For(resourceId, null, assembly);
             return item.AssureExistsImageSource();
         }
         catch (Exception ex)

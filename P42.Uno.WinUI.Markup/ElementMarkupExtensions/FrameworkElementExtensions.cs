@@ -47,7 +47,7 @@ public static class FrameworkElementExtensions
         if (style.BasedOn is null && dict.TryGetValue(key, out var xvalue))
         {
             if (xvalue is Style xStyle)
-                StyleExtensions.BasedOn(style, xStyle);
+                style.BasedOn(xStyle);
             else
                 dict.Add(key, style);
         }

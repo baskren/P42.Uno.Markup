@@ -1,5 +1,5 @@
-using ElementType = Microsoft.UI.Xaml.Controls.Control;
 using P42.Utils.Uno;
+using ElementType = Microsoft.UI.Xaml.Controls.Control;
 
 namespace P42.Uno.WinUI.Markup;
 

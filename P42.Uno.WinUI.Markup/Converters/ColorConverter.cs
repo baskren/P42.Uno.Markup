@@ -79,7 +79,7 @@ public class ColorConverter : TypeConverter, IValueConverter
         {
             Color => value,
             SolidColorBrush brush => brush.Color,
-            string hexText => ColorExtensions.ColorFromString(hexText),
+            string hexText => hexText.ColorFromString(),
             uint uintValue => ColorExtensions.ColorFromUint(uintValue),
             int intValue and >= 0 => ColorExtensions.ColorFromUint((uint)intValue),
             _ => default(Color)

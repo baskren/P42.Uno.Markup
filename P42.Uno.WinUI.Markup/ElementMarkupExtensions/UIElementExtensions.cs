@@ -1,6 +1,7 @@
-using ElementType = Microsoft.UI.Xaml.UIElement;
 using System.ComponentModel;
 using P42.Utils.Uno;
+using ElementType = Microsoft.UI.Xaml.UIElement;
+using PeriodicTimer = P42.Utils.PeriodicTimer;
 
 namespace P42.Uno.WinUI.Markup;
 
@@ -25,7 +26,7 @@ public static class UIElementExtensions
 
         if (value)
         {
-            Utils.PeriodicTimer.StartTimer(TimeSpan.FromSeconds(0.5), () =>
+            PeriodicTimer.StartTimer(TimeSpan.FromSeconds(0.5), () =>
             {
                 try
                 {
