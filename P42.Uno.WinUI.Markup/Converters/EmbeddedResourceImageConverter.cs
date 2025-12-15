@@ -9,8 +9,7 @@ namespace P42.Uno.WinUI.Markup;
 // ReSharper disable once UnusedType.Global
 public class EmbeddedResourceImageSourceConverter : TypeConverter, IValueConverter
 {
-    private static EmbeddedResourceImageSourceConverter? _instance;
-    public static EmbeddedResourceImageSourceConverter Instance => _instance ??= new EmbeddedResourceImageSourceConverter();
+    public static EmbeddedResourceImageSourceConverter Instance => field ??= new EmbeddedResourceImageSourceConverter();
 
     private EmbeddedResourceImageSourceConverter()
     {

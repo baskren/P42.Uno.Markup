@@ -8,8 +8,7 @@ namespace P42.Uno.WinUI.Markup;
 
 public class BooleanConverter : TypeConverter, IValueConverter
 {
-    private static BooleanConverter? _visibilityConverter;
-    public static BooleanConverter Instance => _visibilityConverter ??= new BooleanConverter();
+    public static BooleanConverter Instance => field ??= new BooleanConverter();
 
     private BooleanConverter() { }
 

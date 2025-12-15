@@ -8,8 +8,7 @@ namespace P42.Uno.WinUI.Markup;
 
 public class ColorConverter : TypeConverter, IValueConverter
 {
-    private static ColorConverter? _instance;
-    public static ColorConverter Instance => _instance ??= new ColorConverter();
+    public static ColorConverter Instance => field ??= new ColorConverter();
 
     private ColorConverter()
     {

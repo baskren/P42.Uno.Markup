@@ -7,8 +7,7 @@ namespace P42.Uno.WinUI.Markup;
 
 public class SolidBrushConverter : TypeConverter, IValueConverter
 {
-    private static SolidBrushConverter? _instance;
-    public static SolidBrushConverter Instance => _instance ??= new SolidBrushConverter();
+    public static SolidBrushConverter Instance => field ??= new SolidBrushConverter();
 
     public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
         => ColorConverter.Instance.CanConvertFrom(context, sourceType);

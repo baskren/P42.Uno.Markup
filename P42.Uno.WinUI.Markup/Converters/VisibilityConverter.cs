@@ -6,8 +6,7 @@ namespace P42.Uno.WinUI.Markup;
 
 public class VisibilityConverter : TypeConverter, IValueConverter
 {
-    private static VisibilityConverter? _visibilityConverter;
-    public static VisibilityConverter Instance => _visibilityConverter ??= new VisibilityConverter();
+    public static VisibilityConverter Instance => field ??= new VisibilityConverter();
 
     private VisibilityConverter() { }
 
