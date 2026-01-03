@@ -144,8 +144,8 @@ public class BooleanConverter : TypeConverter, IValueConverter
             if (parameter != null && parameter.GetType() == targetType)
             {
                 if (boolValue) return parameter;
-                return targetType.IsValueType 
-                    ? Activator.CreateInstance(targetType) 
+                return targetType.IsValueType
+                    ? Activator.CreateInstance(targetType)
                     : null;
             }
 

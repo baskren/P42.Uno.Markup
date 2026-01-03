@@ -101,7 +101,7 @@ public static class FrameworkElementExtensions
 
     #region Style
     public static T StyleX<T>(this T element, Style<T> style) where T :ElementType
-    { element.Style = style.FormsStyle; return element; }
+    { element.Style = style.BaseStyle; return element; }
 
     public static T StyleX<T>(this T element, DependencyProperty property, object value) where T : ElementType
     {
@@ -204,7 +204,6 @@ public static class FrameworkElementExtensions
 
 	#endregion
 
-    
 
     #region Special Bindings
 

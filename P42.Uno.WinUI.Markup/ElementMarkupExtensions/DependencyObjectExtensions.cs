@@ -3,60 +3,14 @@ using System.Runtime.CompilerServices;
 using P42.Utils.Uno;
 using ElementType = Microsoft.UI.Xaml.DependencyObject;
 
+// ReSharper disable once CheckNamespace
 namespace P42.Uno.WinUI.Markup;
 
 public static class DependencyObjectExtensions
 {
-    #region IsEnabledX
+    #region IsEnabled
     public static readonly DependencyProperty IsEnabledXProperty =
-        DependencyProperty.RegisterAttached("IsEnabledX", typeof(string), typeof(DependencyObjectExtensions), new PropertyMetadata(null, IsEnabledChanged));
-
-    public static ElementType SetIsEnabled(this ElementType dependencyObject, bool value = true)
-    {
-        dependencyObject.SetValue(IsEnabledXProperty, value);
-        return dependencyObject;
-    }
-
-    public static bool GetIsEnabled(this ElementType dependencyObject)
-        => (bool)dependencyObject.GetValue(IsEnabledXProperty);
-
-    public static ElementType IsEnabled(this ElementType element, bool value = true)
-    { element.SetIsEnabled(value); return element; }
-
-    public static TElement BindIsEnabled<TElement>(
-        this TElement target,
-        DependencyObject source,
-        DependencyProperty sourceProperty,
-        BindingMode mode = BindingMode.OneWay,
-        IValueConverter? converter = null,
-        object? converterParameter = null,
-        string? converterLanguage = null,
-        UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
-        object? targetNullValue = null,
-        object? fallbackValue = null,
-        [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = -1
-    ) where TElement : ElementType
-        => target.AltBind(IsEnabledXProperty, source, sourceProperty, mode, converter, converterParameter, converterLanguage, updateSourceTrigger, targetNullValue, fallbackValue, filePath, lineNumber); 
-    
-    public static TElement BindIsEnabled<TElement, TSource, TDest>(
-        this TElement target,
-        INotifyPropertyChanged source,
-        string sourcePropertyName,
-        BindingMode mode = BindingMode.OneWay,
-        Func<TSource?, TDest?>? convert = null,
-        Func<TDest?, TSource?>? convertBack = null,
-        object? converterParameter = null,
-        string? converterLanguage = null,
-        UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
-        object? targetNullValue = null,
-        object? fallbackValue = null, 
-        [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = -1
-    ) where TElement : ElementType
-    {
-        target.AltBind(IsEnabledXProperty, source, sourcePropertyName, mode, convert, convertBack, converterParameter, converterLanguage, updateSourceTrigger, targetNullValue, fallbackValue, filePath, lineNumber);
-        return target;
-    }
-
+        DependencyProperty.RegisterAttached("IsEnabled", typeof(string), typeof(DependencyObjectExtensions), new PropertyMetadata(null, IsEnabledChanged));
     private static void IsEnabledChanged(ElementType dependencyObject, DependencyPropertyChangedEventArgs args)
     {
         if (args.NewValue is not bool newValue)
@@ -79,29 +33,77 @@ public static class DependencyObjectExtensions
         }
 
     }
-    #endregion IsEnabledX
+
+    extension(ElementType dependencyObject)
+    {
+
+        public bool IsEnabled
+        {
+            get => (bool)dependencyObject.GetValue(IsEnabledXProperty);
+            set => dependencyObject.SetValue(IsEnabledXProperty, value);
+        }
+        
+        public ElementType Enabled(bool value = true)
+        { dependencyObject.IsEnabled = value; return dependencyObject; }
+        
+        public ElementType Disabled(bool value = true)
+        { dependencyObject.IsEnabled = !value; return dependencyObject; }
+    }
+
+    extension<TElement>(TElement target) where TElement : ElementType
+    {
+        public TElement BindIsEnabled(DependencyObject source,
+            DependencyProperty sourceProperty,
+            BindingMode mode = BindingMode.OneWay,
+            IValueConverter? converter = null,
+            object? converterParameter = null,
+            string? converterLanguage = null,
+            UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
+            object? targetNullValue = null,
+            object? fallbackValue = null,
+            [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = -1
+        ) => target.AltBind(IsEnabledXProperty, source, sourceProperty, mode, converter, converterParameter, converterLanguage, updateSourceTrigger, targetNullValue, fallbackValue, filePath, lineNumber);
+
+        public TElement BindIsEnabled<TSource, TDest>(INotifyPropertyChanged source,
+            string sourcePropertyName,
+            BindingMode mode = BindingMode.OneWay,
+            Func<TSource?, TDest?>? convert = null,
+            Func<TDest?, TSource?>? convertBack = null,
+            object? converterParameter = null,
+            string? converterLanguage = null,
+            UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
+            object? targetNullValue = null,
+            object? fallbackValue = null, 
+            [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = -1
+        )
+            where TSource : notnull
+            where TDest : notnull
+        {
+            target.AltBind(IsEnabledXProperty, source, sourcePropertyName, mode, convert, convertBack, converterParameter, converterLanguage, updateSourceTrigger, targetNullValue, fallbackValue, filePath, lineNumber);
+            return target;
+        }
+    }
+
+    #endregion IsEnabled
 
     
-    public static TBindable AssignX<TBindable, TVariable>(this TBindable bindable, out TVariable variable)
-        where TBindable : ElementType, TVariable
+    extension<TElement>(TElement element) where TElement : ElementType
     {
-        variable = bindable;
-        return bindable;
+        public TElement Invoke(Action<TElement> action)
+        {
+            action.Invoke(element);
+            return element;
+        }
+
+        public TElement AddPropertyChangedHandler(DependencyProperty property,
+            DependencyPropertyChangedCallback handler)
+        {
+            element.RegisterPropertyChangedCallback(property, handler);
+            return element;
+
+        }
     }
 
-    public static TBindable Invoke<TBindable>(this TBindable bindable, Action<TBindable> action) where TBindable : ElementType
-    {
-        action.Invoke(bindable);
-        return bindable;
-    }
-
-    #region Property Changed Handler
-    public static TElement AddPropertyChangedHandler<TElement>(this TElement element, DependencyProperty property, DependencyPropertyChangedCallback handler) where TElement : ElementType
-    {
-        element.RegisterPropertyChangedCallback(property, handler);
-        return element;
-    }
-    #endregion
 
     
     /*

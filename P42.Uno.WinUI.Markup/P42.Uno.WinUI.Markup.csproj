@@ -14,6 +14,8 @@
       https://aka.platform.uno/singleproject-features
     -->
 
+    <NoWarn>CS8032</NoWarn>
+
     <UnoFeatures>
       SkiaRenderer;
       CSharpMarkup;
