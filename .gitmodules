@@ -1,0 +1,3 @@
+[submodule "P42.Uno.Extensions.Markup"]
+	path = P42.Uno.Extensions.Markup
+	url = https://github.com/baskren/P42.Uno.Extensions.Markup.git
