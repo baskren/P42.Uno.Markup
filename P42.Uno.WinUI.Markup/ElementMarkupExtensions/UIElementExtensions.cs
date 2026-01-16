@@ -1,4 +1,6 @@
 using System.ComponentModel;
+using System.Numerics;
+using Microsoft.UI.Xaml.Media.Media3D;
 using P42.Utils.Uno;
 using ElementType = Microsoft.UI.Xaml.UIElement;
 using PeriodicTimer = P42.Utils.PeriodicTimer;
@@ -165,6 +167,31 @@ public static class UIElementExtensions
 
         #endregion
 
+        #region Transforms / Transitions
+        public TElement TranslateOrigin(double x, double y)
+        {
+            element.RenderTransformOrigin = new Windows.Foundation.Point(x, y);
+            return element;
+        }
+
+
+        public TElement Translate(double x, double y)
+        {
+            element.RenderTransform = new TranslateTransform
+            {
+                X = x,
+                Y = y
+            };
+            return element;
+        }
+
+        public TElement Scale(float x, float y, float z = 1.0f)
+        { 
+            element.Scale = new Vector3(x, y,z );
+            return element; 
+        }
+
+        #endregion
     }
 
 
