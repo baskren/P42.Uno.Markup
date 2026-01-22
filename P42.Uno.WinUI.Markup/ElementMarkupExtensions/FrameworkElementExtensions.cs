@@ -149,7 +149,7 @@ public static class FrameworkElementExtensions
         => element.MaxWidth(sizeRequest).MaxHeight(sizeRequest);
     #endregion
     
-    
+    /*
 	#region Alignment
 
 	public static TElement Center<TElement>(this TElement element) where TElement :ElementType
@@ -167,8 +167,6 @@ public static class FrameworkElementExtensions
 	}
 
 	#region Vertical Alignment
-	public static TElement VerticalAlignment<TElement>(this TElement element, VerticalAlignment verticalAlignment) where TElement :ElementType
-	{ element.VerticalAlignment = verticalAlignment; return element; }
 
 	public static TElement Top<TElement>(this TElement element) where TElement :ElementType
 	{ element.VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Top; return element; }
@@ -185,8 +183,6 @@ public static class FrameworkElementExtensions
 	#endregion
 
 	#region Horizontal Alignment
-	public static TElement HorizontalAlignment<TElement>(this TElement element, HorizontalAlignment horizontalAlignment) where TElement :ElementType
-	{ element.HorizontalAlignment = horizontalAlignment; return element; }
 
 	public static TElement Left<TElement>(this TElement element) where TElement :ElementType
 	{ element.HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Left; return element; }
@@ -203,6 +199,6 @@ public static class FrameworkElementExtensions
 
 
 	#endregion
-
+    */
 
 }
