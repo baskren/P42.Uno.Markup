@@ -9,6 +9,7 @@ namespace P42.Uno.WinUI.Markup;
 // ReSharper disable once UnusedType.Global
 public static class SemanticZoomLocationExtensions
 {
+    
     #region Bounds
     extension(SemanticZoomLocation semanticZoomLocation)
     {

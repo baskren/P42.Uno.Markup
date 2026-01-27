@@ -9,85 +9,133 @@ public static class GridExtensions
 
 
     #region Rows / Columns
-    public static TElement Columns<TElement>(this TElement grid, params object[] lengths) where TElement : ElementType
+    
+    /// <summary>
+    /// Grid / Column definition Fluent extension methods
+    /// </summary>
+    /// <param name="grid"></param>
+    /// <typeparam name="TElement"></typeparam>
+    
+    extension<TElement>(TElement grid) where TElement : ElementType
     {
-        grid.ColumnDefinitions.Clear();
-        foreach (var length in lengths)
-            grid.ColumnDefinitions.Add(ObjectToColumnDefinition(length));
-
-        return grid;
-    }
-
-    public static TElement Columns<TElement, TEnum>(this TElement grid, params (TEnum name, GridLength length)[] columns) where TElement : ElementType where TEnum : Enum
-    {
-        grid.ColumnDefinitions.Clear();
-        for (var i = 0; i < columns.Length; i++)
+        /// <summary>
+        /// Fluent grid column definition setter
+        /// </summary>
+        /// <param name="lengths"></param>
+        /// <returns></returns>
+        public TElement Columns(params object[] lengths)
         {
-            if (i != columns[i].name.ToInt())
-                throw new ArgumentException(
-                    $"Value of column name {columns[i].name} is not {i}. Columns must be defined with enum names whose values form the sequence 0,1,2,..."
-                );
-            var columnDefinition = new ColumnDefinition { Width = columns[i].length };
-            grid.ColumnDefinitions.Add(columnDefinition);
-        }
-        return grid;
-    }
+            grid.ColumnDefinitions.Clear();
+            foreach (var length in lengths)
+                grid.ColumnDefinitions.Add(ObjectToColumnDefinition(length));
 
-    public static TElement Columns<TElement, TEnum>(this TElement grid, params (TEnum name, object length)[] columns) where TElement : ElementType where TEnum : Enum
-    {
-        grid.ColumnDefinitions.Clear();
-        for (var i = 0; i < columns.Length; i++)
+            return grid;
+        }
+
+        /// <summary>
+        /// Fluent grid column definition setter
+        /// </summary>
+        /// <param name="columns"></param>
+        /// <typeparam name="TEnum"></typeparam>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public TElement Columns<TEnum>(params (TEnum name, GridLength length)[] columns) where TEnum : Enum
         {
-            if (i != columns[i].name.ToInt())
-                throw new ArgumentException(
-                    $"Value of column name {columns[i].name} is not {i}. Columns must be defined with enum names whose values form the sequence 0,1,2,..."
-                );
-            if (!(columns[i].length is ColumnDefinition columnDefinition))
-                columnDefinition = new ColumnDefinition { Width = ObjectToGridLength(columns[i].length) };
-            grid.ColumnDefinitions.Add(columnDefinition);
+            grid.ColumnDefinitions.Clear();
+            for (var i = 0; i < columns.Length; i++)
+            {
+                if (i != columns[i].name.ToInt())
+                    throw new ArgumentException(
+                        $"Value of column name {columns[i].name} is not {i}. Columns must be defined with enum names whose values form the sequence 0,1,2,..."
+                    );
+                var columnDefinition = new ColumnDefinition { Width = columns[i].length };
+                grid.ColumnDefinitions.Add(columnDefinition);
+            }
+            return grid;
         }
-        return grid;
-    }
 
-    public static TElement Rows<TElement>(this TElement grid, params object[] lengths) where TElement : ElementType
-    {
-        grid.RowDefinitions.Clear();
-        foreach (var length in lengths)
-            grid.RowDefinitions.Add(ObjectToRowDefinition(length));
-
-        return grid;
-    }
-
-    public static TElement Rows<TElement, TEnum>(this TElement grid, params (TEnum name, GridLength length)[] rows) where TElement : ElementType where TEnum : Enum
-    {
-        grid.RowDefinitions.Clear();
-        for (var i = 0; i < rows.Length; i++)
+        /// <summary>
+        /// Fluent grid column definition setter
+        /// </summary>
+        /// <param name="columns"></param>
+        /// <typeparam name="TEnum"></typeparam>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public TElement Columns<TEnum>(params (TEnum name, object length)[] columns) where TEnum : Enum
         {
-            if (i != rows[i].name.ToInt())
-                throw new ArgumentException(
-                    $"Value of row name {rows[i].name} is not {i}. Rows must be defined with enum names whose values form the sequence 0,1,2,..."
-                );
-            var rowDefinition = new RowDefinition { Height = rows[i].length };
-            grid.RowDefinitions.Add(rowDefinition);
+            grid.ColumnDefinitions.Clear();
+            for (var i = 0; i < columns.Length; i++)
+            {
+                if (i != columns[i].name.ToInt())
+                    throw new ArgumentException(
+                        $"Value of column name {columns[i].name} is not {i}. Columns must be defined with enum names whose values form the sequence 0,1,2,..."
+                    );
+                if (!(columns[i].length is ColumnDefinition columnDefinition))
+                    columnDefinition = new ColumnDefinition { Width = ObjectToGridLength(columns[i].length) };
+                grid.ColumnDefinitions.Add(columnDefinition);
+            }
+            return grid;
         }
-        return grid;
-    }
 
-    public static TElement Rows<TElement, TEnum>(this TElement grid, params (TEnum name, object length)[] rows) where TElement : ElementType where TEnum : Enum
-    {
-        grid.RowDefinitions.Clear();
-        for (var i = 0; i < rows.Length; i++)
+        /// <summary>
+        /// Fluent grid ros definition setter
+        /// </summary>
+        /// <param name="lengths"></param>
+        /// <returns></returns>
+        public TElement Rows(params object[] lengths)
         {
-            if (i != rows[i].name.ToInt())
-                throw new ArgumentException(
-                    $"Value of row name {rows[i].name} is not {i}. Rows must be defined with enum names whose values form the sequence 0,1,2,..."
-                );
-            if (rows[i].length is not RowDefinition rowDefinition)
-                //rowDefinition = ObjectToRowDefinition(rows[i].length);
-                rowDefinition = new RowDefinition {  Height = ObjectToGridLength(rows[i].length) };
-            grid.RowDefinitions.Add(rowDefinition);
+            grid.RowDefinitions.Clear();
+            foreach (var length in lengths)
+                grid.RowDefinitions.Add(ObjectToRowDefinition(length));
+
+            return grid;
         }
-        return grid;
+
+        /// <summary>
+        /// Fluent grid ros definition setter
+        /// </summary>
+        /// <param name="rows"></param>
+        /// <typeparam name="TEnum"></typeparam>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public TElement Rows<TEnum>(params (TEnum name, GridLength length)[] rows) where TEnum : Enum
+        {
+            grid.RowDefinitions.Clear();
+            for (var i = 0; i < rows.Length; i++)
+            {
+                if (i != rows[i].name.ToInt())
+                    throw new ArgumentException(
+                        $"Value of row name {rows[i].name} is not {i}. Rows must be defined with enum names whose values form the sequence 0,1,2,..."
+                    );
+                var rowDefinition = new RowDefinition { Height = rows[i].length };
+                grid.RowDefinitions.Add(rowDefinition);
+            }
+            return grid;
+        }
+
+        /// <summary>
+        /// Fluent grid ros definition setter
+        /// </summary>
+        /// <param name="rows"></param>
+        /// <typeparam name="TEnum"></typeparam>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public TElement Rows<TEnum>(params (TEnum name, object length)[] rows) where TEnum : Enum
+        {
+            grid.RowDefinitions.Clear();
+            for (var i = 0; i < rows.Length; i++)
+            {
+                if (i != rows[i].name.ToInt())
+                    throw new ArgumentException(
+                        $"Value of row name {rows[i].name} is not {i}. Rows must be defined with enum names whose values form the sequence 0,1,2,..."
+                    );
+                if (rows[i].length is not RowDefinition rowDefinition)
+                    //rowDefinition = ObjectToRowDefinition(rows[i].length);
+                    rowDefinition = new RowDefinition {  Height = ObjectToGridLength(rows[i].length) };
+                grid.RowDefinitions.Add(rowDefinition);
+            }
+            return grid;
+        }
     }
 
     private static bool GetArgumentAndLimitValue(this string str, string conditional, out (string arg, double limit) result)

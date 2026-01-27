@@ -34,27 +34,24 @@ public static class StaticResources
             value = tColor;
             return true;
         }
-        
-        if (resourceValue is T tValue)
-        {
-            value = tValue;
-            return true;
-        }
-        
-        return false;
-    }
 
-    private static FontFamily? _symbolFontFamily;
+        if (resourceValue is not T tValue)
+            return false;
+
+        value = tValue;
+        return true;
+
+    }
 
     public static FontFamily? SymbolThemeFontFamily
     {
         get
         {
-            if (_symbolFontFamily != null)
-                return _symbolFontFamily;
+            if (field != null)
+                return field;
             if (!TryGetAppResourceAs<FontFamily>("SymbolThemeFontFamily", out var fontFamily))
                 return null;
-            return _symbolFontFamily = fontFamily;
+            return field = fontFamily;
         }
     }
 }

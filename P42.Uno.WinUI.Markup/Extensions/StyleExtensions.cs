@@ -28,7 +28,7 @@ public static partial class StyleExtensions
         if (style is null)
             return fallback;
 
-        return !TryGetSetterValue(style, property, out T? value) 
+        return !style.TryGetSetterValue(property, out T? value) 
             ? value 
                 : fallback;
     }

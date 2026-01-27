@@ -1,6 +1,6 @@
 using System.ComponentModel;
 using System.Numerics;
-using Microsoft.UI.Xaml.Media.Media3D;
+//using Microsoft.UI.Xaml.Media.Media3D;
 using P42.Utils.Uno;
 using ElementType = Microsoft.UI.Xaml.UIElement;
 using PeriodicTimer = P42.Utils.PeriodicTimer;

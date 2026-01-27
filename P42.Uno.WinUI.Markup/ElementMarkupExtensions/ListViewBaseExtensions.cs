@@ -5,6 +5,9 @@ namespace P42.Uno.WinUI.Markup;
 // ReSharper disable once UnusedType.Global
 public static class ListViewBaseExtensions
 {
+    /// <summary>
+    /// Simpler list view item contains style
+    /// </summary>
     public static readonly Style SimpleItemContainerStyle = new()
     {
         TargetType = typeof(ListViewItem),
@@ -16,6 +19,13 @@ public static class ListViewBaseExtensions
         }
     };
 
+    /// <summary>
+    /// Fluent setter for SimpleItemContainerStyle
+    /// </summary>
+    /// <param name="element"></param>
+    /// <param name="value"></param>
+    /// <typeparam name="TElement"></typeparam>
+    /// <returns></returns>
     public static TElement UseSimpleItemContainerStyle<TElement>(this TElement element, bool value = true) where TElement : ElementType
     {
         element.ItemContainerStyle = value ? SimpleItemContainerStyle : null;

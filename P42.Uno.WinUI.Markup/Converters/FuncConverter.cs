@@ -43,6 +43,7 @@ public class FuncConverter<TSource, TDest, TParam> : IValueConverter
         _lineNumber = lineNumber;
     }
 
+    // ReSharper disable once MemberCanBeProtected.Global
     public FuncConverter(
         Func<TSource?, TDest?> convert,
         Func<TDest?, TSource?>? convertBack = null, 

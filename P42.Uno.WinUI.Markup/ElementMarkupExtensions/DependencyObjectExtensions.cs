@@ -9,6 +9,10 @@ namespace P42.Uno.WinUI.Markup;
 public static class DependencyObjectExtensions
 {
     #region IsEnabled
+    
+    /// <summary>
+    /// DependencyProperty for IsEnabled
+    /// </summary>
     public static readonly DependencyProperty IsEnabledXProperty =
         DependencyProperty.RegisterAttached("IsEnabled", typeof(string), typeof(DependencyObjectExtensions), new PropertyMetadata(null, IsEnabledChanged));
     private static void IsEnabledChanged(ElementType dependencyObject, DependencyPropertyChangedEventArgs args)
@@ -37,21 +41,50 @@ public static class DependencyObjectExtensions
     extension(ElementType dependencyObject)
     {
 
+        /// <summary>
+        /// Setter / Getter for IsEnabled
+        /// </summary>
         public bool IsEnabled
         {
             get => (bool)dependencyObject.GetValue(IsEnabledXProperty);
             set => dependencyObject.SetValue(IsEnabledXProperty, value);
         }
         
+        /// <summary>
+        /// Fluent setter for IsEnabled
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public ElementType Enabled(bool value = true)
         { dependencyObject.IsEnabled = value; return dependencyObject; }
         
+        /// <summary>
+        /// Fluent setter for IsEnabled
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public ElementType Disabled(bool value = true)
         { dependencyObject.IsEnabled = !value; return dependencyObject; }
     }
 
+    // ReSharper disable once UnusedType.Global
     extension<TElement>(TElement target) where TElement : ElementType
     {
+        /// <summary>
+        /// Bind the IsEnabled property
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="sourceProperty"></param>
+        /// <param name="mode"></param>
+        /// <param name="converter"></param>
+        /// <param name="converterParameter"></param>
+        /// <param name="converterLanguage"></param>
+        /// <param name="updateSourceTrigger"></param>
+        /// <param name="targetNullValue"></param>
+        /// <param name="fallbackValue"></param>
+        /// <param name="filePath"></param>
+        /// <param name="lineNumber"></param>
+        /// <returns></returns>
         public TElement BindIsEnabled(DependencyObject source,
             DependencyProperty sourceProperty,
             BindingMode mode = BindingMode.OneWay,
@@ -64,6 +97,24 @@ public static class DependencyObjectExtensions
             [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = -1
         ) => target.AltBind(IsEnabledXProperty, source, sourceProperty, mode, converter, converterParameter, converterLanguage, updateSourceTrigger, targetNullValue, fallbackValue, filePath, lineNumber);
 
+        /// <summary>
+        /// Bind the IsEnabled property
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="sourcePropertyName"></param>
+        /// <param name="mode"></param>
+        /// <param name="convert"></param>
+        /// <param name="convertBack"></param>
+        /// <param name="converterParameter"></param>
+        /// <param name="converterLanguage"></param>
+        /// <param name="updateSourceTrigger"></param>
+        /// <param name="targetNullValue"></param>
+        /// <param name="fallbackValue"></param>
+        /// <param name="filePath"></param>
+        /// <param name="lineNumber"></param>
+        /// <typeparam name="TSource"></typeparam>
+        /// <typeparam name="TDest"></typeparam>
+        /// <returns></returns>
         public TElement BindIsEnabled<TSource, TDest>(INotifyPropertyChanged source,
             string sourcePropertyName,
             BindingMode mode = BindingMode.OneWay,
@@ -87,6 +138,7 @@ public static class DependencyObjectExtensions
     #endregion IsEnabled
 
     
+    // ReSharper disable once UnusedType.Global
     extension<TElement>(TElement element) where TElement : ElementType
     {
         public TElement Invoke(Action<TElement> action)

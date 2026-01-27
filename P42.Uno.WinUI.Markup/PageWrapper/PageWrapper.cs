@@ -2,20 +2,19 @@ namespace P42.Uno.WinUI.Markup;
 
 public partial class PageWrapper : Page, IWrappedPage
 {
-    private readonly Grid _grid;
-    private readonly Button _backButton;
+    private readonly Grid _grid = new();
+    private readonly Button _backButton = new();
     private Page? _wrappedPage;
 
     public PageWrapper()
     {
         var backButtonStyle = (Style)Resources["NavigationBackButtonNormalStyle"];
 
-        Content = _grid = new Grid()
+        Content = _grid
             .Stretch()
             .Rows(40, "*")
             .Children(
-                new Button()
-                    .Name(out _backButton)
+                _backButton
                     //.Content("<-- BACK JACK")
                     .Style(backButtonStyle)
                     .AddClickHandler(OnBackButtonClicked)

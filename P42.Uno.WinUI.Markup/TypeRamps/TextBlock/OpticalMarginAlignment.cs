@@ -6,13 +6,29 @@ namespace P42.Uno.WinUI.Markup;
 // ReSharper disable once UnusedType.Global
 public static class TextBlockOpticalMarginAlignment
 {
-    public static OpticalMarginAlignment Caption => TextBlockStyle.Caption.GetSetterValue(TextBlock.OpticalMarginAlignmentProperty, OpticalMarginAlignment.None);
-    public static OpticalMarginAlignment Body => TextBlockStyle.Body.GetSetterValue(TextBlock.OpticalMarginAlignmentProperty, OpticalMarginAlignment.None);
-    public static OpticalMarginAlignment BodyStrong => TextBlockStyle.BodyStrong.GetSetterValue(TextBlock.OpticalMarginAlignmentProperty, OpticalMarginAlignment.TrimSideBearings);
-    public static OpticalMarginAlignment BodyLarge => TextBlockStyle.BodyLarge.GetSetterValue(TextBlock.OpticalMarginAlignmentProperty, OpticalMarginAlignment.TrimSideBearings);
-    public static OpticalMarginAlignment Subtitle => TextBlockStyle.Subtitle.GetSetterValue(TextBlock.OpticalMarginAlignmentProperty, OpticalMarginAlignment.TrimSideBearings);
-    public static OpticalMarginAlignment Title => TextBlockStyle.Title.GetSetterValue(TextBlock.OpticalMarginAlignmentProperty, OpticalMarginAlignment.TrimSideBearings);
-    public static OpticalMarginAlignment TitleLarge => TextBlockStyle.TitleLarge.GetSetterValue(TextBlock.OpticalMarginAlignmentProperty, OpticalMarginAlignment.TrimSideBearings);
-    public static OpticalMarginAlignment Display => TextBlockStyle.Display.GetSetterValue(TextBlock.OpticalMarginAlignmentProperty, OpticalMarginAlignment.TrimSideBearings);
+    
+    private static OpticalMarginAlignment? MCaption;
+    public static OpticalMarginAlignment Caption => MCaption ??= TextBlockStyle.Caption.GetSetterValue(TextBlock.OpticalMarginAlignmentProperty, OpticalMarginAlignment.None);
+
+    private static OpticalMarginAlignment? MBody;
+    public static OpticalMarginAlignment Body => MBody ??= TextBlockStyle.Body.GetSetterValue(TextBlock.OpticalMarginAlignmentProperty, OpticalMarginAlignment.None);
+    
+    private static OpticalMarginAlignment? MBodyStrong;
+    public static OpticalMarginAlignment BodyStrong => MBodyStrong ??= TextBlockStyle.BodyStrong.GetSetterValue(TextBlock.OpticalMarginAlignmentProperty, OpticalMarginAlignment.TrimSideBearings);
+
+    private static OpticalMarginAlignment? MBodyLarge;
+    public static OpticalMarginAlignment BodyLarge => MBodyLarge ??= TextBlockStyle.BodyLarge.GetSetterValue(TextBlock.OpticalMarginAlignmentProperty, OpticalMarginAlignment.TrimSideBearings);
+    
+    private static OpticalMarginAlignment? MSubtitle;
+    public static OpticalMarginAlignment Subtitle => MSubtitle ??= TextBlockStyle.Subtitle.GetSetterValue(TextBlock.OpticalMarginAlignmentProperty, OpticalMarginAlignment.TrimSideBearings);
+
+    private static OpticalMarginAlignment? MTitle;
+    public static OpticalMarginAlignment Title => MTitle ??= TextBlockStyle.Title.GetSetterValue(TextBlock.OpticalMarginAlignmentProperty, OpticalMarginAlignment.TrimSideBearings);
+
+    private static OpticalMarginAlignment? MTitleLarge;
+    public static OpticalMarginAlignment TitleLarge => MTitleLarge ??= TextBlockStyle.TitleLarge.GetSetterValue(TextBlock.OpticalMarginAlignmentProperty, OpticalMarginAlignment.TrimSideBearings);
+
+    private static OpticalMarginAlignment? MDisplay;
+    public static OpticalMarginAlignment Display => MDisplay ??= TextBlockStyle.Display.GetSetterValue(TextBlock.OpticalMarginAlignmentProperty, OpticalMarginAlignment.TrimSideBearings);
 }
 

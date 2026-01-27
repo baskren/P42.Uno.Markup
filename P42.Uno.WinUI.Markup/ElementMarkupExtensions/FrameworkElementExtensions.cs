@@ -1,4 +1,3 @@
-using P42.Utils.Uno;
 using ElementType = Microsoft.UI.Xaml.FrameworkElement;
 
 namespace P42.Uno.WinUI.Markup;
@@ -6,199 +5,140 @@ namespace P42.Uno.WinUI.Markup;
 // ReSharper disable once UnusedType.Global
 public static class FrameworkElementExtensions
 {
-    public static TElement Resources<TElement>(this TElement element, params object[] objects) where TElement :ElementType
+    extension<TElement>(TElement element) where TElement :ElementType
     {
-        var dict = element.Resources ?? new ResourceDictionary();
-        object? key = null;
-        foreach (var obj in objects)
+        public TElement Resources(params object[] objects)
         {
-            switch (obj)
+            var dict = element.Resources ?? new ResourceDictionary();
+            object? key = null;
+            foreach (var obj in objects)
             {
-                case string text:
-                    key = text;
-                    break;
-                case Type type:
-                    key = type;
-                    break;
-                case IDictionary<object, object> mDict:
-                    dict.MergedDictionaries.Add((ResourceDictionary)mDict);
-                    key = null;
-                    break;
-                case Style style:
-                    if (key is not null)
-                        element.AddStyle(key, style);
-                    break;
+                switch (obj)
+                {
+                    case string text:
+                        key = text;
+                        break;
+                    case Type type:
+                        key = type;
+                        break;
+                    case IDictionary<object, object> mDict:
+                        dict.MergedDictionaries.Add((ResourceDictionary)mDict);
+                        key = null;
+                        break;
+                    case Style style:
+                        if (key is not null)
+                            element.AddStyle(key, style);
+                        break;
+                }
             }
+            return element; 
         }
-        return element; 
-    }
 
-    public static TElement AddStyle<TElement>(this TElement element, Style style) where TElement : ElementType
-        => element.AddStyle(null, style);
+        public TElement AddStyle(Style style) => element.AddStyle(null, style);
 
-    public static TElement AddStyle<TElement>(this TElement element, object? key, Style style) where TElement : ElementType
-    {
-        var dict = element.Resources ?? new ResourceDictionary();
-        key ??= style.TargetType;
-        
-        if (key is null)
-            return element;
-        
-        if (style.BasedOn is null && dict.TryGetValue(key, out var xvalue))
+        public TElement AddStyle(object? key, Style style)
         {
-            if (xvalue is Style xStyle)
-                style.BasedOn(xStyle);
+            var dict = element.Resources ?? new ResourceDictionary();
+            key ??= style.TargetType;
+        
+            if (key is null)
+                return element;
+        
+            if (style.BasedOn is null && dict.TryGetValue(key, out var xvalue))
+            {
+                if (xvalue is Style xStyle)
+                    style.BasedOn(xStyle);
+                else
+                    dict.Add(key, style);
+            }
             else
                 dict.Add(key, style);
+        
+            return element;
         }
-        else
-            dict.Add(key, style);
-        
-        return element;
-    }
 
-    public static TElement AddStyle<TElement>(this TElement element, string? key, Type targetType, Setter first, params Setter[] setters) where TElement : ElementType
-        => element.AddStyle(key, targetType, null, first, setters);
+        public TElement AddStyle(string? key, Type targetType, Setter first, params Setter[] setters) => element.AddStyle(key, targetType, null, first, setters);
 
-    public static TElement AddStyle<TElement>(this TElement element, Type targetType, Setter first, params Setter[] setters) where TElement : ElementType
-        => element.AddStyle(null, targetType, null, first, setters);
+        public TElement AddStyle(Type targetType, Setter first, params Setter[] setters) => element.AddStyle(null, targetType, null, first, setters);
 
-    public static TElement AddStyle<TElement>(this TElement element, Type targetType, Style? basedUpon, Setter first, params Setter[] setters) where TElement : ElementType
-        => element.AddStyle(null, targetType, basedUpon, first, setters);
+        public TElement AddStyle(Type targetType, Style? basedUpon, Setter first, params Setter[] setters) => element.AddStyle(null, targetType, basedUpon, first, setters);
 
-    public static TElement AddStyle<TElement>(this TElement element, string? key, Type targetType, Style? basedUpon, Setter first, params Setter[]? setters) where TElement : ElementType
-    {
-        var style = new Style(targetType);
-        if (basedUpon is not null)
-            style.BasedOn = basedUpon;
-        
-        style.Setters.Add(first);
-        if (setters is { Length: > 0 })
+        public TElement AddStyle(string? key, Type targetType, Style? basedUpon, Setter first, params Setter[]? setters)
         {
-            foreach (var setter in setters)
-                style.Setters.Add(setter);
-        }
+            var style = new Style(targetType);
+            if (basedUpon is not null)
+                style.BasedOn = basedUpon;
         
-        element.AddStyle((object?)key ?? targetType, style);
-        return element;
+            style.Setters.Add(first);
+            if (setters is { Length: > 0 })
+            {
+                foreach (var setter in setters)
+                    style.Setters.Add(setter);
+            }
+        
+            element.AddStyle((object?)key ?? targetType, style);
+            return element;
+        }
+
+        public TElement AddStyle(string? key, Type targetType, Style? basedUpon, (DependencyProperty, object) first, params (DependencyProperty, object)[]? setters)
+        {
+            element.AddStyle(key, targetType, basedUpon, new Setter(first.Item1, first.Item2), setters?.Select(s => new Setter(s.Item1, s.Item2)).ToArray());
+            return element;
+        }
+
+        public TElement AddStyle(Type targetType, Style? basedUpon, (DependencyProperty, object) first, params (DependencyProperty, object)[] setters) => element.AddStyle(null, targetType, basedUpon, first, setters);
+
+        public TElement AddStyle(string? key, Type targetType, (DependencyProperty, object) first, params (DependencyProperty, object)[] setters) => element.AddStyle(key, targetType, null, first, setters);
+
+        public TElement AddStyle(Type targetType, (DependencyProperty, object) first, params (DependencyProperty, object)[] setters) => element.AddStyle(null, targetType, null, first, setters);
     }
-
-    public static TElement AddStyle<TElement>(this TElement element, string? key, Type targetType, Style? basedUpon, (DependencyProperty, object) first, params (DependencyProperty, object)[]? setters) where TElement : ElementType
-    {
-        element.AddStyle(key, targetType, basedUpon, new Setter(first.Item1, first.Item2), setters?.Select(s => new Setter(s.Item1, s.Item2)).ToArray());
-        return element;
-    }
-
-    public static TElement AddStyle<TElement>(this TElement element, Type targetType, Style? basedUpon, (DependencyProperty, object) first, params (DependencyProperty, object)[] setters) where TElement : ElementType
-        => element.AddStyle(null, targetType, basedUpon, first, setters);
-
-    public static TElement AddStyle<TElement>(this TElement element, string? key, Type targetType, (DependencyProperty, object) first, params (DependencyProperty, object)[] setters) where TElement : ElementType
-        => element.AddStyle(key, targetType, null, first, setters);
-
-    public static TElement AddStyle<TElement>(this TElement element, Type targetType, (DependencyProperty, object) first, params (DependencyProperty, object)[] setters) where TElement : ElementType
-        => element.AddStyle(null, targetType, null, first, setters);
 
 
     #region Style
-    public static T StyleX<T>(this T element, Style<T> style) where T :ElementType
-    { element.Style = style.BaseStyle; return element; }
-
-    public static T StyleX<T>(this T element, DependencyProperty property, object value) where T : ElementType
+    extension<T>(T element) where T :ElementType
     {
-        element.Style = new Style<T>((property, value));
-        return element;
-    }
+        public T Style(Style<T> style)
+        { element.Style = style.BaseStyle; return element; }
 
-    public static T StyleX<T>(this T element, object resourceDictionaryEntry) where T: ElementType
-    {
-        switch (resourceDictionaryEntry)
+        public T Style(DependencyProperty property, object value)
         {
-            case Style style:
-                element.StyleX(style);
-                break;
-            case Style<T> styleT:
-                element.StyleX(styleT);
-                break;
-            default:
-                throw new InvalidCastException(
-                    $"Dictionary entry is of type [{resourceDictionaryEntry.GetType()}], not Style");
+            element.Style = new Style<T>((property, value));
+            return element;
         }
 
-        return element;
+        public T Style(object resourceDictionaryEntry)
+        {
+            switch (resourceDictionaryEntry)
+            {
+                case Style style:
+                    element.Style(style);
+                    break;
+                case Style<T> styleT:
+                    element.Style(styleT);
+                    break;
+                default:
+                    throw new InvalidCastException(
+                        $"Dictionary entry is of type [{resourceDictionaryEntry.GetType()}], not Style");
+            }
+
+            return element;
+        }
     }
+
     #endregion
 
 
     #region Size
-    public static TElement Size<TElement>(this TElement element, double widthRequest, double heightRequest) where TElement :ElementType
-        => element.Width(widthRequest).Height(heightRequest);
+    extension<TElement>(TElement element) where TElement :ElementType
+    {
+        public TElement Size(double widthRequest, double heightRequest) => element.Width(widthRequest).Height(heightRequest);
+        public TElement Size(double sizeRequest) => element.Width(sizeRequest).Height(sizeRequest);
+        public TElement MinSize(double widthRequest, double heightRequest) => element.MinWidth(widthRequest).MinHeight(heightRequest);
+        public TElement MinSize(double sizeRequest) => element.MinWidth(sizeRequest).MinHeight(sizeRequest);
+        public TElement MaxSize(double widthRequest, double heightRequest) => element.MaxWidth(widthRequest).MaxHeight(heightRequest);
+        public TElement MaxSize(double sizeRequest) => element.MaxWidth(sizeRequest).MaxHeight(sizeRequest);
+    }
 
-    public static TElement Size<TElement>(this TElement element, double sizeRequest) where TElement :ElementType
-        => element.Width(sizeRequest).Height(sizeRequest);
-
-    public static TElement MinSize<TElement>(this TElement element, double widthRequest, double heightRequest) where TElement :ElementType
-        => element.MinWidth(widthRequest).MinHeight(heightRequest);
-
-    public static TElement MinSize<TElement>(this TElement element, double sizeRequest) where TElement :ElementType
-        => element.MinWidth(sizeRequest).MinHeight(sizeRequest);
-
-    public static TElement MaxSize<TElement>(this TElement element, double widthRequest, double heightRequest) where TElement :ElementType
-        => element.MaxWidth(widthRequest).MaxHeight(heightRequest);
-
-    public static TElement MaxSize<TElement>(this TElement element, double sizeRequest) where TElement :ElementType
-        => element.MaxWidth(sizeRequest).MaxHeight(sizeRequest);
     #endregion
     
-    /*
-	#region Alignment
-
-	public static TElement Center<TElement>(this TElement element) where TElement :ElementType
-	{ 
-		element.VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Center; 
-		element.HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center; 
-		return element; 
-	}
-
-	public static TElement Stretch<TElement>(this TElement element) where TElement :ElementType
-	{
-		element.VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Stretch;
-		element.HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Stretch;
-		return element;
-	}
-
-	#region Vertical Alignment
-
-	public static TElement Top<TElement>(this TElement element) where TElement :ElementType
-	{ element.VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Top; return element; }
-
-	public static TElement CenterVertical<TElement>(this TElement element) where TElement :ElementType
-	{ element.VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Center; return element; }
-
-	public static TElement Bottom<TElement>(this TElement element) where TElement :ElementType
-	{ element.VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Bottom; return element; }
-
-	public static TElement StretchVertical<TElement>(this TElement element) where TElement :ElementType
-	{ element.VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Stretch; return element; }
-
-	#endregion
-
-	#region Horizontal Alignment
-
-	public static TElement Left<TElement>(this TElement element) where TElement :ElementType
-	{ element.HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Left; return element; }
-
-	public static TElement CenterHorizontal<TElement>(this TElement element) where TElement :ElementType
-	{ element.HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center; return element; }
-
-	public static TElement Right<TElement>(this TElement element) where TElement :ElementType
-	{ element.HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Right; return element; }
-
-	public static TElement StretchHorizontal<TElement>(this TElement element) where TElement :ElementType
-	{ element.HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Stretch; return element; }
-	#endregion
-
-
-	#endregion
-    */
-
 }
