@@ -39,7 +39,7 @@ public static class GridExtensions
         /// <typeparam name="TEnum"></typeparam>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
-        public TElement Columns<TEnum>(params (TEnum name, GridLength length)[] columns) where TEnum : Enum
+        public TElement Columns<TEnum>(params (TEnum name, global::Microsoft.UI.Xaml.GridLength length)[] columns) where TEnum : Enum
         {
             grid.ColumnDefinitions.Clear();
             for (var i = 0; i < columns.Length; i++)
@@ -98,7 +98,7 @@ public static class GridExtensions
         /// <typeparam name="TEnum"></typeparam>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
-        public TElement Rows<TEnum>(params (TEnum name, GridLength length)[] rows) where TEnum : Enum
+        public TElement Rows<TEnum>(params (TEnum name, global::Microsoft.UI.Xaml.GridLength length)[] rows) where TEnum : Enum
         {
             grid.RowDefinitions.Clear();
             for (var i = 0; i < rows.Length; i++)
@@ -192,14 +192,14 @@ public static class GridExtensions
             : new RowDefinition { Height = ObjectToGridLength(obj) };
     }
 
-    private static GridLength ObjectToGridLength(object obj)
+    private static global::Microsoft.UI.Xaml.GridLength ObjectToGridLength(object obj)
     {
         switch (obj)
         {
             case double d:
-                return new GridLength(d);
+                return new global::Microsoft.UI.Xaml.GridLength(d);
             case int i:
-                return new GridLength(i);
+                return new global::Microsoft.UI.Xaml.GridLength(i);
             case string str:
             {
                 str = str.Trim();
@@ -207,20 +207,20 @@ public static class GridExtensions
                 {
                     str = str[..^1];	
                     if (string.IsNullOrWhiteSpace(str) || str == "*")
-                        return new GridLength(1, GridUnitType.Star);
+                        return new global::Microsoft.UI.Xaml.GridLength(1, GridUnitType.Star);
                     return double.TryParse(str, out var value) 
-                        ? new GridLength(value, GridUnitType.Star) 
+                        ? new global::Microsoft.UI.Xaml.GridLength(value, GridUnitType.Star) 
                         : throw new Exception($"Cannot parse string [{str}] into a GridLength");
                 }
                 if (str.ToLower().StartsWith('a'))
-                    return GridLength.Auto;
+                    return global::Microsoft.UI.Xaml.GridLength.Auto;
                 if (str.ToLower().StartsWith('s'))
-                    return new GridLength(1, GridUnitType.Star);
+                    return new global::Microsoft.UI.Xaml.GridLength(1, GridUnitType.Star);
                 return double.TryParse(str, out var d1) 
-                    ? new GridLength(d1) 
+                    ? new global::Microsoft.UI.Xaml.GridLength(d1) 
                     : throw new Exception($"Cannot parse string [{str}] into a GridLength");
             }
-            case GridLength length:
+            case global::Microsoft.UI.Xaml.GridLength length:
                 return length;
             case RowDefinition rowDef:
                 return rowDef.Height;
@@ -228,12 +228,12 @@ public static class GridExtensions
                 return colDef.Width;
             case char c:
                 if (c == '*')
-                    return new GridLength(1.0, GridUnitType.Star);
+                    return new global::Microsoft.UI.Xaml.GridLength(1.0, GridUnitType.Star);
                 return c == 'a' 
-                    ? GridLength.Auto 
+                    ? global::Microsoft.UI.Xaml.GridLength.Auto 
                     : throw new Exception($"Cannot parse character [{c}] into a GridLength");
             default:
-                return new GridLength(Convert.ToDouble(obj));
+                return new global::Microsoft.UI.Xaml.GridLength(Convert.ToDouble(obj));
         }
     }
 
