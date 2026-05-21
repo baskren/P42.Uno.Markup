@@ -6,7 +6,7 @@
     See https://aka.platform.uno/using-uno-sdk#implicit-packages for more information regarding the Implicit Packages.
   -->
   <ItemGroup>
-  	<PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
+  	<PackageVersion Include="Microsoft.SourceLink.GitHub" Version="10.0.300" />
 
     <!--
     <PackageVersion Include="AvantiPoint.CodeGenHelpers" Version="2.0.30-pre" />
