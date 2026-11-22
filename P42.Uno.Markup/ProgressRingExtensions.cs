@@ -1,10 +1,9 @@
 using Microsoft.UI.Xaml.Controls;
 
-namespace P42.Uno.Markup
+namespace P42.Uno.Markup;
+
+public static class ProgressRingExtensions
 {
-    public static class ProgressRingExtensions
-    {
-        public static ProgressRing Active(this ProgressRing element, bool value = true) 
-        { element.IsActive = value; return element; }
-    }
+    public static ProgressRing Active(this ProgressRing element, bool value = true) 
+    { element.IsActive = value; return element; }
 }
