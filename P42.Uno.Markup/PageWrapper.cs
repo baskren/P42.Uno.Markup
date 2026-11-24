@@ -26,10 +26,6 @@ public partial class PageWrapper : Page, IWrappedPage
                     .AddClickHandler(OnBackButtonClicked)
             );
 
-#if HAS_UNO
-        var platformOffset = global::Uno.UI.Behaviors.VisibleBoundsPadding.WindowPadding;
-        this.Padding = platformOffset;
-#endif
     }
 
     void OnBackButtonClicked(object sender, RoutedEventArgs e)

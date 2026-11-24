@@ -683,4 +683,26 @@ public static class ColorExtensions
         return default(Color);
     }
 
+    public static Color Under(this Color background, Color foreground)
+        => foreground.Over(background);
+    
+    public static Color Over(this Color foreground, Color background)
+    {
+        var fgA = foreground.A / 255f;
+        var bgA = background.A / 255f;
+
+        // Calculate resulting alpha
+        var outA = fgA + bgA * (1f - fgA);
+
+        // Prevent division by zero if both colors are completely transparent
+        if (outA == 0) 
+            return Colors.Transparent;
+
+        // Calculate resulting RGB channels
+        var r = (byte)(((foreground.R * fgA) + (background.R * bgA * (1f - fgA))) / outA);
+        var g = (byte)(((foreground.G * fgA) + (background.G * bgA * (1f - fgA))) / outA);
+        var b = (byte)(((foreground.B * fgA) + (background.B * bgA * (1f - fgA))) / outA);
+
+        return Color.FromArgb((byte)(outA * 255f), r, g, b);
+    }
 }
