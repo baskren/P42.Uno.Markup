@@ -31,27 +31,73 @@ public static class UIElementExtensions
         element.SetValue(IsBlinkingProperty, value);
 
         if (value)
+            StartBlinking(element);
+        else
+            StopBlinking(element);
+    }
+
+    // The element's blink timer. It runs only while the element is loaded: previously the timer kept toggling
+    // Opacity on elements that had left the visual tree (e.g. note icons in recycled / off-screen cells), and a
+    // stop only took effect on its next tick.
+    private static readonly DependencyProperty BlinkTimerProperty = DependencyProperty.RegisterAttached(
+        "BlinkTimer",
+        typeof(Microsoft.UI.Xaml.DispatcherTimer),
+        typeof(UIElementExtensions),
+        new PropertyMetadata(null));
+
+    private static void StartBlinking(UIElement element)
+    {
+        var timer = new Microsoft.UI.Xaml.DispatcherTimer { Interval = TimeSpan.FromSeconds(0.5) };
+        timer.Tick += (_, _) =>
         {
-            P42.Utils.Timer.StartTimer(TimeSpan.FromSeconds(0.5), () =>
+            try
             {
-                try
-                {
-                    if (!GetIsBlinking(element))
-                    {
-                        element.Opacity = 1;
-                        return false;
-                    }
-                    element.Opacity = element.Opacity == 1
-                        ? 0.25
-                        : 1;
-                    return true;
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
-            });
+                element.Opacity = element.Opacity == 1
+                    ? 0.25
+                    : 1;
+            }
+            catch (Exception)
+            {
+                timer.Stop();
+            }
+        };
+        element.SetValue(BlinkTimerProperty, timer);
+
+        if (element is FrameworkElement frameworkElement)
+        {
+            frameworkElement.Loaded += OnBlinkingElementLoaded;
+            frameworkElement.Unloaded += OnBlinkingElementUnloaded;
+            if (frameworkElement.IsLoaded)
+                timer.Start();
         }
+        else
+            timer.Start();
+    }
+
+    private static void StopBlinking(UIElement element)
+    {
+        if (element.GetValue(BlinkTimerProperty) is Microsoft.UI.Xaml.DispatcherTimer timer)
+            timer.Stop();
+        element.ClearValue(BlinkTimerProperty);
+
+        if (element is FrameworkElement frameworkElement)
+        {
+            frameworkElement.Loaded -= OnBlinkingElementLoaded;
+            frameworkElement.Unloaded -= OnBlinkingElementUnloaded;
+        }
+        element.Opacity = 1;
+    }
+
+    private static void OnBlinkingElementLoaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is UIElement element && element.GetValue(BlinkTimerProperty) is Microsoft.UI.Xaml.DispatcherTimer timer)
+            timer.Start();
+    }
+
+    private static void OnBlinkingElementUnloaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is UIElement element && element.GetValue(BlinkTimerProperty) is Microsoft.UI.Xaml.DispatcherTimer timer)
+            timer.Stop();
     }
     public static Boolean GetIsBlinking(UIElement element)
         => (Boolean)element.GetValue(IsBlinkingProperty);
